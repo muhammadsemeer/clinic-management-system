@@ -8,4 +8,19 @@
   .admin-dash {
     margin-left: 10px;
   }
+  .head h1 {
+    font-size: 36px;
+    line-height: 50px;
+  }
+  .head h2 {
+    font-size: 30px;
+    line-height: 40px;
+  }
+}
+
+@media (max-width: 500px) {
+  .admin-dash.active {
+    margin-left: 10px;
+    transition: 0.5s ease-in-out;
+  }
 }
