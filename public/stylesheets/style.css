@@ -15,7 +15,11 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background: linear-gradient(90deg, #19b9ec 0%, #8cdffa 100%);
+  background: linear-gradient(
+    90deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
   color: #fff;
   letter-spacing: 1px;
 }
@@ -30,14 +34,14 @@ header {
   margin-top: 80px;
   width: 250px;
   height: 100vh;
-  background: #464646;
+  background: var(--sidebar);
   display: flex;
   align-items: center;
   flex-direction: column;
   letter-spacing: 1px;
 }
 .profile-display {
-  background: #323232;
+  background: var(--sidebar-hover);
   width: 100%;
   text-align: center;
   height: 150px;
@@ -52,7 +56,7 @@ header {
   margin: 5px 0;
 }
 .profile-display p {
-  color: #d0cde1;
+  color: var(--nav-links);
 }
 .nav-links {
   display: flex;
@@ -65,9 +69,8 @@ header {
   padding: 25px;
   width: 100%;
   text-decoration: none;
-  /* margin: 10px 0; */
-  color: #d0cde1;
+  color: var(--nav-links);
 }
 .nav-links a:hover {
-  background-color: #323232;
+  background-color: var(--sidebar-hover);
 }
