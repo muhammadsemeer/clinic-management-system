@@ -17,6 +17,11 @@
     <div class="logo-section">
       <h1>Galaxieon Care</h1>
     </div>
+    {{#if admin}}
+    <div class="menu">
+     <i class="fas fa-bars"></i>
+    </div>
+    {{/if}}
   </header>
   {{#if admin}}
   {{> admin}}

@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+  .sidebar {
+    margin-left: -250px;
+  }
+  .menu {
+    display: inline;
+  }
+  .admin-dash {
+    margin-left: 10px;
+  }
+}
