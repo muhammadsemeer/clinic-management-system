@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    {{#if admin}}
-    {{> admin}}
-    {{/if}}
-    {{{body}}}
-  </body>
+
+<head>
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" type="text/css"/>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  {{#if admin}}
+  {{> admin}}
+  {{/if}}
+  {{{body}}}
+</body>
+
 </html>
