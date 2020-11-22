@@ -8,6 +8,8 @@ var subdomain = require("express-subdomain");
 var adminRouter = require("./routes/admin");
 var app = express();
 
+var db = require("./config/connection");
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
@@ -26,6 +28,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+db.connect((error) => {
+  if (error) throw error;
+  console.log("Database Connected");
+});
 
 app.use(subdomain("admin", adminRouter));
 
