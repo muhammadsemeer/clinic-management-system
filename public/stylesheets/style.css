@@ -6,6 +6,9 @@
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
 }
+body {
+  background: #e4e4e4;
+}
 header {
   top: 0;
   position: fixed;
@@ -24,14 +27,9 @@ header {
   letter-spacing: 1px;
 }
 
-.profile img {
-  width: 50px;
-}
-
 .sidebar {
   position: fixed;
   left: 0;
-  margin-top: 80px;
   width: 250px;
   height: 100vh;
   background: var(--sidebar);
@@ -39,6 +37,7 @@ header {
   align-items: center;
   flex-direction: column;
   letter-spacing: 1px;
+  overflow-y: auto;
 }
 .profile-display {
   background: var(--sidebar-hover);
@@ -61,7 +60,6 @@ header {
 .nav-links {
   display: flex;
   align-items: center;
-  text-align: center;
   flex-direction: column;
   width: 100%;
 }
@@ -73,4 +71,71 @@ header {
 }
 .nav-links a:hover {
   background-color: var(--sidebar-hover);
+}
+
+.nav-links a:last-child {
+  margin-bottom: 100px;
+}
+
+.admin-dash {
+  margin-top: 80px;
+  margin-left: 250px;
+}
+.head {
+  padding-top: 25px;
+  padding-left: 15px;
+  color: var(--primary-color);
+}
+
+.head h1 {
+  font-size: 42px;
+  line-height: 50px;
+}
+.head h2 {
+  font-size: 36px;
+  line-height: 40px;
+}
+
+.card-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.card-container .card {
+  width: 200px;
+  height: 150px;
+  margin: 25px 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.card-container .card img {
+  height: 75px;
+  width: 75px;
+}
+
+.doctor {
+  color: var(--green);
+}
+
+.patient {
+  color: var(--red);
+}
+
+.appoinment {
+  color: var(--primary-color);
+}
+
+.card-container .card h1 {
+  font-size: 50px;
+}
+
+.card-container .card h3 {
+  font-size: 28px;
+  text-align: center;
 }
