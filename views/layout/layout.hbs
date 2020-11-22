@@ -5,6 +5,9 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    {{#if admin}}
+    {{> admin}}
+    {{/if}}
     {{{body}}}
   </body>
 </html>
