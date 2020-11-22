@@ -3,7 +3,7 @@
     margin-left: -250px;
   }
   .menu {
-    display: inline;
+    display: flex;
   }
   .admin-dash {
     margin-left: 10px;

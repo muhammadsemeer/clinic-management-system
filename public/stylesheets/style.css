@@ -38,6 +38,7 @@ header {
   flex-direction: column;
   letter-spacing: 1px;
   overflow-y: auto;
+  transition: 0.5s ease-in-out;
 }
 .profile-display {
   background: var(--sidebar-hover);
@@ -84,12 +85,57 @@ header {
 }
 
 .menu {
+  width: 50px;
+  height: 50px;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
   display: none;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.menu_humburger {
+  width: 30px;
+  height: 6px;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: 0.5s ease-in-out;
+}
+.menu_humburger::after,
+.menu_humburger::before {
+  content: " ";
+  position: absolute;
+  width: 30px;
+  height: 6px;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: 0.5s ease-in-out;
+}
+
+.menu_humburger::after {
+  transform: translateY(10px);
+}
+.menu_humburger::before {
+  transform: translateY(-10px);
+}
+
+.menu.active .menu_humburger {
+  transform: translateX(-50px);
+  background: transparent;
+}
+
+.menu.active .menu_humburger::after {
+  transform: rotate(45deg) translate(35px, -35px);
+}
+.menu.active .menu_humburger::before {
+  transform: rotate(-45deg) translate(35px, 35px);
 }
 
 .admin-dash {
   margin-top: 80px;
   margin-left: 250px;
+  transition: 0.5s ease-in-out;
 }
 
 .admin-dash.active {
