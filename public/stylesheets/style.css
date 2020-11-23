@@ -278,3 +278,14 @@ header {
   color: var(--red);
   letter-spacing: 2px;
 }
+
+.input-section .icon {
+  position: absolute;
+  top: 34px;
+  right: 30px;
+  color: var(--primary-color);
+}
+
+.input-section .icon .fa-eye-slash {
+  display: none;
+}
