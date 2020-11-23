@@ -7,8 +7,9 @@ var hbs = require("express-handlebars");
 var subdomain = require("express-subdomain");
 var adminRouter = require("./routes/admin");
 var app = express();
-
 var db = require("./config/connection");
+var session = require("express-session");
+require("dotenv").config();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -28,6 +29,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
+);
 
 db.connect((error) => {
   if (error) throw error;
