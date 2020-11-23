@@ -6,4 +6,8 @@ router.get("/", function (req, res, next) {
   res.render("admin/index", { title: "Dashboard", admin: true });
 });
 
+router.get("/login", (req, res) => {
+  res.render("admin/login");
+});
+
 module.exports = router;
