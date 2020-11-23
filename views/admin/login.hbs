@@ -3,18 +3,22 @@
         <img src="/images/icons/undraw_secure_login_pdn4.svg" alt="">
     </div>
     <div class="login-container">
+        <h1>Admin Login</h1>
         <form action="/login" method="POST">
             <div class="input-section">
                 <label for="email">
-                    Name
+                    Email
                 </label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" required>
             </div>
             <div class="input-section">
                 <label for="password">
                     Password
                 </label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" required>
+            </div>
+            <div class="input-section">
+                <input type="submit" value="Login">
             </div>
         </form>
     </div>

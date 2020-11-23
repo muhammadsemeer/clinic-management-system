@@ -5,9 +5,7 @@
   font-family: "Yanone Kaffeesatz", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
-}
-body {
-  background: #e4e4e4;
+  outline: none;
 }
 header {
   top: 0;
@@ -200,4 +198,78 @@ header {
 .card-container .card h3 {
   font-size: 28px;
   text-align: center;
+}
+
+.admin-login {
+  margin-top: 80px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.admin-login .img-section img {
+  width: 500px;
+}
+
+.login-container {
+  border-radius: 50px;
+  background: linear-gradient(145deg, var(--login-one), #ffffff);
+  box-shadow: 41px 41px 82px var(--login-two), -41px -41px 82px #ffffff;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login-container h1 {
+  font-size: 40px;
+  color: var(--primary-color);
+}
+.login-container form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 25px;
+}
+.input-section {
+  width: 100%;
+  position: relative;
+}
+
+.input-section label {
+  position: absolute;
+  color: var(--primary-color);
+  background: linear-gradient(145deg, var(--login-one), #ffffff);
+  font-size: 18px;
+  left: 25px;
+  top: 7px;
+  padding: 0 5px;
+}
+
+.input-section input {
+  margin: 15px 0;
+  padding: 15px 20px;
+  width: 100%;
+  border: 1px solid var(--primary-color);
+  font-size: 20px;
+  color: var(--primary-color);
+  box-sizing: border-box;
+  background: none;
+  border-radius: 50px;
+}
+.input-section input[type="submit"] {
+  width: 100px;
+  height: 50px;
+  margin: 25px 0 0 25px;
+  background-color: var(--primary-color);
+  border: none;
+  font-size: 18px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: bold;
 }

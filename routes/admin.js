@@ -7,7 +7,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/login", (req, res) => {
-  res.render("admin/login");
+  res.render("admin/login", { title: "Admin Login" });
 });
 
 module.exports = router;
