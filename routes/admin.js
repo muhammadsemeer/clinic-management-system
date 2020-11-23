@@ -10,4 +10,8 @@ router.get("/login", (req, res) => {
   res.render("admin/login", { title: "Admin Login" });
 });
 
+router.post("/login", (req, res) => {
+  console.log(req.body);
+});
+
 module.exports = router;
