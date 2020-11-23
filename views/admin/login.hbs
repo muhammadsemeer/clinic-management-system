@@ -5,17 +5,18 @@
     <div class="login-container">
         <h1>Admin Login</h1>
         <form action="/login" method="POST">
+            <h3 class="error">{{error}}</h3>
             <div class="input-section">
                 <label for="email">
                     Email
                 </label>
-                <input type="email" name="email" id="email" required>
+                <input type="email" name="email" id="email" value="{{email}}" required>
             </div>
             <div class="input-section">
                 <label for="password">
                     Password
                 </label>
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password" value="{{password}}" required>
             </div>
             <div class="input-section">
                 <input type="submit" value="Login">

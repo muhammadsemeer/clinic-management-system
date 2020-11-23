@@ -273,3 +273,8 @@ header {
   color: #fff;
   font-weight: bold;
 }
+
+.error {
+  color: var(--red);
+  letter-spacing: 2px;
+}

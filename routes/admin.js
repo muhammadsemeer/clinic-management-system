@@ -47,7 +47,14 @@ router.get("/", verifyLogin, function (req, res, next) {
 });
 
 router.get("/login", loginCheck, async (req, res) => {
-  res.render("admin/login", { title: "Admin Login" });
+  console.log(req.session.loginErr);
+  res.render("admin/login", {
+    title: "Admin Login",
+    error: req.session.loginErr,
+    email: req.session.errMail,
+    password: req.session.errPass,
+  });
+  req.session.loginErr = null;
 });
 
 router.post("/login", async (req, res) => {
@@ -62,7 +69,10 @@ router.post("/login", async (req, res) => {
       res.redirect("/");
     })
     .catch((error) => {
-      console.log(error.msg);
+      req.session.loginErr = error.msg;
+      req.session.errMail = req.body.email;
+      req.session.errPass = req.body.password;
+      res.redirect("/login");
     });
 });
 

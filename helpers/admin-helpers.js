@@ -14,11 +14,11 @@ module.exports = {
           if (status) {
             resolve(admin);
           } else {
-            reject({ msg: "Password is Incorrect" });
+            reject({ msg: "Invalid Password" });
           }
         });
       } else {
-        reject({ msg: "Email is incorrect" });
+        reject({ msg: "Invalid Email" });
       }
     });
   },
