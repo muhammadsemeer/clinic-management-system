@@ -16,6 +16,7 @@
     "express-subdomain": "^1.0.5",
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
     "morgan": "~1.9.1"
   },
