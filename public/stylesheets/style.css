@@ -306,6 +306,77 @@ header h1 {
   display: none;
 }
 
-/* .admin-doctors {
-  margin-left: 250px;
-} */
+.admin-doctors .container {
+  padding: 0 25px;
+}
+.admin-doctors .container > div {
+  margin: 20px 0;
+}
+.doctors-display {
+  overflow-x: auto;
+}
+.doctors-display table {
+  background-color: #fff;
+  width: 100%;
+  border-collapse: collapse;
+}
+.doctors-display thead tr {
+  background-color: var(--login-two);
+  color: var(--light-black);
+}
+.doctors-display th,
+.doctors-display td {
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+.doctors-display td div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-weight: bold;
+}
+.doctors-display span {
+  border-radius: 50%;
+}
+.doctors-display td span img {
+  width: 50px;
+  height: 50px;
+}
+.doctors-display tbody tr {
+  border-bottom: 1px solid var(--login-two);
+}
+
+.btn-sec a {
+  text-decoration: none;
+}
+
+.btn-sec i {
+  width: 100px;
+  height: 30px;
+  font-size: 25px;
+  border: none;
+  border-radius: 10px;
+  color: var(--green);
+}
+
+.edit {
+  text-decoration: none;
+  width: 50px;
+  height: 30px;
+  font-size: 25px;
+  border: none;
+  border-radius: 10px;
+  color: var(--primary-color);
+  margin: 0 10px;
+}
+.delete {
+  text-decoration: none;
+  width: 50px;
+  height: 30px;
+  font-size: 25px;
+  border: none;
+  border-radius: 10px;
+  color: var(--red);
+  margin: 0 10px;
+}

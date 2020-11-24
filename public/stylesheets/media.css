@@ -19,7 +19,7 @@
 }
 
 @media (max-width: 500px) {
-  .admin-dash.active {
+  .ml-250.active {
     margin-left: 10px;
     transition: 0.5s ease-in-out;
   }
