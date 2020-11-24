@@ -139,14 +139,16 @@ header h1 {
 [class^="admin"] {
   margin-top: 50px;
 }
-
-.admin-dash {
+.ml-250 {
   margin-left: 250px;
   transition: 0.5s ease-in-out;
+}
+.admin-dash {
+  margin-left: 250px;
   overflow-x: hidden;
 }
 
-.admin-dash.active {
+.ml-250.active {
   margin-left: 250px;
   transition: 0.5s ease-in-out;
 }
@@ -303,3 +305,7 @@ header h1 {
 .input-section .icon .fa-eye-slash {
   display: none;
 }
+
+/* .admin-doctors {
+  margin-left: 250px;
+} */

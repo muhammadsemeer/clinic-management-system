@@ -80,4 +80,8 @@ router.get("/logout", (req, res) => {
   res.redirect("/login");
 });
 
+router.get("/doctors", verifyLogin, (req, res) => {
+  res.render("admin/doctors", { title: "Doctors", admin: req.admin });
+});
+
 module.exports = router;
