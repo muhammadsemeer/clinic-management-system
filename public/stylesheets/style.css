@@ -326,7 +326,6 @@ header h1 {
     var(--secondary-color) 100%
   );
 }
-
 .doctors-display th,
 .doctors-display td {
   padding: 10px;
