@@ -47,7 +47,6 @@ router.get("/", verifyLogin, function (req, res, next) {
 });
 
 router.get("/login", loginCheck, async (req, res) => {
-  console.log(req.session.loginErr);
   res.render("admin/login", {
     title: "Admin Login",
     error: req.session.loginErr,
@@ -79,6 +78,14 @@ router.post("/login", async (req, res) => {
 router.get("/logout", (req, res) => {
   res.clearCookie("adminToken");
   res.redirect("/login");
+});
+
+router.get("/doctors", verifyLogin, (req, res) => {
+  res.render("admin/doctors", { title: "Doctors", admin: req.admin });
+});
+
+router.get("/pateints", verifyLogin, (req, res) => {
+  res.render("admin/patients", { title: "Pateints", admin: req.admin });
 });
 
 module.exports = router;
