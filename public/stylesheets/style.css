@@ -28,7 +28,7 @@ header {
   letter-spacing: 1px;
 }
 header h1 {
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .sidebar {
@@ -159,11 +159,11 @@ header h1 {
 }
 
 .head h1 {
-  font-size: 36px;
+  font-size: 28px;
   line-height: 50px;
 }
 .head h2 {
-  font-size: 34px;
+  font-size: 26px;
   line-height: 40px;
 }
 
@@ -208,11 +208,11 @@ header h1 {
 }
 
 .card-container .card h1 {
-  font-size: 50px;
+  font-size: 38px;
 }
 
 .card-container .card h3 {
-  font-size: 28px;
+  font-size: 26px;
   text-align: center;
 }
 
@@ -241,7 +241,7 @@ header h1 {
   justify-content: center;
 }
 .login-container h1 {
-  font-size: 40px;
+  font-size: 36px;
   color: var(--primary-color);
 }
 .login-container form {
@@ -261,7 +261,7 @@ header h1 {
   position: absolute;
   color: var(--primary-color);
   background: linear-gradient(145deg, var(--login-one), #ffffff);
-  font-size: 18px;
+  font-size: 15px;
   left: 25px;
   top: 7px;
   padding: 0 5px;
@@ -272,7 +272,7 @@ header h1 {
   padding: 15px 20px;
   width: 100%;
   border: 1px solid var(--primary-color);
-  font-size: 20px;
+  font-size: 18px;
   color: var(--primary-color);
   box-sizing: border-box;
   background: none;
@@ -282,6 +282,7 @@ header h1 {
   width: 100px;
   height: 50px;
   margin: 25px 0 0 25px;
+  padding: 0;
   background-color: var(--primary-color);
   border: none;
   font-size: 18px;
@@ -327,7 +328,7 @@ header h1 {
 .doctors-display th,
 .doctors-display td {
   padding: 10px;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 }
 .doctors-display td div {
