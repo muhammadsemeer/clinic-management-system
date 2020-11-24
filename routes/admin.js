@@ -47,7 +47,6 @@ router.get("/", verifyLogin, function (req, res, next) {
 });
 
 router.get("/login", loginCheck, async (req, res) => {
-  console.log(req.session.loginErr);
   res.render("admin/login", {
     title: "Admin Login",
     error: req.session.loginErr,

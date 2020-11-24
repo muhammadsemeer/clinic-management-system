@@ -221,15 +221,16 @@ header h1 {
 }
 
 .admin-login .img-section img {
-  width: 500px;
+  width: 300px;
 }
 
 .login-container {
   border-radius: 50px;
   background: linear-gradient(145deg, var(--login-one), #ffffff);
   box-shadow: 41px 41px 82px var(--login-two), -41px -41px 82px #ffffff;
-  width: 500px;
-  height: 500px;
+  width: calc(100% - 10%);
+  height: auto;
+  padding: 15px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
