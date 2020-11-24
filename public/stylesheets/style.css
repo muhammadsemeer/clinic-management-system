@@ -421,3 +421,30 @@ header h1 {
   height: 50px;
   width: 50px;
 }
+
+.admin-profile {
+  width: calc(100% - 250px);
+  height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-profile .container .card {
+  width: 400px;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+}
+.admin-profile .container .card-head {
+  color: var(--primary-color);
+}
+
+.admin-profile .container .details-feild p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-profile .container .details-feild span {
+  word-break: break-all;
+}
