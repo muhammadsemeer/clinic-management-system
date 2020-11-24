@@ -45,3 +45,9 @@
     height: 400px;
   }
 }
+
+@media (max-width: 375px) {
+  .container .card {
+    padding: 10px;
+  }
+}
