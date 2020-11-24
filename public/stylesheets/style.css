@@ -312,14 +312,20 @@ header h1 {
 .admin-doctors .container > div {
   margin: 20px 0;
 }
+.btn-sec {
+  display: flex;
+  text-align: right;
+}
+.btn-sec a {
+  flex: 1;
+  margin-right: 10px;
+}
 .doctors-display {
   overflow-x: auto;
 }
 .doctors-display table {
-  /* background-color: #fff; */
   width: 100%;
   border-collapse: collapse;
-  /* border-radius: 50px; */
   background: linear-gradient(
     90deg,
     var(--primary-color) 0%,
