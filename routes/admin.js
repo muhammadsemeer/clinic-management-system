@@ -88,4 +88,8 @@ router.get("/pateints", verifyLogin, (req, res) => {
   res.render("admin/patients", { title: "Pateints", admin: req.admin });
 });
 
+router.get("/appointment", verifyLogin, (req, res) => {
+  res.render("admin/appointment", { title: "Appointment", admin: req.admin });
+});
+
 module.exports = router;
