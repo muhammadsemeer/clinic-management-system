@@ -136,8 +136,11 @@ header h1 {
   transform: rotate(-45deg) translate(35px, 35px);
 }
 
-.admin-dash {
+[class^="admin"] {
   margin-top: 50px;
+}
+
+.admin-dash {
   margin-left: 250px;
   transition: 0.5s ease-in-out;
   overflow-x: hidden;
@@ -212,7 +215,6 @@ header h1 {
 }
 
 .admin-login {
-  margin-top: 50px;
   width: 100%;
   height: 100vh;
   display: flex;
