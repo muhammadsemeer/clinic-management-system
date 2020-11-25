@@ -104,6 +104,8 @@ router.get("/add-patient", verifyLogin, (req, res) => {
   res.render("admin/add-patient", { title: "Add Patient", admin: req.admin });
 });
 router.post("/add-doctor", verifyLogin, (req, res) => {
-  console.log(req.body);
+  adminHelpers.addDoctor(req.body).then((response) => {
+    res.redirect("/doctors");
+  });
 });
 module.exports = router;
