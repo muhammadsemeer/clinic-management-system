@@ -1,0 +1,68 @@
+<section class="admin-add ml-250">
+  <div class="head">
+    <h1>
+      Add Docotor
+    </h1>
+  </div>
+  <div class="container">
+    <form action="/add-doctor" method="POST">
+      <div class="input-section">
+        <input type="text" name="name" required />
+        <label for="">
+          Name
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="text" name="username" required />
+        <label for="">
+          Username
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="text" name="specialised" required />
+        <label for="">
+          Specialised
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="text" name="field" required />
+        <label for="">
+          Field
+        </label>
+      </div>
+      <div class="input-section">
+        <label for="password">
+          Password
+        </label>
+        <input type="password" name="password" id="password" required />
+        <div class="icon">
+          <i class="far fa-eye-slash"></i>
+          <i class="far fa-eye"></i>
+        </div>
+      </div>
+      <div class="radio-section">
+        <div>
+          <input type="radio" name="gender" value="Male" id="male" />
+          <label for="male">
+            <img src="/images/icons/undraw_male_avatar_323b.svg" alt="" />
+            <span>
+              Male
+            </span>
+          </label>
+        </div>
+        <div>
+          <input type="radio" name="gender" value="Female" id="female" />
+          <label for="female">
+            <img src="/images/icons/undraw_female_avatar_w3jk.svg" alt="" />
+            <span>
+              Female
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="input-section">
+        <input type="submit" value="Add" />
+      </div>
+    </form>
+  </div>
+</section>

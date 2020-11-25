@@ -25,6 +25,7 @@ header {
   );
   color: #fff;
   letter-spacing: 1px;
+  z-index: 10;
 }
 header h1 {
   font-size: 24px;
@@ -42,6 +43,7 @@ header h1 {
   letter-spacing: 1px;
   overflow-y: auto;
   transition: 0.5s ease-in-out;
+  z-index: 9;
 }
 .profile-display {
   background: var(--sidebar-hover);
@@ -259,6 +261,7 @@ header h1 {
 .input-section label {
   position: absolute;
   color: var(--primary-color);
+  border-radius: 50px;
   background: linear-gradient(145deg, var(--login-one), #ffffff);
   font-size: 15px;
   left: 25px;
@@ -447,4 +450,54 @@ header h1 {
 
 .admin-profile .container .details-feild span {
   word-break: break-all;
+}
+
+.admin-add .container {
+  width: 100%;
+  height: auto;
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-add .container form {
+  padding: 25px;
+  border-radius: 50px;
+  background: linear-gradient(145deg, var(--login-one), #ffffff);
+  box-shadow: 41px 41px 82px var(--login-two), -41px -41px 82px #ffffff;
+}
+
+.radio-section {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.radio-section input[type="radio"] {
+  display: none;
+}
+
+.radio-section label {
+  margin: 10px;
+  width: 150px;
+  height: 100px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: var(--primary-color);
+}
+.radio-section label img {
+  width: 50px;
+  height: 50px;
+}
+
+.radio-section label:hover {
+  border-width: 2px;
+}
+
+.radio-section input[type="radio"]:checked ~ label {
+  border-width: 2px;
 }
