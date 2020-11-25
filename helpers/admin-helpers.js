@@ -1,6 +1,7 @@
 const db = require("../config/connection");
 const collection = require("../config/collection");
 const bcrypt = require("bcrypt");
+const { response } = require("express");
 
 module.exports = {
   doLogin: (Data) => {
@@ -32,6 +33,16 @@ module.exports = {
         .then((data) => {
           resolve();
         });
+    });
+  },
+  getDoctors: () => {
+    return new Promise(async (resolve, reject) => {
+      let doctors = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .find()
+        .toArray();
+      resolve(doctors);
     });
   },
 };

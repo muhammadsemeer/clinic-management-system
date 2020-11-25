@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const adminHelpers = require("../helpers/admin-helpers");
 const jwt = require("jsonwebtoken");
+const { response } = require("express");
 require("dotenv").config();
 
 const verifyLogin = (req, res, next) => {
@@ -81,7 +82,13 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/doctors", verifyLogin, (req, res) => {
-  res.render("admin/doctors", { title: "Doctors", admin: req.admin });
+  adminHelpers.getDoctors().then((response) => {
+    res.render("admin/doctors", {
+      title: "Doctors",
+      admin: req.admin,
+      doctor: response,
+    });
+  });
 });
 
 router.get("/pateints", verifyLogin, (req, res) => {

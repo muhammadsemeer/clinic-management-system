@@ -18,6 +18,12 @@
               Doctor Name
             </th>
             <th>
+              Username
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
               Specialsed
             </th>
             <th>
@@ -32,31 +38,44 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div>
-                <span class="image">
-                  <img src="/images/icons/undraw_male_avatar_323b.svg" alt="" />
-                </span>
-                Dr. Carloin
-              </div>
-            </td>
-            <td>
-              (BDS)
-            </td>
-            <td>
-              Oral and Maxillofical Surgery
-            </td>
-            <td></td>
-            <td>
-              <a class="edit" href="#">
-                <i class="fas fa-user-edit"></i>
-              </a>
-              <a class="delete" href="#">
-                <i class="fas fa-user-slash"></i>
-              </a>
-            </td>
-          </tr>
+          {{#each doctor}}
+            <tr>
+              <td>
+                <div>
+                  <span class="image">
+                    <img
+                      src="/images/icons/undraw_male_avatar_323b.svg"
+                      alt=""
+                    />
+                  </span>
+                  {{this.name}}
+                </div>
+              </td>
+              <td>
+                {{this.username}}
+              </td>
+              <td>
+                {{this.email}}
+              </td>
+              <td>
+                {{this.specialised}}
+              </td>
+              <td>
+                {{this.field}}
+              </td>
+              <td>
+                {{this.status}}
+              </td>
+              <td>
+                <a class="edit" href="#">
+                  <i class="fas fa-user-edit"></i>
+                </a>
+                <a class="delete" href="#">
+                  <i class="fas fa-user-slash"></i>
+                </a>
+              </td>
+            </tr>
+          {{/each}}
         </tbody>
       </table>
     </div>
