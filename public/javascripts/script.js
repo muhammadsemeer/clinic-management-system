@@ -35,7 +35,7 @@ username.addEventListener("keyup", () => {
 });
 
 const validate = (event) => {
-  if ((usernameFormat && (male.checked = true)) || (female.checked = true)) {
+  if (usernameFormat) {
     return true;
   } else {
     return false;
