@@ -1,11 +1,11 @@
 <section class="admin-add ml-250">
   <div class="head">
     <h1>
-      Add Doctor
+      Add Patient
     </h1>
   </div>
   <div class="container">
-    <form action="/add-doctor" method="POST">
+    <form action="/add-patient" method="POST">
       <div class="input-section">
         <input type="text" name="name" required />
         <label for="">
@@ -13,21 +13,26 @@
         </label>
       </div>
       <div class="input-section">
-        <input type="text" name="username" required />
+        <input type="email" name="email" required />
         <label for="">
-          Username
+          Email
         </label>
       </div>
       <div class="input-section">
-        <input type="text" name="specialised" required />
+        <input
+          type="text"
+          pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"
+          name="specialised"
+          required
+        />
         <label for="">
-          Specialised
+          Contact No
         </label>
       </div>
       <div class="input-section">
-        <input type="text" name="field" required />
+        <input type="number" name="field" required />
         <label for="">
-          Field
+          Age
         </label>
       </div>
       <div class="input-section">
