@@ -100,4 +100,8 @@ router.get("/add-doctor", verifyLogin, (req, res) => {
   res.render("admin/add-doctor", { title: "Add Doctor", admin: req.admin });
 });
 
+router.get("/add-patient", verifyLogin, (req, res) => {
+  res.render("admin/add-patient", { title: "Add Patient", admin: req.admin });
+});
+
 module.exports = router;
