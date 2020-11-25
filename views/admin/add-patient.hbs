@@ -5,7 +5,7 @@
     </h1>
   </div>
   <div class="container">
-    <form action="/add-patient" method="POST">
+    <form action="/add-patient" method="POST" onsubmit="return validate(event)">
       <div class="input-section">
         <input type="text" name="name" required />
         <label for="">
@@ -39,7 +39,7 @@
         <label for="password">
           Password
         </label>
-        <input type="password" name="password" id="password" required />
+        <input type="password" name="password" id="password" />
         <div class="icon">
           <i class="far fa-eye-slash"></i>
           <i class="far fa-eye"></i>
@@ -47,7 +47,7 @@
       </div>
       <div class="radio-section">
         <div>
-          <input type="radio" name="gender" value="Male" id="male" />
+          <input type="radio" name="gender" value="Male" id="male" checked />
           <label for="male">
             <img src="/images/icons/undraw_male_avatar_323b.svg" alt="" />
             <span>

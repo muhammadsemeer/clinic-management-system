@@ -5,7 +5,7 @@
     </h1>
   </div>
   <div class="container">
-    <form action="/add-doctor" method="POST">
+    <form action="/add-doctor" method="POST" onsubmit="return validate(event)">
       <div class="input-section">
         <input type="text" name="name" required />
         <label for="">
@@ -18,6 +18,9 @@
           Username
         </label>
       </div>
+      {{!-- <div class="error">
+        <p>Username Does not</p>
+      </div> --}}
       <div class="input-section">
         <input type="text" name="specialised" required />
         <label for="">
@@ -42,7 +45,7 @@
       </div>
       <div class="radio-section">
         <div>
-          <input type="radio" name="gender" value="Male" id="male" />
+          <input type="radio" name="gender" value="Male" id="male" checked/>
           <label for="male">
             <img src="/images/icons/undraw_male_avatar_323b.svg" alt="" />
             <span>
@@ -51,7 +54,12 @@
           </label>
         </div>
         <div>
-          <input type="radio" name="gender" value="Female" id="female" />
+          <input
+            type="radio"
+            name="gender"
+            value="Female"
+            id="female"
+          />
           <label for="female">
             <img src="/images/icons/undraw_female_avatar_w3jk.svg" alt="" />
             <span>
