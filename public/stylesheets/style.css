@@ -539,6 +539,10 @@ header h1 {
   background-color: var(--red);
 }
 
+.modal .normal {
+  background-color: var(--primary-color);
+}
+
 .modal.active {
   opacity: 1;
   visibility: visible;

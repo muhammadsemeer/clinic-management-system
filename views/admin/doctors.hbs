@@ -39,7 +39,7 @@
         </thead>
         <tbody>
           {{#each doctor}}
-            <tr>
+            <tr id="{{this._id}}">
               <td>
                 <div>
                   <span class="image">
@@ -70,7 +70,10 @@
                 <span class="edit">
                   <i class="fas fa-user-edit"></i>
                 </span>
-                <span class="delete">
+                <span
+                  class="delete"
+                  onclick="modalup('doctor-modal','{{this._id}}')"
+                >
                   <i class="fas fa-user-slash"></i>
                 </span>
               </td>
@@ -82,15 +85,29 @@
   </div>
 </section>
 <div class="modal-container">
-  <div class="modal">
+  <div class="modal doctor-modal">
     <h1>
-      Are You Sure ? Do you Want Delete The Doctor
+      Do you Want Delete The Doctor?
     </h1>
     <button class="yes">
       Yes
     </button>
-    <button class="no">
+    <button
+      class="no"
+      onclick="document.querySelector('.doctor-modal').classList.toggle('active')"
+    >
       No
+    </button>
+  </div>
+  <div class="modal delete-sucess-modal">
+    <h1>
+      Deleted Sucessfully
+    </h1>
+    <button
+      class="normal"
+      onclick="document.querySelector('.delete-sucess-modal').classList.toggle('active')"
+    >
+      Close
     </button>
   </div>
 </div>

@@ -7,3 +7,32 @@ menu.addEventListener("click", () => {
   sidebar.classList.toggle("active");
   adminDash.classList.toggle("active");
 });
+var doctorid;
+const modalup = (modal, id) => {
+  doctorid = id;
+  document.querySelector("." + modal).classList.toggle("active");
+};
+
+const yes = document.querySelector(".yes");
+
+yes.addEventListener("click", deleteDoctor);
+
+function deleteDoctor() {
+  fetch(`/doctors/${doctorid}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.status) {
+        document.getElementById(`${doctorid}`).remove();
+        modalup("delete-sucess-modal");
+        document.querySelector(".doctor-modal").classList.toggle("active");
+      } else {
+        alert("Something Went Wrong. Try Again Later");
+        location.reload();
+      }
+    });
+}
