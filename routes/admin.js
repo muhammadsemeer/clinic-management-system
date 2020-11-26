@@ -134,4 +134,15 @@ router.get("/username/:name", (req, res) => {
   });
 });
 
+router.delete("/doctors/:id", (req, res) => {
+  adminHelpers
+    .deleteDoctor(req.params.id)
+    .then((response) => {
+      res.json({ status: true });
+    })
+    .catch((error) => {
+      res.json(error);
+    });
+});
+
 module.exports = router;
