@@ -4,6 +4,9 @@
       Add Doctor
     </h1>
   </div>
+  <div class="error">
+    {{error}}
+  </div>
   <div class="container">
     <form action="/add-doctor" method="POST" onsubmit="return validate(event)">
       <div class="input-section">
@@ -18,9 +21,7 @@
           Username
         </label>
       </div>
-      <div class="error">
-          
-      </div>
+      <div class="error"></div>
       <div class="input-section">
         <input type="email" name="email" required />
         <label for="">

@@ -59,7 +59,7 @@ function checkUserName(name) {
     })
       .then((res) => res.json())
       .then((res) => {
-        checkUsername = res;
+        checkUser = res;
         if (!res) {
           error.innerHTML = "Username is already exists";
           error.style.display = "inline";

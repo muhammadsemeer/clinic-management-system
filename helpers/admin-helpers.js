@@ -25,14 +25,26 @@ module.exports = {
   },
   addDoctor: (details) => {
     return new Promise(async (resolve, reject) => {
+      console.log("here 1");
       details.status = "Active";
       details.password = await bcrypt.hash(details.password, 10);
-      db.get()
+      let emailFound = await db
+        .get()
         .collection(collection.DOCTORS_COLLECTION)
-        .insertOne(details)
-        .then((data) => {
-          resolve();
-        });
+        .find({ email: details.email })
+        .toArray();
+      if (emailFound.length <= 0) {
+        console.log("here 2");
+        db.get()
+          .collection(collection.DOCTORS_COLLECTION)
+          .insertOne(details)
+          .then((data) => {
+            resolve();
+          });
+      } else {
+        console.log("here 3");
+        reject({ msg: "Email Id Already Exists" });
+      }
     });
   },
   getDoctors: () => {

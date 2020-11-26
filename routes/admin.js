@@ -104,7 +104,12 @@ router.get("/myprofile", verifyLogin, (req, res) => {
 });
 
 router.get("/add-doctor", verifyLogin, (req, res) => {
-  res.render("admin/add-doctor", { title: "Add Doctor", admin: req.admin });
+  res.render("admin/add-doctor", {
+    title: "Add Doctor",
+    admin: req.admin,
+    error: req.session.adderror,
+  });
+  req.session.adderror = null;
 });
 
 router.get("/add-patient", verifyLogin, (req, res) => {
@@ -112,9 +117,15 @@ router.get("/add-patient", verifyLogin, (req, res) => {
 });
 
 router.post("/add-doctor", verifyLogin, (req, res) => {
-  adminHelpers.addDoctor(req.body).then((response) => {
-    res.redirect("/doctors");
-  });
+  adminHelpers
+    .addDoctor(req.body)
+    .then((response) => {
+      res.redirect("/doctors");
+    })
+    .catch((error) => {
+      req.session.adderror = error.msg;
+      res.redirect("/add-doctor");
+    });
 });
 
 router.get("/username/:name", (req, res) => {
