@@ -21,7 +21,7 @@
           Username
         </label>
       </div>
-      <div class="error"></div>
+      <div class="error user-error"></div>
       <div class="input-section">
         <input type="email" name="email" required />
         <label for="">
@@ -52,7 +52,7 @@
       </div>
       <div class="radio-section">
         <div>
-          <input type="radio" name="gender" value="Male" id="male" checked />
+          <input type="radio" name="gender" value="Male" id="male" />
           <label for="male">
             <img src="/images/icons/undraw_male_avatar_323b.svg" alt="" />
             <span>
@@ -76,3 +76,14 @@
     </form>
   </div>
 </section>
+<div class="modal gender-modal">
+  <h1>
+    Please Select Gender!
+  </h1>
+  <button
+    class="normal"
+    onclick="document.querySelector('.gender-modal').classList.toggle('active')"
+  >
+    OK
+  </button>
+</div>

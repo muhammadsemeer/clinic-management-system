@@ -8,14 +8,14 @@ menu.addEventListener("click", () => {
   adminDash.classList.toggle("active");
 });
 var doctorid;
-const modalup = (modal, id) => {
+function modalup (modal, id) {
   doctorid = id;
   document.querySelector("." + modal).classList.toggle("active");
 };
-
 const yes = document.querySelector(".yes");
-
-yes.addEventListener("click", deleteDoctor);
+if (yes) {
+  yes.addEventListener("click", deleteDoctor);
+}
 
 function deleteDoctor() {
   fetch(`/doctors/${doctorid}`, {

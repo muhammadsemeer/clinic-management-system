@@ -30,7 +30,7 @@
           Username
         </label>
       </div>
-      <div class="error"></div>
+      <div class="error user-error"></div>
       <div class="input-section">
         <input type="email" name="email" value="{{doctor.email}}" required />
         <label for="">
@@ -80,3 +80,14 @@
     </form>
   </div>
 </section>
+<div class="modal gender-modal">
+  <h1>
+    Please Select Gender!
+  </h1>
+  <button
+    class="normal"
+    onclick="document.querySelector('.gender-modal').classList.toggle('active')"
+  >
+    OK
+  </button>
+</div>
