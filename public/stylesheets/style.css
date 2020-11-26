@@ -8,6 +8,7 @@
 }
 body {
   background-color: var(--body-back);
+  position: relative;
 }
 header {
   top: 0;
@@ -504,4 +505,42 @@ header h1 {
 
 .radio-section input[type="radio"]:checked ~ label {
   border-width: 2px;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 320px;
+  padding: 25px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+  z-index: 9;
+}
+
+.modal h1 {
+  font-size: 20px;
+}
+
+.modal button {
+  width: 50px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.modal .yes {
+  background-color: var(--green);
+}
+.modal .no {
+  background-color: var(--red);
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%);
 }

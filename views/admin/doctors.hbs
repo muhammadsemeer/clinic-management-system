@@ -67,12 +67,12 @@
                 {{this.status}}
               </td>
               <td>
-                <a class="edit" href="#">
+                <span class="edit">
                   <i class="fas fa-user-edit"></i>
-                </a>
-                <a class="delete" href="#">
+                </span>
+                <span class="delete">
                   <i class="fas fa-user-slash"></i>
-                </a>
+                </span>
               </td>
             </tr>
           {{/each}}
@@ -81,3 +81,16 @@
     </div>
   </div>
 </section>
+<div class="modal-container">
+  <div class="modal">
+    <h1>
+      Are You Sure ? Do you Want Delete The Doctor
+    </h1>
+    <button class="yes">
+      Yes
+    </button>
+    <button class="no">
+      No
+    </button>
+  </div>
+</div>
