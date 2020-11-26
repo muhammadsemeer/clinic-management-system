@@ -155,4 +155,10 @@ router.get("/doctors/:name", verifyLogin, (req, res) => {
   });
 });
 
+router.post("/doctors/:name", verifyLogin, (req, res) => {
+  adminHelpers.updateDoctor(req.params.name, req.body).then((response) => {
+    res.redirect("/doctors");
+  });
+});
+
 module.exports = router;

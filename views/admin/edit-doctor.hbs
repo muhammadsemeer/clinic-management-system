@@ -9,8 +9,8 @@
   </div>
   <div class="container">
     <form
-      action="/add-doctor/{{doctor.username}}"
-      method="PUT"
+      action="/doctors/{{doctor.username}}"
+      method="POST"
       onsubmit="return validate(event)"
     >
       <div class="input-section">
@@ -19,18 +19,6 @@
           Name
         </label>
       </div>
-      <div class="input-section">
-        <input
-          type="text"
-          name="username"
-          value="{{doctor.username}}"
-          required
-        />
-        <label for="">
-          Username
-        </label>
-      </div>
-      <div class="error user-error"></div>
       <div class="input-section">
         <input type="email" name="email" value="{{doctor.email}}" required />
         <label for="">

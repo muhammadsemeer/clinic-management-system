@@ -21,37 +21,44 @@ var username = document.querySelector("input[name=username]");
 var usernameFormat = null;
 var error = document.querySelector(".user-error");
 var format = new RegExp(/[@~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
-username.addEventListener("keyup", () => {
-  username.value = username.value.toLowerCase();
-  if (format.test(username.value)) {
-    usernameFormat = false;
-    error.style.display = "inline";
-    error.innerHTML =
-      "Username does not includes special characters like @~`!#$%^&*+=-[]\\',/{}|\\\":";
-    username.style.borderColor = "#ec1919";
-  } else {
-    usernameFormat = true;
-    error.style.display = "none";
-    username.style.borderColor = "#19b9ec";
-  }
-  if (/\s/.test(username.value)) {
-    username.value = username.value.replace(" ", "_");
-  }
-  checkUserName(username.value);
-});
+if (username) {
+  username.addEventListener("keyup", () => {
+    username.value = username.value.toLowerCase();
+    if (format.test(username.value)) {
+      usernameFormat = false;
+      error.style.display = "inline";
+      error.innerHTML =
+        "Username does not includes special characters like @~`!#$%^&*+=-[]\\',/{}|\\\":";
+      username.style.borderColor = "#ec1919";
+    } else {
+      usernameFormat = true;
+      error.style.display = "none";
+      username.style.borderColor = "#19b9ec";
+    }
+    if (/\s/.test(username.value)) {
+      username.value = username.value.replace(" ", "_");
+    }
+    checkUserName(username.value);
+  });
+} else {
+  username = false;
+}
 var checkUser;
 const validate = (event) => {
-  const male = document.querySelector("#male").checked;
-  const female = document.querySelector("#female").checked;
-  if (male === false || female === false) {
-    modalup("gender-modal");
-    return false;
-  } else {
+  const male = document.getElementById("male");
+  const female = document.getElementById("female");
+  console.log(male, female);
+  if (male.checked || female.checked) {
     if (usernameFormat && checkUser) {
+      return true;
+    } else if (!username) {
       return true;
     } else {
       return false;
     }
+  } else {
+    modalup("gender-modal");
+    return false;
   }
 };
 

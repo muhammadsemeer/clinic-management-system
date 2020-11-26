@@ -95,4 +95,25 @@ module.exports = {
         });
     });
   },
+  updateDoctor: (username, details) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .updateOne(
+          { username: username },
+          {
+            $set: {
+              name: details.name,
+              email: details.email,
+              specialised: details.specialised,
+              field: details.field,
+              gender: details.gender,
+            },
+          }
+        )
+        .then((respone) => {
+          resolve();
+        });
+    });
+  },
 };
