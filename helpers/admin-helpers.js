@@ -85,4 +85,14 @@ module.exports = {
         });
     });
   },
+  getOneDoctor: (username) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .findOne({ username: username })
+        .then((response) => {
+          resolve(response);
+        });
+    });
+  },
 };

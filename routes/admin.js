@@ -145,4 +145,14 @@ router.delete("/doctors/:id", (req, res) => {
     });
 });
 
+router.get("/doctors/:name", verifyLogin, (req, res) => {
+  adminHelpers.getOneDoctor(req.params.name).then((response) => {
+    res.render("admin/edit-doctor", {
+      title: "Edit Doctor",
+      admin: req.admin,
+      doctor: response,
+    });
+  });
+});
+
 module.exports = router;
