@@ -18,26 +18,53 @@ eye.addEventListener("click", () => {
 
 var username = document.querySelector("input[name=username]");
 var usernameFormat = null;
+var error = document.querySelector(".error");
+var format = new RegExp(/[@~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
 username.addEventListener("keyup", () => {
   username.value = username.value.toLowerCase();
-  var format = new RegExp(/[@~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
-  // var fillSpace =
   if (format.test(username.value)) {
     usernameFormat = false;
-    document.querySelector(".error").style.display = "inline";
+    error.style.display = "inline";
+    error.innerHTML =
+      "Username does not includes special characters like @~`!#$%^&*+=-[]\\',/{}|\\\":";
+    username.style.borderColor = "#ec1919";
   } else {
     usernameFormat = true;
-    document.querySelector(".error").style.display = "none";
+    error.style.display = "none";
+    username.style.borderColor = "#19b9ec";
   }
   if (/\s/.test(username.value)) {
     username.value = username.value.replace(" ", "_");
   }
+  checkUserName(username.value);
 });
-
+var checkUser;
 const validate = (event) => {
-  if (usernameFormat) {
+  if (usernameFormat && checkUser) {
     return true;
   } else {
     return false;
   }
 };
+
+function checkUserName(name) {
+  if (name.length <= 0 || format.test(name)) {
+    return false;
+  } else {
+    fetch(`/username/${name}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        checkUsername = res;
+        if (!res) {
+          error.innerHTML = "Username is already exists";
+          error.style.display = "inline";
+          username.style.borderColor = "#ec1919";
+        }
+      });
+  }
+}

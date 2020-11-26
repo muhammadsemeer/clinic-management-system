@@ -45,4 +45,18 @@ module.exports = {
       resolve(doctors);
     });
   },
+  checkUsername: (username) => {
+    return new Promise(async (resolve, reject) => {
+      let userNameDb = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .find({ username: username })
+        .toArray();
+      if (userNameDb.length > 0) {
+        resolve(false);
+      } else {
+        resolve(true);
+      }
+    });
+  },
 };

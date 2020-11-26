@@ -110,9 +110,17 @@ router.get("/add-doctor", verifyLogin, (req, res) => {
 router.get("/add-patient", verifyLogin, (req, res) => {
   res.render("admin/add-patient", { title: "Add Patient", admin: req.admin });
 });
+
 router.post("/add-doctor", verifyLogin, (req, res) => {
   adminHelpers.addDoctor(req.body).then((response) => {
     res.redirect("/doctors");
   });
 });
+
+router.get("/username/:name", (req, res) => {
+  adminHelpers.checkUsername(req.params.name).then((response) => {
+    res.json(response);
+  });
+});
+
 module.exports = router;
