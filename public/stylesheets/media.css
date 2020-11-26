@@ -59,3 +59,15 @@
     padding: 10px;
   }
 }
+
+@media (max-width: 500px) and (min-width: 325px) {
+  .modal {
+    width: calc(400px - 10vw);
+  }
+}
+
+@media (min-width: 500px) {
+  .modal {
+    width: 500px;
+  }
+}
