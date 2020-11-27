@@ -39,7 +39,7 @@ module.exports = {
           .collection(collection.DOCTORS_COLLECTION)
           .insertOne(details)
           .then((data) => {
-            resolve();
+            resolve(data.ops[0]);
           });
       } else {
         console.log("here 3");
@@ -77,7 +77,6 @@ module.exports = {
         .collection(collection.DOCTORS_COLLECTION)
         .removeOne({ _id: ObjectId(doctorId) })
         .then((response) => {
-          console.log(response);
           resolve(response);
         })
         .catch((error) => {

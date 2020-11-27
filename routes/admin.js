@@ -41,7 +41,6 @@ const loginCheck = (req, res, next) => {
   }
 };
 
-
 /* GET home page. */
 router.get("/", verifyLogin, function (req, res, next) {
   res.render("admin/index", { title: "Dashboard", admin: req.admin });
@@ -117,12 +116,40 @@ router.get("/add-patient", verifyLogin, (req, res) => {
 });
 
 router.post("/add-doctor", verifyLogin, (req, res) => {
+  var to = req.body.email;
+  var sub = "Added Docots List on Galaxieon Care";
+  var output = `
+  <body style="background-color: #19b9ec; text-align: center; color: #ffffff"; padding: 25px>
+  <h1>Hi, ${req.body.name}</h1>
+  <h2>Greetings from Galaxieon Care</h2>
+  <h3>
+  ${req.admin.name} added you to our doctor's list <br>
+  You can login to your doctor accout with your username and password that 
+  created by ${req.admin.name}
+  </h3>
+  <h3>Username: ${req.body.username}</h3>
+  <h3>Password: ${req.body.password}</h3>
+  </body>
+`;
   adminHelpers
     .addDoctor(req.body)
-    .then((response) => {})
+    .then((response) => {
+      sendMail(to, sub, output).then((response) => {
+        res.render("admin/success-page", {
+          admin: req.admin,
+          title: `${req.body.name} Added Sucessfully`,
+          message: `Username and password was sent to the mail id ${req.body.email}`,
+          to: "/doctors",
+        });
+      });
+    })
     .catch((error) => {
       req.session.adderror = error.msg;
-      res.redirect("/add-doctor");
+      res.render("admin/success-page", {
+        admin: req.admin,
+        title: `Something Went Wrong!!!`,
+        to: "/doctors",
+      });
     });
 });
 
