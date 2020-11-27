@@ -2,8 +2,7 @@ var express = require("express");
 var router = express.Router();
 const adminHelpers = require("../helpers/admin-helpers");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
-require("dotenv").config();
+const { sendMail } = require("../helpers/send-mail");
 
 const verifyLogin = (req, res, next) => {
   if (req.cookies.adminToken) {
@@ -42,13 +41,6 @@ const loginCheck = (req, res, next) => {
   }
 };
 
-var transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.MAIL,
-    pass: process.env.PASS,
-  },
-});
 
 /* GET home page. */
 router.get("/", verifyLogin, function (req, res, next) {
@@ -127,18 +119,7 @@ router.get("/add-patient", verifyLogin, (req, res) => {
 router.post("/add-doctor", verifyLogin, (req, res) => {
   adminHelpers
     .addDoctor(req.body)
-    .then((response) => {
-      let mailOptions = {
-        from: process.env.FROMMAIL,
-        to: req.body.email,
-        subject: "Testing",
-        text: "Nodemailer Check",
-      };
-      transporter.sendMail(mailOptions, (error, data) => {
-        if (error) throw error;
-        res.redirect("/doctors");
-      });
-    })
+    .then((response) => {})
     .catch((error) => {
       req.session.adderror = error.msg;
       res.redirect("/add-doctor");
