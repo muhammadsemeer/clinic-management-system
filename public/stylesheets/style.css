@@ -548,3 +548,16 @@ header h1 {
   visibility: visible;
   transform: translate(-50%, -50%);
 }
+
+.success {
+  padding-left: 0;
+  text-align: center;
+}
+
+.success a {
+  text-decoration: none;
+  color: #fff;
+  background-color: var(--green);
+  border-radius: 5px;
+  padding: 5px;
+}
