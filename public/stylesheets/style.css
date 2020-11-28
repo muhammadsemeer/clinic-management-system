@@ -178,11 +178,12 @@ header h1 {
 }
 
 .card-container .card {
-  width: 250px;
-  height: 150px;
-  margin: 25px;
+  min-width: 300px;
+  height: 200px;
+  margin: 15px;
+  padding: 10px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   border-radius: 10px;
   border-radius: 50px;
@@ -193,8 +194,8 @@ header h1 {
   border-width: 3px;
 }
 .card-container .card img {
-  height: 75px;
-  width: 75px;
+  height: 50px;
+  width: 50px;
 }
 
 .doctor {
@@ -210,11 +211,12 @@ header h1 {
 }
 
 .card-container .card h1 {
-  font-size: 38px;
+  font-size: 25px;
+  word-break: break-all;
 }
 
 .card-container .card h3 {
-  font-size: 26px;
+  font-size: 20px;
   text-align: center;
 }
 
