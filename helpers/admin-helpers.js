@@ -81,7 +81,7 @@ module.exports = {
       let userNameDb = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
-        .find({ username: username })
+        .find({ $and: [{ username: username }, { status: "Active" }] })
         .toArray();
       if (userNameDb.length > 0) {
         resolve(false);
