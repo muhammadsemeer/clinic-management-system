@@ -49,7 +49,7 @@ module.exports = {
       let doctors = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
-        .find()
+        .find({status: "Active"})
         .toArray();
       resolve(doctors);
     });
