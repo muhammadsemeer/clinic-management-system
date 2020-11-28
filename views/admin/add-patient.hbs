@@ -4,16 +4,19 @@
       Add Patient
     </h1>
   </div>
+  <div class="error">
+    {{error}}
+  </div>
   <div class="container">
     <form action="/add-patient" method="POST" onsubmit="return validate(event)">
       <div class="input-section">
-        <input type="text" name="name" required />
+        <input type="text" name="name" value="{{patient.name}}" required />
         <label for="">
           Name
         </label>
       </div>
       <div class="input-section">
-        <input type="email" name="email" required />
+        <input type="email" name="email" value="{{patient.email}}" required />
         <label for="">
           Email
         </label>
@@ -22,7 +25,8 @@
         <input
           type="text"
           pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"
-          name="specialised"
+          name="contactno"
+          value="{{patient.contactno}}"
           required
         />
         <label for="">
@@ -30,7 +34,7 @@
         </label>
       </div>
       <div class="input-section">
-        <input type="number" name="field" required />
+        <input type="number" name="age" value="{{patient.age}}" required />
         <label for="">
           Age
         </label>
@@ -39,7 +43,12 @@
         <label for="password">
           Password
         </label>
-        <input type="password" name="password" id="password" />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          value="{{patient.password}}"
+        />
         <div class="icon">
           <i class="far fa-eye-slash"></i>
           <i class="far fa-eye"></i>
@@ -47,7 +56,7 @@
       </div>
       <div class="radio-section">
         <div>
-          <input type="radio" name="gender" value="Male" id="male" checked />
+          <input type="radio" name="gender" value="Male" id="male" />
           <label for="male">
             <img src="/images/icons/undraw_male_avatar_323b.svg" alt="" />
             <span>

@@ -112,4 +112,26 @@ module.exports = {
         });
     });
   },
+  addPatient: (details) => {
+    return new Promise(async (resolve, reject) => {
+      let mailFound = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .find({
+          $or: [{ email: details.email }, { contactno: details.contactno }],
+        })
+        .toArray();
+      if (mailFound <= 0) {
+        details.password = await bcrypt.hash(details.password, 10);
+        db.get()
+          .collection(collection.PATIENT_COLLECTION)
+          .insertOne(details)
+          .then((data) => {
+            resolve(data.ops[0]);
+          });
+      } else {
+        reject({ msg: "Email Id or Mobile already Registered" });
+      }
+    });
+  },
 };
