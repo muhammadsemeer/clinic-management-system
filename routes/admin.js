@@ -145,11 +145,7 @@ router.post("/add-doctor", verifyLogin, (req, res) => {
     })
     .catch((error) => {
       req.session.adderror = error.msg;
-      res.render("admin/success-page", {
-        admin: req.admin,
-        title: `Something Went Wrong!!!`,
-        to: "/doctors",
-      });
+      res.redirect("/add-doctor");
     });
 });
 

@@ -25,7 +25,6 @@ module.exports = {
   },
   addDoctor: (details) => {
     return new Promise(async (resolve, reject) => {
-      console.log("here 1");
       details.status = "Active";
       details.password = await bcrypt.hash(details.password, 10);
       let emailFound = await db
@@ -34,7 +33,6 @@ module.exports = {
         .find({ email: details.email })
         .toArray();
       if (emailFound.length <= 0) {
-        console.log("here 2");
         db.get()
           .collection(collection.DOCTORS_COLLECTION)
           .insertOne(details)
@@ -42,7 +40,6 @@ module.exports = {
             resolve(data.ops[0]);
           });
       } else {
-        console.log("here 3");
         reject({ msg: "Email Id Already Exists" });
       }
     });
