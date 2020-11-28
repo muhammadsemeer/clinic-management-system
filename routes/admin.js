@@ -54,6 +54,8 @@ router.get("/login", loginCheck, async (req, res) => {
     password: req.session.errPass,
   });
   req.session.loginErr = null;
+  req.session.errMail = null;
+  req.session.errPass = null;
 });
 
 router.post("/login", async (req, res) => {
@@ -107,8 +109,10 @@ router.get("/add-doctor", verifyLogin, (req, res) => {
     title: "Add Doctor",
     admin: req.admin,
     error: req.session.adderror,
+    doctor: req.session.doctor,
   });
   req.session.adderror = null;
+  req.session.doctor = null;
 });
 
 router.get("/add-patient", verifyLogin, (req, res) => {
@@ -145,6 +149,7 @@ router.post("/add-doctor", verifyLogin, (req, res) => {
     })
     .catch((error) => {
       req.session.adderror = error.msg;
+      req.session.doctor = req.body;
       res.redirect("/add-doctor");
     });
 });

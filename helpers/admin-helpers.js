@@ -26,13 +26,13 @@ module.exports = {
   addDoctor: (details) => {
     return new Promise(async (resolve, reject) => {
       details.status = "Active";
-      details.password = await bcrypt.hash(details.password, 10);
       let emailFound = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
         .find({ email: details.email })
         .toArray();
       if (emailFound.length <= 0) {
+        details.password = await bcrypt.hash(details.password, 10);
         db.get()
           .collection(collection.DOCTORS_COLLECTION)
           .insertOne(details)
