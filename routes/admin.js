@@ -93,7 +93,13 @@ router.get("/doctors", verifyLogin, (req, res) => {
 });
 
 router.get("/pateints", verifyLogin, (req, res) => {
-  res.render("admin/patients", { title: "Pateints", admin: req.admin });
+  adminHelpers.getPatients().then((response) => {
+    res.render("admin/patients", {
+      title: "Pateints",
+      admin: req.admin,
+      pateint: response,
+    });
+  });
 });
 
 router.get("/appointment", verifyLogin, (req, res) => {

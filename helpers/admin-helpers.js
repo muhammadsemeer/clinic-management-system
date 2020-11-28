@@ -134,4 +134,14 @@ module.exports = {
       }
     });
   },
+  getPatients: () => {
+    return new Promise(async (resolve, reject) => {
+      let pateints = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .find()
+        .toArray();
+      resolve(pateints)
+    });
+  },
 };
