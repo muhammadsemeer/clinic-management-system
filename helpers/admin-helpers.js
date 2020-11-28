@@ -39,6 +39,28 @@ module.exports = {
           .then((data) => {
             resolve(data.ops[0]);
           });
+      } else if (emailFound[0].status === "Deleted") {
+        details.password = await bcrypt.hash(details.password, 10);
+        db.get()
+          .collection(collection.DOCTORS_COLLECTION)
+          .updateOne(
+            { email: details.email },
+            {
+              $set: {
+                name: details.name,
+                username: details.username,
+                email: details.email,
+                specialised: details.specialised,
+                field: details.field,
+                password: details.password,
+                gender: details.gender,
+                status: "Active",
+              },
+            }
+          )
+          .then((data) => {
+            resolve();
+          });
       } else {
         reject({ msg: "Email Id Already Exists" });
       }
@@ -49,7 +71,7 @@ module.exports = {
       let doctors = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
-        .find({status: "Active"})
+        .find({ status: "Active" })
         .toArray();
       resolve(doctors);
     });
