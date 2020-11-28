@@ -8,10 +8,10 @@ menu.addEventListener("click", () => {
   adminDash.classList.toggle("active");
 });
 var doctorid;
-function modalup (modal, id) {
+function modalup(modal, id) {
   doctorid = id;
   document.querySelector("." + modal).classList.toggle("active");
-};
+}
 const yes = document.querySelector(".yes");
 if (yes) {
   yes.addEventListener("click", deleteDoctor);
@@ -35,4 +35,17 @@ function deleteDoctor() {
         location.reload();
       }
     });
+}
+
+const tooglePatient = () => {
+  document.querySelector(".tab").classList.add("active");
+  document.querySelector("[class^='admin'] ").classList.add("active");
+};
+
+var tabLink = document.querySelector("#tab-link");
+
+tabLink.addEventListener("click", tooglePatient);
+
+if (location.href.includes("#patients")) {
+  tooglePatient();
 }

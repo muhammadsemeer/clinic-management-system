@@ -36,7 +36,7 @@ header h1 {
   position: fixed;
   left: 0;
   width: 250px;
-  height: 100vh;
+  min-height: calc(100vh - 50px);
   background: var(--sidebar);
   display: flex;
   align-items: center;
@@ -76,13 +76,10 @@ header h1 {
   text-decoration: none;
   color: var(--nav-links);
   transition: 0.5s ease-in-out;
+  cursor: pointer;
 }
 .nav-links a:hover {
   background-color: var(--sidebar-hover);
-}
-
-.nav-links a:last-child {
-  margin-bottom: 100px;
 }
 
 .sidebar.active {
@@ -148,6 +145,7 @@ header h1 {
 .admin-dash {
   margin-left: 250px;
   overflow-x: hidden;
+  height: calc(100vh - 50px);
 }
 
 .ml-250.active {
@@ -174,7 +172,7 @@ header h1 {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin: 20px 0 50px 0;
+  margin: 20px 0 0 0;
 }
 
 .card-container .card {
@@ -312,10 +310,14 @@ header h1 {
   display: none;
 }
 
-.admin-doctors .container {
+.admin-doctors .container,
+.patients .container {
   padding: 0 25px;
 }
-.admin-doctors .container > div {
+.patients {
+  margin-top: 50px;
+}
+.admin-doctors .container > div, .patients .container > div {
   margin: 20px 0;
 }
 .btn-sec {
@@ -562,4 +564,17 @@ header h1 {
   background-color: var(--green);
   border-radius: 5px;
   padding: 5px;
+}
+
+.tab {
+  display: none;
+}
+
+.tab.active {
+  display: block;
+  animation: tab 1s ease-in-out;
+}
+
+[class^="admin"].active {
+  display: none;
 }
