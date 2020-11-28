@@ -15,11 +15,11 @@ module.exports = {
           if (status) {
             resolve(admin);
           } else {
-            reject({ msg: "Invalid Password" });
+            reject({ msg: "Invalid Email Or Password" });
           }
         });
       } else {
-        reject({ msg: "Invalid Email" });
+        reject({ msg: "Invalid Email Or Password" });
       }
     });
   },
@@ -141,7 +141,7 @@ module.exports = {
         .collection(collection.PATIENT_COLLECTION)
         .find()
         .toArray();
-      resolve(pateints)
+      resolve(pateints);
     });
   },
 };
