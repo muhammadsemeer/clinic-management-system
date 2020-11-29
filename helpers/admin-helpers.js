@@ -150,8 +150,7 @@ module.exports = {
           $or: [{ email: details.email }, { contactno: details.contactno }],
         })
         .toArray();
-      if (mailFound <= 0) {
-        details.status = "Active";
+      if (mailFound.length <= 0) {
         details.password = await bcrypt.hash(details.password, 10);
         db.get()
           .collection(collection.PATIENT_COLLECTION)
@@ -159,8 +158,30 @@ module.exports = {
           .then((data) => {
             resolve(data.ops[0]);
           });
+      } else if (mailFound[0].status === "Deleted") {
+        details.password = await bcrypt.hash(details.password, 10);
+        db.get()
+          .collection(collection.PATIENT_COLLECTION)
+          .updateOne(
+            { email: details.email },
+            {
+              $set: {
+                name: details.name,
+                username: details.username,
+                email: details.email,
+                specialised: details.specialised,
+                field: details.field,
+                password: details.password,
+                gender: details.gender,
+                status: "Active",
+              },
+            }
+          )
+          .then((data) => {
+            resolve();
+          });
       } else {
-        reject({ msg: "Email Id or Mobile already Registered" });
+        reject({ msg: "Email Id or Contact No Already Exists" });
       }
     });
   },
@@ -169,7 +190,7 @@ module.exports = {
       let pateints = await db
         .get()
         .collection(collection.PATIENT_COLLECTION)
-        .find()
+        .find({ status: "Active" })
         .toArray();
       resolve(pateints);
     });

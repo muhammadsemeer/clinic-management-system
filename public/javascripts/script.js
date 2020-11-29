@@ -47,7 +47,6 @@ var checkUser;
 const validate = (event) => {
   const male = document.getElementById("male");
   const female = document.getElementById("female");
-  console.log(male, female);
   if (male.checked || female.checked) {
     if (usernameFormat && checkUser) {
       return true;

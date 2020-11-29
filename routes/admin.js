@@ -148,7 +148,6 @@ router.post("/add-doctor", verifyLogin, (req, res) => {
             admin: req.admin,
             title: `${req.body.name} Added Sucessfully`,
             message: `Username and password was sent to the mail id ${req.body.email}`,
-            to: "/users",
           });
         })
         .catch((error) => {
@@ -156,7 +155,6 @@ router.post("/add-doctor", verifyLogin, (req, res) => {
             admin: req.admin,
             title: `${req.body.name} Added Sucessfully`,
             message: `Something Went Wrong on Sending Mail to ${req.body.email}`,
-            to: "/doctors",
           });
         });
     })
@@ -225,7 +223,6 @@ router.post("/add-patient", verifyLogin, (req, res) => {
             admin: req.admin,
             title: `${req.body.name} Added Sucessfully`,
             message: `Username and password was sent to the mail id ${req.body.email}`,
-            to: "/pateints",
           });
         })
         .catch((error) => {
@@ -233,7 +230,6 @@ router.post("/add-patient", verifyLogin, (req, res) => {
             admin: req.admin,
             title: `${req.body.name} Added Sucessfully`,
             message: `Something Went Wrong on Sending Mail to ${req.body.email}`,
-            to: "/doctors",
           });
         });
     })

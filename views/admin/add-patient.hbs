@@ -48,6 +48,7 @@
           name="password"
           id="password"
           value="{{patient.password}}"
+          required
         />
         <div class="icon">
           <i class="far fa-eye-slash"></i>
@@ -80,3 +81,14 @@
     </form>
   </div>
 </section>
+<div class="modal gender-modal">
+  <h1>
+    Please Select Gender!
+  </h1>
+  <button
+    class="normal"
+    onclick="document.querySelector('.gender-modal').classList.toggle('active')"
+  >
+    OK
+  </button>
+</div>
