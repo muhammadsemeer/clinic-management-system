@@ -151,9 +151,12 @@
                   <a class="edit" href="#">
                     <i class="fas fa-user-edit"></i>
                   </a>
-                  <a class="delete" href="#">
+                  <span
+                    class="delete"
+                    onclick="modalup('pateint-modal','{{this._id}}')"
+                  >
                     <i class="fas fa-user-slash"></i>
-                  </a>
+                  </span>
                 </td>
               </tr>
             {{/each}}
@@ -166,9 +169,9 @@
 <div class="modal-container">
   <div class="modal doctor-modal">
     <h1>
-      Do you Want Delete The Doctor?
+      Do you Want Delete Doctor?
     </h1>
-    <button class="yes">
+    <button class="yes" id="doctor-delete">
       Yes
     </button>
     <button
@@ -187,6 +190,20 @@
       onclick="document.querySelector('.delete-sucess-modal').classList.toggle('active')"
     >
       Close
+    </button>
+  </div>
+  <div class="modal pateint-modal">
+    <h1>
+      Do you Want Delete Pateint?
+    </h1>
+    <button class="yes" id="patient-delete">
+      Yes
+    </button>
+    <button
+      class="no"
+      onclick="document.querySelector('.pateint-modal').classList.toggle('active')"
+    >
+      No
     </button>
   </div>
 </div>

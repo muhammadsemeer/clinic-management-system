@@ -12,9 +12,14 @@ function modalup(modal, id) {
   doctorid = id;
   document.querySelector("." + modal).classList.toggle("active");
 }
-const yes = document.querySelector(".yes");
-if (yes) {
-  yes.addEventListener("click", deleteDoctor);
+
+const doctorDelete = document.querySelector("#doctor-delete");
+const pateintDelete = document.querySelector("#patient-delete");
+if (doctorDelete) {
+  doctorDelete.addEventListener("click", deleteDoctor);
+}
+if (pateintDelete) {
+  pateintDelete.addEventListener("click", deletePateint);
 }
 
 function deleteDoctor() {
