@@ -82,19 +82,14 @@ router.get("/logout", (req, res) => {
   res.redirect("/login");
 });
 
-router.get("/doctors", verifyLogin, (req, res) => {
-  adminHelpers.getDoctors().then((response) => {
-    res.render("admin/doctors", {
-      title: "Doctors",
-      admin: req.admin,
-      doctor: response,
-    });
-  });
-});
-
-router.get("/pateints", (req, res) => {
-  adminHelpers.getPatients().then((response) => {
-    res.json(response);
+router.get("/users", verifyLogin, async (req, res) => {
+  let doctor = await adminHelpers.getDoctors();
+  let patient = await adminHelpers.getPatients();
+  res.render("admin/users", {
+    title: "Doctors",
+    admin: req.admin,
+    doctor,
+    patient,
   });
 });
 
