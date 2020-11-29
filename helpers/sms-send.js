@@ -10,7 +10,6 @@ module.exports.sendMessage = (to, message) => {
     fast2sms
       .sendMessage(options)
       .then((response) => {
-        console.log(response);
         resolve();
       })
       .catch((error) => {

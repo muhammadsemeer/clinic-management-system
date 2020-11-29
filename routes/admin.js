@@ -44,7 +44,6 @@ const loginCheck = (req, res, next) => {
 
 /* GET home page. */
 router.get("/", verifyLogin, function (req, res, next) {
-  res.cookie("Token", "dgdfgdgfdg");
   res.render("admin/index", { title: "Dashboard", admin: req.admin });
 });
 
@@ -164,13 +163,13 @@ router.post("/add-doctor", verifyLogin, (req, res) => {
     });
 });
 
-router.get("/username/:name", (req, res) => {
+router.get("/username/:name", verifyLogin, (req, res) => {
   adminHelpers.checkUsername(req.params.name).then((response) => {
     res.json(response);
   });
 });
 
-router.delete("/doctors/:id", (req, res) => {
+router.delete("/doctors/:id", verifyLogin, (req, res) => {
   adminHelpers
     .deleteDoctor(req.params.id)
     .then((response) => {
@@ -215,19 +214,21 @@ router.post("/add-patient", verifyLogin, (req, res) => {
     .then((response) => {
       sendMail(to, sub, output)
         .then((response) => {
-          sendMessage([req.body.contactno], output).then((response) => {
-            res.render("admin/success-page", {
-              admin: req.admin,
-              title: `${req.body.name} Added Sucessfully`,
-              message: `Username and password was sent to the mail id  ${req.body.email} and regiested mobile ${req.body.contactno}`,
+          sendMessage([req.body.contactno], output)
+            .then((response) => {
+              res.render("admin/success-page", {
+                admin: req.admin,
+                title: `${req.body.name} Added Sucessfully`,
+                message: `Username and password was sent to the mail id  ${req.body.email} and regiested mobile ${req.body.contactno}`,
+              });
+            })
+            .catch((error) => {
+              res.render("admin/success-page", {
+                admin: req.admin,
+                title: `${req.body.name} Added Sucessfully`,
+                message: `Something Went Wrong on Sending Message to ${req.body.contactno}`,
+              });
             });
-          }).catch((error) => {
-            res.render("admin/success-page", {
-              admin: req.admin,
-              title: `${req.body.name} Added Sucessfully`,
-              message: `Something Went Wrong on Sending Message to ${req.body.contactno}`,
-            });
-          });;
         })
         .catch((error) => {
           res.render("admin/success-page", {
@@ -244,7 +245,7 @@ router.post("/add-patient", verifyLogin, (req, res) => {
     });
 });
 
-router.delete("/pateints/:id", (req, res) => {
+router.delete("/pateints/:id", verifyLogin, (req, res) => {
   adminHelpers
     .deletePateint(req.params.id)
     .then((response) => {
