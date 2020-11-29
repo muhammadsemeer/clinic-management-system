@@ -36,16 +36,3 @@ function deleteDoctor() {
       }
     });
 }
-
-const tooglePatient = () => {
-  document.querySelector(".tab").classList.add("active");
-  document.querySelector("[class^='admin'] ").classList.add("active");
-};
-
-var tabLink = document.querySelector("#tab-link");
-
-tabLink.addEventListener("click", tooglePatient);
-
-if (location.href.includes("#patients")) {
-  tooglePatient();
-}

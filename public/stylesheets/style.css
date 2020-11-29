@@ -310,14 +310,29 @@ header h1 {
   display: none;
 }
 
-.admin-doctors .container,
-.patients .container {
+.admin-users .user-container {
+  width: 100%;
+  position: relative;
+}
+
+.admin-users .container {
   padding: 0 25px;
+  width: 100%;
+  position: absolute;
+  transition: 0.5s ease-in-out;
+  width: 100%;
+  transform: translateY(100px);
+  opacity: 0;
+  visibility: hidden;
 }
-.patients {
-  margin-top: 50px;
+
+.admin-users .container.active {
+  transform: translateY(0px);
+  opacity: 1;
+  visibility: visible;
 }
-.admin-doctors .container > div, .patients .container > div {
+
+.admin-users .container > div {
   margin: 20px 0;
 }
 .btn-sec {
@@ -564,17 +579,4 @@ header h1 {
   background-color: var(--green);
   border-radius: 5px;
   padding: 5px;
-}
-
-.tab {
-  display: none;
-}
-
-.tab.active {
-  display: block;
-  animation: tab 1s ease-in-out;
-}
-
-[class^="admin"].active {
-  display: none;
 }
