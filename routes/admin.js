@@ -148,7 +148,7 @@ router.post("/add-doctor", verifyLogin, (req, res) => {
             admin: req.admin,
             title: `${req.body.name} Added Sucessfully`,
             message: `Username and password was sent to the mail id ${req.body.email}`,
-            to: "/doctors",
+            to: "/users",
           });
         })
         .catch((error) => {
@@ -241,6 +241,17 @@ router.post("/add-patient", verifyLogin, (req, res) => {
       req.session.adderror = error.msg;
       req.session.pateint = req.body;
       res.redirect("/add-patient");
+    });
+});
+
+router.delete("/pateints/:id", (req, res) => {
+  adminHelpers
+    .deletePateint(req.params.id)
+    .then((response) => {
+      res.json({ status: true });
+    })
+    .catch((error) => {
+      res.json(error);
     });
 });
 

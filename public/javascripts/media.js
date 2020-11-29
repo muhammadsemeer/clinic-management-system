@@ -48,3 +48,23 @@ function toogleTab(activeTab, inactiveTab, showContent, hideContent) {
   document.querySelector(inactiveTab).classList.remove("active");
   document.querySelector(hideContent).classList.remove("active");
 }
+
+function deletePateint() {
+  fetch(`/pateints/${doctorid}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.status) {
+        document.getElementById(`${doctorid}`).remove();
+        modalup("delete-sucess-modal");
+        document.querySelector(".pateint-modal").classList.toggle("active");
+      } else {
+        alert("Something Went Wrong. Try Again Later");
+        location.reload();
+      }
+    });
+}

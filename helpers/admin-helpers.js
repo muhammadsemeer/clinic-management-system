@@ -174,4 +174,24 @@ module.exports = {
       resolve(pateints);
     });
   },
+  deletePateint: (pateintId) => {
+    return new Promise(async (resolve, reject) => {
+      db.get()
+        .collection(collection.PATIENT_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(pateintId) },
+          {
+            $set: {
+              status: "Deleted",
+            },
+          }
+        )
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
 };
