@@ -15,6 +15,7 @@
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
     "express-subdomain": "^1.0.5",
+    "fast-two-sms": "^2.1.0",
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",

@@ -3,6 +3,7 @@ var router = express.Router();
 const adminHelpers = require("../helpers/admin-helpers");
 const jwt = require("jsonwebtoken");
 const { sendMail } = require("../helpers/send-mail");
+const { sendMessage } = require("../helpers/sms-send");
 
 const verifyLogin = (req, res, next) => {
   if (req.cookies.adminToken) {
@@ -213,11 +214,19 @@ router.post("/add-patient", verifyLogin, (req, res) => {
     .then((response) => {
       sendMail(to, sub, output)
         .then((response) => {
-          res.render("admin/success-page", {
-            admin: req.admin,
-            title: `${req.body.name} Added Sucessfully`,
-            message: `Username and password was sent to the mail id ${req.body.email}`,
-          });
+          sendMessage([req.body.contactno], output).then((response) => {
+            res.render("admin/success-page", {
+              admin: req.admin,
+              title: `${req.body.name} Added Sucessfully`,
+              message: `Username and password was sent to the mail id  ${req.body.email} and regiested mobile ${req.body.contactno}`,
+            });
+          }).catch((error) => {
+            res.render("admin/success-page", {
+              admin: req.admin,
+              title: `${req.body.name} Added Sucessfully`,
+              message: `Something Went Wrong on Sending Message to ${req.body.contactno}`,
+            });
+          });;
         })
         .catch((error) => {
           res.render("admin/success-page", {
