@@ -1,6 +1,24 @@
 <section class="admin-users ml-250">
   <div class="user-container">
-    <div class="container active">
+    <div class="tab">
+      <button
+        id="doctor"
+        class="active"
+        onclick="toogleTab('#doctor', '#patient', '#doctor-conatiner', '#patient-conatiner')"
+      >
+        <i class="fas fa-user-md"></i>
+        Doctors
+      </button>
+      <button
+        id="patient"
+        onclick="toogleTab('#patient','#doctor','#patient-conatiner','#doctor-conatiner')"
+      >
+        <i class="fas fa-user-injured"></i>
+        Patients
+      </button>
+      <hr />
+    </div>
+    <div id="doctor-conatiner" class="container active">
       <div class="btn-sec">
         <a href="/add-doctor">
           <i class="fas fa-user-plus"></i>
@@ -79,7 +97,7 @@
         </table>
       </div>
     </div>
-    <div class="container">
+    <div id="patient-conatiner" class="container">
       <div class="btn-sec">
         <a href="/add-patient">
           <i class="fas fa-user-plus"></i>
@@ -108,7 +126,7 @@
           </thead>
           <tbody>
             {{#each patient}}
-              <tr>
+              <tr id="{{this._id}}">
                 <td>
                   <div>
                     <span class="image">

@@ -36,3 +36,10 @@ function deleteDoctor() {
       }
     });
 }
+
+function toogleTab(activeTab, inactiveTab, showContent, hideContent) {
+  document.querySelector(activeTab).classList.add("active");
+  document.querySelector(showContent).classList.add("active");
+  document.querySelector(inactiveTab).classList.remove("active");
+  document.querySelector(hideContent).classList.remove("active");
+}
