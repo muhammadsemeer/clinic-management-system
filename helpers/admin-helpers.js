@@ -48,10 +48,7 @@ module.exports = {
             {
               $set: {
                 name: details.name,
-                username: details.username,
                 email: details.email,
-                specialised: details.specialised,
-                field: details.field,
                 password: details.password,
                 gender: details.gender,
                 status: "Active",

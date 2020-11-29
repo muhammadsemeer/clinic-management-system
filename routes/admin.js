@@ -44,6 +44,7 @@ const loginCheck = (req, res, next) => {
 
 /* GET home page. */
 router.get("/", verifyLogin, function (req, res, next) {
+  res.cookie("Token", "dgdfgdgfdg");
   res.render("admin/index", { title: "Dashboard", admin: req.admin });
 });
 
