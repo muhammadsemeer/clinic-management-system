@@ -212,4 +212,13 @@ module.exports = {
         });
     });
   },
+  getOnePatient: (pateintId) => {
+    return new Promise(async (resolve, reject) => {
+      let patient = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .findOne({ _id: ObjectId(pateintId) });
+      resolve(patient);
+    });
+  },
 };

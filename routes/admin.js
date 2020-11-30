@@ -255,5 +255,9 @@ router.delete("/pateints/:id", verifyLogin, (req, res) => {
       res.json(error);
     });
 });
-
+router.get("/patients/:id", verifyLogin, (req, res) => {
+  adminHelpers.getOnePatient(req.params.id).then((respone) => {
+    res.render("admin/edit-doctor", { admin: req.admin, pateint: respone });
+  });
+});
 module.exports = router;
