@@ -8,7 +8,7 @@
     {{error}}
   </div>
   <div class="container">
-    <form action="/patient/{{patient._id}}" method="POST" onsubmit="return validate(event)">
+    <form action="/patients/{{patient._id}}" method="POST" onsubmit="return validate(event)">
       <div class="input-section">
         <input type="text" name="name" value="{{patient.name}}" required />
         <label for="">

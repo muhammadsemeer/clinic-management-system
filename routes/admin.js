@@ -192,7 +192,7 @@ router.get("/doctors/:name", verifyLogin, (req, res) => {
 
 router.post("/doctors/:name", verifyLogin, (req, res) => {
   adminHelpers.updateDoctor(req.params.name, req.body).then((response) => {
-    res.redirect("/doctors");
+    res.redirect("/users");
   });
 });
 
@@ -257,7 +257,18 @@ router.delete("/pateints/:id", verifyLogin, (req, res) => {
 });
 router.get("/patients/:id", verifyLogin, (req, res) => {
   adminHelpers.getOnePatient(req.params.id).then((respone) => {
-    res.render("admin/edit-patient", { admin: req.admin, patient: respone, title: "Edit Patient" });
+    res.render("admin/edit-patient", {
+      admin: req.admin,
+      patient: respone,
+      title: "Edit Patient",
+    });
   });
 });
+
+router.post("/patients/:id", verifyLogin, (req, res) => {
+  adminHelpers.updatePatient(req.params.id, req.body).then((response) => {
+    res.redirect("/users");
+  });
+});
+
 module.exports = router;

@@ -221,4 +221,25 @@ module.exports = {
       resolve(patient);
     });
   },
+  updatePatient: (pateintId, details) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.PATIENT_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(pateintId) },
+          {
+            $set: {
+              name: details.name,
+              email: details.email,
+              contactno: details.contactno,
+              age: details.age,
+              gender: details.gender,
+            },
+          }
+        )
+        .then((response) => {
+          resolve();
+        });
+    });
+  },
 };
