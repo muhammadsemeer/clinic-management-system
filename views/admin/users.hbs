@@ -29,6 +29,9 @@
           <thead>
             <tr>
               <th>
+                Image
+              </th>
+              <th>
                 Doctor Name
               </th>
               <th>
@@ -44,9 +47,6 @@
                 Sepeciality
               </th>
               <th>
-                Account Status
-              </th>
-              <th>
                 Actions
               </th>
             </tr>
@@ -55,15 +55,15 @@
             {{#each doctor}}
               <tr id="{{this._id}}">
                 <td>
-                  <div>
-                    <span class="image">
-                      <img
-                        src="/images/icons/undraw_male_avatar_323b.svg"
-                        alt=""
-                      />
-                    </span>
-                    {{this.name}}
-                  </div>
+                  <span class="image">
+                    <img
+                      src="/images/icons/undraw_male_avatar_323b.svg"
+                      alt=""
+                    />
+                  </span>
+                </td>
+                <td>
+                  {{this.name}}
                 </td>
                 <td>
                   {{this.username}}
@@ -76,9 +76,6 @@
                 </td>
                 <td>
                   {{this.field}}
-                </td>
-                <td>
-                  {{this.status}}
                 </td>
                 <td>
                   <a class="edit" href="/doctors/{{this.username}}">
@@ -120,7 +117,7 @@
                 Mobile No
               </th>
               <th>
-                Account Status
+                Email
               </th>
               <th>
                 Actions
@@ -132,12 +129,6 @@
               <tr id="{{this._id}}">
                 <td>
                   <div>
-                    <span class="image">
-                      <img
-                        src="/images/icons/undraw_male_avatar_323b.svg"
-                        alt=""
-                      />
-                    </span>
                     {{this.name}}
                   </div>
                 </td>
@@ -151,7 +142,7 @@
                   {{this.contactno}}
                 </td>
                 <td>
-                  {{this.status}}
+                  {{this.email}}
                 </td>
                 <td>
                   <a class="edit" href="/patients/{{this._id}}">

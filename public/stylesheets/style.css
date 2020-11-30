@@ -361,12 +361,6 @@ header h1 {
   font-size: 18px;
   text-align: center;
 }
-.doctors-display td div {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  font-weight: bold;
-}
 .doctors-display span {
   border-radius: 50%;
 }
