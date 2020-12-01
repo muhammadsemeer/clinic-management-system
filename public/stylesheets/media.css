@@ -71,3 +71,9 @@
     width: 500px;
   }
 }
+
+@media (max-width: 600px) {
+  .admin-cropper .img-container {
+    padding: 0;
+  }
+}
