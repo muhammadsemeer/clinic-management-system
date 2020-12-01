@@ -141,18 +141,16 @@ router.post("/add-doctor", verifyLogin, (req, res) => {
     .addDoctor(req.body)
     .then((response) => {
       sendMail(to, sub, output)
-        .then((response) => {
-          res.render("admin/success-page", {
+        .then((data) => {
+          res.render("admin/image-crop", {
             admin: req.admin,
-            title: `${req.body.name} Added Sucessfully`,
-            message: `Username and password was sent to the mail id ${req.body.email}`,
+            id: response._id,
           });
         })
         .catch((error) => {
-          res.render("admin/success-page", {
+          res.render("admin/image-crop", {
             admin: req.admin,
-            title: `${req.body.name} Added Sucessfully`,
-            message: `Something Went Wrong on Sending Mail to ${req.body.email}`,
+            id: response._id,
           });
         });
     })
@@ -268,6 +266,18 @@ router.get("/patients/:id", verifyLogin, (req, res) => {
 router.post("/patients/:id", verifyLogin, (req, res) => {
   adminHelpers.updatePatient(req.params.id, req.body).then((response) => {
     res.redirect("/users");
+  });
+});
+
+router.post("/doctor/upload/:id", (req, res) => {
+  let image = req.files.image;
+  image.mv("./public/images/doctor/" + req.params.id + ".jpg", (err) => {
+    if (err) {
+      console.log(err);
+      res.json({ status: false });
+    } else {
+      res.json({ status: true });
+    }
   });
 });
 

@@ -23,19 +23,23 @@ const crop = () => {
   document.querySelector("#croped-image").appendChild(croppped);
 };
 
-const upload = () => {
+const upload = (id) => {
   cropper.getCroppedCanvas().toBlob((blob) => {
     const formData = new FormData();
 
     formData.append("image", blob);
 
-    fetch("/upload", {
+    fetch("/doctor/upload/" + id, {
       method: "POST",
       body: formData,
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        if (res.status) {
+          window.location = "/users";
+        } else {
+          modalup("error-modal")
+        }
       });
   });
 };

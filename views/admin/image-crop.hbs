@@ -1,4 +1,9 @@
 <section class="admin-cropper ml-250">
+  <div class="head">
+    <h1>
+      Image Upload
+    </h1>
+  </div>
   <div class="input">
     <div class="btn-container">
       <div class="btn-grp">
@@ -68,9 +73,20 @@
   <div id="croped-image"></div>
   <div class="btn-container" style="margin: 5px 0;">
     <div class="btn-grp">
-      <button class="crop" style="width: 100px;" onclick="upload()">
+      <button class="crop" style="width: 100px;" onclick="upload('{{id}}')">
         Upload
       </button>
     </div>
   </div>
+</div>
+<div class="modal error-modal">
+  <h3>
+    Something Went Wrong!
+  </h3>
+  <button
+    class="normal"
+    onclick="document.querySelector('error-modal').classList.remove('active')"
+  >
+    Close
+  </button>
 </div>

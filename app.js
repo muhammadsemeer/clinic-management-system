@@ -9,6 +9,7 @@ var adminRouter = require("./routes/admin");
 var app = express();
 var db = require("./config/connection");
 var session = require("express-session");
+var fileUpload = require("express-fileupload");
 require("dotenv").config();
 
 // view engine setup
@@ -37,6 +38,7 @@ app.use(
     cookie: { maxAge: 60 * 24 * 100 },
   })
 );
+app.use(fileUpload());
 
 db.connect((error) => {
   if (error) throw error;

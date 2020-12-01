@@ -55,8 +55,12 @@ module.exports = {
               },
             }
           )
-          .then((data) => {
-            resolve();
+          .then(async (data) => {
+            let doctor = await db
+              .get()
+              .collection(collection.DOCTORS_COLLECTION)
+              .findOne({ email: details.email });
+            resolve(doctor);
           });
       } else {
         reject({ msg: "Email Id Already Exists" });
