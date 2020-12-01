@@ -72,8 +72,16 @@
 <div class="modal crop-modal">
   <div id="croped-image"></div>
   <div class="btn-container" style="margin: 5px 0;">
+    <div id="myProgress">
+      <div id="myBar"></div>
+    </div>
     <div class="btn-grp">
-      <button class="crop" style="width: 100px;" onclick="upload('{{id}}')">
+      <button
+        class="crop"
+        id="up-btn"
+        style="width: 100px;"
+        onclick="upload('{{id}}')"
+      >
         Upload
       </button>
     </div>

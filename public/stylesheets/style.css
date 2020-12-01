@@ -657,8 +657,16 @@ button.crop {
 .input label:hover {
   background-color: #006eff;
 }
-.preview {
-  width: 150px;
-  height: 150px;
-  overflow: hidden;
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+  display: none;
+}
+
+#myBar {
+  text-align: center;
+  color: #fff;
+  width: 1%;
+  height: 30px;
+  background-color: #4caf50;
 }

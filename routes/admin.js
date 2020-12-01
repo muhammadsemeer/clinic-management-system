@@ -145,6 +145,7 @@ router.post("/add-doctor", verifyLogin, (req, res) => {
           res.render("admin/image-crop", {
             admin: req.admin,
             id: response._id,
+            title: "Image Upload",
           });
         })
         .catch((error) => {
