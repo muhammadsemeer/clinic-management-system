@@ -23,10 +23,7 @@ const crop = () => {
   document.querySelector("#croped-image").appendChild(croppped);
 };
 
-var i = 0;
 function move(time) {
-  if (i == 0) {
-    i = 1;
     var elem = document.getElementById("myBar");
     var width = 1;
     var id = setInterval(frame, time);
@@ -45,7 +42,6 @@ function move(time) {
         elem.style.width = width + "%";
       }
     }
-  }
 }
 
 const upload = (id) => {
@@ -69,6 +65,7 @@ const upload = (id) => {
           return;
         } else {
           modalup("error-modal");
+          document.querySelector("#myProgress").style.display = "none";
         }
       });
   });
