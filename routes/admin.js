@@ -272,15 +272,14 @@ router.post("/patients/:id", verifyLogin, (req, res) => {
 
 router.post("/doctor/upload/:id", (req, res) => {
   let image = req.files.image;
-  // image.mv("./public/images/doctor/" + req.params.id + ".jpg", (err) => {
-  //   if (err) {
-  //     console.log(err);
-  //     res.json({ status: false });
-  //   } else {
-  //     res.json({ status: true });
-  //   }
-  // });
-  res.json({ status: false });
+  image.mv("./public/images/doctor/" + req.params.id + ".jpg", (err) => {
+    if (err) {
+      console.log(err);
+      res.json({ status: false });
+    } else {
+      res.json({ status: true });
+    }
+  });
 });
 
 module.exports = router;
