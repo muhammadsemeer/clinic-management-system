@@ -16,17 +16,7 @@
 </head>
 
 <body>
-  <header>
-    <div class="logo-section">
-      <a href="/"><h1>Galaxieon Care</h1></a>
-    </div>
-    {{#if admin}}
-    <div class="menu">
-      <div class="menu_humburger">
-      </div>
-    </div>
-    {{/if}}
-  </header>
+  {{> header}}
   {{#if admin}}
   {{> admin}}
   {{/if}}
