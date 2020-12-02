@@ -23,31 +23,32 @@ const crop = () => {
   document.querySelector("#croped-image").appendChild(croppped);
 };
 
-function move(time) {
-    var elem = document.getElementById("myBar");
+function move(time, func) {
+  var elem = document.getElementById("myBar");
+  if (func == 1) {
     var width = 1;
     var id = setInterval(frame, time);
     function frame() {
       if (width >= 100) {
         if (time === 10) {
-          clearInterval(id);
-          i = 0;
+          move(0, 0);
           document.querySelector("#myBar").innerHTML = "Uploaded Sucessfully";
-          setTimeout(() => {
-            window.location = "/users";
-          }, 500);
+          document.querySelector("#cls-btn").style.display = "block";
         }
       } else {
         width++;
         elem.style.width = width + "%";
       }
     }
+  } else {
+    elem.style.width = "100%";
+  }
 }
 
 const upload = (id) => {
   document.querySelector("#up-btn").style.display = "none";
   document.querySelector("#myProgress").style.display = "block";
-  move(1000);
+  move(2000, 1);
   cropper.getCroppedCanvas().toBlob((blob) => {
     const formData = new FormData();
 
@@ -60,8 +61,7 @@ const upload = (id) => {
       .then((res) => res.json())
       .then((res) => {
         if (res.status) {
-          i = 0;
-          move(10);
+          move(10, 1);
           return;
         } else {
           modalup("error-modal");

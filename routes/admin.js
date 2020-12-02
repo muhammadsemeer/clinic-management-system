@@ -4,7 +4,7 @@ const adminHelpers = require("../helpers/admin-helpers");
 const jwt = require("jsonwebtoken");
 const { sendMail } = require("../helpers/send-mail");
 const { sendMessage } = require("../helpers/sms-send");
-
+const fs = require("fs");
 const verifyLogin = (req, res, next) => {
   if (req.cookies.adminToken) {
     jwt.verify(
@@ -172,7 +172,12 @@ router.delete("/doctors/:id", verifyLogin, (req, res) => {
   adminHelpers
     .deleteDoctor(req.params.id)
     .then((response) => {
-      res.json({ status: true });
+      fs.unlink(
+        "././public/images/doctor/" + req.params.id + ".jpg",
+        (error) => {
+          res.json({ status: true });
+        }
+      );
     })
     .catch((error) => {
       res.json(error);
@@ -274,11 +279,18 @@ router.post("/doctor/upload/:id", (req, res) => {
   let image = req.files.image;
   image.mv("./public/images/doctor/" + req.params.id + ".jpg", (err) => {
     if (err) {
-      console.log(err);
       res.json({ status: false });
     } else {
       res.json({ status: true });
     }
+  });
+});
+
+router.get("/image-upload/:id", verifyLogin, (req, res) => {
+  res.render("admin/image-crop", {
+    admin: req.admin,
+    id: req.params.id,
+    title: "Image Upload",
   });
 });
 

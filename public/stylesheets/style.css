@@ -670,3 +670,7 @@ button.crop {
   height: 30px;
   background-color: #4caf50;
 }
+#cls-btn {
+  width: 150px;
+  display: none;
+}
