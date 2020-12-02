@@ -6,21 +6,21 @@
       </h1>
     </a>
   </div>
-  <a href="/">
-    Home
-  </a>
-  {{#if user}}
-    <nav>
+  <nav>
+    <a href="/">
+      Home
+    </a>
+    {{#if user}}
       <a href="#">
         Appointments
       </a>
       <a href="#">
         My Profile
       </a>
-    </nav>
-  {{else}}
-  <nav>
-      <a href="">Login</a>
+    {{else}}
+      <a href="">
+        Login
+      </a>
+    {{/if}}
   </nav>
-  {{/if}}
 </header>
