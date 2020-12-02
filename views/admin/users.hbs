@@ -55,10 +55,16 @@
             {{#each doctor}}
               <tr id="{{this._id}}">
                 <td>
-                    <img
-                      src="/images/doctor/{{this._id}}.jpg"
-                      alt=""
-                    />
+                  <div>
+                    <img src="/images/doctor/{{this._id}}.jpg" alt="" />
+                    <div
+                      id="{{this._id}}msg"
+                      class="img-hover"
+                      onclick="window.location = '/image-upload/{{this._id}}'"
+                    >
+                      Edit
+                    </div>
+                  </div>
                 </td>
                 <td>
                   {{this.name}}
