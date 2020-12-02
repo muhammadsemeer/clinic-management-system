@@ -1,0 +1,26 @@
+<header>
+  <div class="logo-section">
+    <a href="/">
+      <h1>
+        Galaxieon Care
+      </h1>
+    </a>
+  </div>
+  <a href="/">
+    Home
+  </a>
+  {{#if user}}
+    <nav>
+      <a href="#">
+        Appointments
+      </a>
+      <a href="#">
+        My Profile
+      </a>
+    </nav>
+  {{else}}
+  <nav>
+      <a href="">Login</a>
+  </nav>
+  {{/if}}
+</header>
