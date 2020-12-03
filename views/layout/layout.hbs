@@ -19,7 +19,8 @@
   {{#if admin}}
   {{> admin-header}}
   {{> admin}}
-  {{else}}
+  {{/if}}
+  {{#if header}}
   {{> user-header}}
   {{/if}}
   {{{body}}}
