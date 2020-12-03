@@ -804,3 +804,49 @@ nav a {
   height: 200px;
   border-radius: 10px;
 }
+
+/* user mobile menu */
+.menu-icon {
+  display: none;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.menu-user {
+  background-color: var(--primary-color);
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.menu-user.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-user a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 20px;
+}
+
+.menu-user span {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+}

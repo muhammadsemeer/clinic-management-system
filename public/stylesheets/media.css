@@ -20,6 +20,12 @@
     margin-left: 0;
     width: 100%;
   }
+  nav {
+    display: none;
+  }
+  .menu-icon {
+    display: block;
+  }
 }
 
 @media (max-width: 500px) {

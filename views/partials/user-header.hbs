@@ -23,4 +23,25 @@
       </a>
     {{/if}}
   </nav>
+  <div class="menu-icon" onclick="document.querySelector('.menu-user').classList.toggle('active');">
+    <i class="fas fa-bars"></i>
+  </div>
 </header>
+<div class="menu-user">
+  <span onclick="document.querySelector('.menu-user').classList.toggle('active');">&times;</span>
+  <a href="/">
+      Home
+    </a>
+    {{#if user}}
+      <a href="#">
+        Appointments
+      </a>
+      <a href="#">
+        My Profile
+      </a>
+    {{else}}
+      <a href="">
+        Login
+      </a>
+    {{/if}}
+</div>
