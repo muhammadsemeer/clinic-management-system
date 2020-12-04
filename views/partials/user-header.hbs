@@ -7,8 +7,11 @@
     </a>
   </div>
   <nav>
-    <a href="/">
+    <a href="#">
       Home
+    </a>
+    <a href="#contact">
+      Contact
     </a>
     {{#if user}}
       <a href="#">
@@ -23,25 +26,35 @@
       </a>
     {{/if}}
   </nav>
-  <div class="menu-icon" onclick="document.querySelector('.menu-user').classList.toggle('active');">
+  <div
+    class="menu-icon"
+    onclick="document.querySelector('.menu-user').classList.toggle('active');"
+  >
     <i class="fas fa-bars"></i>
   </div>
 </header>
 <div class="menu-user">
-  <span onclick="document.querySelector('.menu-user').classList.toggle('active');">&times;</span>
+  <span
+    onclick="document.querySelector('.menu-user').classList.toggle('active');"
+  >
+    ×
+  </span>
   <a href="/">
-      Home
+    Home
+  </a>
+  <a href="#contact" onclick="document.querySelector('.menu-user').classList.toggle('active');">
+    Contact
+  </a>
+  {{#if user}}
+    <a href="#">
+      Appointments
     </a>
-    {{#if user}}
-      <a href="#">
-        Appointments
-      </a>
-      <a href="#">
-        My Profile
-      </a>
-    {{else}}
-      <a href="">
-        Login
-      </a>
-    {{/if}}
+    <a href="#">
+      My Profile
+    </a>
+  {{else}}
+    <a href="">
+      Login
+    </a>
+  {{/if}}
 </div>
