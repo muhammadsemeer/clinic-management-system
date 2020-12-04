@@ -284,11 +284,11 @@ header h1 {
   position: absolute;
   color: var(--primary-color);
   border-radius: 50px;
-  background: linear-gradient(145deg, var(--login-one), #ffffff);
-  font-size: 15px;
+  font-size: 18px;
   left: 25px;
-  top: 7px;
+  top: 30px;
   padding: 0 5px;
+  transition: all 0.5s ease-in-out;
 }
 
 .input-section input {
@@ -302,6 +302,15 @@ header h1 {
   background: none;
   border-radius: 50px;
 }
+
+.input-section input:focus ~ label,
+.input-section input:valid ~ label {
+  background: linear-gradient(145deg, var(--login-one), #ffffff);
+  font-size: 15px;
+  left: 25px;
+  top: 7px;
+}
+
 .input-section input[type="submit"] {
   width: 100px;
   height: 50px;
@@ -778,7 +787,7 @@ nav a {
 
 /* card section */
 
-.card {
+.user .card {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -786,7 +795,7 @@ nav a {
   flex-wrap: wrap;
 }
 
-.container {
+.user .container {
   width: 300px;
   height: 400px;
   margin: 25px;
@@ -799,7 +808,7 @@ nav a {
   justify-content: center;
 }
 
-.container .img-section img {
+.user .container .img-section img {
   width: 200px;
   height: 200px;
   border-radius: 10px;
