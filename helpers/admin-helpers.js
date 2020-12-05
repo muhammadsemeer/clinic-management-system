@@ -153,6 +153,7 @@ module.exports = {
         })
         .toArray();
       if (mailFound.length <= 0) {
+        details.status = "Active";
         details.password = await bcrypt.hash(details.password, 10);
         db.get()
           .collection(collection.PATIENT_COLLECTION)

@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 module.exports = {
   doSignup: (details) => {
     return new Promise(async (resolve, reject) => {
-      console.log(details);
       let mailFound = await db
         .get()
         .collection(collection.PATIENT_COLLECTION)
@@ -14,6 +13,7 @@ module.exports = {
         })
         .toArray();
       if (mailFound.length <= 0) {
+        details.status = "Active";
         details.password = await bcrypt.hash(details.password, 10);
         db.get()
           .collection(collection.PATIENT_COLLECTION)
