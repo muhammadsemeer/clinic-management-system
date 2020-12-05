@@ -10,7 +10,6 @@ const loginCheck = (req, res, next) => {
       req.cookies.userToken,
       process.env.JWT_SECERT,
       (error, decoded) => {
-        console.log(decoded);
         if (error) {
           next();
         } else {
@@ -21,6 +20,29 @@ const loginCheck = (req, res, next) => {
     );
   } else {
     next();
+  }
+};
+
+const tokenCheck = (req, res, next) => {
+  if (req.cookies.userToken) {
+    console.log("if 1");
+    jwt.verify(
+      req.cookies.userToken,
+      process.env.JWT_SECERT,
+      (error, decoded) => {
+        if (error) {
+          console.log("if 2");
+          next();
+          console.log(error);
+        } else {
+        console.log("else 1");
+        res.redirect("/");
+      }
+    }
+    );
+  } else {
+    console.log("else 2");
+    next()
   }
 };
 
@@ -35,7 +57,7 @@ router.get("/", loginCheck, (req, res) => {
   });
 });
 
-router.get("/signup", (req, res) => {
+router.get("/signup", tokenCheck, (req, res) => {
   res.render("user/signup", {
     title: "Create An Account",
     error: req.session.signuperr,
