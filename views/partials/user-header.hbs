@@ -7,11 +7,8 @@
     </a>
   </div>
   <nav>
-    <a href="#">
+    <a href="/">
       Home
-    </a>
-    <a href="#contact">
-      Contact
     </a>
     {{#if user}}
       <a href="#">
@@ -25,6 +22,9 @@
         Login
       </a>
     {{/if}}
+    <a href="#contact">
+      Contact
+    </a>
   </nav>
   <div
     class="menu-icon"
@@ -42,7 +42,10 @@
   <a href="/">
     Home
   </a>
-  <a href="#contact" onclick="document.querySelector('.menu-user').classList.toggle('active');">
+  <a
+    href="#contact"
+    onclick="document.querySelector('.menu-user').classList.toggle('active');"
+  >
     Contact
   </a>
   {{#if user}}
