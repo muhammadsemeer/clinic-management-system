@@ -20,11 +20,16 @@
     {{else}}
       <a href="">
         Login
-      </a>
-    {{/if}}
     <a href="#contact">
       Contact
     </a>
+      </a>
+    {{/if}}
+    {{#if user}}
+      <a href="/logout">
+        Logout
+      </a>
+    {{/if}}
   </nav>
   <div
     class="menu-icon"
@@ -54,6 +59,9 @@
     </a>
     <a href="#">
       My Profile
+    </a>
+    <a href="/logout">
+      Logout
     </a>
   {{else}}
     <a href="">

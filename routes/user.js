@@ -35,14 +35,14 @@ const tokenCheck = (req, res, next) => {
           next();
           console.log(error);
         } else {
-        console.log("else 1");
-        res.redirect("/");
+          console.log("else 1");
+          res.redirect("/");
+        }
       }
-    }
     );
   } else {
     console.log("else 2");
-    next()
+    next();
   }
 };
 
@@ -75,13 +75,16 @@ router.post("/signup", (req, res) => {
       });
       res.cookie("userToken", token);
       res.redirect("/");
-      console.log("1");
     })
     .catch((error) => {
-      console.log("2");
       req.session.signuperr = error.msg;
       res.redirect("/signup");
     });
+});
+
+router.get("/logout", (req, res) => {
+  res.clearCookie("userToken");
+  res.redirect("/");
 });
 
 module.exports = router;
