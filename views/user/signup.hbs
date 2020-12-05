@@ -6,7 +6,7 @@
     <h1>
       Create an Account
     </h1>
-    <form action="/login" method="POST">
+    <form action="/signup" method="POST" onsubmit="return validate(event)">
       <h3 class="error">
         {{error}}
       </h3>
@@ -82,3 +82,14 @@
     </form>
   </div>
 </section>
+<div class="modal gender-modal">
+  <h1>
+    Please Select Gender!
+  </h1>
+  <button
+    class="normal"
+    onclick="document.querySelector('.gender-modal').classList.toggle('active')"
+  >
+    OK
+  </button>
+</div>

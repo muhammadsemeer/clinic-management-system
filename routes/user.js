@@ -1,5 +1,6 @@
 var express = require("express");
 const adminHelpers = require("../helpers/admin-helpers");
+const userHelpers = require("../helpers/user-helpers");
 var router = express.Router();
 
 router.get("/", (req, res) => {
@@ -14,7 +15,23 @@ router.get("/", (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-  res.render("user/signup", { title: "Create An Account" });
+  res.render("user/signup", {
+    title: "Create An Account",
+    error: req.session.signuperr,
+  });
+  res.session.signuperr = null;
+});
+
+router.post("/signup", (req, res) => {
+  userHelpers
+    .doSignup(req.body)
+    .then((response) => {
+      res.redirect("/");
+    })
+    .catch((error) => {
+      req.session.signuperr = error.msg;
+      res.redirect("/signup");
+    });
 });
 
 module.exports = router;
