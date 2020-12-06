@@ -49,6 +49,7 @@ module.exports = {
       if (mailFound.length <= 0) {
         details.status = "Active";
         details.auth = OAuth;
+        delete details.authtoken;
         db.get()
           .collection(collection.PATIENT_COLLECTION)
           .insertOne(details)
