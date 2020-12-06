@@ -31,4 +31,33 @@ module.exports = {
       }
     });
   },
+  OAuth: (details, OAuth) => {
+    return new Promise(async (resolve, reject) => {
+      let mailFound = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .find({
+          $and: [
+            {
+              email: details.email,
+            },
+            { status: "Active" },
+            { auth: OAuth },
+          ],
+        })
+        .toArray();
+      if (mailFound.length <= 0) {
+        details.status = "Active";
+        details.auth = OAuth;
+        db.get()
+          .collection(collection.PATIENT_COLLECTION)
+          .insertOne(details)
+          .then((data) => {
+            resolve(data.ops[0]);
+          });
+      } else {
+        resolve(mailFound[0]);
+      }
+    });
+  },
 };

@@ -3,6 +3,7 @@ const adminHelpers = require("../helpers/admin-helpers");
 const userHelpers = require("../helpers/user-helpers");
 var router = express.Router();
 const jwt = require("jsonwebtoken");
+const { verify } = require("../helpers/google-oauth");
 require("dotenv").config();
 const loginCheck = (req, res, next) => {
   if (req.cookies.userToken) {
@@ -83,6 +84,29 @@ router.post("/signup", (req, res) => {
 router.get("/logout", (req, res) => {
   res.clearCookie("userToken");
   res.redirect("/");
+});
+
+router.post("/signup/oauth/google", (req, res) => {
+  verify(req.body.authtoken)
+    .then((data) => {
+      userHelpers
+        .OAuth(req.body, "Google")
+        .then((response) => {
+          var token = jwt.sign(response, process.env.JWT_SECERT, {
+            expiresIn: "60d",
+          });
+          res.cookie("userToken", token, {
+            httpOnly: true,
+          });
+          res.json({ status: true });
+        })
+        .catch((error) => {
+          res.json({ status: false, error: error });
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 module.exports = router;

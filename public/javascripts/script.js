@@ -94,19 +94,18 @@ function onSuccess(googleUser) {
     formData.append("name", profile.getName());
     formData.append("profileImage", profile.getImageUrl());
     formData.append("email", profile.getEmail());
-    formData.append("Authtoken", id_token);
+    formData.append("authtoken", id_token);
     fetch("/signup/oauth/google", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: formData,
     })
       .then((res) => res.json())
-      .then((status) => {
-        if (status) {
+      .then((res) => {
+        if (res.status) {
+          signOut();
           window.location = "/";
         } else {
+          document.querySelector(".error").innerHTML = res.error.msg;
           signOut();
         }
       });
@@ -131,6 +130,6 @@ function renderButton() {
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
-    modalup("error-modal");
+    console.log("User Logged out")
   });
 }

@@ -17,6 +17,7 @@
     "express-session": "^1.17.1",
     "express-subdomain": "^1.0.5",
     "fast-two-sms": "^2.1.0",
+    "google-auth-library": "^6.1.3",
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
