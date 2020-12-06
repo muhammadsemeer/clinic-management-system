@@ -94,6 +94,7 @@ function onSuccess(googleUser) {
     formData.append("name", profile.getName());
     formData.append("profileImage", profile.getImageUrl());
     formData.append("email", profile.getEmail());
+    formData.append("Authtoken", id_token);
     fetch("/signup/oauth/google", {
       method: "POST",
       headers: {
