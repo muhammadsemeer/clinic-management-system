@@ -95,20 +95,22 @@ function onSuccess(googleUser) {
     formData.append("profileImage", profile.getImageUrl());
     formData.append("email", profile.getEmail());
     formData.append("authtoken", id_token);
-    fetch("/signup/oauth/google", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.status) {
-          signOut();
-          window.location = "/";
-        } else {
-          document.querySelector(".error").innerHTML = res.error.msg;
-          signOut();
-        }
-      });
+    if (id_token) {
+      fetch("/signup/oauth/google", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.status) {
+            signOut();
+            window.location = "/";
+          } else {
+            document.querySelector(".error").innerHTML = res.error.msg;
+            signOut();
+          }
+        });
+    }
   }
 }
 function onFailure(error) {
@@ -130,6 +132,34 @@ function renderButton() {
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
-    console.log("User Logged out")
+    console.log("User Logged out");
+  });
+}
+
+// OAuth Facebook
+
+function checkLoginState() {
+  FB.getLoginStatus(function (response) {
+    if (response.status === "connected") {
+      FB.api("/me", "GET", { fields: "id,name,email" }, function (response) {
+        fetch("/signup/oauth/google", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(response),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.status) {
+              window.location = "/";
+            } else {
+              document.querySelector(".error").innerHTML = res.error.msg;
+            }
+          });
+      });
+    } else {
+      modalup("error-modal");
+    }
   });
 }
