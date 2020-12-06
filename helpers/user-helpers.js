@@ -9,7 +9,12 @@ module.exports = {
         .get()
         .collection(collection.PATIENT_COLLECTION)
         .find({
-          $or: [{ email: details.email }, { contactno: details.contactno }],
+          $and: [
+            {
+              $or: [{ email: details.email }, { contactno: details.contactno }],
+            },
+            { status: "Active" },
+          ],
         })
         .toArray();
       if (mailFound.length <= 0) {
@@ -20,25 +25,6 @@ module.exports = {
           .insertOne(details)
           .then((data) => {
             resolve(data.ops[0]);
-          });
-      } else if (mailFound[0].status === "Deleted") {
-        details.password = await bcrypt.hash(details.password, 10);
-        db.get()
-          .collection(collection.PATIENT_COLLECTION)
-          .updateOne(
-            { email: details.email },
-            {
-              $set: {
-                name: details.name,
-                email: details.email,
-                password: details.password,
-                gender: details.gender,
-                status: "Active",
-              },
-            }
-          )
-          .then((data) => {
-            resolve();
           });
       } else {
         reject({ msg: "Email Id or Contact No Already Exists" });
