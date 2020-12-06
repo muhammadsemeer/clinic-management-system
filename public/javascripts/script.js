@@ -142,7 +142,7 @@ function checkLoginState() {
   FB.getLoginStatus(function (response) {
     if (response.status === "connected") {
       FB.api("/me", "GET", { fields: "id,name,email" }, function (response) {
-        fetch("/signup/oauth/google", {
+        fetch("/signup/oauth/facebook", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

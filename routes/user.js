@@ -109,4 +109,22 @@ router.post("/signup/oauth/google", (req, res) => {
     });
 });
 
+router.post("/signup/oauth/facebook", (req, res) => {
+  console.log("Api Call");
+  userHelpers
+    .OAuth(req.body, "Facebook")
+    .then((response) => {
+      var token = jwt.sign(response, process.env.JWT_SECERT, {
+        expiresIn: "60d",
+      });
+      res.cookie("userToken", token, {
+        httpOnly: true,
+      });
+      res.json({ status: true });
+    })
+    .catch((error) => {
+      res.json({ status: false, error: error });
+    });
+});
+
 module.exports = router;
