@@ -69,7 +69,9 @@ router.post("/signup", (req, res) => {
       var token = jwt.sign(response, process.env.JWT_SECERT, {
         expiresIn: "60d",
       });
-      res.cookie("userToken", token);
+      res.cookie("userToken", token, {
+        httpOnly: true,
+      });
       res.redirect("/");
     })
     .catch((error) => {

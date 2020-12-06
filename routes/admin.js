@@ -67,7 +67,9 @@ router.post("/login", async (req, res) => {
       var token = jwt.sign(response, process.env.JWT_SECERT, {
         expiresIn: "60d",
       });
-      res.cookie("adminToken", token);
+      res.cookie("adminToken", token, {
+        httpOnly: true,
+      });
       res.redirect("/");
     })
     .catch((error) => {
