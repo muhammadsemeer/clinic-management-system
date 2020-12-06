@@ -82,3 +82,54 @@ function checkUserName(name) {
       });
   }
 }
+
+// OAuth-google
+function onSuccess(googleUser) {
+  var id_token = googleUser.getAuthResponse().id_token;
+  var auth2 = gapi.auth2.getAuthInstance();
+  if (auth2.isSignedIn.get()) {
+    var profile = auth2.currentUser.get().getBasicProfile();
+    const formData = new FormData();
+    formData.append("google_id", profile.getId());
+    formData.append("name", profile.getName());
+    formData.append("profileImage", profile.getImageUrl());
+    formData.append("email", profile.getEmail());
+    fetch("/signup/oauth/google", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((status) => {
+        if (status) {
+          window.location = "/";
+        } else {
+          signOut();
+        }
+      });
+  }
+}
+function onFailure(error) {
+  modalup("error-modal");
+}
+
+function renderButton() {
+  gapi.signin2.render("my-signin2", {
+    scope: "profile email",
+    width: 240,
+    height: 50,
+    longtitle: true,
+    theme: "dark",
+    onsuccess: onSuccess,
+    onfailure: onFailure,
+  });
+}
+
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    modalup("error-modal");
+  });
+}

@@ -10,6 +10,7 @@
       <h3 class="error">
         {{error}}
       </h3>
+      <div id="my-signin2"></div>
       <div class="input-section">
         <input type="text" name="name" id="name" required />
         <label for="name">
@@ -17,12 +18,7 @@
         </label>
       </div>
       <div class="input-section">
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value="{{email}}"
-        />
+        <input type="email" name="email" id="email" value="{{email}}" />
         <label for="email">
           Email (Optional)
         </label>
@@ -88,6 +84,17 @@
   <button
     class="normal"
     onclick="document.querySelector('.gender-modal').classList.toggle('active')"
+  >
+    OK
+  </button>
+</div>
+<div class="modal error-modal">
+  <h1>
+    Something Went Wrong.. Try Again!!!!
+  </h1>
+  <button
+    class="normal"
+    onclick="document.querySelector('.error-modal').classList.toggle('active')"
   >
     OK
   </button>

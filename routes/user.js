@@ -25,23 +25,19 @@ const loginCheck = (req, res, next) => {
 
 const tokenCheck = (req, res, next) => {
   if (req.cookies.userToken) {
-    console.log("if 1");
     jwt.verify(
       req.cookies.userToken,
       process.env.JWT_SECERT,
       (error, decoded) => {
         if (error) {
-          console.log("if 2");
           next();
           console.log(error);
         } else {
-          console.log("else 1");
           res.redirect("/");
         }
       }
     );
   } else {
-    console.log("else 2");
     next();
   }
 };

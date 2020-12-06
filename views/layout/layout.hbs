@@ -3,6 +3,7 @@
 
 <head>
   <title>{{title}}</title>
+  <meta name="google-signin-client_id" content="254931449650-egdl6jb9jcf9olrgurqfsebir6jjme66.apps.googleusercontent.com">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
     integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
@@ -24,6 +25,7 @@
   {{> user-header}}
   {{/if}}
   {{{body}}}
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
   <script src="/javascripts/media.js"></script>
   <script src="/javascripts/script.js"></script>
   <script src="/javascripts/image-cropper.js"></script>
