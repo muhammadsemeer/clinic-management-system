@@ -32,7 +32,6 @@ const tokenCheck = (req, res, next) => {
       (error, decoded) => {
         if (error) {
           next();
-          console.log(error);
         } else {
           res.redirect("/");
         }
@@ -124,6 +123,10 @@ router.post("/signup/oauth/facebook", (req, res) => {
     .catch((error) => {
       res.json({ status: false, error: error });
     });
+});
+
+router.get("/login", tokenCheck, (req, res) => {
+  res.render("user/login", { title: "Login" });
 });
 
 module.exports = router;

@@ -1,0 +1,62 @@
+<section class="admin-login" style="margin-top: 50px;">
+  <div class="img-section">
+    <img src="/images/icons/undraw_secure_login_pdn4.svg" alt="" />
+  </div>
+  <div class="login-container">
+    <h1>
+      Create an Account
+    </h1>
+    <form action="/signup" method="POST" onsubmit="return validate(event)">
+      <h3 class="error">
+        {{error}}
+      </h3>
+      <div class="input-section">
+        <input type="email" name="email" id="email" required />
+        <label for="email">
+          Email or Mobile No
+        </label>
+      </div>
+      <p class="or">
+        OR
+      </p>
+      <div id="my-signin2"></div>
+      <p class="or">
+        OR
+      </p>
+      <div
+        class="fb-login-button"
+        data-size="large"
+        data-button-type="continue_with"
+        data-layout="rounded"
+        data-auto-logout-link="false"
+        data-use-continue-as="true"
+        data-onlogin="checkLoginState();"
+      ></div>
+      <div class="input-section">
+        <input type="submit" value="Login" />
+      </div>
+    </form>
+  </div>
+</section>
+<div class="modal gender-modal">
+  <h1>
+    Please Select Gender!
+  </h1>
+  <button
+    class="normal"
+    onclick="document.querySelector('.gender-modal').classList.toggle('active')"
+  >
+    OK
+  </button>
+</div>
+<div class="modal error-modal">
+  <h1>
+    Something Went Wrong.. Try Again!!!!
+  </h1>
+  <button
+    class="normal"
+    onclick="document.querySelector('.error-modal').classList.toggle('active')"
+  >
+    OK
+  </button>
+</div>
