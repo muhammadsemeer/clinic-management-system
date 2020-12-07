@@ -902,3 +902,14 @@ footer .social {
   flex-direction: row;
   font-size: 20px;
 }
+
+/* Oauth Buttons */
+
+#my-signin2,
+.fb-login-button {
+  margin: 10px 0;
+}
+
+.or {
+  color: #7c7c7c;
+}
