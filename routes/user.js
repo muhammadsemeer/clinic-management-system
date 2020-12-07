@@ -142,12 +142,20 @@ router.post("/login", tokenCheck, (req, res) => {
   var format = /([0-9])\w+/g;
   var input = req.body.email;
   if (format.test(input)) {
-    console.log("mobile");
+    userHelpers
+      .checkMobile(input)
+      .then((response) => {
+        res.render("user/otp", { title: "Verify OTP", mobileno: input });
+      })
+      .catch((error) => {
+        req.session.loginErr = error.msg;
+        req.session.loginUser = input;
+        res.redirect("/login");
+      });
   } else {
     userHelpers
       .checkEmail(input)
       .then((response) => {
-        console.log(response);
         res.render("user/password", { title: "Login", email: response });
       })
       .catch((error) => {

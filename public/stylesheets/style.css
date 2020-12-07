@@ -270,7 +270,8 @@ header h1 {
 }
 .login-container h4 {
   color: var(--primary-color);
-  padding: 20px 0 0 0;
+  padding: 20px 20px 0 20px;
+  text-align: center;
 }
 .login-container a {
   text-decoration: none;
@@ -320,13 +321,13 @@ header h1 {
   top: 7px;
 }
 
-.input-section input[name="contactno"]::placeholder {
+.input-section input::placeholder {
   opacity: 0;
   transition: 0.5s ease-in-out;
 }
 
-.input-section input[name="contactno"]:focus::placeholder,
-.input-section input[name="contactno"]:valid::placeholder {
+.input-section input:focus::placeholder,
+.input-section input:valid::placeholder {
   opacity: 1;
 }
 .input-section input[type="submit"] {

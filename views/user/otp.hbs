@@ -4,26 +4,25 @@
   </div>
   <div class="login-container">
     <h4>
-      Enter password
-      to continue login on
-      {{email}}
+      Enter the 6 digit verfication code that send to
+      {{mobileno}}
     </h4>
     <form action="/login" method="POST">
       <h3 class="error">
         {{error}}
       </h3>
       <div class="input-section">
-        <input type="password" name="password" id="password" required />
-        <label for="password">
-          Password
+        <input type="password" name="code" id="code" required />
+        <label for="code">
+          Verfication Code
         </label>
-          <div class="icon">
-            <i class="far fa-eye-slash"></i>
-            <i class="far fa-eye"></i>
-          </div>
+        <div class="icon">
+          <i class="far fa-eye-slash"></i>
+          <i class="far fa-eye"></i>
+        </div>
       </div>
       <a href="/forgot-password">
-        Forgot Password?
+        Resend the code Again
       </a>
       <div class="input-section">
         <input type="submit" value="Login" />

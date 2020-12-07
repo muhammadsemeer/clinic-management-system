@@ -77,4 +77,18 @@ module.exports = {
       }
     });
   },
+  checkMobile: (mobileno) => {
+    return new Promise(async (resolve, reject) => {
+      let mobileFound = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .find({ $and: [{ contactno: mobileno }, { auth: "Password" }] })
+        .toArray();
+      if (mobileFound.length <= 0) {
+        reject({ msg: "No User Found" });
+      } else {
+        resolve(mobileFound[0].contactno);
+      }
+    });
+  },
 };
