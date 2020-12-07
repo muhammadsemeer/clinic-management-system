@@ -4,6 +4,7 @@ const userHelpers = require("../helpers/user-helpers");
 var router = express.Router();
 const jwt = require("jsonwebtoken");
 const { verify } = require("../helpers/google-oauth");
+const { sendOTP, verfiyOTP } = require("../helpers/send-otp");
 require("dotenv").config();
 const loginCheck = (req, res, next) => {
   if (req.cookies.userToken) {
@@ -145,7 +146,15 @@ router.post("/login", tokenCheck, (req, res) => {
     userHelpers
       .checkMobile(input)
       .then((response) => {
-        res.render("user/otp", { title: "Verify OTP", mobileno: input });
+        sendOTP(response)
+          .then((data) => {
+            res.render("user/otp", { title: "Verify OTP", mobileno: response });
+          })
+          .catch((error) => {
+            req.session.loginErr = error.msg;
+            req.session.loginUser = input;
+            res.redirect("/login");
+          });
       })
       .catch((error) => {
         req.session.loginErr = error.msg;
@@ -170,7 +179,6 @@ router.post("/login/password", tokenCheck, (req, res) => {
   userHelpers
     .passwordLogin(req.body)
     .then((response) => {
-      console.log(response);
       delete response.password;
       var token = jwt.sign(response, process.env.JWT_SECERT, {
         expiresIn: "60d",
@@ -183,6 +191,27 @@ router.post("/login/password", tokenCheck, (req, res) => {
     .catch((error) => {
       res.render("user/password", { email: req.body.email, error: error.msg });
     });
+});
+
+router.post("/login/otp-verify", (req, res) => {
+  console.log(req.body);
+  userHelpers.otpLogin(req.body.number).then((response) => {
+    console.log(response);
+    verfiyOTP(req.body.number, req.body.code)
+      .then((data) => {
+        delete response.password;
+        var token = jwt.sign(response, process.env.JWT_SECERT, {
+          expiresIn: "60d",
+        });
+        res.cookie("userToken", token, {
+          httpOnly: true,
+        });
+        res.redirect("/");
+      })
+      .catch((error) => {
+        res.render("user/otp", { mobileno: req.body.number, error: error });
+      });
+  });
 });
 
 module.exports = router;

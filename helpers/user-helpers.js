@@ -123,4 +123,24 @@ module.exports = {
       }
     });
   },
+  otpLogin: (number) => {
+    return new Promise(async (resolve, reject) => {
+      let mobileFound = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .find({
+          $and: [
+            { contactno: number },
+            { auth: "Password" },
+            { status: "Active" },
+          ],
+        })
+        .toArray();
+      if (mobileFound.length <= 0) {
+        reject({ msg: "Inavild Email or Mobile No" });
+      } else {
+        resolve(mobileFound[0]);
+      }
+    });
+  },
 };

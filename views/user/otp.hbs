@@ -7,11 +7,12 @@
       Enter the 6 digit verfication code that send to
       {{mobileno}}
     </h4>
-    <form action="/login" method="POST">
+    <form action="/login/otp-verify" method="POST">
       <h3 class="error">
         {{error}}
       </h3>
       <div class="input-section">
+        <input type="text" name="number" value="{{mobileno}}" hidden />
         <input type="password" name="code" id="code" required />
         <label for="code">
           Verfication Code
