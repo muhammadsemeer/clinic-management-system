@@ -11,7 +11,9 @@
         {{error}}
       </h3>
       <div id="my-signin2"></div>
-      <p class="or">OR</p>
+      <p class="or">
+        OR
+      </p>
       <div
         class="fb-login-button"
         data-size="large"
@@ -21,15 +23,28 @@
         data-use-continue-as="true"
         data-onlogin="checkLoginState();"
       ></div>
-      <p class="or">OR</p>
+      <p class="or">
+        OR
+      </p>
       <div class="input-section">
-        <input type="text" name="name" id="name" required />
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value="{{userDetails.name}}"
+          required
+        />
         <label for="name">
           Name
         </label>
       </div>
       <div class="input-section">
-        <input type="email" name="email" id="email" value="{{email}}" />
+        <input
+          type="email"
+          name="email"
+          id="email"
+          value="{{userDetails.email}}"
+        />
         <label for="email">
           Email (Optional)
         </label>
@@ -40,6 +55,7 @@
           pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"
           name="contactno"
           id="contactno"
+          value="{{userDetails.contactno}}"
           required
         />
         <label for="contactno">
@@ -51,7 +67,7 @@
           type="password"
           name="password"
           id="password"
-          value="{{password}}"
+          value="{{userDetails.password}}"
           required
         />
         <label for="password">
@@ -82,6 +98,9 @@
           </label>
         </div>
       </div>
+      <a href="/login">
+        Already Have an Account
+      </a>
       <div class="input-section">
         <input type="submit" value="Login" />
       </div>
