@@ -166,4 +166,23 @@ router.post("/login", tokenCheck, (req, res) => {
   }
 });
 
+router.post("/login/password", tokenCheck, (req, res) => {
+  userHelpers
+    .passwordLogin(req.body)
+    .then((response) => {
+      console.log(response);
+      delete response.password;
+      var token = jwt.sign(response, process.env.JWT_SECERT, {
+        expiresIn: "60d",
+      });
+      res.cookie("userToken", token, {
+        httpOnly: true,
+      });
+      res.redirect("/");
+    })
+    .catch((error) => {
+      res.render("user/password", { email: req.body.email, error: error.msg });
+    });
+});
+
 module.exports = router;

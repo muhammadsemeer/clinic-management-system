@@ -1,6 +1,7 @@
 const db = require("../config/connection");
 const collection = require("../config/collection");
 const bcrypt = require("bcrypt");
+const e = require("express");
 
 module.exports = {
   doSignup: (details) => {
@@ -68,7 +69,9 @@ module.exports = {
       let emailFound = await db
         .get()
         .collection(collection.PATIENT_COLLECTION)
-        .find({ $and: [{ email: email }, { auth: "Password" }] })
+        .find({
+          $and: [{ email: email }, { auth: "Password" }, { status: "Active" }],
+        })
         .toArray();
       if (emailFound.length <= 0) {
         reject({ msg: "No User Found" });
@@ -82,12 +85,41 @@ module.exports = {
       let mobileFound = await db
         .get()
         .collection(collection.PATIENT_COLLECTION)
-        .find({ $and: [{ contactno: mobileno }, { auth: "Password" }] })
+        .find({
+          $and: [
+            { contactno: mobileno },
+            { auth: "Password" },
+            { status: "Active" },
+          ],
+        })
         .toArray();
       if (mobileFound.length <= 0) {
-        reject({ msg: "No User Found" });
+        reject({ msg: "Inavild Email or Mobile No" });
       } else {
         resolve(mobileFound[0].contactno);
+      }
+    });
+  },
+  passwordLogin: (details) => {
+    return new Promise(async (resolve, reject) => {
+      console.log(details.email);
+      let emailFound = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .find({ $and: [{ email: details.email }, { auth: "Password" }] })
+        .toArray();
+      if (emailFound.length <= 0) {
+        reject({ msg: "Invalid Password" });
+      } else {
+        bcrypt
+          .compare(details.password, emailFound[0].password)
+          .then((status) => {
+            if (status) {
+              resolve(emailFound[0]);
+            } else {
+              reject({ msg: "Invalid Password" });
+            }
+          });
       }
     });
   },
