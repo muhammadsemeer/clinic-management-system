@@ -110,7 +110,6 @@ router.post("/signup/oauth/google", (req, res) => {
 });
 
 router.post("/signup/oauth/facebook", (req, res) => {
-  console.log("Api Call");
   userHelpers
     .OAuth(req.body, "Facebook")
     .then((response) => {

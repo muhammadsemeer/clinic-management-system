@@ -42,7 +42,6 @@ module.exports = {
               email: details.email,
             },
             { status: "Active" },
-            { auth: OAuth },
           ],
         })
         .toArray();
@@ -56,8 +55,10 @@ module.exports = {
           .then((data) => {
             resolve(data.ops[0]);
           });
-      } else {
+      } else if (mailFound[0].auth === OAuth) {
         resolve(mailFound[0]);
+      } else {
+        reject({ msg: "Email Id Alreday Registered" });
       }
     });
   },
