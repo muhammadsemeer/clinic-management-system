@@ -163,3 +163,17 @@ function checkLoginState() {
     }
   });
 }
+
+const emailCheck = (event) => {
+  var email = document.getElementById("email");
+  var mailFormat = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})|([0-9]{10})+$/;
+  if (email.value == "") {
+    alert("  Please enter your Email or Phone Number  ");
+  } else if (!mailFormat.test(email.value)) {
+    console.log("here");
+    modalup("valdation-modal");
+    return false;
+  } else {
+    return true;
+  }
+};

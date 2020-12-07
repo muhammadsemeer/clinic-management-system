@@ -19,6 +19,7 @@ module.exports = {
         .toArray();
       if (mailFound.length <= 0) {
         details.status = "Active";
+        details.auth = "Password";
         details.password = await bcrypt.hash(details.password, 10);
         db.get()
           .collection(collection.PATIENT_COLLECTION)
@@ -59,6 +60,20 @@ module.exports = {
         resolve(mailFound[0]);
       } else {
         reject({ msg: "Email Id Alreday Registered" });
+      }
+    });
+  },
+  checkEmail: (email) => {
+    return new Promise(async (resolve, reject) => {
+      let emailFound = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .find({ $and: [{ email: email }, { auth: "Password" }] })
+        .toArray();
+      if (emailFound.length <= 0) {
+        reject({ msg: "No User Found" });
+      } else {
+        resolve(emailFound[0].email);
       }
     });
   },

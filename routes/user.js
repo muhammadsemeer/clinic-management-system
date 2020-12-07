@@ -57,8 +57,10 @@ router.get("/signup", tokenCheck, (req, res) => {
   res.render("user/signup", {
     title: "Create An Account",
     error: req.session.signuperr,
+    userDetails: req.session.signupUser,
   });
   req.session.signuperr = null;
+  req.session.signupUser = null;
 });
 
 router.post("/signup", (req, res) => {
@@ -76,6 +78,7 @@ router.post("/signup", (req, res) => {
     })
     .catch((error) => {
       req.session.signuperr = error.msg;
+      req.session.signupUser = req.body;
       res.redirect("/signup");
     });
 });
@@ -126,7 +129,33 @@ router.post("/signup/oauth/facebook", (req, res) => {
 });
 
 router.get("/login", tokenCheck, (req, res) => {
-  res.render("user/login", { title: "Login" });
+  res.render("user/login", {
+    title: "Login",
+    error: req.session.loginErr,
+    input: req.session.loginUser,
+  });
+  req.session.loginErr = null;
+  req.session.loginUser = null;
+});
+
+router.post("/login", tokenCheck, (req, res) => {
+  var format = /([0-9])\w+/g;
+  var input = req.body.email;
+  if (format.test(input)) {
+    console.log("mobile");
+  } else {
+    userHelpers
+      .checkEmail(input)
+      .then((response) => {
+        console.log(response);
+        res.render("user/password", { title: "Login", email: response });
+      })
+      .catch((error) => {
+        req.session.loginErr = error.msg;
+        req.session.loginUser = input;
+        res.redirect("/login");
+      });
+  }
 });
 
 module.exports = router;
