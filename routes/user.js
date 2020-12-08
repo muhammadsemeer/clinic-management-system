@@ -194,9 +194,7 @@ router.post("/login/password", tokenCheck, (req, res) => {
 });
 
 router.post("/login/otp-verify", (req, res) => {
-  console.log(req.body);
   userHelpers.otpLogin(req.body.number).then((response) => {
-    console.log(response);
     verfiyOTP(req.body.number, req.body.code)
       .then((data) => {
         delete response.password;
@@ -209,7 +207,9 @@ router.post("/login/otp-verify", (req, res) => {
         res.redirect("/");
       })
       .catch((error) => {
-        res.render("user/otp", { mobileno: req.body.number, error: error });
+        req.session.loginErr = error.msg;
+        req.session.loginUser = req.body.number;
+        res.redirect("/login");
       });
   });
 });

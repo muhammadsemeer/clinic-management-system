@@ -23,10 +23,15 @@ module.exports = {
         .services(process.env.TWILIO_SERVICE_SSID)
         .verificationChecks.create({ to: number, code: code })
         .then((verification_check) => {
-          resolve();
+          console.log(verification_check);
+          if (verification_check.valid) {
+            resolve();
+          } else {
+            reject({msg: "Invalid Code"})
+          }
         })
         .catch((error) => {
-          reject();
+          reject(error);
         });
     });
   },

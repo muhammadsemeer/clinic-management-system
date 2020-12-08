@@ -102,7 +102,6 @@ module.exports = {
   },
   passwordLogin: (details) => {
     return new Promise(async (resolve, reject) => {
-      console.log(details.email);
       let emailFound = await db
         .get()
         .collection(collection.PATIENT_COLLECTION)
