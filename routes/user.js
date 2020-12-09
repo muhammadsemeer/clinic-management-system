@@ -214,8 +214,15 @@ router.post("/login/otp-verify", (req, res) => {
   });
 });
 
-router.get("/book-appoinment", loginCheck, (req, res) => {
-  res.render("user/book-appointment", { header: true, user: req.user, title: "Book Appointment"});
+router.get("/book-appoinment/:id", loginCheck, (req, res) => {
+  userHelpers.getBookingDoctor(req.params.id).then((response) => {
+    res.render("user/book-appointment", {
+      header: true,
+      user: req.user,
+      title: "Book Appointment",
+      doctor: response,
+    });
+  });
 });
 
 module.exports = router;

@@ -2,6 +2,7 @@ const db = require("../config/connection");
 const collection = require("../config/collection");
 const bcrypt = require("bcrypt");
 const e = require("express");
+const { ObjectId } = require("mongodb");
 
 module.exports = {
   doSignup: (details) => {
@@ -140,6 +141,15 @@ module.exports = {
       } else {
         resolve(mobileFound[0]);
       }
+    });
+  },
+  getBookingDoctor: (doctorid) => {
+    return new Promise(async (resolve, reject) => {
+      let docotor = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .findOne({ _id: ObjectId(doctorid) });
+      resolve(docotor);
     });
   },
 };
