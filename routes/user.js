@@ -214,4 +214,8 @@ router.post("/login/otp-verify", (req, res) => {
   });
 });
 
+router.get("/book-appoinment", loginCheck, (req, res) => {
+  res.render("user/book-appointment", { header: true, user: req.user, title: "Book Appointment"});
+});
+
 module.exports = router;
