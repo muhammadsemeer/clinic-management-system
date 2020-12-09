@@ -225,4 +225,20 @@ router.get("/book-appoinment/:id", loginCheck, (req, res) => {
   });
 });
 
+router.get("/date", (req, res) => {
+  let start = req.query.start;
+  let limit = req.query.limit;
+  let date = new Date();
+    let startDate = new Date(
+      new Date(date).setDate(new Date(date).getDate() + (start*limit))
+    ).toDateString();
+    let middleDate = new Date(
+      new Date(startDate).setDate(new Date(startDate).getDate() + 1)
+    ).toDateString();
+    let endDate = new Date(
+      new Date(startDate).setDate(new Date(startDate).getDate() + 2)
+    ).toDateString();
+    res.json({startDate, middleDate, endDate})
+});
+
 module.exports = router;
