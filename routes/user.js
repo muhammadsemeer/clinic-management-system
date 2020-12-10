@@ -235,7 +235,7 @@ router.get("/date", (req, res) => {
   }
   let date = Date.now();
   let startDate = new Date(
-    new Date(date).setDate(new Date(date).getDate() + start * limit + 1)
+    new Date(date).setDate(new Date(date).getDate() + start * limit)
   ).toDateString();
   let middleDate = new Date(
     new Date(startDate).setDate(new Date(startDate).getDate() + 1)

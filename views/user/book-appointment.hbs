@@ -22,8 +22,9 @@
           Select Your Date and Time
         </h1>
       </div>
+      <h3 class="error" style="text-align: center;"></h3>
       <div class="dates">
-        <div class="arrow " onclick="changeStart(0)">
+        <div class="arrow" onclick="changeStart(0)">
           <i class="fas fa-chevron-left"></i>
         </div>
         <input type="text" id="id" value="{{doctor._id}}" hidden />
@@ -36,9 +37,8 @@
         <div class="arrow time" onclick="changeTime(0)" style="display: none;">
           <i class="fas fa-chevron-left"></i>
         </div>
-        <div class="radio-section" id="time">
-        </div>
-          <div class="arrow" onclick="changeTime(1)" style="display: none;">
+        <div class="radio-section" id="time"></div>
+        <div class="arrow" onclick="changeTime(1)" style="display: none;">
           <i class="fas fa-chevron-right"></i>
         </div>
       </div>
@@ -57,6 +57,17 @@
   <button
     class="normal"
     onclick="document.querySelector('.error-modal').classList.toggle('active')"
+  >
+    OK
+  </button>
+</div>
+<div class="modal success-modal">
+  <h1>
+    Appointment Booked!!!
+  </h1>
+  <button
+    class="normal"
+    onclick="window.location = '/'"
   >
     OK
   </button>

@@ -57,9 +57,12 @@ const book = (doctorid, userid) => {
       .then((res) => res.json())
       .then((res) => {
         if (res.status) {
-          alert("Sucess");
+          modalup("success-modal");
         } else {
-          alert(res.error);
+          document.querySelector(".error").innerHTML = res.error;
+          setTimeout(() => {
+            document.querySelector(".error").innerHTML = "";
+          },5000)
         }
       });
   } else {
@@ -83,9 +86,9 @@ function changeTime(change) {
 }
 
 function getTimeSlots(date, start) {
-  var arrow = document.querySelectorAll(".time .arrow")
-  arrow[0].style.display = "flex"
-  arrow[1].style.display = "flex"
+  var arrow = document.querySelectorAll(".time .arrow");
+  arrow[0].style.display = "flex";
+  arrow[1].style.display = "flex";
   var div = "";
   var dates = document.querySelector("#time");
   var doctorid = document.querySelector("#id").value;
