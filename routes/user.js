@@ -5,6 +5,7 @@ var router = express.Router();
 const jwt = require("jsonwebtoken");
 const { verify } = require("../helpers/google-oauth");
 const { sendOTP, verfiyOTP } = require("../helpers/send-otp");
+const { createSlots } = require("../helpers/create-time-slot");
 require("dotenv").config();
 const loginCheck = (req, res, next) => {
   if (req.cookies.userToken) {
@@ -216,11 +217,14 @@ router.post("/login/otp-verify", (req, res) => {
 
 router.get("/book-appoinment/:id", loginCheck, (req, res) => {
   userHelpers.getBookingDoctor(req.params.id).then((response) => {
+    var slotConfig = response.slotConfig;
+    var timeslot = createSlots(slotConfig);
     res.render("user/book-appointment", {
       header: true,
       user: req.user,
       title: "Book Appointment",
       doctor: response,
+      timeslot,
     });
   });
 });
@@ -243,6 +247,18 @@ router.get("/date", (req, res) => {
     new Date(startDate).setDate(new Date(startDate).getDate() + 2)
   ).toDateString();
   res.json([startDate, middleDate, endDate]);
+});
+
+router.post("/book-appoinment/:doctor/:user", (req, res) => {
+  userHelpers
+    .bookApointment(req.params.doctor, req.params.user, req.body)
+    .then((response) => {
+      console.log(response);
+      res.json({ status: true });
+    })
+    .catch((error) => {
+      res.json({ status: false, error: error.msg });
+    });
 });
 
 module.exports = router;

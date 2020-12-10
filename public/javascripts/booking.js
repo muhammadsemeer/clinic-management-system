@@ -13,7 +13,7 @@ function getDates(start) {
         dates.innerHTML = "";
         div += `
           <div>
-          <input type="radio" name="date" id="${index}" />
+          <input type="radio" name="date" id="${index}" value="${element}" />
           <label for="${index}" style="width: 200px">
           <span>${element}</span>
           </label>
@@ -37,3 +37,31 @@ const changeStart = (value) => {
   }
 };
 getDates(start);
+
+const book = (doctorid, userid) => {
+  let dateInput = document.querySelector('input[name="date"]:checked');
+  if (dateInput !== null) {
+    var date = dateInput.value;
+    var timeslot = document.getElementById("timeslot").value;
+    fetch(`/book-appoinment/${doctorid}/${userid}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date,
+        timeslot,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status) {
+          alert("Sucess");
+        } else {
+          alert(res.error);
+        }
+      });
+  } else {
+    modalup("error-modal");
+  }
+};

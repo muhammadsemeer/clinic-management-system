@@ -30,7 +30,6 @@ module.exports.createSlots = (slotConfig) => {
     ) {
       _endSlot = new Date(_tempSlotStartTime);
       _startSlot = new Date(_tempSlotStartTime);
-
       //Adding minutes and hours from config to create slot and overiding the value of _tempSlotStartTime
       _tempSlotStartTime = _endSlot.setHours(
         parseInt(_endSlot.getHours()) + parseInt(configSlotHours)
@@ -66,6 +65,5 @@ module.exports.createSlots = (slotConfig) => {
       );
     }
   }
-
   return slotsArray;
 }

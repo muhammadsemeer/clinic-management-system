@@ -152,4 +152,36 @@ module.exports = {
       resolve(docotor);
     });
   },
+  bookApointment: (doctor, user, details) => {
+    return new Promise(async (resolve, reject) => {
+      let busySchedule = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .find({
+          $and: [
+            { doctor: doctor },
+            { date: details.date },
+            { timeslot: details.timeslot },
+          ],
+        })
+        .toArray();
+      if (busySchedule.length <= 0) {
+        db.get()
+          .collection(collection.APPOINTMENT_COLLECTION)
+          .insertOne({
+            doctor,
+            user,
+            date: details.date,
+            timeslot: details.timeslot,
+          })
+          .then((response) => {
+            resolve(response.ops[0]);
+          });
+      } else {
+        reject({
+          msg: `${details.timeslot} is not available on ${details.date}`,
+        });
+      }
+    });
+  },
 };

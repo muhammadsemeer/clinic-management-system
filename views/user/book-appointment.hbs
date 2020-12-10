@@ -26,45 +26,60 @@
         <div class="arrow" onclick="changeStart(0)">
           <i class="fas fa-chevron-left"></i>
         </div>
-        <div class="radio-section">
-        </div>
+        <div class="radio-section"></div>
         <div class="arrow" onclick="changeStart(1)">
           <i class="fas fa-chevron-right"></i>
         </div>
       </div>
       <div class="time">
-        <div class="radio-section">
-          <div>
-            <input type="radio" name="date" id="1" />
-            <label for="1" style="width: 200px;">
-              <span>
-                9.30 -10:30
-              </span>
-            </label>
-          </div>
-          <div>
-            <input type="radio" name="date" id="2" />
-            <label for="2" style="width: 200px;">
-              <span>
-                9.30 -10:30
-              </span>
-            </label>
-          </div>
-          <div>
-            <input type="radio" name="date" id="3" />
-            <label for="3" style="width: 200px;">
-              <span>
-                9.30 -10:30
-              </span>
-            </label>
-          </div>
-        </div>
+        <!-- <div class="radio-section">
+{{#each timeslot}}
+            <div>
+              <input
+                type="radio"
+                name="timeslot"
+                id="{{this.timeSlotStart}}-{{this.timeSlotEnd}}"
+                value="{{this.timeSlotStart}}-{{this.timeSlotEnd}}"
+                checked
+              />
+              <label
+                for="{{this.timeSlotStart}}-{{this.timeSlotEnd}}"
+                style="width: 200px;"
+              >
+                <span>
+                  {{this.timeSlotStart}}
+                  -
+                  {{this.timeSlotEnd}}
+                </span>
+              </label>
+            </div>
+          {{/each}}        </div> -->
+        <select name="timeSlot" id="timeslot">
+          {{#each timeslot}}
+            <option value="{{this.timeSlotStart}}-{{this.timeSlotEnd}}">
+              {{this.timeSlotStart}}
+              -
+              {{this.timeSlotEnd}}
+            </option>
+          {{/each}}
+        </select>
       </div>
       <div class="btn-grp" style="display: flex; justify-content: center">
-        <button class="crop">
+        <button class="crop" onclick="book('{{doctor._id}}','{{user._id}}')">
           Book Appointment
         </button>
       </div>
     </div>
   </div>
 </section>
+<div class="modal error-modal">
+  <h1>
+    Please Select Date...
+  </h1>
+  <button
+    class="normal"
+    onclick="document.querySelector('.error-modal').classList.toggle('active')"
+  >
+    OK
+  </button>
+</div>
