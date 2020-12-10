@@ -9,7 +9,6 @@ function getDates(start) {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       res.forEach((element, index) => {
         dates.innerHTML = "";
         div += `
