@@ -946,11 +946,16 @@ footer .social {
 
 .head-sec,
 .sessions,
-.dates,
 .time {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+}
+
+.dates {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .sessions p {
@@ -975,4 +980,17 @@ footer .social {
   height: 150px;
   width: 150px;
   border-radius: 10px;
+}
+
+.arrow i {
+  font-size: 25px;
+  color: #006eff;
+}
+
+.dates .radio-section {
+  animation: tab 1s ease-in-out;
+}
+
+.dates .radio-section.active {
+  animation: tab2 1s ease-in-out;
 }

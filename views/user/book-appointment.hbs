@@ -5,10 +5,10 @@
         <img src="/images/doctor/{{doctor._id}}.jpg" alt="" />
       </div>
       <div class="content-sec">
-        <p onclick="changeStart(1)">
+        <p>
           {{doctor.name}}
         </p>
-        <p onclick="changeStart(0)">
+        <p>
           {{doctor.field}}
         </p>
         <p>
@@ -23,31 +23,13 @@
         </h1>
       </div>
       <div class="dates">
+        <div class="arrow" onclick="changeStart(0)">
+          <i class="fas fa-chevron-left"></i>
+        </div>
         <div class="radio-section">
-          {{!  <div>
-            <input type="radio" name="date" id="1" />
-            <label for="1" style="width: 200px;">
-              <span>
-                Wednesday<br>9 Dec 2020
-              </span>
-            </label>
-          </div>
-          <div>
-            <input type="radio" name="date" id="2" />
-            <label for="2" style="width: 200px;">
-              <span>
-                Wednesday<br>9 Dec 2020
-              </span>
-            </label>
-          </div>
-          <div>
-            <input type="radio" name="date" id="3" />
-            <label for="3" style="width: 200px;">
-              <span>
-                Wednesday<br>9 Dec 2020
-              </span>
-            </label>
-          </div> }}
+        </div>
+        <div class="arrow" onclick="changeStart(1)">
+          <i class="fas fa-chevron-right"></i>
         </div>
       </div>
       <div class="time">
