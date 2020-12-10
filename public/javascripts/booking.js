@@ -1,6 +1,6 @@
 function getDates(start) {
   var div = "";
-  var dates = document.querySelector(".radio-section");
+  var dates = document.querySelector("#date");
   fetch(`/date?start=${start}&limit=3`, {
     method: "GET",
     headers: {
@@ -14,7 +14,7 @@ function getDates(start) {
         div += `
           <div>
           <input type="radio" name="date" id="${index}" value="${element}" />
-          <label for="${index}" style="width: 200px">
+          <label for="${index}" onclick="getTimeSlots('${element}')" style="width: 200px">
           <span>${element}</span>
           </label>
           </div>
@@ -65,3 +65,21 @@ const book = (doctorid, userid) => {
     modalup("error-modal");
   }
 };
+
+function getTimeSlots(date) {
+  var doctorid = document.querySelector("#id").value;
+  date = new Date(date);
+  fetch(`/get-timeslot/${doctorid}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      date,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+    });
+}

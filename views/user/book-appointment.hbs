@@ -26,34 +26,13 @@
         <div class="arrow" onclick="changeStart(0)">
           <i class="fas fa-chevron-left"></i>
         </div>
-        <div class="radio-section"></div>
+        <input type="text" id="id" value="{{doctor._id}}" hidden />
+        <div class="radio-section" id="date"></div>
         <div class="arrow" onclick="changeStart(1)">
           <i class="fas fa-chevron-right"></i>
         </div>
       </div>
       <div class="time">
-        <!-- <div class="radio-section">
-{{#each timeslot}}
-            <div>
-              <input
-                type="radio"
-                name="timeslot"
-                id="{{this.timeSlotStart}}-{{this.timeSlotEnd}}"
-                value="{{this.timeSlotStart}}-{{this.timeSlotEnd}}"
-                checked
-              />
-              <label
-                for="{{this.timeSlotStart}}-{{this.timeSlotEnd}}"
-                style="width: 200px;"
-              >
-                <span>
-                  {{this.timeSlotStart}}
-                  -
-                  {{this.timeSlotEnd}}
-                </span>
-              </label>
-            </div>
-          {{/each}}        </div> -->
         <select name="timeSlot" id="timeslot">
           {{#each timeslot}}
             <option value="{{this.timeSlotStart}}-{{this.timeSlotEnd}}">
@@ -65,8 +44,11 @@
         </select>
       </div>
       <div class="btn-grp" style="display: flex; justify-content: center">
-        <button class="crop" onclick="book('{{doctor._id}}','{{user._id}}')">
+        <!-- <button class="crop" onclick="book('{{doctor._id}}','{{user._id}}')">
           Book Appointment
+        </button> -->
+        <button onclick="getTimeSlots('{{doctor._id}}',0)">
+          Check
         </button>
       </div>
     </div>

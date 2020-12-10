@@ -261,4 +261,35 @@ router.post("/book-appoinment/:doctor/:user", (req, res) => {
     });
 });
 
+router.post("/get-timeslot/:id", (req, res) => {
+  userHelpers.getBookingDoctor(req.params.id).then((response) => {
+    var slotConfig = response.slotConfig;
+    var timeslot = createSlots(slotConfig);
+    var result = [];
+    let date = new Date(req.body.date);
+    console.log(req.body.date);
+    for (let i = 0; i < timeslot.length; i++) {
+      var varDate;
+      var check = timeslot[i].timeSlotStart.split(" ");
+      console.log(check, "check");
+      var time = check[0].split(":");
+      console.log(time, "time");
+      if (check[1] === "PM" && time[0] < 12) {
+        time[0] = parseInt(time[0]) + 12;
+        varDate = new Date(date).setHours(time[0], time[1]);
+        console.log(varDate, "if");
+      } else {
+        varDate = new Date(date).setHours(time[0], time[1]);
+        console.log(varDate, "else");
+      }
+      var today = Date.now();
+      if (varDate >= today) {
+        result.push(timeslot[i]);
+      }
+    }
+    console.log(result);
+    res.json(result);
+  });
+});
+
 module.exports = router;
