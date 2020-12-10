@@ -945,15 +945,15 @@ footer .social {
 }
 
 .head-sec,
-.sessions,
-.time {
+.sessions {
   max-width: 700px;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
-.dates {
+.dates,
+.time {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -988,10 +988,12 @@ footer .social {
   color: #006eff;
 }
 
-.dates .radio-section {
+.dates .radio-section,
+.time .radio-section {
   animation: tab 1s ease-in-out;
 }
 
-.dates .radio-section.active {
+.dates .radio-section.active,
+.time .radio-section.active {
   animation: tab2 1s ease-in-out;
 }

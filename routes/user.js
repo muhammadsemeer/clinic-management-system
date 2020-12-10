@@ -217,14 +217,11 @@ router.post("/login/otp-verify", (req, res) => {
 
 router.get("/book-appoinment/:id", loginCheck, (req, res) => {
   userHelpers.getBookingDoctor(req.params.id).then((response) => {
-    var slotConfig = response.slotConfig;
-    var timeslot = createSlots(slotConfig);
     res.render("user/book-appointment", {
       header: true,
       user: req.user,
       title: "Book Appointment",
       doctor: response,
-      timeslot,
     });
   });
 });
@@ -238,7 +235,7 @@ router.get("/date", (req, res) => {
   }
   let date = Date.now();
   let startDate = new Date(
-    new Date(date).setDate(new Date(date).getDate() + start * limit)
+    new Date(date).setDate(new Date(date).getDate() + start * limit + 1)
   ).toDateString();
   let middleDate = new Date(
     new Date(startDate).setDate(new Date(startDate).getDate() + 1)
@@ -265,30 +262,32 @@ router.post("/get-timeslot/:id", (req, res) => {
   userHelpers.getBookingDoctor(req.params.id).then((response) => {
     var slotConfig = response.slotConfig;
     var timeslot = createSlots(slotConfig);
-    var result = [];
+    var intermediateResult = [];
     let date = new Date(req.body.date);
-    console.log(req.body.date);
     for (let i = 0; i < timeslot.length; i++) {
       var varDate;
       var check = timeslot[i].timeSlotStart.split(" ");
-      console.log(check, "check");
       var time = check[0].split(":");
-      console.log(time, "time");
       if (check[1] === "PM" && time[0] < 12) {
         time[0] = parseInt(time[0]) + 12;
         varDate = new Date(date).setHours(time[0], time[1]);
-        console.log(varDate, "if");
       } else {
         varDate = new Date(date).setHours(time[0], time[1]);
-        console.log(varDate, "else");
       }
       var today = Date.now();
       if (varDate >= today) {
-        result.push(timeslot[i]);
+        intermediateResult.push(timeslot[i]);
       }
     }
-    console.log(result);
-    res.json(result);
+    var count = parseInt(req.body.start) * 3;
+    var finalResult = [];
+    for (let i = count; i < intermediateResult.length; i++) {
+      if (finalResult.length !== 3) {
+        finalResult.push(intermediateResult[i]);
+      }
+    }
+
+    res.json(finalResult);
   });
 });
 
