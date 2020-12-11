@@ -130,3 +130,4 @@ function getTimeSlots(date, start) {
       return dates.insertAdjacentHTML("beforeend", div);
     });
 }
+
