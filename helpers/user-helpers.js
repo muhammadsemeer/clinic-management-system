@@ -158,7 +158,7 @@ module.exports = {
         .collection(collection.APPOINTMENT_COLLECTION)
         .find({
           $and: [
-            { doctor: doctor },
+            { doctor: ObjectId(doctor) },
             { date: details.date },
             { timeslot: details.timeslot },
           ],
