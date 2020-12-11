@@ -259,7 +259,7 @@ router.post("/book-appoinment/:doctor/:user", (req, res) => {
 });
 
 router.post("/get-timeslot/:id", (req, res) => {
-  userHelpers.getBookingDoctor(req.params.id).then((response) => {
+  userHelpers.getBookingDoctor(req.params.id).then(async (response) => {
     var slotConfig = response.slotConfig;
     var timeslot = createSlots(slotConfig);
     var intermediateResult = [];
@@ -281,12 +281,23 @@ router.post("/get-timeslot/:id", (req, res) => {
     }
     var count = parseInt(req.body.start) * 3;
     var finalResult = [];
+    let busySlots = await userHelpers.getBusySlots(date);
     for (let i = count; i < intermediateResult.length; i++) {
       if (finalResult.length !== 3) {
         finalResult.push(intermediateResult[i]);
       }
+      if (busySlots.length > i) {
+        for (let j = 0; j < finalResult.length; j++) {
+          var busyCheck = busySlots[i].timeslot.split("-");
+          if (
+            busyCheck[0] === finalResult[j].timeSlotStart &&
+            busyCheck[1] === finalResult[j].timeSlotEnd
+          ) {
+            finalResult.splice(j,1)
+          }
+        }
+      }
     }
-
     res.json(finalResult);
   });
 });

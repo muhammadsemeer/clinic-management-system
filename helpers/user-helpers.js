@@ -186,12 +186,13 @@ module.exports = {
   },
   getBusySlots: (date) => {
     return new Promise(async (resolve, reject) => {
+      date = new Date(date).toDateString();
       let busySlots = await db
         .get()
         .collection(collection.APPOINTMENT_COLLECTION)
         .find({ date: date }, { projection: { timeslot: 1, _id: 0 } })
         .toArray();
-        resolve(busySlots)
+      resolve(busySlots);
     });
   },
 };

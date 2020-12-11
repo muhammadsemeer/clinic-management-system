@@ -111,7 +111,7 @@ function getTimeSlots(date, start) {
         <div>
         <input type="radio" name="timeslot"
           id="t${index}"
-          value=" ${element.timeSlotStart}-${element.timeSlotEnd}"
+          value="${element.timeSlotStart}-${element.timeSlotEnd}"
         />
         <label
           for="t${index}"
