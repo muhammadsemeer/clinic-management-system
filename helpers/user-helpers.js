@@ -1,7 +1,6 @@
 const db = require("../config/connection");
 const collection = require("../config/collection");
 const bcrypt = require("bcrypt");
-const e = require("express");
 const { ObjectId } = require("mongodb");
 
 module.exports = {
@@ -169,8 +168,8 @@ module.exports = {
         db.get()
           .collection(collection.APPOINTMENT_COLLECTION)
           .insertOne({
-            doctor,
-            user,
+            doctor: ObjectId(doctor),
+            user: ObjectId(user),
             date: details.date,
             timeslot: details.timeslot,
           })
@@ -193,6 +192,31 @@ module.exports = {
         .find({ date: date }, { projection: { timeslot: 1, _id: 0 } })
         .toArray();
       resolve(busySlots);
+    });
+  },
+  getMyAppointments: (userId) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: { user: ObjectId(userId) },
+          },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctors",
+            },
+          },
+          {
+            $unwind: "$doctors",
+          },
+        ])
+        .toArray();
+      resolve(appointment);
     });
   },
 };

@@ -53,7 +53,7 @@ const verifyLogin = (req, res, next) => {
         if (error) {
           return res.redirect("/login");
         } else {
-          req.admin = decoded;
+          req.user = decoded;
           next();
         }
       }
@@ -322,10 +322,13 @@ router.post("/get-timeslot/:id", (req, res) => {
 });
 
 router.get("/appointments", verifyLogin, (req, res) => {
-  res.render("user/appointment", {
-    user: req.admin,
-    header: true,
-    title: "My Appoitments",
+  userHelpers.getMyAppointments(req.user._id).then((response) => {
+    res.render("user/appointment", {
+      user: req.user,
+      header: true,
+      title: "My Appoitments",
+      appointments: response,
+    });
   });
 });
 
