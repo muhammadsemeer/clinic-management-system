@@ -293,7 +293,7 @@ router.post("/get-timeslot/:id", (req, res) => {
             busyCheck[0] === finalResult[j].timeSlotStart &&
             busyCheck[1] === finalResult[j].timeSlotEnd
           ) {
-            finalResult.splice(j,1)
+            finalResult.splice(j, 1);
           }
         }
       }

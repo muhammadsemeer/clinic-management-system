@@ -105,6 +105,18 @@ function getTimeSlots(date, start) {
   })
     .then((res) => res.json())
     .then((res) => {
+      if (res.length === 0) {
+        return dates.innerHTML = `
+        <label
+          for=""
+          style="width: 600px;"
+        >
+          <span>
+           No Slots Availble
+          </span>
+        </label>
+        `
+      }
       res.forEach((element, index) => {
         dates.innerHTML = "";
         div += `
