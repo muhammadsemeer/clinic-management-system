@@ -302,4 +302,8 @@ router.post("/get-timeslot/:id", (req, res) => {
   });
 });
 
+router.get("/appointments", (req, res) => {
+  res.render("user/appointment");
+});
+
 module.exports = router;
