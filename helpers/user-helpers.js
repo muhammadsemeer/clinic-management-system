@@ -208,11 +208,11 @@ module.exports = {
               from: collection.DOCTORS_COLLECTION,
               localField: "doctor",
               foreignField: "_id",
-              as: "doctors",
+              as: "doctor",
             },
           },
           {
-            $unwind: "$doctors",
+            $unwind: "$doctor",
           },
         ])
         .toArray();

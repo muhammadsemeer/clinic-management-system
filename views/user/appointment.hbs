@@ -27,39 +27,41 @@
     </div>
   </div>
   <div class="card active" id="appointment-conatiner">
+      {{#each appointments}}
     <div class="container">
       <div class="doctor-section">
         <div>
-          <img src="/images/doctor/5fc635ae3adf2a34afa7c556.jpg" alt="" />
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="" />
         </div>
         <div>
           <h3>
-            Doctor Name
+            {{this.doctor.name}}
           </h3>
           <p>
-            Doctor Field
+            {{this.doctor.field}}
           </p>
         </div>
       </div>
       <div class="content">
         <p>
-          Appoitment Date
+          {{this.date}}
         </p>
         <p>
-          Time
+          {{this.timeslot}}
         </p>
         <p>
-          Status
+         {{this.status}}
         </p>
         <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-          <a href="/book-appoinment/{{this._id}}">
+          <a href="#">
             <button class="crop" style="font-size: 15px">
-              Book Apointment
+              Cancel Apointment
             </button>
           </a>
         </div>
       </div>
     </div>
+    {{/each}}
   </div>
   <div class="user-container">
     <div class="card" id="consulted-container">
@@ -87,13 +89,6 @@
           <p>
             Status
           </p>
-          <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-            <a href="/book-appoinment/{{this._id}}">
-              <button class="crop" style="font-size: 15px">
-                Book Apointment
-              </button>
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -124,13 +119,6 @@
           <p>
             Status
           </p>
-          <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-            <a href="/book-appoinment/{{this._id}}">
-              <button class="crop" style="font-size: 15px">
-                Book Apointment
-              </button>
-            </a>
-          </div>
         </div>
       </div>
     </div>
