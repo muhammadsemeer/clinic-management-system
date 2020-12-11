@@ -112,7 +112,7 @@ function getTimeSlots(date, start) {
           style="width: 600px;"
         >
           <span>
-           No Slots Availble
+           No Slots Available
           </span>
         </label>
         `
