@@ -997,3 +997,56 @@ footer .social {
 .time .radio-section.active {
   animation: tab2 1s ease-in-out;
 }
+
+/* apoitments page */
+
+.appointment {
+  height: calc(100vh - 50px);
+  overflow: hidden;
+}
+
+.appointment .card {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 50px 25px;
+  flex-wrap: wrap;
+  transform: translateY(100px);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s ease-in-out;
+}
+
+.appointment .card.active {
+  transform: translateY(0px);
+  opacity: 1;
+  visibility: visible;
+}
+
+.appointment .container {
+  width: 300px;
+  height: 300px;
+  margin: 25px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: 23px 23px 45px #d9d9d9, -23px -23px 45px #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.appointment .container .doctor-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  word-break: break-all;
+}
+
+.appointment .container .doctor-section img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}

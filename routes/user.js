@@ -303,7 +303,11 @@ router.post("/get-timeslot/:id", (req, res) => {
 });
 
 router.get("/appointments", (req, res) => {
-  res.render("user/appointment");
+  res.render("user/appointment", {
+    user: req.admin,
+    header: true,
+    title: "My Appoitments",
+  });
 });
 
 module.exports = router;

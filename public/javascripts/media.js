@@ -50,6 +50,21 @@ function toogleTab(activeTab, inactiveTab, showContent, hideContent) {
   document.querySelector(inactiveTab).classList.remove("active");
   document.querySelector(hideContent).classList.remove("active");
 }
+function toogleTab3(
+  activeTab,
+  inactiveTab1,
+  inactiveTab2,
+  showContent,
+  hideContent1,
+  hideContent2
+) {
+  document.querySelector(activeTab).classList.add("active");
+  document.querySelector(showContent).classList.add("active");
+  document.querySelector(inactiveTab1).classList.remove("active");
+  document.querySelector(inactiveTab2).classList.remove("active");
+  document.querySelector(hideContent1).classList.remove("active");
+  document.querySelector(hideContent2).classList.remove("active");
+}
 
 function deletePateint() {
   fetch(`/pateints/${doctorid}`, {
