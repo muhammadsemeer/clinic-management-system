@@ -44,6 +44,25 @@ const tokenCheck = (req, res, next) => {
   }
 };
 
+const verifyLogin = (req, res, next) => {
+  if (req.cookies.userToken) {
+    jwt.verify(
+      req.cookies.userToken,
+      process.env.JWT_SECERT,
+      (error, decoded) => {
+        if (error) {
+          return res.redirect("/login");
+        } else {
+          req.admin = decoded;
+          next();
+        }
+      }
+    );
+  } else {
+    res.redirect("/login");
+  }
+};
+
 router.get("/", loginCheck, (req, res) => {
   adminHelpers.getDoctors().then((response) => {
     res.render("user/index", {
@@ -302,7 +321,7 @@ router.post("/get-timeslot/:id", (req, res) => {
   });
 });
 
-router.get("/appointments", (req, res) => {
+router.get("/appointments", verifyLogin, (req, res) => {
   res.render("user/appointment", {
     user: req.admin,
     header: true,
