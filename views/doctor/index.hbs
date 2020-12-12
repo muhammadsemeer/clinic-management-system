@@ -27,9 +27,10 @@
     </div>
   </div>
   <div class="card active" id="appointment-conatiner">
-    {{#each appointments}}
-      <div class="container">
-        <div class="doctor-section">
+    {{#if todaysAppoitnment}}
+      {{#each todaysAppoitnment}}
+        <div class="container">
+          <!-- <div class="doctor-section">
           <div>
             <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="" />
           </div>
@@ -41,62 +42,92 @@
               {{this.doctor.field}}
             </p>
           </div>
-        </div>
-        <div class="content">
-          <p>
-            {{this.user.name}}
-          </p>
-          <p>
-            {{this.user.contactno}}
-          </p>
-          <p>
-            {{this.date}}
-          </p>
-          <p>
-            {{this.timeslot}}
-          </p>
-          <p>
-            {{this.status}}
-          </p>
-          <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-            <a href="#">
-              <button class="crop" style="font-size: 15px">
-                Cancel Apointment
-              </button>
-            </a>
+        </div> -->
+          <div class="content">
+            <h3>
+              {{this.user.name}}
+            </h3>
+            <p>
+              {{this.user.contactno}}
+            </p>
+            <p>
+              {{this.date}}
+            </p>
+            <p>
+              {{this.timeslot}}
+            </p>
+            <p>
+              {{this.status}}
+            </p>
+            <div class="btn-grp" style="margin-left: 0; font-size: 16px">
+              <a href="#">
+                <button class="crop" style="font-size: 15px">
+                  Cancel Apointment
+                </button>
+              </a>
+            </div>
           </div>
         </div>
+      {{/each}}
+    {{else}}
+      <div class="container">
+        <h1>
+          No Appointments
+        </h1>
       </div>
-    {{/each}}
+    {{/if}}
   </div>
   <div class="user-container">
     <div class="card" id="consulted-container">
-      <div class="container">
-        <div class="doctor-section">
+      {{#if upcomingAppointments}}
+        {{#each upcomingAppointments}}
+          <div class="container">
+            <!-- <div class="doctor-section">
           <div>
-            <img src="/images/doctor/5fc635ae3adf2a34afa7c556.jpg" alt="" />
+            <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="" />
           </div>
           <div>
             <h3>
-              Doctor Name
+              {{this.doctor.name}}
             </h3>
             <p>
-              Doctor Field
+              {{this.doctor.field}}
             </p>
           </div>
+        </div> -->
+            <div class="content">
+              <h3>
+                {{this.user.name}}
+              </h3>
+              <p>
+                {{this.user.contactno}}
+              </p>
+              <p>
+                {{this.date}}
+              </p>
+              <p>
+                {{this.timeslot}}
+              </p>
+              <p>
+                {{this.status}}
+              </p>
+              <div class="btn-grp" style="margin-left: 0; font-size: 16px">
+                <a href="#">
+                  <button class="crop" style="font-size: 15px">
+                    Cancel Apointment
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      {{else}}
+        <div class="container">
+          <h1>
+            No Appointments
+          </h1>
         </div>
-        <div class="content">
-          <p>
-            Appoitment Date
-          </p>
-          <p>
-            Time
-          </p>
-          <p>
-            Status
-          </p>
-        </div>
-      </div>
+      {{/if}}
     </div>
   </div>
   <div class="user-container">
