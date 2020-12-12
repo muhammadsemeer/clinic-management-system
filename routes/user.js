@@ -322,14 +322,15 @@ router.post("/get-timeslot/:id", (req, res) => {
   });
 });
 
-router.get("/appointments", verifyLogin, (req, res) => {
-  userHelpers.getMyAppointments(req.user._id).then((response) => {
-    res.render("user/appointment", {
-      user: req.user,
-      header: true,
-      title: "My Appoitments",
-      appointments: response,
-    });
+router.get("/appointments", verifyLogin, async (req, res) => {
+  let appointments = await userHelpers.getMyAppointments(req.user._id);
+  let requests = await userHelpers.getMyRequests(req.user._id);
+  res.render("user/appointment", {
+    user: req.user,
+    header: true,
+    title: "My Appoitments",
+    appointments,
+    requests,
   });
 });
 
