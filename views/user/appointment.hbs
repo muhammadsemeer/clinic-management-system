@@ -4,64 +4,104 @@
       <button
         id="appointment"
         class="active"
-        onclick="toogleTab3('#appointment', '#consulted','#cancel', '#appointment-conatiner', '#consulted-container', '#cancelled-conatiner')"
+        onclick="toogleTab3('#appointment', '#requsted' ,'#consulted','#cancel', '#appointment-conatiner', '#consulted-container', '#cancelled-conatiner','#requested-container')"
       >
-      <i class="fas fa-calendar-check"></i>
+        <i class="fas fa-calendar-check"></i>
         Appoitments
       </button>
       <button
-        id="consulted"
-        onclick="toogleTab3('#consulted','#appointment', '#cancel', '#consulted-container', '#appointment-conatiner', '#cancelled-conatiner')"
+        id="requsted"
+        onclick="toogleTab3('#requsted','#consulted','#appointment', '#cancel', '#requested-container','#consulted-container', '#appointment-conatiner', '#cancelled-conatiner')"
       >
-      <i class="fas fa-clipboard-check"></i>
+        <i class="fas fa-spinner"></i>
+        My Requests
+      </button>
+      <button
+        id="consulted"
+        onclick="toogleTab3('#consulted','#appointment', '#requsted' ,'#cancel', '#consulted-container', '#requested-container','#appointment-conatiner', '#cancelled-conatiner')"
+      >
+        <i class="fas fa-clipboard-check"></i>
         Consulted
       </button>
       <button
         id="cancel"
-        onclick="toogleTab3('#cancel','#consulted','#appointment',  '#cancelled-conatiner','#consulted-container', '#appointment-conatiner')"
+        onclick="toogleTab3('#cancel','#consulted','#appointment',  '#cancelled-conatiner','#requested-container','#consulted-container', '#appointment-conatiner')"
       >
-      <i class="fas fa-calendar-times"></i>
+        <i class="fas fa-calendar-times"></i>
         Cancelled
       </button>
       <hr />
     </div>
   </div>
   <div class="card active" id="appointment-conatiner">
-      {{#each appointments}}
-    <div class="container">
-      <div class="doctor-section">
-        <div>
-          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="" />
+    {{#each appointments}}
+      <div class="container">
+        <div class="doctor-section">
+          <div>
+            <img
+              src="/images/doctor/{{this.doctor._id}}.jpg"
+              alt="{{this.doctor.name}}"
+            />
+          </div>
+          <div>
+            <h3>
+              {{this.doctor.name}}
+            </h3>
+            <p>
+              {{this.doctor.field}}
+            </p>
+          </div>
         </div>
-        <div>
-          <h3>
-            {{this.doctor.name}}
-          </h3>
+        <div class="content">
           <p>
-            {{this.doctor.field}}
+            {{this.date}}
+          </p>
+          <p>
+            {{this.timeslot}}
+          </p>
+          <p>
+            {{this.status}}
+          </p>
+          <div class="btn-grp" style="margin-left: 0; font-size: 16px">
+            <a href="#">
+              <button class="crop" style="font-size: 15px">
+                Cancel Apointment
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  <div class="user-container">
+    <div class="card" id="requested-container">
+      <div class="container">
+        <div class="doctor-section">
+          <div>
+            <img src="/images/doctor/5fc635ae3adf2a34afa7c556.jpg" alt="" />
+          </div>
+          <div>
+            <h3>
+              Doctor Name
+            </h3>
+            <p>
+              Doctor Field
+            </p>
+          </div>
+        </div>
+        <div class="content">
+          <p>
+            Appoitment Date
+          </p>
+          <p>
+            Time
+          </p>
+          <p>
+            Status
           </p>
         </div>
       </div>
-      <div class="content">
-        <p>
-          {{this.date}}
-        </p>
-        <p>
-          {{this.timeslot}}
-        </p>
-        <p>
-         {{this.status}}
-        </p>
-        <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-          <a href="#">
-            <button class="crop" style="font-size: 15px">
-              Cancel Apointment
-            </button>
-          </a>
-        </div>
-      </div>
     </div>
-    {{/each}}
   </div>
   <div class="user-container">
     <div class="card" id="consulted-container">
