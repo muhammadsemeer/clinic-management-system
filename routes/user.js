@@ -269,7 +269,6 @@ router.post("/book-appoinment/:doctor/:user", (req, res) => {
   userHelpers
     .bookApointment(req.params.doctor, req.params.user, req.body)
     .then((response) => {
-      console.log(response);
       res.json({ status: true });
     })
     .catch((error) => {

@@ -26,7 +26,6 @@ module.exports = {
           },
         ])
         .toArray();
-      console.log(appointment);
       resolve(appointment);
     });
   },
@@ -53,7 +52,6 @@ module.exports = {
           },
         ])
         .toArray()
-      console.log(appointment);
       resolve(appointment);
     });
   },
