@@ -1045,6 +1045,14 @@ footer .social {
   word-break: break-all;
 }
 
+.appointment .container .doctor-section > div {
+  margin: 0 5px;
+}
+
+.appointment .container .doctor-section h3 {
+  font-size: 16px;
+}
+
 .appointment .container .doctor-section img {
   width: 100px;
   height: 100px;
