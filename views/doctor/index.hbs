@@ -1,0 +1,132 @@
+<section class="appointment">
+  <div class="user-container">
+    <div class="tab">
+      <button
+        id="appointment"
+        class="active"
+        onclick="toogleTab3('#appointment', '#consulted','#cancel', '#appointment-conatiner', '#consulted-container', '#cancelled-conatiner')"
+      >
+        <i class="fas fa-calendar-day"></i>
+        Today
+      </button>
+      <button
+        id="consulted"
+        onclick="toogleTab3('#consulted','#appointment', '#cancel', '#consulted-container', '#appointment-conatiner', '#cancelled-conatiner')"
+      >
+        <i class="fas fa-calendar-week"></i>
+        Upcoming
+      </button>
+      <button
+        id="cancel"
+        onclick="toogleTab3('#cancel','#consulted','#appointment',  '#cancelled-conatiner','#consulted-container', '#appointment-conatiner')"
+      >
+        <i class="fas fa-clipboard-check"></i>
+        Consulted
+      </button>
+      <hr />
+    </div>
+  </div>
+  <div class="card active" id="appointment-conatiner">
+    {{#each appointments}}
+      <div class="container">
+        <div class="doctor-section">
+          <div>
+            <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="" />
+          </div>
+          <div>
+            <h3>
+              {{this.doctor.name}}
+            </h3>
+            <p>
+              {{this.doctor.field}}
+            </p>
+          </div>
+        </div>
+        <div class="content">
+          <p>
+            {{this.user.name}}
+          </p>
+          <p>
+            {{this.user.contactno}}
+          </p>
+          <p>
+            {{this.date}}
+          </p>
+          <p>
+            {{this.timeslot}}
+          </p>
+          <p>
+            {{this.status}}
+          </p>
+          <div class="btn-grp" style="margin-left: 0; font-size: 16px">
+            <a href="#">
+              <button class="crop" style="font-size: 15px">
+                Cancel Apointment
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  <div class="user-container">
+    <div class="card" id="consulted-container">
+      <div class="container">
+        <div class="doctor-section">
+          <div>
+            <img src="/images/doctor/5fc635ae3adf2a34afa7c556.jpg" alt="" />
+          </div>
+          <div>
+            <h3>
+              Doctor Name
+            </h3>
+            <p>
+              Doctor Field
+            </p>
+          </div>
+        </div>
+        <div class="content">
+          <p>
+            Appoitment Date
+          </p>
+          <p>
+            Time
+          </p>
+          <p>
+            Status
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="user-container">
+    <div class="card" id="cancelled-conatiner">
+      <div class="container">
+        <div class="doctor-section">
+          <div>
+            <img src="/images/doctor/5fc635ae3adf2a34afa7c556.jpg" alt="" />
+          </div>
+          <div>
+            <h3>
+              Doctor Name
+            </h3>
+            <p>
+              Doctor Field
+            </p>
+          </div>
+        </div>
+        <div class="content">
+          <p>
+            Appoitment Date
+          </p>
+          <p>
+            Time
+          </p>
+          <p>
+            Status
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
