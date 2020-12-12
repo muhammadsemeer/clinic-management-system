@@ -172,6 +172,7 @@ module.exports = {
             user: ObjectId(user),
             date: details.date,
             timeslot: details.timeslot,
+            status: "Pending",
           })
           .then((response) => {
             resolve(response.ops[0]);
@@ -201,7 +202,9 @@ module.exports = {
         .collection(collection.APPOINTMENT_COLLECTION)
         .aggregate([
           {
-            $match: { user: ObjectId(userId) },
+            $match: {
+              $and: [{ user: ObjectId(userId) }, { status: "Approved" }],
+            },
           },
           {
             $lookup: {

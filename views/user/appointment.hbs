@@ -34,44 +34,52 @@
     </div>
   </div>
   <div class="card active" id="appointment-conatiner">
-    {{#each appointments}}
-      <div class="container">
-        <div class="doctor-section">
-          <div>
-            <img
-              src="/images/doctor/{{this.doctor._id}}.jpg"
-              alt="{{this.doctor.name}}"
-            />
+    {{#if appointments}}
+      {{#each appointments}}
+        <div class="container">
+          <div class="doctor-section">
+            <div>
+              <img
+                src="/images/doctor/{{this.doctor._id}}.jpg"
+                alt="{{this.doctor.name}}"
+              />
+            </div>
+            <div>
+              <h3>
+                {{this.doctor.name}}
+              </h3>
+              <p>
+                {{this.doctor.field}}
+              </p>
+            </div>
           </div>
-          <div>
-            <h3>
-              {{this.doctor.name}}
-            </h3>
+          <div class="content">
             <p>
-              {{this.doctor.field}}
+              {{this.date}}
             </p>
+            <p>
+              {{this.timeslot}}
+            </p>
+            <p>
+              {{this.status}}
+            </p>
+            <div class="btn-grp" style="margin-left: 0; font-size: 16px">
+              <a href="#">
+                <button class="crop" style="font-size: 15px">
+                  Cancel Apointment
+                </button>
+              </a>
+            </div>
           </div>
         </div>
-        <div class="content">
-          <p>
-            {{this.date}}
-          </p>
-          <p>
-            {{this.timeslot}}
-          </p>
-          <p>
-            {{this.status}}
-          </p>
-          <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-            <a href="#">
-              <button class="crop" style="font-size: 15px">
-                Cancel Apointment
-              </button>
-            </a>
-          </div>
-        </div>
+      {{/each}}
+    {{else}}
+      <div class="container">
+        <h1>
+          No Appointments
+        </h1>
       </div>
-    {{/each}}
+    {{/if}}
   </div>
   <div class="user-container">
     <div class="card" id="requested-container">
