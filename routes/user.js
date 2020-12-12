@@ -300,20 +300,22 @@ router.post("/get-timeslot/:id", (req, res) => {
     var count = parseInt(req.body.start) * 3;
     var finalResult = [];
     let busySlots = await userHelpers.getBusySlots(date);
+    for (let i = 0; i < intermediateResult.length; i++) {
+      if (i < intermediateResult.length && busySlots.length !== 0) {
+        for (let j = 0; j < busySlots.length; j++) {
+          var busyCheck = busySlots[j].timeslot.split("-");
+          if (
+            busyCheck[0] === intermediateResult[i].timeSlotStart &&
+            busyCheck[1] === intermediateResult[i].timeSlotEnd
+          ) {
+            intermediateResult.splice(i, 1);
+          }
+        }
+      }
+    }
     for (let i = count; i < intermediateResult.length; i++) {
       if (finalResult.length !== 3) {
         finalResult.push(intermediateResult[i]);
-      }
-      if (busySlots.length > i) {
-        for (let j = 0; j < finalResult.length; j++) {
-          var busyCheck = busySlots[i].timeslot.split("-");
-          if (
-            busyCheck[0] === finalResult[j].timeSlotStart &&
-            busyCheck[1] === finalResult[j].timeSlotEnd
-          ) {
-            finalResult.splice(j, 1);
-          }
-        }
       }
     }
     res.json(finalResult);
