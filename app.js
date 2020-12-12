@@ -7,6 +7,7 @@ var hbs = require("express-handlebars");
 var subdomain = require("express-subdomain");
 var adminRouter = require("./routes/admin");
 var userRouter = require("./routes/user");
+var doctorRouter = require("./routes/doctor");
 var app = express();
 var db = require("./config/connection");
 var session = require("express-session");
@@ -47,6 +48,7 @@ db.connect((error) => {
 });
 
 app.use(subdomain("admin", adminRouter));
+app.use(subdomain("doctor", doctorRouter));
 app.use("/", userRouter);
 
 // catch 404 and forward to error handler
