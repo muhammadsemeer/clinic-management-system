@@ -160,7 +160,7 @@ router.get("/login", tokenCheck, (req, res) => {
 });
 
 router.post("/login", tokenCheck, (req, res) => {
-  var format = /([0-9])\w+/g;
+  var format = /([0-9\+[1-9]{1}[0-9]{3,14})+$/;
   var input = req.body.email;
   if (format.test(input)) {
     userHelpers
