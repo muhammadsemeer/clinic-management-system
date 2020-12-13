@@ -26,6 +26,17 @@
   .menu-icon {
     display: block;
   }
+  .dr-page.active {
+    margin-left: 0;
+  }
+  .dr-page.appointment {
+    width: 100%;
+  }
+  
+  .dr-page.appointment .card {
+    padding: 0;
+    width: 100%;
+  }
 }
 
 @media (max-width: 500px) {

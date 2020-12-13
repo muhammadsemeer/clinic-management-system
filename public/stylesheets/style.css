@@ -665,6 +665,7 @@ header h1 {
   width: 100%;
   padding: 25px;
   padding-bottom: 0;
+  text-align: center;
 }
 
 .tab button {
@@ -676,6 +677,7 @@ header h1 {
   font-size: 18px;
   cursor: pointer;
   transition: 0.25s ease-in-out;
+  margin: 5px;
 }
 .tab button:hover {
   color: var(--primary-color);
@@ -1077,4 +1079,13 @@ footer .social {
 
 .dr-page {
   margin-top: 50px;
+}
+
+.dr-page.appointment {
+  width: calc(100vw - 250px);
+}
+
+.dr-page.appointment .card {
+  padding: 0;
+  width: calc(100vw - 250px);
 }
