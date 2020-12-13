@@ -11,11 +11,12 @@
         {{error}}
       </h3>
       <div class="input-section">
-        <input type="email" name="email" id="email" value="{{entered.email}}" required />
-        <label for="email">
-          Email
+        <input type="text" name="usrname" id="username" value="{{entered.usrname}}" required />
+        <label for="username">
+          Username
         </label>
       </div>
+      <div class="error user-error"></div>
       <div class="input-section">
         <input type="password" name="password" id="password" value="{{entered.password}}" required />
         <label for="password">

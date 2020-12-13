@@ -217,7 +217,7 @@ router.post("/login/otp-verify", (req, res) => {
   userHelpers.otpLogin(req.body.number).then((response) => {
     verfiyOTP(req.body.number, req.body.code)
       .then((data) => {
-        delete response.password;
+        delete data.password;
         var token = jwt.sign(response, process.env.JWT_SECERT, {
           expiresIn: "60d",
         });
