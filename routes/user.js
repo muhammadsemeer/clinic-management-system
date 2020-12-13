@@ -323,9 +323,16 @@ router.post("/get-timeslot/:id", (req, res) => {
 });
 
 router.get("/appointments", verifyLogin, async (req, res) => {
-  let appointments = await userHelpers.getMyAppointments(req.user._id);
-  let requests = await userHelpers.getMyRequests(req.user._id);
-  let cancelled = await userHelpers.getCancelledAppoinmetns(req.user._id);
+  let appointments = await userHelpers.getMyAppointments(
+    req.user._id,
+    "Approved"
+  );
+  let requests = await userHelpers.getMyAppointments(req.user._id, "Pending");
+  let cancelled = await userHelpers.getMyAppointments(req.user._id, "Deleted");
+  let consulted = await userHelpers.getMyAppointments(
+    req.user._id,
+    "Consulted"
+  );
   res.render("user/appointment", {
     user: req.user,
     header: true,
@@ -333,6 +340,7 @@ router.get("/appointments", verifyLogin, async (req, res) => {
     appointments,
     requests,
     cancelled,
+    consulted,
   });
 });
 

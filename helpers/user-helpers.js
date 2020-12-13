@@ -198,7 +198,7 @@ module.exports = {
       resolve(busySlots);
     });
   },
-  getMyAppointments: (userId) => {
+  getMyAppointments: (userId,status) => {
     return new Promise(async (resolve, reject) => {
       let appointment = await db
         .get()
@@ -206,34 +206,7 @@ module.exports = {
         .aggregate([
           {
             $match: {
-              $and: [{ user: ObjectId(userId) }, { status: "Approved" }],
-            },
-          },
-          {
-            $lookup: {
-              from: collection.DOCTORS_COLLECTION,
-              localField: "doctor",
-              foreignField: "_id",
-              as: "doctor",
-            },
-          },
-          {
-            $unwind: "$doctor",
-          },
-        ])
-        .toArray();
-      resolve(appointment);
-    });
-  },
-  getMyRequests: (userId) => {
-    return new Promise(async (resolve, reject) => {
-      let appointment = await db
-        .get()
-        .collection(collection.APPOINTMENT_COLLECTION)
-        .aggregate([
-          {
-            $match: {
-              $and: [{ user: ObjectId(userId) }, { status: "Pending" }],
+              $and: [{ user: ObjectId(userId) }, { status: status}],
             },
           },
           {
@@ -270,60 +243,6 @@ module.exports = {
         .catch((error) => {
           reject(error);
         });
-    });
-  },
-  getCancelledAppoinmetns: (id) => {
-    return new Promise(async (resolve, reject) => {
-      let appointment = await db
-        .get()
-        .collection(collection.APPOINTMENT_COLLECTION)
-        .aggregate([
-          {
-            $match: {
-              $and: [{ user: ObjectId(id) }, { status: "Deleted" }],
-            },
-          },
-          {
-            $lookup: {
-              from: collection.DOCTORS_COLLECTION,
-              localField: "doctor",
-              foreignField: "_id",
-              as: "doctor",
-            },
-          },
-          {
-            $unwind: "$doctor",
-          },
-        ])
-        .toArray();
-      resolve(appointment);
-    });
-  },
-  getCancelledAppoinmetns: (id) => {
-    return new Promise(async (resolve, reject) => {
-      let appointment = await db
-        .get()
-        .collection(collection.APPOINTMENT_COLLECTION)
-        .aggregate([
-          {
-            $match: {
-              $and: [{ user: ObjectId(id) }, { status: "Consulted" }],
-            },
-          },
-          {
-            $lookup: {
-              from: collection.DOCTORS_COLLECTION,
-              localField: "doctor",
-              foreignField: "_id",
-              as: "doctor",
-            },
-          },
-          {
-            $unwind: "$doctor",
-          },
-        ])
-        .toArray();
-      resolve(appointment);
     });
   },
 };
