@@ -176,3 +176,22 @@ const emailCheck = (event) => {
     return true;
   }
 };
+
+const cancelAppointment = () => {
+  document.querySelector(".message-modal").classList.toggle("active");
+  fetch(`/cancel-appointment/${doctorid}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res) {
+        document.getElementById(`${doctorid}`).remove();
+        modalup("success-modal");
+      } else {
+        modalup("error-modal");
+      }
+    });
+};

@@ -36,7 +36,7 @@
   <div class="card active" id="appointment-conatiner">
     {{#if appointments}}
       {{#each appointments}}
-        <div class="container">
+        <div class="container" id="{{this._id}}">
           <div class="doctor-section">
             <div>
               <img
@@ -65,7 +65,11 @@
             </p>
             <div class="btn-grp" style="margin-left: 0; font-size: 16px">
               <a href="#">
-                <button class="crop" style="font-size: 15px">
+                <button
+                  class="crop"
+                  style="font-size: 15px"
+                  onclick="modalup('message-modal','{{this._id}}')"
+                >
                   Cancel Apointment
                 </button>
               </a>
@@ -85,7 +89,7 @@
     <div class="card" id="requested-container">
       {{#if requests}}
         {{#each requests}}
-          <div class="container">
+          <div class="container" id="{{this._id}}">
             <div class="doctor-section">
               <div>
                 <img
@@ -113,11 +117,13 @@
                 {{this.status}}
               </p>
               <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-                <a href="#">
-                  <button class="crop" style="font-size: 15px">
-                    Cancel Apointment
-                  </button>
-                </a>
+                <button
+                  class="crop"
+                  style="font-size: 15px"
+                  onclick="modalup('message-modal','{{this._id}}')"
+                >
+                  Cancel Apointment
+                </button>
               </div>
             </div>
           </div>
@@ -192,3 +198,39 @@
     </div>
   </div>
 </section>
+<div class="modal message-modal">
+  <h1>
+    Are You Want to Cancel Appointment?
+  </h1>
+  <button class="yes" onclick="cancelAppointment()">
+    Yes
+  </button>
+  <button
+    class="no"
+    onclick="document.querySelector('.message-modal').classList.toggle('active')"
+  >
+    No
+  </button>
+</div>
+<div class="modal success-modal">
+  <h1>
+    Appointment Successully Cancelled
+  </h1>
+  <button
+    class="normal"
+    onclick="document.querySelector('.success-modal').classList.toggle('active')"
+  >
+    Close
+  </button>
+</div>
+<div class="modal error-modal">
+  <h1>
+    Something Went Wrong
+  </h1>
+  <button
+    class="normal"
+    onclick="document.querySelector('.error-modal').classList.toggle('active')"
+  >
+    Close
+  </button>
+</div>

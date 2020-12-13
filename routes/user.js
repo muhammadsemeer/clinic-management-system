@@ -334,7 +334,7 @@ router.get("/appointments", verifyLogin, async (req, res) => {
   });
 });
 
-router.delete("/cancel-appointment/:id", verifyLogin, (req, res) => {
+router.delete("/cancel-appointment/:id", (req, res) => {
   userHelpers
     .cancelAppointment(req.params.id)
     .then((response) => {
