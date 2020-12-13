@@ -190,7 +190,7 @@ module.exports = {
       let busySlots = await db
         .get()
         .collection(collection.APPOINTMENT_COLLECTION)
-        .find({ date: date }, { projection: { timeslot: 1, _id: 0 } })
+        .find({ $and: [{date: date }, {status: {$ne: "Deleted"} }]}, { projection: { timeslot: 1, _id: 0 } })
         .toArray();
       resolve(busySlots);
     });
