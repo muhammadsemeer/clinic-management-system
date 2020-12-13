@@ -1058,3 +1058,16 @@ footer .social {
   height: 100px;
   border-radius: 10px;
 }
+
+.profile {
+  width: 100%;
+  height: calc(100vh - 50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile .container .card {
+  width: 400px;
+  height: auto;
+}

@@ -1,0 +1,43 @@
+<div class="user profile">
+    <div class="container">
+        <div class="card">
+            <div class="card-head">
+                <h1>
+                    My Profile
+                </h1>
+            </div>
+            <div class="card-body">
+                <div class="details-feild">
+                    <p>
+                        Name:
+                        {{userDetails.name}}
+                    </p>
+                </div>
+                <div class="details-feild">
+                    <p>
+                        Email:
+                        {{userDetails.email}}
+                    </p>
+                </div>
+                {{#if userDetails.contactno}}
+                <div class="details-feild">
+                    <p>
+                        Contact No: {{userDetails.contactno}}
+                    </p>
+                </div>
+                {{/if}}
+                {{#if userDetails.gender}}
+                <div class="details-feild">
+                    <p>
+                        Gender: {{userDetails.gender}}
+                    </p>
+                    {{/if}}
+                </div>
+                <div class="btn-grp" style="margin-left: 0;">
+                    <a href="/profile/edit"><button class="crop">Edit</button></a>
+                    <button class="crop" style="margin-left: 10px;">Change Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

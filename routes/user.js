@@ -361,6 +361,7 @@ router.get("/profile", verifyLogin, (req, res) => {
       title: "My Profile",
       user: req.user,
       userDetails: response,
+      header: true,
     });
   });
 });

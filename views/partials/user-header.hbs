@@ -11,61 +11,53 @@
       Home
     </a>
     {{#if user}}
-      <a href="/appointments">
-        Appointments
-      </a>
-      <a href="#">
-        My Profile
-      </a>
+    <a href="/appointments">
+      Appointments
+    </a>
+    <a href="/profile">
+      My Profile
+    </a>
     {{else}}
-      <a href="/login">
-        Login
-        <a href="#contact">
-          Contact
-        </a>
+    <a href="/login">
+      Login
+      <a href="#contact">
+        Contact
       </a>
+    </a>
     {{/if}}
     {{#if user}}
-      <a href="/logout">
-        Logout
-      </a>
+    <a href="/logout">
+      Logout
+    </a>
     {{/if}}
   </nav>
-  <div
-    class="menu-icon"
-    onclick="document.querySelector('.menu-user').classList.toggle('active');"
-  >
+  <div class="menu-icon" onclick="document.querySelector('.menu-user').classList.toggle('active');">
     <i class="fas fa-bars"></i>
   </div>
 </header>
 <div class="menu-user">
-  <span
-    onclick="document.querySelector('.menu-user').classList.toggle('active');"
-  >
+  <span onclick="document.querySelector('.menu-user').classList.toggle('active');">
     ×
   </span>
   <a href="/">
     Home
   </a>
-  <a
-    href="/#contact"
-    onclick="document.querySelector('.menu-user').classList.toggle('active');"
-  >
+  <a href="/#contact" onclick="document.querySelector('.menu-user').classList.toggle('active');">
     Contact
   </a>
   {{#if user}}
-    <a href="/appointments">
-      Appointments
-    </a>
-    <a href="#">
-      My Profile
-    </a>
-    <a href="/logout">
-      Logout
-    </a>
+  <a href="/appointments">
+    Appointments
+  </a>
+  <a href="/profile">
+    My Profile
+  </a>
+  <a href="/logout">
+    Logout
+  </a>
   {{else}}
-    <a href="/login">
-      Login
-    </a>
+  <a href="/login">
+    Login
+  </a>
   {{/if}}
 </div>
