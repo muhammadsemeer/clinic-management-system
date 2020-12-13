@@ -1,0 +1,34 @@
+<section class="admin-login">
+  <div class="img-section">
+    <img src="/images/icons/undraw_secure_login_pdn4.svg" alt="" />
+  </div>
+  <div class="login-container">
+    <h1>
+      Doctor Login
+    </h1>
+    <form action="/login" method="POST">
+      <h3 class="error">
+        {{error}}
+      </h3>
+      <div class="input-section">
+        <input type="email" name="email" id="email" value="{{entered.email}}" required />
+        <label for="email">
+          Email
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="password" name="password" id="password" value="{{entered.password}}" required />
+        <label for="password">
+          Password
+        </label>
+        <div class="icon">
+          <i class="far fa-eye-slash"></i>
+          <i class="far fa-eye"></i>
+        </div>
+      </div>
+      <div class="input-section">
+        <input type="submit" value="Login" />
+      </div>
+    </form>
+  </div>
+</section>

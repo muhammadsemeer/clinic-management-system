@@ -12,4 +12,8 @@ router.get("/", async (req, res) => {
   });
 });
 
+router.get("/login", (req, res) => {
+  res.render("doctor/login", { title: "Doctor Login" });
+});
+
 module.exports = router;
