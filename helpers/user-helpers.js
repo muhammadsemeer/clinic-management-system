@@ -249,4 +249,24 @@ module.exports = {
       resolve(appointment);
     });
   },
+  cancelAppointment: (id) => {
+    return new Promise(async (resolve, reject) => {
+      db.get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(id) },
+          {
+            $set: {
+              status: "Deleted",
+            },
+          }
+        )
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
 };
