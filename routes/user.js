@@ -355,4 +355,14 @@ router.delete("/cancel-appointment/:id", (req, res) => {
     });
 });
 
+router.get("/profile", verifyLogin, (req, res) => {
+  userHelpers.getMyProfile(req.user._id).then((response) => {
+    res.render("user/myprofile", {
+      title: "My Profile",
+      user: req.user,
+      userDetails: response,
+    });
+  });
+});
+
 module.exports = router;
