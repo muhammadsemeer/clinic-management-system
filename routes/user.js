@@ -334,4 +334,15 @@ router.get("/appointments", verifyLogin, async (req, res) => {
   });
 });
 
+router.delete("/cancel-appointment/:id", verifyLogin, (req, res) => {
+  userHelpers
+    .cancelAppointment(req.params.id)
+    .then((response) => {
+      res.json(true);
+    })
+    .catch((error) => {
+      res.json(false);
+    });
+});
+
 module.exports = router;
