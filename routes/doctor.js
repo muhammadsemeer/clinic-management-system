@@ -4,7 +4,44 @@ var router = express.Router();
 var jwt = require("jsonwebtoken")
 require("dotenv").config()
 
-router.get("/", async (req, res) => {
+const verifyLogin = (req, res, next) => {
+  if (req.cookies.doctorToken) {
+    jwt.verify(
+      req.cookies.doctorToken,
+      process.env.JWT_SECERT,
+      (error, decoded) => {
+        if (error) {
+          return res.redirect("/login");
+        } else {
+          req.admin = decoded;
+          next();
+        }
+      }
+    );
+  } else {
+    res.redirect("/login");
+  }
+};
+
+const loginCheck = (req, res, next) => {
+  if (req.cookies.doctorToken) {
+    jwt.verify(
+      req.cookies.doctorToken,
+      process.env.JWT_SECERT,
+      (error, decoded) => {
+        if (error) {
+          next();
+        } else {
+          res.redirect("/");
+        }
+      }
+    );
+  } else {
+    next();
+  }
+};
+
+router.get("/", verifyLogin, async (req, res) => {
   let todaysAppoitnment = await doctorHelpers.getTodaysAppointemnts();
   let upcomingAppointments = await doctorHelpers.getUpcomingAppointemnts();
   res.render("doctor/index", {
@@ -14,7 +51,7 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.get("/login", (req, res) => {
+router.get("/login", loginCheck, (req, res) => {
   res.render("doctor/login", {
     title: "Doctor Login",
     error: req.session.loginErr,
