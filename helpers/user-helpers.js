@@ -190,7 +190,10 @@ module.exports = {
       let busySlots = await db
         .get()
         .collection(collection.APPOINTMENT_COLLECTION)
-        .find({ $and: [{date: date }, {status: {$ne: "Deleted"} }]}, { projection: { timeslot: 1, _id: 0 } })
+        .find(
+          { $and: [{ date: date }, { status: { $ne: "Deleted" } }] },
+          { projection: { timeslot: 1, _id: 0 } }
+        )
         .toArray();
       resolve(busySlots);
     });
@@ -278,6 +281,33 @@ module.exports = {
           {
             $match: {
               $and: [{ user: ObjectId(id) }, { status: "Deleted" }],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$doctor",
+          },
+        ])
+        .toArray();
+      resolve(appointment);
+    });
+  },
+  getCancelledAppoinmetns: (id) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [{ user: ObjectId(id) }, { status: "Consulted" }],
             },
           },
           {
