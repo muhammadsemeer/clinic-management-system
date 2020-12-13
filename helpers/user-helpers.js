@@ -277,7 +277,7 @@ module.exports = {
         .aggregate([
           {
             $match: {
-              $and: [{ user: ObjectId(userId) }, { status: "Deleted" }],
+              $and: [{ user: ObjectId(id) }, { status: "Deleted" }],
             },
           },
           {

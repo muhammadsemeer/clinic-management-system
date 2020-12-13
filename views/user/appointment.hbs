@@ -169,32 +169,46 @@
   </div>
   <div class="user-container">
     <div class="card" id="cancelled-conatiner">
-      <div class="container">
-        <div class="doctor-section">
-          <div>
-            <img src="/images/doctor/5fc635ae3adf2a34afa7c556.jpg" alt="" />
+      {{#if cancelled}}
+        {{#each cancelled}}
+          <div class="container" id="{{this._id}}">
+            <div class="doctor-section">
+              <div>
+                <img
+                  src="/images/doctor/{{this.doctor._id}}.jpg"
+                  alt="{{this.doctor.name}}"
+                />
+              </div>
+              <div>
+                <h3>
+                  {{this.doctor.name}}
+                </h3>
+                <p>
+                  {{this.doctor.field}}
+                </p>
+              </div>
+            </div>
+            <div class="content">
+              <p>
+                {{this.date}}
+              </p>
+              <p>
+                {{this.timeslot}}
+              </p>
+              <p>
+                {{this.status}}
+              </p>
+              </div>
+            </div>
           </div>
-          <div>
-            <h3>
-              Doctor Name
-            </h3>
-            <p>
-              Doctor Field
-            </p>
-          </div>
+        {{/each}}
+      {{else}}
+        <div class="container">
+          <h1>
+            No Appointments
+          </h1>
         </div>
-        <div class="content">
-          <p>
-            Appoitment Date
-          </p>
-          <p>
-            Time
-          </p>
-          <p>
-            Status
-          </p>
-        </div>
-      </div>
+      {{/if}}
     </div>
   </div>
 </section>
