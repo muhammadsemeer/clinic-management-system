@@ -13,7 +13,7 @@ const verifyLogin = (req, res, next) => {
         if (error) {
           return res.redirect("/login");
         } else {
-          req.admin = decoded;
+          req.doctor = decoded;
           next();
         }
       }
@@ -46,6 +46,7 @@ router.get("/", verifyLogin, async (req, res) => {
   let upcomingAppointments = await doctorHelpers.getUpcomingAppointemnts();
   res.render("doctor/index", {
     title: "Doctor Dashboard",
+    doctor: req.doctor,
     todaysAppoitnment,
     upcomingAppointments,
   });

@@ -69,6 +69,7 @@ header h1 {
 .profile-display img {
   width: 100px;
   margin: 5px 0;
+  border-radius: 50%;
 }
 .profile-display p {
   color: var(--nav-links);
@@ -1070,4 +1071,10 @@ footer .social {
 .profile .container .card {
   width: 400px;
   height: auto;
+}
+
+/* Docotor Pages */
+
+.dr-page {
+  margin-top: 50px;
 }
