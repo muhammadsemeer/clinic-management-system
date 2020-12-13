@@ -198,7 +198,7 @@ module.exports = {
       resolve(busySlots);
     });
   },
-  getMyAppointments: (userId,status) => {
+  getMyAppointments: (userId, status) => {
     return new Promise(async (resolve, reject) => {
       let appointment = await db
         .get()
@@ -206,7 +206,7 @@ module.exports = {
         .aggregate([
           {
             $match: {
-              $and: [{ user: ObjectId(userId) }, { status: status}],
+              $and: [{ user: ObjectId(userId) }, { status: status }],
             },
           },
           {
@@ -243,6 +243,21 @@ module.exports = {
         .catch((error) => {
           reject(error);
         });
+    });
+  },
+  getMyProfile: (id) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.PATIENT_COLLECTION)
+        .findOne(
+          { _id: ObjectId(id) },
+          {
+            projection: { name: 1, email: 1, contactno: 1, gender: 1 },
+          }
+        )
+        .then((response) => {
+          resolve(response);
+        })
     });
   },
 };
