@@ -62,8 +62,6 @@ function toogleTab3(
   inactiveTab4,
   hideContent4,
 ) {
-  console.log( document.querySelector(activeTab));
-  console.log( document.querySelector(showContent));
   document.querySelector(activeTab).classList.add("active");
   document.querySelector(showContent).classList.add("active");
   document.querySelector(inactiveTab1).classList.remove("active");

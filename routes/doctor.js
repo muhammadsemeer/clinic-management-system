@@ -80,4 +80,9 @@ router.post("/login", (req, res) => {
     });
 });
 
+router.get("/logout",(req,res) => {
+  res.clearCookie("doctorToken");
+  res.redirect("/login");
+})
+
 module.exports = router;
