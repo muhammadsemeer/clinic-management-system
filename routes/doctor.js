@@ -83,7 +83,7 @@ router.get("/logout", (req, res) => {
 
 router.get("/bookings", verifyLogin, (req, res) => {
   doctorHelpers.getMybookings(req.doctor._id).then((response) => {
-    console.log(response);
+    res.render("doctor/bookings", {title: "My Booking", doctorLogged: req.doctor});
   });
 });
 
