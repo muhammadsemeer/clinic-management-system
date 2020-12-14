@@ -100,4 +100,12 @@ router.get("/bookings/approve/:id", verifyLogin, (req, res) => {
     });
 });
 
+router.delete("/bookings/cancel/:id", (req, res) => {
+  doctorHelpers
+    .changeBookingStatus(req.params.id, "Deleted")
+    .then((response) => {
+      res.json(true);
+    });
+});
+
 module.exports = router;

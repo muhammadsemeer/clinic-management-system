@@ -72,8 +72,9 @@
             }
         }).then((res) => res.json()).then((status) => {
             if (status) {
-                modalup("delete-sucess-modal")
                 document.getElementById(doctorid).remove()
+                document.querySelector('.delete-modal').classList.toggle('active')
+                modalup("delete-sucess-modal")
             } else {
                 modalup("delete-fail-modal")
             }
