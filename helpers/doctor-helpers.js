@@ -139,7 +139,47 @@ module.exports = {
         var today = new Date();
         var dbDate = new Date(element.date);
         if (dbDate > today) {
-          result.push(element)
+          result.push(element);
+        }
+      });
+      resolve(result);
+    });
+  },
+  getExipredApointments: (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+      let date = new Date().toDateString();
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [
+                { doctor: ObjectId(doctorId) },
+                { status: "Approved" },
+                { date: { $ne: date } },
+              ],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+        ])
+        .toArray();
+      let result = [];
+      appointment.forEach((element) => {
+        var today = new Date();
+        var dbDate = new Date(element.date);
+        if (dbDate < today) {
+          result.push(element);
         }
       });
       resolve(result);
