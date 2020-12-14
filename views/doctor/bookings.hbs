@@ -14,12 +14,16 @@
                 <p>Date: {{this.date}}</p>
                 <p>Time: {{this.timeslot}}</p>
                 <div class="btn-grp">
-                    <button class="crop">
-                        Approve
-                    </button>
-                    <button class="crop" style="margin-left: 10px;">
-                        Cancel
-                    </button>
+                    <a href="/bookings/approve/{{this._id}}">
+                        <button class="crop">
+                            Approve
+                        </button>
+                    </a>
+                    <a href="/bookings/cancel/{{this._id}}">
+                        <button class="crop" style="margin-left: 10px;">
+                            Cancel
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

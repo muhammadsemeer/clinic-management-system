@@ -2,6 +2,7 @@ var express = require("express");
 const doctorHelpers = require("../helpers/doctor-helpers");
 var router = express.Router();
 var jwt = require("jsonwebtoken");
+const { response } = require("express");
 require("dotenv").config();
 
 const verifyLogin = (req, res, next) => {
@@ -83,13 +84,20 @@ router.get("/logout", (req, res) => {
 
 router.get("/bookings", verifyLogin, (req, res) => {
   doctorHelpers.getMybookings(req.doctor._id).then((response) => {
-    console.log(response);
     res.render("doctor/bookings", {
       title: "My Booking",
       doctorLogged: req.doctor,
       bookings: response,
     });
   });
+});
+
+router.get("/bookings/approve/:id", verifyLogin, (req, res) => {
+  doctorHelpers
+    .changeBookingStatus(req.params.id, "Approved")
+    .then((response) => {
+      res.redirect("/bookings");
+    });
 });
 
 module.exports = router;
