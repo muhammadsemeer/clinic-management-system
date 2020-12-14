@@ -56,4 +56,21 @@ module.exports = {
       resolve(bookings);
     });
   },
+  changeBookingStatus: (bookingId, status) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(bookingId) },
+          {
+            $set: {
+              status: status,
+            },
+          }
+        )
+        .then((response) => {
+          resolve();
+        });
+    });
+  },
 };
