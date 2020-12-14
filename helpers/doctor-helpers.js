@@ -185,4 +185,31 @@ module.exports = {
       resolve(result);
     });
   },
+  getCancelledAppointment: (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [{ doctor: ObjectId(doctorId) }, { status: "Deleted" }],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+        ])
+        .toArray();
+      resolve(appointment);
+    });
+  },
 };
