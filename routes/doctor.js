@@ -1,8 +1,8 @@
 var express = require("express");
 const doctorHelpers = require("../helpers/doctor-helpers");
 var router = express.Router();
-var jwt = require("jsonwebtoken")
-require("dotenv").config()
+var jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const verifyLogin = (req, res, next) => {
   if (req.cookies.doctorToken) {
@@ -42,13 +42,9 @@ const loginCheck = (req, res, next) => {
 };
 
 router.get("/", verifyLogin, async (req, res) => {
-  let todaysAppoitnment = await doctorHelpers.getTodaysAppointemnts();
-  let upcomingAppointments = await doctorHelpers.getUpcomingAppointemnts();
   res.render("doctor/index", {
     title: "Doctor Dashboard",
-    doctor: req.doctor,
-    todaysAppoitnment,
-    upcomingAppointments,
+    doctorLogged: req.doctor,
   });
 });
 
@@ -80,9 +76,15 @@ router.post("/login", (req, res) => {
     });
 });
 
-router.get("/logout",(req,res) => {
+router.get("/logout", (req, res) => {
   res.clearCookie("doctorToken");
   res.redirect("/login");
-})
+});
+
+router.get("/bookings", verifyLogin, (req, res) => {
+  doctorHelpers.getMybookings(req.doctor._id).then((response) => {
+    console.log(response);
+  });
+});
 
 module.exports = router;
