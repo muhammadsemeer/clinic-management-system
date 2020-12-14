@@ -1,3 +1,35 @@
 <section class="dr-page booking ml-250">
-    
+    {{#if bookings}}
+    {{#each bookings}}
+    <div class="container" style="padding-top: 15px;">
+        <div class="card">
+            <div class="card-head">
+                <div>
+                    <img src="{{this.user.profileImage}}" alt="{{this.user.name}}">
+                    <p>{{this.user.name}}</p>
+                    <p style="word-break: break-all; font-size: 14px;">{{this.user.email}}</p>
+                </div>
+            </div>
+            <div class="card-body">
+                <p>Date: {{this.date}}</p>
+                <p>Time: {{this.timeslot}}</p>
+                <div class="btn-grp">
+                    <button class="crop">
+                        Approve
+                    </button>
+                    <button class="crop" style="margin-left: 10px;">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="container" style="padding-top: 15px;">
+        <div class="card" style="display: flex; justify-content: center; align-items: center">
+            <h1>No Bookings</h1>
+        </div>
+    </div>
+    {{/if}}
 </section>

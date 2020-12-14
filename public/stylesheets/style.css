@@ -1089,3 +1089,14 @@ footer .social {
   padding: 0;
   width: calc(100vw - 250px);
 }
+
+.booking {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.booking .container .card {
+  width: 300px;
+  height: 300px;
+}
