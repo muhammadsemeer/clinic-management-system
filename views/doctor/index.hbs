@@ -24,20 +24,34 @@
   </div>
   <!-- today -->
   <div class="card-sec active" id="today">
-    <div class="card">
+    {{#if todays}}
+    {{#each todays}}
+    <div class="card" id="{{this._id}}">
       <div class="c-head">
-        <p>Muhammad Semeer</p>
-        <p>muhammadsemeerali@gmail.com</p>
+        <p>{{this.user.name}}</p>
+        {{#if this.user.email}}
+        <p>{{this.user.email}}</p>
+        {{else}}
+        <p>{{this.user.contactno}}</p>
+        {{/if}}
       </div>
       <div class="c-content">
-        <p>Date</p>
-        <p>Time Stlot</p>
+        <p>{{this.date}}</p>
+        <p>{{this.timeslot}}</p>
         <div class="btn-grp" style="margin-left: 0;">
           <button class="crop">Consult</button>
           <button class="crop" style="margin-left: 10px;">Cancel</button>
         </div>
       </div>
     </div>
+    {{/each}}
+    {{else}}
+    <div class="card-sec active">
+      <div class="card" style="display: flex; justify-content: center; align-items: center">
+        <h1>No Appointments</h1>
+      </div>
+    </div>
+    {{/if}}
   </div>
   <!-- upcoming -->
   <div class="card-sec" id="upcoming">

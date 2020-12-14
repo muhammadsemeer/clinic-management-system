@@ -1085,11 +1085,6 @@ footer .social {
   width: calc(100vw - 250px);
 }
 
-.dr-page.appointment .card {
-  padding: 0;
-  width: calc(100vw - 250px);
-}
-
 .booking {
   display: flex;
   justify-content: space-evenly;
@@ -1099,4 +1094,52 @@ footer .social {
 .booking .container .card {
   width: 300px;
   height: 300px;
+}
+
+.dr-page.appointment .tab-c {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.dr-page.appointment .tab-c.active {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.appmnt {
+  position: relative;
+}
+
+.card-sec {
+  position: absolute;
+  margin-top: 25px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: 0.5s ease-in-out;
+}
+
+.card-sec.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.card-sec .card {
+  width: 300px;
+  height: 300px;
+  margin: 25px;
+  padding: 25px;
+  word-wrap: break-word;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: 23px 23px 45px #d9d9d9, -23px -23px 45px #ffffff;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }

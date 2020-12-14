@@ -73,7 +73,7 @@ module.exports = {
         });
     });
   },
-  getAppointment: (doctorId) => {
+  getTodaysAppointment: (doctorId) => {
     return new Promise(async (resolve, reject) => {
       let date = new Date().toDateString();
       let appointment = await db
