@@ -156,7 +156,8 @@ module.exports = {
             $match: {
               $and: [
                 { doctor: ObjectId(doctorId) },
-                { status: "Approved" },
+                { status: { $ne: "Deleted" } },
+                { status: { $ne: "Pending" } },
                 { date: { $ne: date } },
               ],
             },
