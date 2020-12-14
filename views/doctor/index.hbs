@@ -46,15 +46,14 @@
     </div>
     {{/each}}
     {{else}}
-    <div class="card-sec active">
-      <div class="card" style="display: flex; justify-content: center; align-items: center">
-        <h1>No Appointments</h1>
-      </div>
+    <div class="card" style="display: flex; justify-content: center; align-items: center">
+      <h1>No Appointments</h1>
     </div>
     {{/if}}
   </div>
   <!-- upcoming -->
   <div class="card-sec" id="upcoming">
+    {{#if upcoming}}
     <div class="card">
       <div class="c-head">
         <p>Muhammad Semeer</p>
@@ -69,9 +68,15 @@
         </div>
       </div>
     </div>
+    {{else}}
+    <div class="card" style="display: flex; justify-content: center; align-items: center">
+      <h1>No Appointments</h1>
+    </div>
+    {{/if}}
   </div>
   <!-- consulted -->
   <div class="card-sec" id="consulted">
+    {{#if consulted}}
     <div class="card">
       <div class="c-head">
         <p>Muhammad Semeer</p>
@@ -86,9 +91,15 @@
         </div>
       </div>
     </div>
+    {{else}}
+    <div class="card" style="display: flex; justify-content: center; align-items: center">
+      <h1>No Appointments</h1>
+    </div>
+    {{/if}}
   </div>
   <!-- cancelled -->
   <div class="card-sec" id="cancelled">
+    {{#if cancelled}}
     <div class="card">
       <div class="c-head">
         <p>Muhammad Semeer</p>
@@ -103,9 +114,15 @@
         </div>
       </div>
     </div>
+    {{else}}
+    <div class="card" style="display: flex; justify-content: center; align-items: center">
+      <h1>No Appointments</h1>
+    </div>
+    {{/if}}
   </div>
   <!-- expired -->
   <div class="card-sec" id="expired">
+    {{#if expired}}
     <div class="card">
       <div class="c-head">
         <p>Muhammad Semeer</p>
@@ -120,6 +137,11 @@
         </div>
       </div>
     </div>
+    {{else}}
+    <div class="card" style="display: flex; justify-content: center; align-items: center">
+      <h1>No Appointments</h1>
+    </div>
+    {{/if}}
   </div>
 </section>
 <script>
