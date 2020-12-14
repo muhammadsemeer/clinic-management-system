@@ -40,7 +40,8 @@
         <p>{{this.timeslot}}</p>
         <div class="btn-grp" style="margin-left: 0;">
           <button class="crop">Consult</button>
-          <button class="crop" style="margin-left: 10px;">Cancel</button>
+          <button class="crop" style="margin-left: 10px;"
+            onclick="modalup('delete-modal','{{this._id}}')">Cancel</button>
         </div>
       </div>
     </div>
@@ -68,7 +69,7 @@
         <p>{{this.date}}</p>
         <p>{{this.timeslot}}</p>
         <div class="btn-grp" style="margin-left: 0;">
-          <button class="crop" style="margin-left: 10px;">Cancel</button>
+          <button class="crop" onclick="modalup('delete-modal','{{this._id}}')">Cancel</button>
         </div>
       </div>
     </div>
@@ -92,7 +93,8 @@
         <p>Time Stlot</p>
         <div class="btn-grp" style="margin-left: 0;">
           <button class="crop">Consult</button>
-          <button class="crop" style="margin-left: 10px;">Cancel</button>
+          <button class="crop" style="margin-left: 10px;"
+            onclick="modalup('delete-modal','{{this.doctor}}')">Cancel</button>
         </div>
       </div>
     </div>
@@ -164,5 +166,50 @@
     }
     document.getElementById(id).classList.add("active")
     event.target.classList.add("active")
+  }
+</script>
+<div class="modal delete-modal">
+  <h1>
+    Do you Want Delete Doctor?
+  </h1>
+  <button class="yes" onclick="cancelBooking()">
+    Yes
+  </button>
+  <button class="no" onclick="document.querySelector('.delete-modal').classList.toggle('active')">
+    No
+  </button>
+</div>
+<div class="modal delete-sucess-modal">
+  <h1>
+    Deleted Sucessfully
+  </h1>
+  <button class="normal" onclick="document.querySelector('.delete-sucess-modal').classList.toggle('active')">
+    Close
+  </button>
+</div>
+<div class="modal delete-fail-modal">
+  <h1>
+    Something Went Wrong
+  </h1>
+  <button class="normal" onclick="document.querySelector('.delete-fail-modal').classList.toggle('active')">
+    Close
+  </button>
+</div>
+<script>
+  function cancelBooking() {
+    fetch(`/bookings/cancel/${doctorid}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }).then((res) => res.json()).then((status) => {
+      if (status) {
+        document.getElementById(doctorid).remove()
+        document.querySelector('.delete-modal').classList.toggle('active')
+        modalup("delete-sucess-modal")
+      } else {
+        modalup("delete-fail-modal")
+      }
+    })
   }
 </script>

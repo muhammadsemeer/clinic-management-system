@@ -1121,12 +1121,14 @@ footer .social {
   justify-content: space-evenly;
   flex-wrap: wrap;
   transform: translateY(50px);
+  visibility: hidden;
   opacity: 0;
   transition: 0.5s ease-in-out;
 }
 
 .card-sec.active {
   transform: translateY(0px);
+  visibility: visible;
   opacity: 1;
 }
 

@@ -10,7 +10,8 @@ if (menu) {
   });
 }
 var doctorid;
-function modalup(modal, id) {
+var reomve;
+function modalup(modal, id, remove) {
   doctorid = id;
   document.querySelector("." + modal).classList.toggle("active");
 }
