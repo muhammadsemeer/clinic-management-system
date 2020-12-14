@@ -1,267 +1,125 @@
-<section class="dr-page appointment ml-250">
-  <div class="doctor-conatiner">
-    <div class="tab">
-      <button id="appointment" class="active"
-        onclick="toogleTab3('#appointment', '#requsted' ,'#consulted','#cancel', '#appointment-conatiner', '#consulted-container', '#cancelled-conatiner','#requested-container','#exipred', '#exipred-container')">
-        <i class="fas fa-calendar-day"></i>
-        Today
-      </button>
-      <button id="requsted"
-        onclick="toogleTab3('#requsted','#consulted','#appointment', '#cancel', '#requested-container','#consulted-container', '#appointment-conatiner', '#cancelled-conatiner','#exipred', '#exipred-container')">
-        <i class="fas fa-calendar-week"></i>
-        Upcoming
-      </button>
-      <button id="consulted"
-        onclick="toogleTab3('#consulted','#appointment', '#requsted' ,'#cancel', '#consulted-container', '#requested-container','#appointment-conatiner', '#cancelled-conatiner','#exipred', '#exipred-container')">
-        <i class="fas fa-clipboard-check"></i>
-        Consulted
-      </button>
-      <button id="cancel"
-        onclick="toogleTab3('#cancel','#consulted','#appointment', '#requsted', '#cancelled-conatiner','#requested-container','#consulted-container', '#appointment-conatiner','#exipred', '#exipred-container')">
-        <i class="fas fa-calendar-times"></i>
-        Cancelled
-      </button>
-      <button id="exipred"
-        onclick="toogleTab3('#exipred','#consulted','#appointment', '#requsted', '#exipred-container', '#consulted-container', '#requested-container','#appointment-conatiner', '#cancelled-conatiner','#cancel')">
-        <i class="fas fa-history"></i>
-        Expired
-      </button>
-      <hr />
-    </div>
+<section class="dr-page appmnt ml-250">
+  <div class="tab">
+    <button class="tb active" data-id="today" onclick="tabview(event)">
+      <i class="fas fa-calendar-day"></i>
+      Today
+    </button>
+    <button class="tb" data-id="upcoming" onclick="tabview(event)">
+      <i class="fas fa-calendar-week"></i>
+      Upcoming
+    </button>
+    <button class="tb" data-id="consulted" onclick="tabview(event)">
+      <i class="fas fa-clipboard-check"></i>
+      Consulted
+    </button>
+    <button class="tb" data-id="cancelled" onclick="tabview(event)">
+      <i class="fas fa-calendar-times"></i>
+      Cancelled
+    </button>
+    <button class="tb" data-id="expired" onclick="tabview(event)">
+      <i class="fas fa-history"></i>
+      Expired
+    </button>
+    <hr />
   </div>
-  <div class="card active" id="appointment-conatiner">
-    {{#if appointments}}
-    {{#each appointments}}
-    <div class="container" id="{{this._id}}">
-      <div>
-        <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+  <!-- today -->
+  <div class="card-sec active" id="today">
+    <div class="card">
+      <div class="c-head">
+        <p>Muhammad Semeer</p>
+        <p>muhammadsemeerali@gmail.com</p>
       </div>
-      <div>
-        <h3>
-          {{this.doctor.name}}
-        </h3>
-        <p>
-          {{this.doctor.field}}
-        </p>
-      </div>
-    </div>
-    <div class="content">
-      <p>
-        {{this.date}}
-      </p>
-      <p>
-        {{this.timeslot}}
-      </p>
-      <p>
-        {{this.status}}
-      </p>
-      <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-        <a href="#">
-          <button class="crop" style="font-size: 15px" onclick="modalup('message-modal','{{this._id}}')">
-            Cancel Apointment
-          </button>
-        </a>
-      </div>
-    </div>
-  </div>
-  {{/each}}
-  {{else}}
-  <div class="container">
-    <h1>
-      No Appointments
-    </h1>
-  </div>
-  {{/if}}
-  </div>
-  <div class="doctor-conatiner">
-    <div class="card" id="requested-container">
-      {{#if requests}}
-      {{#each requests}}
-      <div class="container" id="{{this._id}}">
-        <div>
-          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
-        </div>
-        <div>
-          <h3>
-            {{this.doctor.name}}
-          </h3>
-          <p>
-            {{this.doctor.field}}
-          </p>
-        </div>
-      </div>
-      <div class="content">
-        <p>
-          {{this.date}}
-        </p>
-        <p>
-          {{this.timeslot}}
-        </p>
-        <p>
-          {{this.status}}
-        </p>
-        <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-          <button class="crop" style="font-size: 15px" onclick="modalup('message-modal','{{this._id}}')">
-            Cancel Apointment
-          </button>
+      <div class="c-content">
+        <p>Date</p>
+        <p>Time Stlot</p>
+        <div class="btn-grp" style="margin-left: 0;">
+          <button class="crop">Consult</button>
+          <button class="crop" style="margin-left: 10px;">Cancel</button>
         </div>
       </div>
     </div>
-    {{/each}}
-    {{else}}
-    <div class="container">
-      <h1>
-        No Appointments
-      </h1>
-    </div>
-    {{/if}}
   </div>
-  </div>
-  <div class="doctor-conatiner">
-    <div class="card" id="consulted-container">
-      {{#if consulted}}
-      {{#each consulted}}
-      <div class="container" id="{{this._id}}">
-        <div>
-          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
-        </div>
-        <div>
-          <h3>
-            {{this.doctor.name}}
-          </h3>
-          <p>
-            {{this.doctor.field}}
-          </p>
-        </div>
+  <!-- upcoming -->
+  <div class="card-sec" id="upcoming">
+    <div class="card">
+      <div class="c-head">
+        <p>Muhammad Semeer</p>
+        <p>muhammadsemeerali@gmail.com</p>
       </div>
-      <div class="content">
-        <p>
-          {{this.date}}
-        </p>
-        <p>
-          {{this.timeslot}}
-        </p>
-        <p>
-          {{this.status}}
-        </p>
+      <div class="c-content">
+        <p>Date</p>
+        <p>Time Stlot</p>
+        <div class="btn-grp" style="margin-left: 0;">
+          <button class="crop">Consult</button>
+          <button class="crop" style="margin-left: 10px;">Cancel</button>
+        </div>
       </div>
     </div>
   </div>
-  {{/each}}
-  {{else}}
-  <div class="container">
-    <h1>
-      No Appointments
-    </h1>
-  </div>
-  {{/if}}
-  </div>
-  </div>
-  <div class="doctor-conatiner">
-    <div class="card" id="cancelled-conatiner">
-      {{#if cancelled}}
-      {{#each cancelled}}
-      <div class="container" id="{{this._id}}">
-        <div>
-          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
-        </div>
-        <div>
-          <h3>
-            {{this.doctor.name}}
-          </h3>
-          <p>
-            {{this.doctor.field}}
-          </p>
-        </div>
+  <!-- consulted -->
+  <div class="card-sec" id="consulted">
+    <div class="card">
+      <div class="c-head">
+        <p>Muhammad Semeer</p>
+        <p>muhammadsemeerali@gmail.com</p>
       </div>
-      <div class="content">
-        <p>
-          {{this.date}}
-        </p>
-        <p>
-          {{this.timeslot}}
-        </p>
-        <p>
-          {{this.status}}
-        </p>
+      <div class="c-content">
+        <p>Date</p>
+        <p>Time Stlot</p>
+        <div class="btn-grp" style="margin-left: 0;">
+          <button class="crop">Consult</button>
+          <button class="crop" style="margin-left: 10px;">Cancel</button>
+        </div>
       </div>
     </div>
   </div>
-  {{/each}}
-  {{else}}
-  <div class="container">
-    <h1>
-      No Appointments
-    </h1>
-  </div>
-  {{/if}}
-  </div>
-  </div>
-  <div class="doctor-container">
-    <div class="card" id="exipred-container">
-      {{#if expired}}
-      {{#each expired}}
-      <div class="container" id="{{this._id}}">
-        <div>
-          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
-        </div>
-        <div>
-          <h3>
-            {{this.doctor.name}}
-          </h3>
-          <p>
-            {{this.doctor.field}}
-          </p>
-        </div>
+  <!-- cancelled -->
+  <div class="card-sec" id="cancelled">
+    <div class="card">
+      <div class="c-head">
+        <p>Muhammad Semeer</p>
+        <p>muhammadsemeerali@gmail.com</p>
       </div>
-      <div class="content">
-        <p>
-          {{this.date}}
-        </p>
-        <p>
-          {{this.timeslot}}
-        </p>
-        <p>
-          {{this.status}}
-        </p>
+      <div class="c-content">
+        <p>Date</p>
+        <p>Time Stlot</p>
+        <div class="btn-grp" style="margin-left: 0;">
+          <button class="crop">Consult</button>
+          <button class="crop" style="margin-left: 10px;">Cancel</button>
+        </div>
       </div>
     </div>
   </div>
-  {{/each}}
-  {{else}}
-  <div class="container">
-    <h1>
-      No Appointments
-    </h1>
-  </div>
-  {{/if}}
-  </div>
+  <!-- expired -->
+  <div class="card-sec" id="expired">
+    <div class="card">
+      <div class="c-head">
+        <p>Muhammad Semeer</p>
+        <p>muhammadsemeerali@gmail.com</p>
+      </div>
+      <div class="c-content">
+        <p>Date</p>
+        <p>Time Stlot</p>
+        <div class="btn-grp" style="margin-left: 0;">
+          <button class="crop">Consult</button>
+          <button class="crop" style="margin-left: 10px;">Cancel</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
-<div class="modal message-modal">
-  <h1>
-    Are You Want to Cancel Appointment?
-  </h1>
-  <button class="yes" onclick="cancelAppointment()">
-    Yes
-  </button>
-  <button class="no" onclick="document.querySelector('.message-modal').classList.toggle('active')">
-    No
-  </button>
-</div>
-<div class="modal success-modal">
-  <h1>
-    Appointment Successully Cancelled
-  </h1>
-  <button class="normal" onclick="document.querySelector('.success-modal').classList.toggle('active')">
-    Close
-  </button>
-</div>
-<div class="modal error-modal">
-  <h1>
-    Something Went Wrong
-  </h1>
-  <button class="normal" onclick="document.querySelector('.error-modal').classList.toggle('active')">
-    Close
-  </button>
-</div>
+<script>
+  function tabview(event) {
+    var id = event.target.getAttribute("data-id")
+    var tb = document.querySelectorAll(".tb")
+    var cardSec = document.querySelectorAll(".card-sec")
+    for (let i = 0; i < tb.length; i++) {
+      tb[i].classList.remove("active")
+    }
+    for (let i = 0; i < cardSec.length; i++) {
+      cardSec[i].classList.remove("active")
+    }
+    document.getElementById(id).classList.add("active")
+    event.target.classList.add("active")
+  }
+</script>
