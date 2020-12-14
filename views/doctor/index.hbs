@@ -128,20 +128,22 @@
   <!-- expired -->
   <div class="card-sec" id="expired">
     {{#if expired}}
+    {{#each expired}}
     <div class="card">
       <div class="c-head">
-        <p>Muhammad Semeer</p>
-        <p>muhammadsemeerali@gmail.com</p>
+        <p>{{this.user.name}}</p>
+        {{#if this.user.email}}
+        <p>{{this.user.email}}</p>
+        {{else}}
+        <p>{{this.user.contactno}}</p>
+        {{/if}}
       </div>
       <div class="c-content">
-        <p>Date</p>
-        <p>Time Stlot</p>
-        <div class="btn-grp" style="margin-left: 0;">
-          <button class="crop">Consult</button>
-          <button class="crop" style="margin-left: 10px;">Cancel</button>
-        </div>
+        <p>{{this.date}}</p>
+        <p>{{this.timeslot}}</p>
       </div>
     </div>
+    {{/each}}
     {{else}}
     <div class="card" style="display: flex; justify-content: center; align-items: center">
       <h1>No Appointments</h1>

@@ -45,11 +45,13 @@ const loginCheck = (req, res, next) => {
 router.get("/", verifyLogin, async (req, res) => {
   let todays = await doctorHelpers.getTodaysAppointment(req.doctor._id);
   let upcoming = await doctorHelpers.getUpcomingAppointments(req.doctor._id);
+  let expired = await doctorHelpers.getExipredApointments(req.doctor._id);
   res.render("doctor/index", {
     title: "Doctor Dashboard",
     doctorLogged: req.doctor,
     todays,
     upcoming,
+    expired,
   });
 });
 

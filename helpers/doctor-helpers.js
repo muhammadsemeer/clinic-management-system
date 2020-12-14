@@ -157,7 +157,6 @@ module.exports = {
               $and: [
                 { doctor: ObjectId(doctorId) },
                 { status: { $ne: "Deleted" } },
-                { status: { $ne: "Pending" } },
                 { date: { $ne: date } },
               ],
             },
