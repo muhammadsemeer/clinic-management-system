@@ -60,7 +60,7 @@ function toogleTab3(
   hideContent2,
   hideContent3,
   inactiveTab4,
-  hideContent4,
+  hideContent4
 ) {
   document.querySelector(activeTab).classList.add("active");
   document.querySelector(showContent).classList.add("active");
@@ -70,7 +70,7 @@ function toogleTab3(
   document.querySelector(hideContent1).classList.remove("active");
   document.querySelector(hideContent2).classList.remove("active");
   document.querySelector(hideContent3).classList.remove("active");
-  if(inactiveTab4 && hideContent4) {
+  if (inactiveTab4 && hideContent4) {
     document.querySelector(inactiveTab4).classList.remove("active");
     document.querySelector(hideContent4).classList.remove("active");
   }

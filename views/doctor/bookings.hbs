@@ -1,7 +1,7 @@
 <section class="dr-page booking ml-250">
     {{#if bookings}}
     {{#each bookings}}
-    <div class="container" style="padding-top: 15px;">
+    <div class="container" id="{{this._id}}" style="padding-top: 15px;">
         <div class="card">
             <div class="card-head">
                 <div>
@@ -19,10 +19,9 @@
                             Approve
                         </button>
                     </a>
-                    <a href="/bookings/cancel/{{this._id}}">
-                        <button class="crop" style="margin-left: 10px;">
-                            Cancel
-                        </button>
+                    <button class="crop" style="margin-left: 10px;" onclick="modalup('delete-modal','{{this._id}}')">
+                        Cancel
+                    </button>
                     </a>
                 </div>
             </div>
@@ -37,3 +36,47 @@
     </div>
     {{/if}}
 </section>
+<div class="modal delete-modal">
+    <h1>
+        Do you Want Delete Doctor?
+    </h1>
+    <button class="yes" onclick="cancelBooking()">
+        Yes
+    </button>
+    <button class="no" onclick="document.querySelector('.delete-modal').classList.toggle('active')">
+        No
+    </button>
+</div>
+<div class="modal delete-sucess-modal">
+    <h1>
+        Deleted Sucessfully
+    </h1>
+    <button class="normal" onclick="document.querySelector('.delete-sucess-modal').classList.toggle('active')">
+        Close
+    </button>
+</div>
+<div class="modal delete-fail-modal">
+    <h1>
+        Something Went Wrong
+    </h1>
+    <button class="normal" onclick="document.querySelector('.delete-fail-modal').classList.toggle('active')">
+        Close
+    </button>
+</div>
+<script>
+    function cancelBooking() {
+        fetch(`/bookings/cancel/${doctorid}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then((res) => res.json()).then((status) => {
+            if (status) {
+                modalup("delete-sucess-modal")
+                document.getElementById(doctorid).remove()
+            } else {
+                modalup("delete-fail-modal")
+            }
+        })
+    }
+</script>
