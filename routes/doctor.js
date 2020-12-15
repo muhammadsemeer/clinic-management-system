@@ -144,10 +144,12 @@ router.delete("/bookings/cancel/:id", (req, res) => {
 
 router.get("/patients", verifyLogin, (req, res) => {
   doctorHelpers.getMyPatients(req.doctor._id).then((response) => {
-    res.render("doctor/patient", {
-      title: "Patients",
-      doctorLogged: req.doctor,
-      patients: response,
+    doctorHelpers.removeBlocked(req.doctor._id, response).then((result) => {
+      res.render("doctor/patient", {
+        title: "Patients",
+        doctorLogged: req.doctor,
+        patients: result,
+      });
     });
   });
 });
@@ -155,14 +157,6 @@ router.get("/patients", verifyLogin, (req, res) => {
 router.delete("/block-user/:id", verifyToken, (req, res) => {
   doctorHelpers.blockPatient(req.doctor._id, req.params.id).then((response) => {
     res.json(response);
-  });
-});
-
-router.get("/test/:id", (req, res) => {
-  doctorHelpers.getMyPatients(req.params.id).then((result) => {
-    doctorHelpers.removeBlocked(req.params.id, result).then((response) => {
-      res.json(response);
-    });
   });
 });
 
