@@ -2,7 +2,6 @@ var express = require("express");
 const doctorHelpers = require("../helpers/doctor-helpers");
 var router = express.Router();
 var jwt = require("jsonwebtoken");
-const { response } = require("express");
 require("dotenv").config();
 
 const verifyLogin = (req, res, next) => {
