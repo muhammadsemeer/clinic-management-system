@@ -295,13 +295,19 @@ module.exports = {
             projection: { _id: 0, blockedUsers: 1 },
           }
         );
-      let result = []
+      let result = [];
       for (let i = 0; i < patients.length; i++) {
-        for (let j = 0; j < blocked.blockedUsers.length; j++) {
-        if (blocked.blockedUsers[j] != patients[i]._id) {
-          result.push(patients[i])
+        if (
+          !(Object.keys(blocked).length === 0 && blocked.constructor === Object)
+        ) {
+          for (let j = 0; j < blocked.blockedUsers.length; j++) {
+            if (blocked.blockedUsers[j] != patients[i]._id) {
+              result.push(patients[i]);
+            }
+          }
+        } else {
+          result = patients;
         }
-      }
       }
       resolve(result);
     });
@@ -317,13 +323,17 @@ module.exports = {
             projection: { _id: 0, blockedUsers: 1 },
           }
         );
-      let result = []
+      let result = [];
       for (let i = 0; i < patients.length; i++) {
-        for (let j = 0; j < blocked.blockedUsers.length; j++) {
-        if (blocked.blockedUsers[j] == patients[i]._id) {
-          result.push(patients[i])
+        if (
+          !(Object.keys(blocked).length === 0 && blocked.constructor === Object)
+        ) {
+          for (let j = 0; j < blocked.blockedUsers.length; j++) {
+            if (blocked.blockedUsers[j] == patients[i]._id) {
+              result.push(patients[i]);
+            }
+          }
         }
-      }
       }
       resolve(result);
     });
