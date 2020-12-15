@@ -220,4 +220,53 @@ module.exports = {
       resolve(appointment);
     });
   },
+  getMyPatients: (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+      let patients = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [{ doctor: ObjectId(doctorId) }],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+          {
+            $project: {
+              _id: 0,
+              user: 1,
+            },
+          },
+          {
+            $group: {
+              _id: null,
+              uniqueIds: { $addToSet: "$user._id" },
+              count: { $sum: 1 },
+            },
+          },
+          { $match: { count: { $gt: 1 } } },
+        ])
+        .toArray();
+      var id = patients[0].uniqueIds;
+      var result = [];
+      for (let i = 0; i < id.length; i++) {
+        result[i] = await db
+          .get()
+          .collection(collection.PATIENT_COLLECTION)
+          .findOne({ _id: ObjectId(id[0]) });
+      }
+      resolve(result);
+    });
+  },
 };
