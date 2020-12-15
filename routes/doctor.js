@@ -158,4 +158,12 @@ router.delete("/block-user/:id", verifyToken, (req, res) => {
   });
 });
 
+router.get("/test/:id", (req, res) => {
+  doctorHelpers.getMyPatients(req.params.id).then((result) => {
+    doctorHelpers.removeBlocked(req.params.id, result).then((response) => {
+      res.json(response);
+    });
+  });
+});
+
 module.exports = router;

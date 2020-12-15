@@ -276,12 +276,36 @@ module.exports = {
         .updateOne(
           { _id: ObjectId(doctorId) },
           {
-            $push: { blockedUsers: ObjectId(userId) },
+            $push: { blockedUsers: userId },
           }
         )
         .then((response) => {
           resolve(true);
         });
+    });
+  },
+  removeBlocked: (doctorId, patients) => {
+    return new Promise(async (resolve, reject) => {
+      let blocked = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .findOne(
+          { _id: ObjectId(doctorId) },
+          {
+            projection: { _id: 0, blockedUsers: 1 },
+          }
+        );
+      for (let i = 0; i < patients.length; i++) {
+        for (let j = 0; j < blocked.blockedUsers.length; j++) {
+          console.log(blocked.blockedUsers[j]);
+          console.log(j, "j");
+          console.log(patients[i]._id);
+        if (blocked.blockedUsers[j] == patients[i]._id) {
+          patients.splice(i, 1);
+        }
+      }
+      }
+      resolve(patients);
     });
   },
 };
