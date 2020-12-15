@@ -32,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each patients}}
+                        {{#each notBlocked}}
                         <tr id="{{this._id}}">
                             <td>
                                 {{this.name}}
@@ -77,7 +77,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each patients}}
+                        {{#each blocked}}
                         <tr id="{{this._id}}">
                             <td>
                                 {{this.name}}
@@ -92,8 +92,8 @@
                                 <span class="edit">
                                     <i class="fas fa-calendar"></i>
                                 </span>
-                                <span class="delete" onclick="modalup('delete-modal','{{this._id}}')">
-                                    <i class="fas fa-user-slash"></i>
+                                <span class="yes" onclick="modalup('delete-modal','{{this._id}}')">
+                                    <i class="fas fa-user-check"></i>
                                 </span>
                             </td>
                         </tr>

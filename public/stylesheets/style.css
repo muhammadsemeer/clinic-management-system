@@ -380,7 +380,8 @@ header h1 {
   visibility: hidden;
 }
 
-.admin-users .container.active, .ptnt .container.active {
+.admin-users .container.active,
+.ptnt .container.active {
   transform: translateY(0px);
   opacity: 1;
   visibility: visible;
@@ -461,6 +462,16 @@ header h1 {
   color: var(--green);
 }
 
+span.yes {
+  text-decoration: none;
+  width: 50px;
+  height: 30px;
+  font-size: 25px;
+  border: none;
+  border-radius: 10px;
+  color: var(--green);
+  margin: 0 10px;
+}
 .edit {
   text-decoration: none;
   width: 50px;
