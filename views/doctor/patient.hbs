@@ -1,0 +1,45 @@
+<section class="dr-page ptnt ml-250">
+    <div class="doctors-display" style="padding: 25px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Contactno
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each patients}}
+                <tr id="{{this._id}}">
+                    <td>
+                        {{this.name}}
+                    </td>
+                    <td>
+                        {{this.email}}
+                    </td>
+                    <td>
+                        {{this.contactno}}
+                    </td>
+                    <td>
+                        <span class="edit">
+                            <i class="fas fa-calendar"></i>
+                        </span>
+                        <span class="delete">
+                            <i class="fas fa-user-lock"></i>
+                        </span>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>

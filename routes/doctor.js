@@ -120,7 +120,7 @@ router.get("/patients", verifyLogin, (req, res) => {
     res.render("doctor/patient", {
       title: "Patients",
       doctorLogged: req.doctor,
-      response,
+      patients: response,
     });
   });
 });
