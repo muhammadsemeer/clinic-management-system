@@ -5,9 +5,12 @@
         <div class="card">
             <div class="card-head">
                 <div>
-                    <img src="{{this.user.profileImage}}" alt="{{this.user.name}}">
                     <p>{{this.user.name}}</p>
+                    {{#if this.user.email}}
                     <p style="word-break: break-all; font-size: 14px;">{{this.user.email}}</p>
+                    {{else}}
+                    <p style="word-break: break-all; font-size: 14px;">{{this.user.contactno}}</p>
+                    {{/if}}
                 </div>
             </div>
             <div class="card-body">
