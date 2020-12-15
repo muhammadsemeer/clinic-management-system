@@ -41,6 +41,33 @@ const loginCheck = (req, res, next) => {
   }
 };
 
+const verifyToken = (req, res, next) => {
+  const rawCookies = req.headers.cookie.split("; ");
+
+  const parsedCookies = {};
+  rawCookies.forEach((rawCookie) => {
+    const parsedCookie = rawCookie.split("=");
+    parsedCookies[parsedCookie[0]] = parsedCookie[1];
+  });
+  console.log(parsedCookies);
+  if (parsedCookies.doctorToken) {
+    jwt.verify(
+      parsedCookies.doctorToken,
+      process.env.JWT_SECERT,
+      (error, decoded) => {
+        console.log(decoded);
+        if (error) {
+          res.json("login");
+        } else {
+          next();
+        }
+      }
+    );
+  } else {
+    res.json("login");
+  }
+};
+
 router.get("/", verifyLogin, async (req, res) => {
   let todays = await doctorHelpers.getTodaysAppointment(req.doctor._id);
   let upcoming = await doctorHelpers.getUpcomingAppointments(req.doctor._id);
