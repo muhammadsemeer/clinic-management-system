@@ -32,6 +32,7 @@ const loginCheck = (req, res, next) => {
         if (error) {
           next();
         } else {
+          req.doctor = decoded;
           res.redirect("/");
         }
       }
@@ -49,16 +50,15 @@ const verifyToken = (req, res, next) => {
     const parsedCookie = rawCookie.split("=");
     parsedCookies[parsedCookie[0]] = parsedCookie[1];
   });
-  console.log(parsedCookies);
   if (parsedCookies.doctorToken) {
     jwt.verify(
       parsedCookies.doctorToken,
       process.env.JWT_SECERT,
       (error, decoded) => {
-        console.log(decoded);
         if (error) {
           res.json("login");
         } else {
+          req.doctor = decoded;
           next();
         }
       }
@@ -149,6 +149,12 @@ router.get("/patients", verifyLogin, (req, res) => {
       doctorLogged: req.doctor,
       patients: response,
     });
+  });
+});
+
+router.delete("/block-user/:id", verifyToken, (req, res) => {
+  doctorHelpers.blockPatient(req.doctor._id, req.params.id).then((response) => {
+    res.json(response);
   });
 });
 

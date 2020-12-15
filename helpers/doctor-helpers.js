@@ -269,4 +269,19 @@ module.exports = {
       resolve(result);
     });
   },
+  blockPatient: (doctorId, userId) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(doctorId) },
+          {
+            $push: { blockedUsers: ObjectId(userId) },
+          }
+        )
+        .then((response) => {
+          resolve(true);
+        });
+    });
+  },
 };
