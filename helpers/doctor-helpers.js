@@ -264,7 +264,7 @@ module.exports = {
         result[i] = await db
           .get()
           .collection(collection.PATIENT_COLLECTION)
-          .findOne({ _id: ObjectId(id[0]) });
+          .findOne({ _id: ObjectId(id[i]) });
       }
       resolve(result);
     });
