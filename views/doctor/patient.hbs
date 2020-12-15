@@ -1,46 +1,107 @@
 <section class="dr-page ptnt ml-250">
-    <div class="doctors-display" style="padding: 25px;">
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Email
-                    </th>
-                    <th>
-                        Contactno
-                    </th>
-                    <th>
-                        Actions
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each patients}}
-                <tr id="{{this._id}}">
-                    <td>
-                        {{this.name}}
-                    </td>
-                    <td>
-                        {{this.email}}
-                    </td>
-                    <td>
-                        {{this.contactno}}
-                    </td>
-                    <td>
-                        <span class="edit">
-                            <i class="fas fa-calendar"></i>
-                        </span>
-                        <span class="delete" onclick="modalup('delete-modal','{{this._id}}')">
-                            <i class="fas fa-user-slash"></i>
-                        </span>
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+    <div class="tab">
+        <button id="doctor" class="active"
+            onclick="toogleTab('#doctor', '#patient', '#doctor-conatiner', '#patient-conatiner')">
+            <i class="fas fa-user-injured"></i>
+            Patients
+        </button>
+        <button id="patient" onclick="toogleTab('#patient','#doctor','#patient-conatiner','#doctor-conatiner')">
+            <i class="fas fa-user-times"></i>
+            Blocked
+        </button>
+        <hr />
+    </div>
+    <div class="user-container">
+        <div id="doctor-conatiner" class="container active">
+            <div class="doctors-display" style="padding: 25px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Contactno
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each patients}}
+                        <tr id="{{this._id}}">
+                            <td>
+                                {{this.name}}
+                            </td>
+                            <td>
+                                {{this.email}}
+                            </td>
+                            <td>
+                                {{this.contactno}}
+                            </td>
+                            <td>
+                                <span class="edit">
+                                    <i class="fas fa-calendar"></i>
+                                </span>
+                                <span class="delete" onclick="modalup('delete-modal','{{this._id}}')">
+                                    <i class="fas fa-user-slash"></i>
+                                </span>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="patient-conatiner" class="container">
+            <div class="doctors-display" style="padding: 25px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Contactno
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each patients}}
+                        <tr id="{{this._id}}">
+                            <td>
+                                {{this.name}}
+                            </td>
+                            <td>
+                                {{this.email}}
+                            </td>
+                            <td>
+                                {{this.contactno}}
+                            </td>
+                            <td>
+                                <span class="edit">
+                                    <i class="fas fa-calendar"></i>
+                                </span>
+                                <span class="delete" onclick="modalup('delete-modal','{{this._id}}')">
+                                    <i class="fas fa-user-slash"></i>
+                                </span>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </section>
 <div class="modal delete-modal">

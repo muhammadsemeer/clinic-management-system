@@ -362,12 +362,14 @@ header h1 {
 
 /* admin-users page */
 
-.admin-users .user-container {
+.admin-users .user-container,
+.ptnt .user-container {
   width: 100%;
   position: relative;
 }
 
-.admin-users .container {
+.admin-users .container,
+.ptnt .container {
   padding: 0 25px;
   width: 100%;
   position: absolute;
@@ -378,7 +380,7 @@ header h1 {
   visibility: hidden;
 }
 
-.admin-users .container.active {
+.admin-users .container.active, .ptnt .container.active {
   transform: translateY(0px);
   opacity: 1;
   visibility: visible;
