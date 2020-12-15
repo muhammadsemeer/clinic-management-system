@@ -115,4 +115,14 @@ router.delete("/bookings/cancel/:id", (req, res) => {
     });
 });
 
+router.get("/patients", verifyLogin, (req, res) => {
+  doctorHelpers.getMyPatients(req.doctor._id).then((response) => {
+    res.render("doctor/patient", {
+      title: "Patients",
+      doctorLogged: req.doctor,
+      response,
+    });
+  });
+});
+
 module.exports = router;
