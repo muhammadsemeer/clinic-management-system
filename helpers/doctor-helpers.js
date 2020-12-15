@@ -53,7 +53,15 @@ module.exports = {
           },
         ])
         .toArray();
-      resolve(bookings);
+      let result = [];
+      bookings.forEach((element) => {
+        var today = new Date();
+        var dbDate = new Date(element.date);
+        if (dbDate >= today) {
+          result.push(element);
+        }
+      });
+      resolve(result);
     });
   },
   changeBookingStatus: (bookingId, status) => {
