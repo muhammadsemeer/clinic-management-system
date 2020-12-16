@@ -179,7 +179,7 @@ router.get("/myprofile", verifyLogin, (req, res) => {
 });
 
 router.get("/image-upload/:id", verifyLogin, (req, res) => {
-  res.render("admin/image-crop", {
+  res.render("doctor/image-crop", {
     doctorLogged: req.doctor,
     id: req.params.id,
     title: "Edit Image",
