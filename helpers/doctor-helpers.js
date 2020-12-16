@@ -360,4 +360,13 @@ module.exports = {
         });
     });
   },
+  getMyProfile: (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+      let profile = db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .findOne({ _id: ObjectId(doctorId) });
+      resolve(profile);
+    });
+  },
 };
