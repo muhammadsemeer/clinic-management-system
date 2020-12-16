@@ -178,4 +178,23 @@ router.get("/myprofile", verifyLogin, (req, res) => {
   });
 });
 
+router.get("/image-upload/:id", verifyLogin, (req, res) => {
+  res.render("admin/image-crop", {
+    doctorLogged: req.doctor,
+    id: req.params.id,
+    title: "Edit Image",
+  });
+});
+
+router.post("/doctor/upload/:id", verifyToken, (req, res) => {
+  let image = req.files.image;
+  image.mv("./public/images/doctor/" + req.params.id + ".jpg", (err) => {
+    if (err) {
+      res.json({ status: false });
+    } else {
+      res.json({ status: true });
+    }
+  });
+});
+
 module.exports = router;
