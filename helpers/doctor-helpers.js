@@ -297,6 +297,9 @@ module.exports = {
           }
         );
       let result = [];
+      if (blocked.blockedUsers.length === patients.length) {
+        return resolve();
+      }
       for (let i = 0; i < patients.length; i++) {
         if (
           !(
