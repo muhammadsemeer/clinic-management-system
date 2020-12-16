@@ -197,4 +197,14 @@ router.post("/doctor/upload/:id", verifyToken, (req, res) => {
   });
 });
 
+router.get("/profile/edit", verifyLogin, (req, res) => {
+  doctorHelpers.getMyProfile(req.doctor._id).then((response) => {
+    res.render("doctor/edit-profile", {
+      title: "Edit Profile",
+      doctorLogged: req.doctor,
+      doctor: response,
+    });
+  });
+});
+
 module.exports = router;
