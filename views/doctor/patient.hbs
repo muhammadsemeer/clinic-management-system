@@ -92,7 +92,7 @@
                                 <span class="edit">
                                     <i class="fas fa-calendar"></i>
                                 </span>
-                                <span class="yes" onclick="modalup('delete-modal','{{this._id}}')">
+                                <span class="yes" onclick="modalup('unblock-modal','{{this._id}}')">
                                     <i class="fas fa-user-check"></i>
                                 </span>
                             </td>
@@ -115,11 +115,30 @@
         No
     </button>
 </div>
+<div class="modal unblock-modal">
+    <h1>
+        Do you Want Unblock ?
+    </h1>
+    <button class="yes" onclick="unblock()">
+        Yes
+    </button>
+    <button class="no" onclick="document.querySelector('.unblock-modal').classList.toggle('active')">
+        No
+    </button>
+</div>
 <div class="modal delete-sucess-modal">
     <h1>
         Pateint Blocked
     </h1>
     <button class="normal" onclick="document.querySelector('.delete-sucess-modal').classList.toggle('active')">
+        Close
+    </button>
+</div>
+<div class="modal unblock-sucess-modal">
+    <h1>
+        Pateint Unblocked
+    </h1>
+    <button class="normal" onclick="document.querySelector('.unblock-sucess-modal').classList.toggle('active')">
         Close
     </button>
 </div>
@@ -143,6 +162,25 @@
                 document.querySelector(".delete-modal").classList.remove("active")
                 document.getElementById(doctorid).remove()
                 modalup("delete-sucess-modal")
+            } else if (res === "login") {
+                window.location = "/login"
+            }
+            else {
+                modalup("delete-fail-modal")
+            }
+        })
+    }
+    function unblock() {
+        fetch(`/block-user/${doctorid}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then((res) => res.json()).then((res) => {
+            if (res === true) {
+                document.querySelector(".unblock-modal").classList.remove("active")
+                document.getElementById(doctorid).remove()
+                modalup("unblock-sucess-modal")
             } else if (res === "login") {
                 window.location = "/login"
             }

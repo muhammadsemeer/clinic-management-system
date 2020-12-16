@@ -165,5 +165,10 @@ router.delete("/block-user/:id", verifyToken, (req, res) => {
     res.json(response);
   });
 });
+router.put("/block-user/:id", verifyToken, (req, res) => {
+  doctorHelpers.unBlock(req.doctor._id, req.params.id).then((response) => {
+    res.json(response);
+  });
+});
 
 module.exports = router;

@@ -286,6 +286,7 @@ module.exports = {
   },
   removeBlocked: (doctorId, patients) => {
     return new Promise(async (resolve, reject) => {
+      console.log(patients);
       let blocked = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
@@ -298,7 +299,10 @@ module.exports = {
       let result = [];
       for (let i = 0; i < patients.length; i++) {
         if (
-          !(Object.keys(blocked).length === 0 && blocked.constructor === Object)
+          !(
+            Object.keys(blocked).length === 0 && blocked.constructor === Object
+          ) &&
+          blocked.blockedUsers.length != 0
         ) {
           for (let j = 0; j < blocked.blockedUsers.length; j++) {
             if (blocked.blockedUsers[j] != patients[i]._id) {
@@ -336,6 +340,21 @@ module.exports = {
         }
       }
       resolve(result);
+    });
+  },
+  unBlock: (doctorId, userId) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(doctorId) },
+          {
+            $pull: { blockedUsers: userId },
+          }
+        )
+        .then((response) => {
+          resolve(true);
+        });
     });
   },
 };
