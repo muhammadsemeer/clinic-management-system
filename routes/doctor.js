@@ -148,15 +148,12 @@ router.get("/patients", verifyLogin, async (req, res) => {
     req.doctor._id,
     allPateints
   );
-  let blocked = await doctorHelpers.getBlocked(
-    req.doctor._id,
-    allPateints
-  );
+  let blocked = await doctorHelpers.getBlocked(req.doctor._id, allPateints);
   res.render("doctor/patient", {
     title: "Patients",
     doctorLogged: req.doctor,
     notBlocked,
-    blocked
+    blocked,
   });
 });
 
@@ -168,6 +165,16 @@ router.delete("/block-user/:id", verifyToken, (req, res) => {
 router.put("/block-user/:id", verifyToken, (req, res) => {
   doctorHelpers.unBlock(req.doctor._id, req.params.id).then((response) => {
     res.json(response);
+  });
+});
+
+router.get("/myprofile", verifyLogin, (req, res) => {
+  doctorHelpers.getMyProfile(req.doctor._id).then((response) => {
+    res.render("doctor/profile", {
+      title: "My Profile",
+      doctorLogged: req.doctor,
+      doctorDetails: response,
+    });
   });
 });
 
