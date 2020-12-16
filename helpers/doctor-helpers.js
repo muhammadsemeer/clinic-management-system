@@ -306,7 +306,7 @@ module.exports = {
         ) {
           for (let j = 0; j < blocked.blockedUsers.length; j++) {
             if (blocked.blockedUsers[j] != patients[i]._id) {
-              result.push(patients[i]);
+              result.slice(i,1)
             }
           }
         } else {
