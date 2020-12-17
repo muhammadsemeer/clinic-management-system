@@ -54,10 +54,13 @@ module.exports = {
         ])
         .toArray();
       let result = [];
+      console.log(bookings);
       bookings.forEach((element) => {
-        var today = new Date();
-        var dbDate = new Date(element.date);
-        if (dbDate >= today) {
+        var today = new Date().toDateString();
+        var dbDate = new Date(element.date).toDateString();
+        if (
+          dbDate >= today
+        ) {
           result.push(element);
         }
       });
@@ -439,6 +442,21 @@ module.exports = {
           }
         );
       resolve(slotConfig);
+    });
+  },
+  upadateSlotConfig: (doctorId, slotConfig) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(doctorId) },
+          {
+            $set: {
+              slotConfig: slotConfig,
+            },
+          }
+        );
+      resolve();
     });
   },
 };

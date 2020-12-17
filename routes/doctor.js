@@ -250,9 +250,23 @@ router.get("/profile/slot-config", verifyLogin, (req, res) => {
     res.render("doctor/slot-config", {
       title: "Edit Slot Config",
       doctorLogged: req.doctor,
-      slotConfig: response.slotConfig 
+      slotConfig: response.slotConfig,
     });
   });
+});
+
+router.post("/profile/slot-config/", verifyLogin, (req, res) => {
+  var slotConfig = {
+    configSlotHours: req.body.slotHours,
+    configSlotMinutes: req.body.slotMinutes,
+    configSlotPreparation: req.body.slotPreparation,
+    timeArr: [{ startTime: req.body.startTime, endTime: req.body.endTime }],
+  };
+  doctorHelpers
+    .upadateSlotConfig(req.doctor._id, slotConfig)
+    .then((response) => {
+      res.redirect("/myprofile");
+    });
 });
 
 module.exports = router;

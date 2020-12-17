@@ -8,7 +8,7 @@
     {{error}}
   </div>
   <div class="container">
-    <form action="/profile/slot-config/{{doctorLogged._id}}" method="POST">
+    <form action="/profile/slot-config" method="POST">
       {{#each slotConfig.timeArr}}
       <div class="input-section">
         <input type="time" name="startTime" value="{{this.startTime}}" id="startTime" required />
@@ -31,7 +31,7 @@
         </label>
       </div>
       <div class="input-section">
-        <input type="number" max="60" min="0" placeholder="like 8 or 13" name="slotMiutes"
+        <input type="number" max="60" min="0" placeholder="like 8 or 13" name="slotMinutes"
           value="{{slotConfig.configSlotMinutes}}" required />
         <label for="">
           Slot Minutes
