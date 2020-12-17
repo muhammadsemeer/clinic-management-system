@@ -73,6 +73,7 @@ router.get("/", verifyLogin, async (req, res) => {
   let upcoming = await doctorHelpers.getUpcomingAppointments(req.doctor._id);
   let expired = await doctorHelpers.getExipredApointments(req.doctor._id);
   let cancelled = await doctorHelpers.getCancelledAppointment(req.doctor._id);
+  let consulted = await doctorHelpers.getConsultedAppointments(req.doctor._id);
   res.render("doctor/index", {
     title: "Doctor Dashboard",
     doctorLogged: req.doctor,
@@ -80,6 +81,7 @@ router.get("/", verifyLogin, async (req, res) => {
     upcoming,
     expired,
     cancelled,
+    consulted,
   });
 });
 

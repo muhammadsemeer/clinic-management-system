@@ -83,21 +83,35 @@
   <!-- consulted -->
   <div class="card-sec" id="consulted">
     {{#if consulted}}
-    <div class="card">
+    {{#each consulted}}
+    <div class="card" id="{{this._id}}">
       <div class="c-head">
-        <p>Muhammad Semeer</p>
-        <p>muhammadsemeerali@gmail.com</p>
+        <p>{{this.user.name}}</p>
+        {{#if this.user.email}}
+        <p>{{this.user.email}}</p>
+        {{else}}
+        <p>{{this.user.contactno}}</p>
+        {{/if}}
       </div>
       <div class="c-content">
-        <p>Date</p>
-        <p>Time Stlot</p>
-        <div class="btn-grp" style="margin-left: 0;">
-          <button class="crop">Consult</button>
-          <button class="crop" style="margin-left: 10px;"
-            onclick="modalup('delete-modal','{{this.doctor}}')">Cancel</button>
-        </div>
+        <p>{{this.date}}</p>
+        <p>{{this.timeslot}}</p>
+        <h4>Medicines</h4>
+        {{#if this.medicines}}
+        {{#each this.medicines}}
+        <p>{{this}}</p>
+        {{/each}}
+        {{else}}
+        <p>No Medicines Provided</p>
+        {{/if}}
+        {{#if this.notes}}
+        <h4>Notes</h4>
+        <p>{{this.notes}}
+        </p>
+        {{/if}}
       </div>
     </div>
+    {{/each}}
     {{else}}
     <div class="card" style="display: flex; justify-content: center; align-items: center">
       <h1>No Appointments</h1>

@@ -504,4 +504,31 @@ module.exports = {
         });
     });
   },
+  getConsultedAppointments: (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [{ doctor: ObjectId(doctorId) }, { status: "Consulted" }],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+        ])
+        .toArray();
+      resolve(appointment);
+    });
+  },
 };
