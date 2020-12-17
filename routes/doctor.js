@@ -247,7 +247,11 @@ router.post("/profile/username/:id", verifyLogin, (req, res) => {
 router.get("/profile/slot-config", verifyLogin, (req, res) => {
   doctorHelpers.getMySlotConfig(req.doctor._id).then((response) => {
     console.log(response);
-    res.render("doctor/slot-config");
+    res.render("doctor/slot-config", {
+      title: "Edit Slot Config",
+      doctorLogged: req.doctor,
+      slotConfig: response.slotConfig 
+    });
   });
 });
 
