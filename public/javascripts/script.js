@@ -195,3 +195,50 @@ const cancelAppointment = () => {
       }
     });
 };
+
+var name;
+var usernameFormat;
+var error = document.querySelector(".user-error");
+function checkname(event) {
+  var username = event.target;
+  username.value = username.value.toLowerCase();
+  if (format.test(username.value)) {
+    usernameFormat = false;
+    error.style.display = "inline";
+    error.innerHTML =
+      "Username does not includes special characters like @~`!#$%^&*+=-[]\\',/{}|\\\":";
+    username.style.borderColor = "#ec1919";
+  } else {
+    usernameFormat = true;
+    error.style.display = "none";
+    username.style.borderColor = "#19b9ec";
+  }
+  if (/\s/.test(username.value)) {
+    username.value = username.value.replace(" ", "_");
+  }
+  if (event.target.value !== "") {
+    fetch(`/username/${username.value}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        name = res;
+        if (!res) {
+          error.innerHTML = "Username is already exists";
+          error.style.display = "inline";
+          username.style.borderColor = "#ec1919";
+        }
+      });
+  }
+}
+
+function valid(event) {
+  if (name === "true" && usernameFormat) {
+    return true;
+  } else {
+    return false;
+  }
+}

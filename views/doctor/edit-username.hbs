@@ -1,0 +1,35 @@
+<section class="admin-add ml-250">
+  <div class="head">
+    <h1>
+      Edit Profile
+    </h1>
+  </div>
+  <div class="error">
+    {{error}}
+  </div>
+  <div class="container">
+    <form action="/profile/username/{{doctor._id}}" method="POST" onsubmit="return valid(event)">
+      <div class="head">
+        <h3>Current Username: {{doctor.username}}</h3>
+      </div>
+      <div class="input-section">
+        <input type="text" name="name" onkeyup="checkname(event)" id="name" required>
+        <label for="name">
+          New Username
+        </label>
+      </div>
+      <div class="error user-error"></div>
+      <div class="input-section">
+        <input type="submit" value="Update" />
+      </div>
+    </form>
+  </div>
+</section>
+<div class="modal gender-modal">
+  <h1>
+    Please Select Gender!
+  </h1>
+  <button class="normal" onclick="document.querySelector('.gender-modal').classList.toggle('active')">
+    OK
+  </button>
+</div>
