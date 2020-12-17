@@ -1190,7 +1190,8 @@ footer .social {
   flex-direction: column;
 }
 
-.disp-sec, textarea {
+.disp-sec,
+textarea {
   width: 100%;
   min-height: 250px;
   background: none;
@@ -1201,6 +1202,21 @@ footer .social {
   resize: none;
 }
 
-.disp-sec ol {
-  padding-left: 20px;
+.disp-sec ul {
+  text-align: left;
+  padding: 0;
+}
+
+ul li {
+  box-sizing: border-box;
+  list-style: none;
+  padding: 15px;
+  margin-bottom: 10px;
+  width: 100%;
+  color: #000;
+  border-radius: 5px;
+  background: var(--primary-color);
+  display: grid;
+  grid-template-columns: 90% 10%;
+  word-wrap: break-word;
 }

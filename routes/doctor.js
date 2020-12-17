@@ -279,8 +279,5 @@ router.get("/consult/:id", verifyLogin, (req, res) => {
   });
 });
 
-router.post("/test", (req, res) => {
-  console.log(req.body);
-});
 
 module.exports = router;

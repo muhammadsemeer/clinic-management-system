@@ -8,10 +8,10 @@
     {{error}}
   </div>
   <div class="container">
-    <form>
+    <form onsubmit="submitForm('{{appointment._id}}',event)">
       <div class="head">
         <h4>
-          Name: {{appointment.user.name}} <br> Age: {{appointment.user.age}} <br> Gender {{appointment.user.gender}}
+          Name: {{appointment.user.name}} <br> Age: {{appointment.user.age}} <br> Gender: {{appointment.user.gender}}
         </h4>
       </div>
       <div class="input-section">
@@ -24,8 +24,8 @@
         </div>
       </div>
       <div class="disp-sec">
-        <ol>
-        </ol>
+        <ul>
+        </ul>
       </div>
       <div class="input-section">
         <div class="head">
@@ -47,3 +47,4 @@
     OK
   </button>
 </div>
+<script src="/javascripts/consult.js"></script>
