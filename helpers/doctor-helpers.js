@@ -2,6 +2,7 @@ const db = require("../config/connection");
 const collection = require("../config/collection");
 const { ObjectId } = require("mongodb");
 const bcrypt = require("bcrypt");
+const { response } = require("express");
 
 module.exports = {
   dologin: (deatils) => {
@@ -482,6 +483,25 @@ module.exports = {
         ])
         .toArray();
       resolve(appointment[0]);
+    });
+  },
+  addPrescription: (appId, medicines, notes) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(appId) },
+          {
+            $set: {
+              medicines,
+              notes,
+              status: "Consulted",
+            },
+          }
+        )
+        .then((response) => {
+          resolve();
+        });
     });
   },
 };

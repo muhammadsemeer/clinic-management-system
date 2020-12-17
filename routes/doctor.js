@@ -279,5 +279,14 @@ router.get("/consult/:id", verifyLogin, (req, res) => {
   });
 });
 
+router.post("/consult/:id", verifyToken, (req, res) => {
+  let medicines = req.body.medicines.split(",");
+  let notes = req.body.notes;
+  doctorHelpers
+    .addPrescription(req.params.id, medicines, notes)
+    .then((response) => {
+      res.json(true);
+    });
+});
 
 module.exports = router;

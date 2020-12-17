@@ -24,8 +24,7 @@ const deleteElem = (index) => {
   item.remove();
 };
 
-const submitForm = (id,event) => {
-  console.log(id);
+const submitForm = (id, event) => {
   event.preventDefault();
   const formData = new FormData();
   formData.append("medicines", medicines);
@@ -35,5 +34,11 @@ const submitForm = (id,event) => {
     body: formData,
   })
     .then((res) => res.json())
-    .then((res) => {});
+    .then((res) => {
+      if (res) {
+        modalup("sucess-modal");
+      } else {
+        window.location = "/login";
+      }
+    });
 };
