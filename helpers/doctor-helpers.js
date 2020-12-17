@@ -369,4 +369,24 @@ module.exports = {
       resolve(profile);
     });
   },
+  checkUsername: (username, currentUsername) => {
+    return new Promise(async (resolve, reject) => {
+      let userNameDb = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .find({
+          $and: [
+            { username: username },
+            { status: "Active" },
+            { username: { $ne: currentUsername } },
+          ],
+        })
+        .toArray();
+      if (userNameDb.length > 0) {
+        resolve(false);
+      } else {
+        resolve(true);
+      }
+    });
+  },
 };

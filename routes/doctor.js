@@ -207,4 +207,12 @@ router.get("/profile/edit", verifyLogin, (req, res) => {
   });
 });
 
+router.get("/username/:name", verifyToken, (req, res) => {
+  doctorHelpers
+    .checkUsername(req.params.name, req.doctor.username)
+    .then((response) => {
+      res.json(response);
+    });
+});
+
 module.exports = router;
