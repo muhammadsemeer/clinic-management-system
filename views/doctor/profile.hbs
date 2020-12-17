@@ -38,7 +38,7 @@
                 </div>
                 <div class="details-feild">
                     <p>
-                      Specialised: {{doctorDetails.specialised}}
+                        Specialised: {{doctorDetails.specialised}}
                     </p>
                 </div>
                 <div class="details-field">
@@ -48,14 +48,15 @@
                 </div>
                 <div class="details-field">
                     <p>
-                        Time Slot: {{doctorDetails.slotConfig.configSlotHours}}  :  {{doctorDetails.slotConfig.configSlotMinutes}}
+                        Time Slot: {{doctorDetails.slotConfig.configSlotHours}} :
+                        {{doctorDetails.slotConfig.configSlotMinutes}}
                     </p>
                 </div>
                 <div class="details-field">
                     <p>
-                        Consulting Time: 
-                        {{#each  doctorDetails.slotConfig.timeArr}}
-                            {{this.startTime}} to {{this.endTime}}
+                        Consulting Time:
+                        {{#each doctorDetails.slotConfig.timeArr}}
+                        {{this.startTime}} to {{this.endTime}}
                         {{/each}}
                     </p>
                 </div>
@@ -70,7 +71,8 @@
                 </div>
                 <div class="btn-grp">
                     <a href="/profile/username"><button class="crop">Edit Username</button></a>
-                    <a href="/profle/slot-config"><button class="crop" style="margin-left: 10px;">Edit TimeSlots</button></a>
+                    <a href="/profile/slot-config"><button class="crop" style="margin-left: 10px;">Edit
+                            TimeSlots</button></a>
                 </div>
             </div>
         </div>
