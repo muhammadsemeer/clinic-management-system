@@ -1,0 +1,49 @@
+<section class="admin-add ml-250">
+  <div class="head">
+    <h1>
+      Consult Patient
+    </h1>
+  </div>
+  <div class="error">
+    {{error}}
+  </div>
+  <div class="container">
+    <form>
+      <div class="head">
+        <h4>
+          Name: {{appointment.user.name}} <br> Age: {{appointment.user.age}} <br> Gender {{appointment.user.gender}}
+        </h4>
+      </div>
+      <div class="input-section">
+        <input type="text" name="input" id="medicines" style="padding-right: 75px;" />
+        <label for="medicines">
+          Medicines
+        </label>
+        <div class="btn-grp" style="position: absolute; right: 20px; top: 20px">
+          <button class="crop" type="button" onclick="addItem()">Add</button>
+        </div>
+      </div>
+      <div class="disp-sec">
+        <ol>
+        </ol>
+      </div>
+      <div class="input-section">
+        <div class="head">
+          <h3>Notes</h3>
+        </div>
+        <textarea name="notes"></textarea>
+      </div>
+      <div class="input-section">
+        <input type="submit" value="Update" />
+      </div>
+    </form>
+  </div>
+</section>
+<div class="modal gender-modal">
+  <h1>
+    Please Select Gender!
+  </h1>
+  <button class="normal" onclick="document.querySelector('.gender-modal').classList.toggle('active')">
+    OK
+  </button>
+</div>

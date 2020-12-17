@@ -1189,3 +1189,18 @@ footer .social {
   justify-content: center;
   flex-direction: column;
 }
+
+.disp-sec, textarea {
+  width: 100%;
+  min-height: 250px;
+  background: none;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 15px;
+  color: var(--primary-color);
+  resize: none;
+}
+
+.disp-sec ol {
+  padding-left: 20px;
+}

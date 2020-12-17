@@ -58,9 +58,7 @@ module.exports = {
       bookings.forEach((element) => {
         var today = new Date().toDateString();
         var dbDate = new Date(element.date).toDateString();
-        if (
-          dbDate >= today
-        ) {
+        if (dbDate >= today) {
           result.push(element);
         }
       });
@@ -457,6 +455,33 @@ module.exports = {
           }
         );
       resolve();
+    });
+  },
+  getAppointmentDetails: (appId) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [{ _id: ObjectId(appId) }],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+        ])
+        .toArray();
+      resolve(appointment[0]);
     });
   },
 };

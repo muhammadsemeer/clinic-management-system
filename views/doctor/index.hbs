@@ -39,7 +39,7 @@
         <p>{{this.date}}</p>
         <p>{{this.timeslot}}</p>
         <div class="btn-grp" style="margin-left: 0;">
-          <button class="crop">Consult</button>
+          <a href="/consult/{{this._id}}"><button class="crop">Consult</button></a>
           <button class="crop" style="margin-left: 10px;"
             onclick="modalup('delete-modal','{{this._id}}')">Cancel</button>
         </div>
@@ -145,6 +145,7 @@
       <div class="c-content">
         <p>{{this.date}}</p>
         <p>{{this.timeslot}}</p>
+        <p>{{this.status}}</p>
       </div>
     </div>
     {{/each}}

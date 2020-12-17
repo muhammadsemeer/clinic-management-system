@@ -269,4 +269,18 @@ router.post("/profile/slot-config/", verifyLogin, (req, res) => {
     });
 });
 
+router.get("/consult/:id", verifyLogin, (req, res) => {
+  doctorHelpers.getAppointmentDetails(req.params.id).then((response) => {
+    res.render("doctor/consult", {
+      title: "Consult Patient",
+      doctorLogged: req.doctor,
+      appointment: response,
+    });
+  });
+});
+
+router.post("/test", (req, res) => {
+  console.log(req.body);
+});
+
 module.exports = router;
