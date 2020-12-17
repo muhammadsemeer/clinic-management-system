@@ -427,4 +427,18 @@ module.exports = {
         });
     });
   },
+  getMySlotConfig: (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+      let slotConfig = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .findOne(
+          { _id: ObjectId(doctorId) },
+          {
+            projection: { _id: 0, slotConfig: 1 },
+          }
+        );
+      resolve(slotConfig);
+    });
+  },
 };
