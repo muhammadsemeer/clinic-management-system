@@ -223,4 +223,14 @@ router.post("/profile/details/:id", verifyLogin, (req, res) => {
     });
 });
 
+router.get("/profile/username", verifyLogin, (req,res) => {
+  doctorHelpers.getMyProfile(req.doctor._id).then((response) => {
+    res.render("doctor/edit-username", {
+      title: "Edit Username",
+      doctorLogged: req.doctor,
+      doctor: response,
+    });
+  });
+})
+
 module.exports = router;
