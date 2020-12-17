@@ -223,7 +223,7 @@ router.post("/profile/details/:id", verifyLogin, (req, res) => {
     });
 });
 
-router.get("/profile/username", verifyLogin, (req,res) => {
+router.get("/profile/username", verifyLogin, (req, res) => {
   doctorHelpers.getMyProfile(req.doctor._id).then((response) => {
     res.render("doctor/edit-username", {
       title: "Edit Username",
@@ -231,6 +231,17 @@ router.get("/profile/username", verifyLogin, (req,res) => {
       doctor: response,
     });
   });
-})
+});
+
+router.post("/profile/username/:id", verifyLogin, (req, res) => {
+  doctorHelpers.editUsername(req.doctor._id, req.body.name).then((response) => {
+    res.clearCookie("doctorToken");
+    res.render("doctor/message", {
+      title: "Username Changed",
+      message: "You have to relogin to complete the verification",
+      redirect: "/login",
+    });
+  });
+});
 
 module.exports = router;

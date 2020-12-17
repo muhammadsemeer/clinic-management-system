@@ -410,4 +410,21 @@ module.exports = {
         });
     });
   },
+  editUsername: (id, name) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(id) },
+          {
+            $set: {
+              username: name,
+            },
+          }
+        )
+        .then((response) => {
+          resolve();
+        });
+    });
+  },
 };
