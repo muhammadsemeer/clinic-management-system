@@ -215,4 +215,12 @@ router.get("/username/:name", verifyToken, (req, res) => {
     });
 });
 
+router.post("/profile/details/:id", verifyLogin, (req, res) => {
+  doctorHelpers
+    .editProfileDeatils(req.doctor._id, req.body)
+    .then((response) => {
+      res.redirect("/myprofile");
+    });
+});
+
 module.exports = router;

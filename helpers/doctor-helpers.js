@@ -389,4 +389,25 @@ module.exports = {
       }
     });
   },
+  editProfileDeatils: (id, deatils) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(id) },
+          {
+            $set: {
+              name: deatils.name,
+              email: deatils.email,
+              specialised: deatils.specialised,
+              field: deatils.field,
+              gender: deatils.gender,
+            },
+          }
+        )
+        .then((res) => {
+          resolve();
+        });
+    });
+  },
 };
