@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="btn-grp" style="display: flex; justify-content: center">
-        <button class="crop" onclick="book('{{doctor._id}}','{{user._id}}')">
+        <button class="crop" onclick="book('{{doctor._id}}')">
           Book Appointment
         </button>
       </div>
@@ -54,10 +54,7 @@
   <h1>
     Please Select Date and Time
   </h1>
-  <button
-    class="normal"
-    onclick="document.querySelector('.error-modal').classList.toggle('active')"
-  >
+  <button class="normal" onclick="document.querySelector('.error-modal').classList.toggle('active')">
     OK
   </button>
 </div>
@@ -65,10 +62,7 @@
   <h1>
     Appointment Booked!!!
   </h1>
-  <button
-    class="normal"
-    onclick="window.location = '/appointments'"
-  >
+  <button class="normal" onclick="window.location = '/appointments'">
     OK
   </button>
 </div>

@@ -63,7 +63,39 @@ const verifyLogin = (req, res, next) => {
   }
 };
 
+const verifyToken = (req, res, next) => {
+  const rawCookies = req.headers.cookie.split("; ");
+
+  const parsedCookies = {};
+  rawCookies.forEach((rawCookie) => {
+    const parsedCookie = rawCookie.split("=");
+    parsedCookies[parsedCookie[0]] = parsedCookie[1];
+  });
+  if (parsedCookies.userToken) {
+    jwt.verify(
+      parsedCookies.userToken,
+      process.env.JWT_SECERT,
+      (error, decoded) => {
+        if (error) {
+          res.json({ status: "No Auth" });
+        } else {
+          req.user = decoded;
+          next();
+        }
+      }
+    );
+  } else {
+    res.json({ status: "No Auth" });
+  }
+};
+
 router.get("/", loginCheck, (req, res) => {
+  if (req.cookies.redirect) {
+    let path = req.cookies.redirect;
+    res.clearCookie("redirect");
+    res.redirect(path);
+    return;
+  }
   adminHelpers.getDoctors().then((response) => {
     res.render("user/index", {
       user: req.user,
@@ -265,12 +297,12 @@ router.get("/date", (req, res) => {
   res.json([startDate, middleDate, endDate]);
 });
 
-router.post("/book-appoinment/:doctor/:user", (req, res) => {
+router.post("/book-appoinment/:doctor", verifyToken, (req, res) => {
   userHelpers
-    .checkBlocked(req.params.doctor, req.params.user)
+    .checkBlocked(req.params.doctor, req.user._id)
     .then((result) => {
       userHelpers
-        .bookApointment(req.params.doctor, req.params.user, req.body)
+        .bookApointment(req.params.doctor, req.user._id, req.body)
         .then((response) => {
           res.json({ status: true });
         })

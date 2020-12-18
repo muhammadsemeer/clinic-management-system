@@ -44,7 +44,12 @@ const book = (doctorid, userid) => {
   if (dateInput !== null || timeInput !== null) {
     var date = dateInput.value;
     var timeslot = timeInput.value;
-    fetch(`/book-appoinment/${doctorid}/${userid}`, {
+    let obj = {
+      doctor: doctorid,
+      date,
+      timeslot,
+    };
+    fetch(`/book-appoinment/${doctorid}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,13 +61,18 @@ const book = (doctorid, userid) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.status) {
+        if (res.status === true) {
           modalup("success-modal");
+        } else if (res.status === "No Auth") {
+          saveBooking(obj);
+          let date = new Date().setMinutes(10);
+          document.cookie = `redirect=${location.pathname}; expires= ${date}; path=/`;
+          window.location = `/login`;
         } else {
           document.querySelector(".error").innerHTML = res.error;
           setTimeout(() => {
             document.querySelector(".error").innerHTML = "";
-          },5000)
+          }, 5000);
         }
       });
   } else {
@@ -106,7 +116,7 @@ function getTimeSlots(date, start) {
     .then((res) => res.json())
     .then((res) => {
       if (res.length === 0) {
-        return dates.innerHTML = `
+        return (dates.innerHTML = `
         <label
           for=""
           style="width: 600px;"
@@ -115,7 +125,7 @@ function getTimeSlots(date, start) {
            No Slots Available
           </span>
         </label>
-        `
+        `);
       }
       res.forEach((element, index) => {
         dates.innerHTML = "";
@@ -143,3 +153,40 @@ function getTimeSlots(date, start) {
     });
 }
 
+function saveBooking(bookings) {
+  localStorage.setItem("bookings", JSON.stringify(bookings));
+}
+
+function getAndBook() {
+  if (localStorage.getItem("bookings") !== null) {
+    let bookings = JSON.parse(localStorage.getItem("bookings"));
+    fetch(`/book-appoinment/${bookings.doctor}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: bookings.date,
+        timeslot: bookings.timeslot,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === true) {
+          localStorage.removeItem("bookings");
+          modalup("success-modal");
+        } else if (res.status === "No Auth") {
+          let date = new Date().setMinutes(10);
+          document.cookie = `redirect=${location.pathname}; expires= ${date}; path=/`;
+          window.location = `/login`;
+        } else {
+          document.querySelector(".error").innerHTML = res.error;
+          setTimeout(() => {
+            document.querySelector(".error").innerHTML = "";
+          }, 5000);
+        }
+      });
+  }
+}
+
+getAndBook();
