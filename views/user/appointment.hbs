@@ -1,32 +1,23 @@
 <section class="user appointment">
   <div class="user-container">
     <div class="tab">
-      <button
-        id="appointment"
-        class="active"
-        onclick="toogleTab3('#appointment', '#requsted' ,'#consulted','#cancel', '#appointment-conatiner', '#consulted-container', '#cancelled-conatiner','#requested-container')"
-      >
+      <button id="appointment" class="active"
+        onclick="toogleTab3('#appointment', '#requsted' ,'#consulted','#cancel', '#appointment-conatiner', '#consulted-container', '#cancelled-conatiner','#requested-container')">
         <i class="fas fa-calendar-check"></i>
         Appoitments
       </button>
-      <button
-        id="requsted"
-        onclick="toogleTab3('#requsted','#consulted','#appointment', '#cancel', '#requested-container','#consulted-container', '#appointment-conatiner', '#cancelled-conatiner')"
-      >
+      <button id="requsted"
+        onclick="toogleTab3('#requsted','#consulted','#appointment', '#cancel', '#requested-container','#consulted-container', '#appointment-conatiner', '#cancelled-conatiner')">
         <i class="fas fa-spinner"></i>
         My Requests
       </button>
-      <button
-        id="consulted"
-        onclick="toogleTab3('#consulted','#appointment', '#requsted' ,'#cancel', '#consulted-container', '#requested-container','#appointment-conatiner', '#cancelled-conatiner')"
-      >
+      <button id="consulted"
+        onclick="toogleTab3('#consulted','#appointment', '#requsted' ,'#cancel', '#consulted-container', '#requested-container','#appointment-conatiner', '#cancelled-conatiner')">
         <i class="fas fa-clipboard-check"></i>
         Consulted
       </button>
-      <button
-        id="cancel"
-        onclick="toogleTab3('#cancel','#consulted','#appointment', '#requsted', '#cancelled-conatiner','#requested-container','#consulted-container', '#appointment-conatiner')"
-      >
+      <button id="cancel"
+        onclick="toogleTab3('#cancel','#consulted','#appointment', '#requsted', '#cancelled-conatiner','#requested-container','#consulted-container', '#appointment-conatiner')">
         <i class="fas fa-calendar-times"></i>
         Cancelled
       </button>
@@ -35,195 +26,183 @@
   </div>
   <div class="card active" id="appointment-conatiner">
     {{#if appointments}}
-      {{#each appointments}}
-        <div class="container" id="{{this._id}}">
-          <div class="doctor-section">
-            <div>
-              <img
-                src="/images/doctor/{{this.doctor._id}}.jpg"
-                alt="{{this.doctor.name}}"
-              />
-            </div>
-            <div>
-              <h3>
-                {{this.doctor.name}}
-              </h3>
-              <p>
-                {{this.doctor.field}}
-              </p>
-            </div>
-          </div>
-          <div class="content">
-            <p>
-              {{this.date}}
-            </p>
-            <p>
-              {{this.timeslot}}
-            </p>
-            <p>
-              {{this.status}}
-            </p>
-            <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-              <a href="#">
-                <button
-                  class="crop"
-                  style="font-size: 15px"
-                  onclick="modalup('message-modal','{{this._id}}')"
-                >
-                  Cancel Apointment
-                </button>
-              </a>
-            </div>
-          </div>
+    {{#each appointments}}
+    <div class="container" id="{{this._id}}">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
         </div>
-      {{/each}}
-    {{else}}
-      <div class="container">
-        <h1>
-          No Appointments
-        </h1>
+        <div>
+          <h3>
+            {{this.doctor.name}}
+          </h3>
+          <p>
+            {{this.doctor.field}}
+          </p>
+        </div>
       </div>
+      <div class="content">
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
+        <p>
+          {{this.status}}
+        </p>
+        <div class="btn-grp" style="margin-left: 0; font-size: 16px">
+          <a href="#">
+            <button class="crop" style="font-size: 15px" onclick="modalup('message-modal','{{this._id}}')">
+              Cancel Apointment
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="container">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
     {{/if}}
   </div>
   <div class="user-container">
     <div class="card" id="requested-container">
       {{#if requests}}
-        {{#each requests}}
-          <div class="container" id="{{this._id}}">
-            <div class="doctor-section">
-              <div>
-                <img
-                  src="/images/doctor/{{this.doctor._id}}.jpg"
-                  alt="{{this.doctor.name}}"
-                />
-              </div>
-              <div>
-                <h3>
-                  {{this.doctor.name}}
-                </h3>
-                <p>
-                  {{this.doctor.field}}
-                </p>
-              </div>
-            </div>
-            <div class="content">
-              <p>
-                {{this.date}}
-              </p>
-              <p>
-                {{this.timeslot}}
-              </p>
-              <p>
-                {{this.status}}
-              </p>
-              <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-                <button
-                  class="crop"
-                  style="font-size: 15px"
-                  onclick="modalup('message-modal','{{this._id}}')"
-                >
-                  Cancel Apointment
-                </button>
-              </div>
-            </div>
+      {{#each requests}}
+      <div class="container" id="{{this._id}}">
+        <div class="doctor-section">
+          <div>
+            <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
           </div>
-        {{/each}}
-      {{else}}
-        <div class="container">
-          <h1>
-            No Appointments
-          </h1>
+          <div>
+            <h3>
+              {{this.doctor.name}}
+            </h3>
+            <p>
+              {{this.doctor.field}}
+            </p>
+          </div>
         </div>
+        <div class="content">
+          <p>
+            {{this.date}}
+          </p>
+          <p>
+            {{this.timeslot}}
+          </p>
+          <p>
+            {{this.status}}
+          </p>
+          <div class="btn-grp" style="margin-left: 0; font-size: 16px">
+            <button class="crop" style="font-size: 15px" onclick="modalup('message-modal','{{this._id}}')">
+              Cancel Apointment
+            </button>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+      {{else}}
+      <div class="container">
+        <h1>
+          No Appointments
+        </h1>
+      </div>
       {{/if}}
     </div>
   </div>
   <div class="user-container">
     <div class="card" id="consulted-container">
       {{#if consulted}}
-        {{#each consulted}}
-          <div class="container" id="{{this._id}}">
-            <div class="doctor-section">
-              <div>
-                <img
-                  src="/images/doctor/{{this.doctor._id}}.jpg"
-                  alt="{{this.doctor.name}}"
-                />
-              </div>
-              <div>
-                <h3>
-                  {{this.doctor.name}}
-                </h3>
-                <p>
-                  {{this.doctor.field}}
-                </p>
-              </div>
-            </div>
-            <div class="content">
-              <p>
-                {{this.date}}
-              </p>
-              <p>
-                {{this.timeslot}}
-              </p>
-              <p>
-                {{this.status}}
-              </p>
-              </div>
-            </div>
+      {{#each consulted}}
+      <div class="container" id="{{this._id}}">
+        <div class="doctor-section">
+          <div>
+            <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
           </div>
-        {{/each}}
-      {{else}}
-        <div class="container">
-          <h1>
-            No Appointments
-          </h1>
+          <div>
+            <h3>
+              {{this.doctor.name}}
+            </h3>
+            <p>
+              {{this.doctor.field}}
+            </p>
+          </div>
         </div>
-      {{/if}}
+        <div class="content">
+          <p>
+            {{this.date}}
+          </p>
+          <p>
+            {{this.timeslot}}
+          </p>
+          <h3>Medicines</h3>
+          {{#if this.medicines}}
+          {{#each this.medicines}}
+          <p>{{this}}</p>
+          {{/each}}
+          {{else}}
+          <p>No Medicines Provided</p>
+          {{/if}}
+          {{#if this.notes}}
+          <h3>Notes</h3>
+          {{this.notes}}drgdrghdffdhddddddddddddddd
+          {{/if}}
+        </div>
+      </div>
+      {{/each}}
     </div>
+    {{else}}
+    <div class="container">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
+    {{/if}}
+  </div>
   </div>
   <div class="user-container">
     <div class="card" id="cancelled-conatiner">
       {{#if cancelled}}
-        {{#each cancelled}}
-          <div class="container" id="{{this._id}}">
-            <div class="doctor-section">
-              <div>
-                <img
-                  src="/images/doctor/{{this.doctor._id}}.jpg"
-                  alt="{{this.doctor.name}}"
-                />
-              </div>
-              <div>
-                <h3>
-                  {{this.doctor.name}}
-                </h3>
-                <p>
-                  {{this.doctor.field}}
-                </p>
-              </div>
-            </div>
-            <div class="content">
-              <p>
-                {{this.date}}
-              </p>
-              <p>
-                {{this.timeslot}}
-              </p>
-              <p>
-                {{this.status}}
-              </p>
-              </div>
-            </div>
+      {{#each cancelled}}
+      <div class="container" id="{{this._id}}">
+        <div class="doctor-section">
+          <div>
+            <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
           </div>
-        {{/each}}
-      {{else}}
-        <div class="container">
-          <h1>
-            No Appointments
-          </h1>
+          <div>
+            <h3>
+              {{this.doctor.name}}
+            </h3>
+            <p>
+              {{this.doctor.field}}
+            </p>
+          </div>
         </div>
-      {{/if}}
+        <div class="content">
+          <p>
+            {{this.date}}
+          </p>
+          <p>
+            {{this.timeslot}}
+          </p>
+          <p>
+            {{this.status}}
+          </p>
+        </div>
+      </div>
+      {{/each}}
     </div>
+    {{else}}
+    <div class="container">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
+    {{/if}}
   </div>
 </section>
 <div class="modal message-modal">
@@ -233,10 +212,7 @@
   <button class="yes" onclick="cancelAppointment()">
     Yes
   </button>
-  <button
-    class="no"
-    onclick="document.querySelector('.message-modal').classList.toggle('active')"
-  >
+  <button class="no" onclick="document.querySelector('.message-modal').classList.toggle('active')">
     No
   </button>
 </div>
@@ -244,10 +220,7 @@
   <h1>
     Appointment Successully Cancelled
   </h1>
-  <button
-    class="normal"
-    onclick="document.querySelector('.success-modal').classList.toggle('active')"
-  >
+  <button class="normal" onclick="document.querySelector('.success-modal').classList.toggle('active')">
     Close
   </button>
 </div>
@@ -255,10 +228,7 @@
   <h1>
     Something Went Wrong
   </h1>
-  <button
-    class="normal"
-    onclick="document.querySelector('.error-modal').classList.toggle('active')"
-  >
+  <button class="normal" onclick="document.querySelector('.error-modal').classList.toggle('active')">
     Close
   </button>
 </div>
