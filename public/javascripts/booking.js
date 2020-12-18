@@ -180,6 +180,7 @@ function getAndBook() {
           document.cookie = `redirect=${location.pathname}; expires= ${date}; path=/`;
           window.location = `/login`;
         } else {
+          localStorage.removeItem("bookings");
           document.querySelector(".error").innerHTML = res.error;
           setTimeout(() => {
             document.querySelector(".error").innerHTML = "";
