@@ -267,9 +267,16 @@ router.get("/date", (req, res) => {
 
 router.post("/book-appoinment/:doctor/:user", (req, res) => {
   userHelpers
-    .bookApointment(req.params.doctor, req.params.user, req.body)
-    .then((response) => {
-      res.json({ status: true });
+    .checkBlocked(req.params.doctor, req.params.user)
+    .then((result) => {
+      userHelpers
+        .bookApointment(req.params.doctor, req.params.user, req.body)
+        .then((response) => {
+          res.json({ status: true });
+        })
+        .catch((error) => {
+          res.json({ status: false, error: error.msg });
+        });
     })
     .catch((error) => {
       res.json({ status: false, error: error.msg });

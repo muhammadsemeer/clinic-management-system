@@ -257,7 +257,37 @@ module.exports = {
         )
         .then((response) => {
           resolve(response);
-        })
+        });
+    });
+  },
+  checkBlocked: (doctorId, userId) => {
+    return new Promise(async (resolve, reject) => {
+      let blocked = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .findOne(
+          { _id: ObjectId(doctorId) },
+          {
+            projection: { _id: 0, blockedUsers: 1 },
+          }
+        );
+      if (
+        !(
+          Object.keys(blocked).length === 0 && blocked.constructor === Object
+        ) &&
+        blocked.blockedUsers.length != 0
+      ) {
+        let check = blocked.blockedUsers.findIndex(
+          (element) => element == userId
+        );
+        if (check !== -1) {
+          reject({ msg: "Your unable to book appointment" });
+        } else {
+          resolve();
+        }
+      } else {
+        resolve();
+      }
     });
   },
 };

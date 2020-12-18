@@ -55,7 +55,6 @@ module.exports = {
         ])
         .toArray();
       let result = [];
-      console.log(bookings);
       bookings.forEach((element) => {
         var today = new Date().toDateString();
         var dbDate = new Date(element.date).toDateString();
