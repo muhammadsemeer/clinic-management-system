@@ -1,6 +1,6 @@
 @media (max-width: 768px) {
   .sidebar {
-    margin-left: -250px;
+    margin-left: -200px;
   }
   .menu {
     display: flex;

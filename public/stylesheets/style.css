@@ -44,7 +44,7 @@ header h1 {
 .sidebar {
   position: fixed;
   left: 0;
-  width: 250px;
+  width: 200px;
   height: calc(100vh - 50px);
   background: var(--sidebar);
   display: flex;
@@ -153,20 +153,19 @@ header h1 {
   margin-top: 50px;
 }
 .ml-250 {
-  margin-left: 250px;
+  margin-left: 200px;
   transition: 0.5s ease-in-out;
 }
 
 /* admin dashboad */
 
 .admin-dash {
-  margin-left: 250px;
   overflow-x: hidden;
   height: calc(100vh - 50px);
 }
 
 .ml-250.active {
-  margin-left: 250px;
+  margin-left: 200px;
   transition: 0.5s ease-in-out;
 }
 .head {
@@ -190,6 +189,10 @@ header h1 {
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin: 20px 0 0 0;
+}
+
+.admin-dash .card {
+  width: 250px;
 }
 
 .card-container .card {
