@@ -404,5 +404,15 @@ router.get("/profile", verifyLogin, (req, res) => {
     });
   });
 });
+router.get("/profile/edit", verifyLogin, (req, res) => {
+  userHelpers.getMyProfile(req.user._id).then((response) => {
+    res.render("user/edit-profile", {
+      title: "My Profile",
+      user: req.user,
+      userDetails: response,
+      header: true,
+    });
+  });
+});
 
 module.exports = router;

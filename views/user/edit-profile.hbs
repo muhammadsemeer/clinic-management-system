@@ -1,0 +1,70 @@
+<section class="admin-add">
+  <div class="head">
+    <h1>
+      Edit Profile
+    </h1>
+  </div>
+  <div class="error">
+    {{error}}
+  </div>
+  <div class="container">
+    <form action="/profile/edit" method="POST">
+      <div class="input-section">
+        <input type="text" name="name" value="{{userDetails.name}}" required />
+        <label for="">
+          Name
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="email" name="email" value="{{userDetails.email}}" required />
+        <label for="">
+          Email
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="text" pattern="^\+[1-9]{1}[0-9]{3,14}$" name="contactno" value="{{userDetails.contactno}}"
+           />
+        <label for="">
+          Contact No (with country code)
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="number" name="age" value="{{userDetails.age}}" />
+        <label for="">
+          Age
+        </label>
+      </div>
+      <div class="radio-section">
+        <div>
+          <input type="radio" name="gender" value="Male" id="male" />
+          <label for="male">
+            <img src="/images/icons/undraw_male_avatar_323b.svg" alt="" />
+            <span>
+              Male
+            </span>
+          </label>
+        </div>
+        <div>
+          <input type="radio" name="gender" value="Female" id="female" />
+          <label for="female">
+            <img src="/images/icons/undraw_female_avatar_w3jk.svg" alt="" />
+            <span>
+              Female
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="input-section">
+        <input type="submit" value="Edit" />
+      </div>
+    </form>
+  </div>
+</section>
+<div class="modal gender-modal">
+  <h1>
+    Please Select Gender!
+  </h1>
+  <button class="normal" onclick="document.querySelector('.gender-modal').classList.toggle('active')">
+    OK
+  </button>
+</div>
