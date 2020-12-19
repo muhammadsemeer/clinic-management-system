@@ -252,7 +252,7 @@ module.exports = {
         .findOne(
           { _id: ObjectId(id) },
           {
-            projection: { name: 1, email: 1, contactno: 1, gender: 1 },
+            projection: { name: 1, email: 1, contactno: 1, gender: 1, age: 1 },
           }
         )
         .then((response) => {
@@ -287,6 +287,45 @@ module.exports = {
         }
       } else {
         resolve();
+      }
+    });
+  },
+  editPofrile: (userId, details) => {
+    return new Promise(async (resolve, reject) => {
+      let email = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .find({
+          $and: [
+            { _id: { $ne: ObjectId(userId) } },
+            {
+              $or: [{ email: details.email }, { contactno: details.contactno }],
+            },
+            {
+              status: "Active",
+            },
+          ],
+        })
+        .toArray();
+      if (email.length <= 0) {
+        db.get()
+          .collection(collection.PATIENT_COLLECTION)
+          .updateOne(
+            { _id: ObjectId(userId) },
+            {
+              $set: {
+                name: details.name,
+                email: details.email,
+                contactno: details.contactno,
+                age: details.age,
+              },
+            }
+          )
+          .then((response) => {
+            resolve();
+          });
+      } else {
+        reject({ msg: "Email or Contact No already registered" });
       }
     });
   },

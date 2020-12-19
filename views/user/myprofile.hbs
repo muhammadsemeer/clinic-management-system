@@ -31,8 +31,15 @@
                     <p>
                         Gender: {{userDetails.gender}}
                     </p>
-                    {{/if}}
                 </div>
+                {{/if}}
+                {{#if userDetails.age}}
+                <div class="details-feild">
+                    <p>
+                        Age: {{userDetails.age}}
+                    </p>
+                </div>
+                {{/if}}
                 <div class="btn-grp" style="margin-left: 0;">
                     <a href="/profile/edit"><button class="crop">Edit</button></a>
                     <button class="crop" style="margin-left: 10px;">Change Password</button>

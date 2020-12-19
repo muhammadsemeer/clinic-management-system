@@ -411,8 +411,31 @@ router.get("/profile/edit", verifyLogin, (req, res) => {
       user: req.user,
       userDetails: response,
       header: true,
+      error: req.session.editErr,
     });
+    req.session.editErr = null;
   });
+});
+
+router.post("/profile/edit", verifyLogin, (req, res) => {
+  userHelpers
+    .editPofrile(req.user._id, req.body)
+    .then((response) => {
+      if (req.body.email !== req.user.email) {
+        res.clearCookie("userToken");
+        res.render("user/message", {
+          title: "Email Changed",
+          message: "You have to relogin to complete the verification",
+          redirect: "/login",
+        });
+      } else {
+        res.redirect("/profile");
+      }
+    })
+    .catch((error) => {
+      req.session.editErr = error.msg;
+      res.redirect("/profile/edit");
+    });
 });
 
 module.exports = router;
