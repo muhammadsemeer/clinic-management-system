@@ -43,8 +43,9 @@ const loginCheck = (req, res, next) => {
 };
 
 /* GET home page. */
-router.get("/", verifyLogin, function (req, res, next) {
-  res.render("admin/index", { title: "Dashboard", admin: req.admin });
+router.get("/", verifyLogin, async (req, res) => {
+  let counts = await adminHelpers.getCounts();
+  res.render("admin/index", { title: "Dashboard", admin: req.admin, counts });
 });
 
 router.get("/login", loginCheck, async (req, res) => {
