@@ -245,4 +245,21 @@ module.exports = {
         });
     });
   },
+  getCounts: () => {
+    return new Promise(async (resolve, reject) => {
+      let doctorsCount = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .countDocuments({ status: "Active" });
+      let patientsCount = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .countDocuments({ status: "Active" });
+      let appointmentsCount = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .countDocuments();
+      resolve({ doctorsCount, patientsCount, appointmentsCount });
+    });
+  },
 };
