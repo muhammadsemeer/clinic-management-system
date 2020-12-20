@@ -24,24 +24,24 @@
   </div>
   <!-- today -->
   <div class="card-sec active" id="today">
-    {{#if todays}}
-    {{#each todays}}
-    <div class="card" id="{{this._id}}">
+    {{#if result1}}
+    {{#each result1}}
+    <div class="card" id="{{this.item._id}}">
       <div class="c-head">
-        <p>{{this.user.name}}</p>
-        {{#if this.user.email}}
-        <p>{{this.user.email}}</p>
+        <p>{{this.item.user.name}}</p>
+        {{#if this.item.user.email}}
+        <p>{{this.item.user.email}}</p>
         {{else}}
-        <p>{{this.user.contactno}}</p>
+        <p>{{this.item.user.contactno}}</p>
         {{/if}}
       </div>
       <div class="c-content">
-        <p>{{this.date}}</p>
-        <p>{{this.timeslot}}</p>
+        <p>{{this.item.date}}</p>
+        <p>{{this.item.timeslot}}</p>
         <div class="btn-grp" style="margin-left: 0;">
-          <a href="/consult/{{this._id}}"><button class="crop">Consult</button></a>
+          <a href="/consult/{{this.item._id}}"><button class="crop">Consult</button></a>
           <button class="crop" style="margin-left: 10px;"
-            onclick="modalup('delete-modal','{{this._id}}')">Cancel</button>
+            onclick="modalup('delete-modal','{{this.item._id}}')">Cancel</button>
         </div>
       </div>
     </div>
@@ -54,22 +54,22 @@
   </div>
   <!-- upcoming -->
   <div class="card-sec" id="upcoming">
-    {{#if upcoming}}
-    {{#each upcoming}}
-    <div class="card" id="{{this._id}}">
+    {{#if result2}}
+    {{#each result2}}
+    <div class="card" id="{{this.item._id}}">
       <div class="c-head">
-        <p>{{this.user.name}}</p>
-        {{#if this.user.email}}
-        <p>{{this.user.email}}</p>
+        <p>{{this.item.user.name}}</p>
+        {{#if this.item.user.email}}
+        <p>{{this.item.user.email}}</p>
         {{else}}
-        <p>{{this.user.contactno}}</p>
+        <p>{{this.item.user.contactno}}</p>
         {{/if}}
       </div>
       <div class="c-content">
-        <p>{{this.date}}</p>
-        <p>{{this.timeslot}}</p>
+        <p>{{this.item.date}}</p>
+        <p>{{this.item.timeslot}}</p>
         <div class="btn-grp" style="margin-left: 0;">
-          <button class="crop" onclick="modalup('delete-modal','{{this._id}}')">Cancel</button>
+          <button class="crop" onclick="modalup('delete-modal','{{this.item._id}}')">Cancel</button>
         </div>
       </div>
     </div>
@@ -82,31 +82,31 @@
   </div>
   <!-- consulted -->
   <div class="card-sec" id="consulted">
-    {{#if consulted}}
-    {{#each consulted}}
-    <div class="card" id="{{this._id}}">
+    {{#if result3}}
+    {{#each result3}}
+    <div class="card" id="{{this.item._id}}">
       <div class="c-head">
-        <p>{{this.user.name}}</p>
-        {{#if this.user.email}}
-        <p>{{this.user.email}}</p>
+        <p>{{this.item.user.name}}</p>
+        {{#if this.item.user.email}}
+        <p>{{this.item.user.email}}</p>
         {{else}}
-        <p>{{this.user.contactno}}</p>
+        <p>{{this.item.user.contactno}}</p>
         {{/if}}
       </div>
       <div class="c-content">
-        <p>{{this.date}}</p>
-        <p>{{this.timeslot}}</p>
+        <p>{{this.item.date}}</p>
+        <p>{{this.item.timeslot}}</p>
         <h4>Medicines</h4>
-        {{#if this.medicines}}
-        {{#each this.medicines}}
-        <p>{{this}}</p>
+        {{#if this.item.medicines}}
+        {{#each this.item.medicines}}
+        <p>{{this.item}}</p>
         {{/each}}
         {{else}}
         <p>No Medicines Provided</p>
         {{/if}}
-        {{#if this.notes}}
+        {{#if this.item.notes}}
         <h4>Notes</h4>
-        <p>{{this.notes}}
+        <p>{{this.item.notes}}
         </p>
         {{/if}}
       </div>
@@ -120,20 +120,20 @@
   </div>
   <!-- cancelled -->
   <div class="card-sec" id="cancelled">
-    {{#if cancelled}}
-    {{#each cancelled}}
+    {{#if result4}}
+    {{#each result4}}
     <div class="card">
       <div class="c-head">
-        <p>{{this.user.name}}</p>
-        {{#if this.user.email}}
-        <p>{{this.user.email}}</p>
+        <p>{{this.item.user.name}}</p>
+        {{#if this.item.user.email}}
+        <p>{{this.item.user.email}}</p>
         {{else}}
-        <p>{{this.email.contactno}}</p>
+        <p>{{this.item.email.contactno}}</p>
         {{/if}}
       </div>
       <div class="c-content">
-        <p>{{this.date}}</p>
-        <p>{{this.timeslot}}</p>
+        <p>{{this.item.date}}</p>
+        <p>{{this.item.timeslot}}</p>
       </div>
     </div>
     {{/each}}
@@ -145,21 +145,21 @@
   </div>
   <!-- expired -->
   <div class="card-sec" id="expired">
-    {{#if expired}}
-    {{#each expired}}
+    {{#if result5}}
+    {{#each result5}}
     <div class="card">
       <div class="c-head">
-        <p>{{this.user.name}}</p>
-        {{#if this.user.email}}
-        <p>{{this.user.email}}</p>
+        <p>{{this.item.user.name}}</p>
+        {{#if this.item.user.email}}
+        <p>{{this.item.user.email}}</p>
         {{else}}
-        <p>{{this.user.contactno}}</p>
+        <p>{{this.item.user.contactno}}</p>
         {{/if}}
       </div>
       <div class="c-content">
-        <p>{{this.date}}</p>
-        <p>{{this.timeslot}}</p>
-        <p>{{this.status}}</p>
+        <p>{{this.item.date}}</p>
+        <p>{{this.item.timeslot}}</p>
+        <p>{{this.item.status}}</p>
       </div>
     </div>
     {{/each}}

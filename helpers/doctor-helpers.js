@@ -2,7 +2,6 @@ const db = require("../config/connection");
 const collection = require("../config/collection");
 const { ObjectId } = require("mongodb");
 const bcrypt = require("bcrypt");
-const { response } = require("express");
 
 module.exports = {
   dologin: (deatils) => {
