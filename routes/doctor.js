@@ -2,6 +2,7 @@ var express = require("express");
 const doctorHelpers = require("../helpers/doctor-helpers");
 var router = express.Router();
 var jwt = require("jsonwebtoken");
+const Fuse = require("fuse.js");
 require("dotenv").config();
 
 const verifyLogin = (req, res, next) => {
@@ -77,6 +78,7 @@ router.get("/", verifyLogin, async (req, res) => {
   res.render("doctor/index", {
     title: "Doctor Dashboard",
     doctorLogged: req.doctor,
+    search: true,
     todays,
     upcoming,
     expired,
@@ -289,6 +291,35 @@ router.post("/consult/:id", verifyToken, (req, res) => {
     .then((response) => {
       res.json(true);
     });
+});
+
+router.get("/search/:sort", verifyToken, async (req, res) => {
+  let appointments;
+  if (req.params.sort === "today") {
+    console.log("1");
+    appointments = await doctorHelpers.getTodaysAppointment(req.doctor._id);
+  } else if (req.params.sort === "upcoming") {
+    console.log("2");
+    appointments = await doctorHelpers.getUpcomingAppointments(req.doctor._id);
+  } else if (req.params.sort === "consulted") {
+    console.log("3");
+    appointments = await doctorHelpers.getConsultedAppointments(req.doctor._id);
+  } else if (req.params.sort === "cancelled") {
+    console.log("4");
+    appointments = await doctorHelpers.getCancelledAppointment(req.doctor._id);
+  } else if (req.params.sort === "expired") {
+    console.log("5");
+    appointments = await doctorHelpers.getExipredApointments(req.doctor._id);
+  } else {
+    res.json([]);
+  }
+  const options = {
+    // includeScore: true,
+    keys: ["date", "user.name", "user.email", "timeslot"],
+  };
+  const fuse = new Fuse(appointments, options);
+  const result = fuse.search(req.query.q);
+  res.json(result);
 });
 
 module.exports = router;
