@@ -97,8 +97,21 @@ router.get("/users", verifyLogin, async (req, res) => {
   });
 });
 
-router.get("/appointment", verifyLogin, (req, res) => {
-  res.render("admin/appointment", { title: "Appointment", admin: req.admin });
+router.get("/appointment", verifyLogin, async (req, res) => {
+  let todays = await adminHelpers.getTodaysAppointment();
+  let upcoming = await adminHelpers.getUpcomingAppointments();
+  let expired = await adminHelpers.getExipredApointments();
+  let cancelled = await adminHelpers.getCancelledAppointment();
+  let consulted = await adminHelpers.getConsultedAppointments();
+  res.render("admin/appointment", {
+    title: "Appointment",
+    admin: req.admin,
+    todays,
+    upcoming,
+    expired,
+    cancelled,
+    consulted,
+  });
 });
 
 router.get("/myprofile", verifyLogin, (req, res) => {
@@ -298,12 +311,12 @@ router.get("/image-upload/:id", verifyLogin, (req, res) => {
 });
 
 router.put("/doctor/block/:id", (req, res) => {
-  adminHelpers.blockDoctor(req.params.id,"Blocked").then((response) => {
+  adminHelpers.blockDoctor(req.params.id, "Blocked").then((response) => {
     res.json(response);
   });
 });
 router.put("/patient/block/:id", (req, res) => {
-  adminHelpers.blockPatient(req.params.id,"Blocked").then((response) => {
+  adminHelpers.blockPatient(req.params.id, "Blocked").then((response) => {
     res.json(response);
   });
 });
@@ -312,7 +325,7 @@ router.get("/users/blocked", verifyLogin, async (req, res) => {
   let doctor = await adminHelpers.getBlockedDoctors();
   let patient = await adminHelpers.getBlockedPatients();
   res.render("admin/blocked-users", {
-    title: "Users",
+    title: "Blocked Users",
     admin: req.admin,
     doctor,
     patient,
@@ -320,12 +333,12 @@ router.get("/users/blocked", verifyLogin, async (req, res) => {
 });
 
 router.put("/doctor/unblock/:id", (req, res) => {
-  adminHelpers.blockDoctor(req.params.id,"Active").then((response) => {
+  adminHelpers.blockDoctor(req.params.id, "Active").then((response) => {
     res.json(response);
   });
 });
 router.put("/patient/unblock/:id", (req, res) => {
-  adminHelpers.blockPatient(req.params.id,"Active").then((response) => {
+  adminHelpers.blockPatient(req.params.id, "Active").then((response) => {
     res.json(response);
   });
 });
