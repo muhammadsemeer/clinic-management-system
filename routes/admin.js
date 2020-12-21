@@ -106,6 +106,7 @@ router.get("/appointment", verifyLogin, async (req, res) => {
   res.render("admin/appointment", {
     title: "Appointment",
     admin: req.admin,
+    search: true,
     todays,
     upcoming,
     expired,
