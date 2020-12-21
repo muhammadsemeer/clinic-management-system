@@ -261,3 +261,21 @@ const blockDoctor = () => {
       }
     });
 };
+const blockPatient = () => {
+  fetch(`/patient/block/${doctorid}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res) {
+        document.getElementById(`${doctorid}`).remove();
+        document
+          .querySelector(".pateint-block-modal")
+          .classList.toggle("active")
+        modalup("block-sucess-modal");
+      }
+    });
+};

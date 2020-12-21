@@ -302,5 +302,10 @@ router.put("/doctor/block/:id", (req, res) => {
     res.json(response)
   })
 });
+router.put("/patient/block/:id", (req, res) => {
+  adminHelpers.blockPatient(req.params.id).then((response) => {
+    res.json(response)
+  })
+});
 
 module.exports = router;

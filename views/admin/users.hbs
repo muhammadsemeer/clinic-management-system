@@ -206,7 +206,7 @@
     <h1>
       Do you Want Delete Pateint?
     </h1>
-    <button class="yes">
+    <button class="yes" id="patient-delete">
       Yes
     </button>
     <button class="no" onclick="document.querySelector('.pateint-modal').classList.toggle('active')">
@@ -217,7 +217,7 @@
     <h1>
       Do you Want Block Pateint?
     </h1>
-    <button class="yes" id="patient-delete">
+    <button class="yes" onclick="blockPatient()">
       Yes
     </button>
     <button class="no" onclick="document.querySelector('.pateint-block-modal').classList.toggle('active')">

@@ -279,4 +279,21 @@ module.exports = {
         });
     });
   },
+  blockPatient: (userId) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.PATIENT_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(userId) },
+          {
+            $set: {
+              status: "Blocked",
+            },
+          }
+        )
+        .then((res) => {
+          resolve(true);
+        });
+    });
+  },
 };
