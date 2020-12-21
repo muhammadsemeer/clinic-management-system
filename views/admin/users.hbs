@@ -1,18 +1,12 @@
 <section class="admin-users ml-250">
   <div class="user-container">
     <div class="tab">
-      <button
-        id="doctor"
-        class="active"
-        onclick="toogleTab('#doctor', '#patient', '#doctor-conatiner', '#patient-conatiner')"
-      >
+      <button id="doctor" class="active"
+        onclick="toogleTab('#doctor', '#patient', '#doctor-conatiner', '#patient-conatiner')">
         <i class="fas fa-user-md"></i>
         Doctors
       </button>
-      <button
-        id="patient"
-        onclick="toogleTab('#patient','#doctor','#patient-conatiner','#doctor-conatiner')"
-      >
+      <button id="patient" onclick="toogleTab('#patient','#doctor','#patient-conatiner','#doctor-conatiner')">
         <i class="fas fa-user-injured"></i>
         Patients
       </button>
@@ -53,46 +47,45 @@
           </thead>
           <tbody>
             {{#each doctor}}
-              <tr id="{{this._id}}">
-                <td>
-                  <div>
-                    <img src="/images/doctor/{{this._id}}.jpg" alt="" />
-                    <div
-                      id="{{this._id}}msg"
-                      class="img-hover"
-                      onclick="window.location = '/image-upload/{{this._id}}'"
-                    >
-                      Edit
-                    </div>
+            <tr id="{{this._id}}">
+              <td>
+                <div>
+                  <img src="/images/doctor/{{this._id}}.jpg" alt="" />
+                  <div id="{{this._id}}msg" class="img-hover" onclick="window.location = '/image-upload/{{this._id}}'">
+                    Edit
                   </div>
-                </td>
-                <td>
-                  {{this.name}}
-                </td>
-                <td>
-                  {{this.username}}
-                </td>
-                <td>
-                  {{this.email}}
-                </td>
-                <td>
-                  {{this.specialised}}
-                </td>
-                <td>
-                  {{this.field}}
-                </td>
-                <td>
-                  <a class="edit" href="/doctors/{{this.username}}">
-                    <i class="fas fa-user-edit"></i>
-                  </a>
-                  <span
-                    class="delete"
-                    onclick="modalup('doctor-modal','{{this._id}}')"
-                  >
-                    <i class="fas fa-user-slash"></i>
-                  </span>
-                </td>
-              </tr>
+                </div>
+              </td>
+              <td>
+                {{this.name}}
+              </td>
+              <td>
+                {{this.username}}
+              </td>
+              <td>
+                {{this.email}}
+              </td>
+              <td>
+                {{this.specialised}}
+              </td>
+              <td>
+                {{this.field}}
+              </td>
+              <td>
+                <a class="edit tooltip" href="/doctors/{{this.username}}">
+                  <i class="fas fa-user-edit"></i>
+                  <span class="tooltip-text">Edit</span>
+                </a>
+                <span class="delete tooltip">
+                  <i class="fas fa-user-slash"></i>
+                  <span class="tooltip-text">Block</span>
+                </span>
+                <span class="delete tooltip" onclick="modalup('doctor-modal','{{this._id}}')">
+                  <i class="fas fa-user-times"></i>
+                  <span class="tooltip-text">Delete</span>
+                </span>
+              </td>
+            </tr>
             {{/each}}
           </tbody>
         </table>
@@ -130,36 +123,39 @@
           </thead>
           <tbody>
             {{#each patient}}
-              <tr id="{{this._id}}">
-                <td>
-                  <div>
-                    {{this.name}}
-                  </div>
-                </td>
-                <td>
-                  {{this.age}}
-                </td>
-                <td>
-                  {{this.gender}}
-                </td>
-                <td>
-                  {{this.contactno}}
-                </td>
-                <td>
-                  {{this.email}}
-                </td>
-                <td>
-                  <a class="edit" href="/patients/{{this._id}}">
-                    <i class="fas fa-user-edit"></i>
-                  </a>
-                  <span
-                    class="delete"
-                    onclick="modalup('pateint-modal','{{this._id}}')"
-                  >
-                    <i class="fas fa-user-slash"></i>
-                  </span>
-                </td>
-              </tr>
+            <tr id="{{this._id}}">
+              <td>
+                <div>
+                  {{this.name}}
+                </div>
+              </td>
+              <td>
+                {{this.age}}
+              </td>
+              <td>
+                {{this.gender}}
+              </td>
+              <td>
+                {{this.contactno}}
+              </td>
+              <td>
+                {{this.email}}
+              </td>
+              <td>
+                <a class="edit tooltip" href="/patients/{{this._id}}">
+                  <i class="fas fa-user-edit"></i>
+                  <span class="tooltip-text">Edit</span>
+                </a>
+                <span class="delete tooltip">
+                  <i class="fas fa-user-slash"></i>
+                  <span class="tooltip-text">Block</span>
+                </span>
+                <span class="delete tooltip" onclick="modalup('pateint-modal','{{this._id}}')">
+                  <i class="fas fa-user-times"></i>
+                  <span class="tooltip-text">Delete</span>
+                </span>
+              </td>
+            </tr>
             {{/each}}
           </tbody>
         </table>
@@ -175,10 +171,7 @@
     <button class="yes" id="doctor-delete">
       Yes
     </button>
-    <button
-      class="no"
-      onclick="document.querySelector('.doctor-modal').classList.toggle('active')"
-    >
+    <button class="no" onclick="document.querySelector('.doctor-modal').classList.toggle('active')">
       No
     </button>
   </div>
@@ -186,10 +179,7 @@
     <h1>
       Deleted Sucessfully
     </h1>
-    <button
-      class="normal"
-      onclick="document.querySelector('.delete-sucess-modal').classList.toggle('active')"
-    >
+    <button class="normal" onclick="document.querySelector('.delete-sucess-modal').classList.toggle('active')">
       Close
     </button>
   </div>
@@ -200,10 +190,7 @@
     <button class="yes" id="patient-delete">
       Yes
     </button>
-    <button
-      class="no"
-      onclick="document.querySelector('.pateint-modal').classList.toggle('active')"
-    >
+    <button class="no" onclick="document.querySelector('.pateint-modal').classList.toggle('active')">
       No
     </button>
   </div>

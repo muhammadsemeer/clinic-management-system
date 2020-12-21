@@ -90,7 +90,7 @@ router.get("/users", verifyLogin, async (req, res) => {
   let doctor = await adminHelpers.getDoctors();
   let patient = await adminHelpers.getPatients();
   res.render("admin/users", {
-    title: "Doctors",
+    title: "Users",
     admin: req.admin,
     doctor,
     patient,
