@@ -262,7 +262,7 @@ module.exports = {
       resolve({ doctorsCount, patientsCount, appointmentsCount });
     });
   },
-  blockDoctor: (doctorId) => {
+  blockDoctor: (doctorId, status) => {
     return new Promise((resolve, reject) => {
       db.get()
         .collection(collection.DOCTORS_COLLECTION)
@@ -270,7 +270,7 @@ module.exports = {
           { _id: ObjectId(doctorId) },
           {
             $set: {
-              status: "Blocked",
+              status: status,
             },
           }
         )
@@ -279,7 +279,7 @@ module.exports = {
         });
     });
   },
-  blockPatient: (userId) => {
+  blockPatient: (userId, status) => {
     return new Promise((resolve, reject) => {
       db.get()
         .collection(collection.PATIENT_COLLECTION)
@@ -287,7 +287,7 @@ module.exports = {
           { _id: ObjectId(userId) },
           {
             $set: {
-              status: "Blocked",
+              status: status,
             },
           }
         )

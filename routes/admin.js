@@ -298,12 +298,12 @@ router.get("/image-upload/:id", verifyLogin, (req, res) => {
 });
 
 router.put("/doctor/block/:id", (req, res) => {
-  adminHelpers.blockDoctor(req.params.id).then((response) => {
+  adminHelpers.blockDoctor(req.params.id,"Blocked").then((response) => {
     res.json(response);
   });
 });
 router.put("/patient/block/:id", (req, res) => {
-  adminHelpers.blockPatient(req.params.id).then((response) => {
+  adminHelpers.blockPatient(req.params.id,"Blocked").then((response) => {
     res.json(response);
   });
 });
@@ -316,6 +316,17 @@ router.get("/users/blocked", verifyLogin, async (req, res) => {
     admin: req.admin,
     doctor,
     patient,
+  });
+});
+
+router.put("/doctor/unblock/:id", (req, res) => {
+  adminHelpers.blockDoctor(req.params.id,"Active").then((response) => {
+    res.json(response);
+  });
+});
+router.put("/patient/unblock/:id", (req, res) => {
+  adminHelpers.blockPatient(req.params.id,"Active").then((response) => {
+    res.json(response);
   });
 });
 
