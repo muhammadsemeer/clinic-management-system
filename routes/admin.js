@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const { sendMail } = require("../helpers/send-mail");
 const { sendMessage } = require("../helpers/sms-send");
 const fs = require("fs");
+const Fuse = require("fuse.js");
 const verifyLogin = (req, res, next) => {
   if (req.cookies.adminToken) {
     jwt.verify(
@@ -341,6 +342,48 @@ router.put("/doctor/unblock/:id", (req, res) => {
 router.put("/patient/unblock/:id", (req, res) => {
   adminHelpers.blockPatient(req.params.id, "Active").then((response) => {
     res.json(response);
+  });
+});
+
+router.get("/search", verifyLogin, async (req, res) => {
+  let todaysAppointments = await adminHelpers.getTodaysAppointment();
+  let upcomingAppointments = await adminHelpers.getUpcomingAppointments();
+  let expiredAppointments = await adminHelpers.getExipredApointments();
+  let cancelledAppointments = await adminHelpers.getCancelledAppointment();
+  let consultedAppointments = await adminHelpers.getConsultedAppointments();
+  const options = {
+    includeScore: true,
+    keys: [
+      "date",
+      "doctor.name",
+      "doctor.email",
+      "doctor.field",
+      "doctor.specialised",
+      "user.name",
+      "user.email",
+      "timeslot",
+    ],
+  };
+  const fuse1 = new Fuse(todaysAppointments, options);
+  const fuse2 = new Fuse(upcomingAppointments, options);
+  const fuse3 = new Fuse(consultedAppointments, options);
+  const fuse4 = new Fuse(cancelledAppointments, options);
+  const fuse5 = new Fuse(expiredAppointments, options);
+  const result1 = fuse1.search(req.query.q);
+  const result2 = fuse2.search(req.query.q);
+  const result3 = fuse3.search(req.query.q);
+  const result4 = fuse4.search(req.query.q);
+  const result5 = fuse5.search(req.query.q);
+  res.render("admin/search", {
+    title: `${req.query.q} - Search`,
+    admin: req.admin,
+    search: true,
+    query: req.query.q,
+    result1,
+    result2,
+    result3,
+    result4,
+    result5,
   });
 });
 

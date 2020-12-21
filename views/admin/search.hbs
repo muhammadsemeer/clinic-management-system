@@ -24,49 +24,49 @@
   </div>
   <!-- today -->
   <div class="card-sec active" id="today">
-    {{#if todays}}
-    {{#each todays}}
-    <div class="card" id="{{this._id}}">
+    {{#if result1}}
+    {{#each result1}}
+    <div class="card" id="{{this.item._id}}">
       <div class="doctor-section">
         <div>
-          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+          <img src="/images/doctor/{{this.item.doctor._id}}.jpg" alt="{{this.item.doctor.name}}" />
         </div>
         <div>
           <h4>
-            {{this.doctor.name}}
+            {{this.item.doctor.name}}
           </h4>
           <p>
-            {{this.doctor.field}}
+            {{this.item.doctor.field}}
           </p>
-          <p>{{this.doctor.specialised}}</p>
+          <p>{{this.item.doctor.specialised}}</p>
         </div>
       </div>
       <div>
-        <p>{{this.doctor.email}}</p>
+        <p>{{this.item.doctor.email}}</p>
       </div>
       <div class="c-head">
         <h3>
           User Deatils
         </h3>
         <p>
-          {{this.user.name}}
+          {{this.item.user.name}}
         </p>
-        {{#if this.user.email}}
+        {{#if this.item.user.email}}
         <p>
-          {{this.user.email}}
+          {{this.item.user.email}}
         </p>
         {{else}}
         <p>
-          {{this.user.contactno}}
+          {{this.item.user.contactno}}
         </p>
         {{/if}}
       </div>
       <div class="c-content">
         <p>
-          {{this.date}}
+          {{this.item.date}}
         </p>
         <p>
-          {{this.timeslot}}
+          {{this.item.timeslot}}
         </p>
       </div>
     </div>
@@ -81,49 +81,49 @@
   </div>
   <!-- upcoming -->
   <div class="card-sec" id="upcoming">
-    {{#if upcoming}}
-    {{#each upcoming}}
-    <div class="card" id="{{this._id}}">
+    {{#if result2}}
+    {{#each result2}}
+    <div class="card" id="{{this.item._id}}">
       <div class="doctor-section">
         <div>
-          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+          <img src="/images/doctor/{{this.item.doctor._id}}.jpg" alt="{{this.item.doctor.name}}" />
         </div>
         <div>
           <h4>
-            {{this.doctor.name}}
+            {{this.item.doctor.name}}
           </h4>
           <p>
-            {{this.doctor.field}}
+            {{this.item.doctor.field}}
           </p>
-          <p>{{this.doctor.specialised}}</p>
+          <p>{{this.item.doctor.specialised}}</p>
         </div>
       </div>
       <div>
-        <p>{{this.doctor.email}}</p>
+        <p>{{this.item.doctor.email}}</p>
       </div>
       <div class="c-head">
         <h3>
           User Deatils
         </h3>
         <p>
-          {{this.user.name}}
+          {{this.item.user.name}}
         </p>
-        {{#if this.user.email}}
+        {{#if this.item.user.email}}
         <p>
-          {{this.user.email}}
+          {{this.item.user.email}}
         </p>
         {{else}}
         <p>
-          {{this.user.contactno}}
+          {{this.item.user.contactno}}
         </p>
         {{/if}}
       </div>
       <div class="c-content">
         <p>
-          {{this.date}}
+          {{this.item.date}}
         </p>
         <p>
-          {{this.timeslot}}
+          {{this.item.timeslot}}
         </p>
       </div>
     </div>
@@ -138,55 +138,55 @@
   </div>
   <!-- consulted -->
   <div class="card-sec" id="consulted">
-    {{#if consulted}}
-    {{#each consulted}}
-    <div class="card" id="{{this._id}}">
+    {{#if result3}}
+    {{#each result3}}
+    <div class="card" id="{{this.item._id}}">
       <div class="doctor-section">
         <div>
-          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+          <img src="/images/doctor/{{this.item.doctor._id}}.jpg" alt="{{this.item.doctor.name}}" />
         </div>
         <div>
           <h4>
-            {{this.doctor.name}}
+            {{this.item.doctor.name}}
           </h4>
           <p>
-            {{this.doctor.field}}
+            {{this.item.doctor.field}}
           </p>
-          <p>{{this.doctor.specialised}}</p>
+          <p>{{this.item.doctor.specialised}}</p>
         </div>
       </div>
       <div>
-        <p>{{this.doctor.email}}</p>
+        <p>{{this.item.doctor.email}}</p>
       </div>
       <div class="c-head">
         <h3>
           User Deatils
         </h3>
         <p>
-          {{this.user.name}}
+          {{this.item.user.name}}
         </p>
-        {{#if this.user.email}}
+        {{#if this.item.user.email}}
         <p>
-          {{this.user.email}}
+          {{this.item.user.email}}
         </p>
         {{else}}
         <p>
-          {{this.user.contactno}}
+          {{this.item.user.contactno}}
         </p>
         {{/if}}
       </div>
       <div class="c-content">
         <p>
-          {{this.date}}
+          {{this.item.date}}
         </p>
         <p>
-          {{this.timeslot}}
+          {{this.item.timeslot}}
         </p>
         <h4>
           Medicines
         </h4>
-        {{#if this.medicines}}
-        {{#each this.medicines}}
+        {{#if this.item.medicines}}
+        {{#each this.item.medicines}}
         <p>
           {{this}}
         </p>
@@ -196,12 +196,12 @@
           No Medicines Provided
         </p>
         {{/if}}
-        {{#if this.notes}}
+        {{#if this.item.notes}}
         <h4>
           Notes
         </h4>
         <p>
-          {{this.notes}}
+          {{this.item.notes}}
         </p>
         {{/if}}
       </div>
@@ -217,47 +217,47 @@
   </div>
   <!-- cancelled -->
   <div class="card-sec" id="cancelled">
-    {{#if cancelled}}
-    {{#each cancelled}}
+    {{#if result4}}
+    {{#each result4}}
     <div class="card">
       <div class="doctor-section">
         <div>
-          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+          <img src="/images/doctor/{{this.item.doctor._id}}.jpg" alt="{{this.item.doctor.name}}" />
         </div>
         <div>
           <h4>
-            {{this.doctor.name}}
+            {{this.item.doctor.name}}
           </h4>
           <p>
-            {{this.doctor.field}}
+            {{this.item.doctor.field}}
           </p>
-          <p>{{this.doctor.specialised}}</p>
+          <p>{{this.item.doctor.specialised}}</p>
         </div>
       </div>
       <div>
-        <p>{{this.doctor.email}}</p>
+        <p>{{this.item.doctor.email}}</p>
       </div>
       <div class="c-head">
         <h3>User Deatils</h3>
         <p>
-          {{this.user.name}}
+          {{this.item.user.name}}
         </p>
-        {{#if this.user.email}}
+        {{#if this.item.user.email}}
         <p>
-          {{this.user.email}}
+          {{this.item.user.email}}
         </p>
         {{else}}
         <p>
-          {{this.email.contactno}}
+          {{this.item.email.contactno}}
         </p>
         {{/if}}
       </div>
       <div class="c-content">
         <p>
-          {{this.date}}
+          {{this.item.date}}
         </p>
         <p>
-          {{this.timeslot}}
+          {{this.item.timeslot}}
         </p>
       </div>
     </div>
@@ -272,50 +272,50 @@
   </div>
   <!-- expired -->
   <div class="card-sec" id="expired">
-    {{#if expired}}
-    {{#each expired}}
+    {{#if result5}}
+    {{#each result5}}
     <div class="card">
       <div class="doctor-section">
         <div>
-          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+          <img src="/images/doctor/{{this.item.doctor._id}}.jpg" alt="{{this.item.doctor.name}}" />
         </div>
         <div>
           <h4>
-            {{this.doctor.name}}
+            {{this.item.doctor.name}}
           </h4>
           <p>
-            {{this.doctor.field}}
+            {{this.item.doctor.field}}
           </p>
-          <p>{{this.doctor.specialised}}</p>
+          <p>{{this.item.doctor.specialised}}</p>
         </div>
       </div>
       <div>
-        <p>{{this.doctor.email}}</p>
+        <p>{{this.item.doctor.email}}</p>
       </div>
       <div class="c-head">
         <h3>User Deatils</h3>
         <p>
-          {{this.user.name}}
+          {{this.item.user.name}}
         </p>
-        {{#if this.user.email}}
+        {{#if this.item.user.email}}
         <p>
-          {{this.user.email}}
+          {{this.item.user.email}}
         </p>
         {{else}}
         <p>
-          {{this.user.contactno}}
+          {{this.item.user.contactno}}
         </p>
         {{/if}}
       </div>
       <div class="c-content">
         <p>
-          {{this.date}}
+          {{this.item.date}}
         </p>
         <p>
-          {{this.timeslot}}
+          {{this.item.timeslot}}
         </p>
         <p>
-          {{this.status}}
+          {{this.item.status}}
         </p>
       </div>
     </div>
