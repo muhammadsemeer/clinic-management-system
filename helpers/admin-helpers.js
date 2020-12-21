@@ -339,6 +339,17 @@ module.exports = {
           {
             $unwind: "$user",
           },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$doctor",
+          },
         ])
         .toArray();
       resolve(appointment);
@@ -366,6 +377,17 @@ module.exports = {
           },
           {
             $unwind: "$user",
+          },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$doctor",
           },
         ])
         .toArray();
@@ -403,6 +425,17 @@ module.exports = {
           {
             $unwind: "$user",
           },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$doctor",
+          },
         ])
         .toArray();
       let result = [];
@@ -438,6 +471,17 @@ module.exports = {
           {
             $unwind: "$user",
           },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$doctor",
+          },
         ])
         .toArray();
       resolve(appointment);
@@ -464,6 +508,17 @@ module.exports = {
           },
           {
             $unwind: "$user",
+          },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$doctor",
           },
         ])
         .toArray();
