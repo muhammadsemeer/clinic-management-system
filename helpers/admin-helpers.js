@@ -262,4 +262,21 @@ module.exports = {
       resolve({ doctorsCount, patientsCount, appointmentsCount });
     });
   },
+  blockDoctor: (doctorId) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(doctorId) },
+          {
+            $set: {
+              status: "Blocked",
+            },
+          }
+        )
+        .then((res) => {
+          resolve(true);
+        });
+    });
+  },
 };

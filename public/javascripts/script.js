@@ -242,3 +242,22 @@ function valid(event) {
     return false;
   }
 }
+
+const blockDoctor = () => {
+  fetch(`/doctor/block/${doctorid}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res) {
+        document.getElementById(`${doctorid}`).remove();
+        document
+          .querySelector(".doctor-block-modal")
+          .classList.toggle("active");
+        modalup("block-sucess-modal");
+      }
+    });
+};

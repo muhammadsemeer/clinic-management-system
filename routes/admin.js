@@ -297,4 +297,10 @@ router.get("/image-upload/:id", verifyLogin, (req, res) => {
   });
 });
 
+router.put("/doctor/block/:id", (req, res) => {
+  adminHelpers.blockDoctor(req.params.id).then((response) => {
+    res.json(response)
+  })
+});
+
 module.exports = router;

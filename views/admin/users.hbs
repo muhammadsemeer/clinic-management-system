@@ -76,7 +76,7 @@
                   <i class="fas fa-user-edit"></i>
                   <span class="tooltip-text">Edit</span>
                 </a>
-                <span class="delete tooltip">
+                <span class="delete tooltip" onclick="modalup('doctor-block-modal','{{this._id}}')">
                   <i class="fas fa-user-slash"></i>
                   <span class="tooltip-text">Block</span>
                 </span>
@@ -146,7 +146,7 @@
                   <i class="fas fa-user-edit"></i>
                   <span class="tooltip-text">Edit</span>
                 </a>
-                <span class="delete tooltip">
+                <span class="delete tooltip" onclick="modalup('pateint-block-modal','{{this._id}}')">
                   <i class="fas fa-user-slash"></i>
                   <span class="tooltip-text">Block</span>
                 </span>
@@ -175,6 +175,17 @@
       No
     </button>
   </div>
+  <div class="modal doctor-block-modal">
+    <h1>
+      Do you Want Block Doctor?
+    </h1>
+    <button class="yes" onclick="blockDoctor()">
+      Yes
+    </button>
+    <button class="no" onclick="document.querySelector('.doctor-block-modal').classList.toggle('active')">
+      No
+    </button>
+  </div>
   <div class="modal delete-sucess-modal">
     <h1>
       Deleted Sucessfully
@@ -183,14 +194,33 @@
       Close
     </button>
   </div>
+  <div class="modal block-sucess-modal">
+    <h1>
+      Blocked Sucessfully
+    </h1>
+    <button class="normal" onclick="document.querySelector('.block-sucess-modal').classList.toggle('active')">
+      Close
+    </button>
+  </div>
   <div class="modal pateint-modal">
     <h1>
       Do you Want Delete Pateint?
     </h1>
-    <button class="yes" id="patient-delete">
+    <button class="yes">
       Yes
     </button>
     <button class="no" onclick="document.querySelector('.pateint-modal').classList.toggle('active')">
+      No
+    </button>
+  </div>
+  <div class="modal pateint-block-modal">
+    <h1>
+      Do you Want Block Pateint?
+    </h1>
+    <button class="yes" id="patient-delete">
+      Yes
+    </button>
+    <button class="no" onclick="document.querySelector('.pateint-block-modal').classList.toggle('active')">
       No
     </button>
   </div>
