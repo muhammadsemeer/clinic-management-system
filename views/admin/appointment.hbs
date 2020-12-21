@@ -27,28 +27,61 @@
     {{#if todays}}
     {{#each todays}}
     <div class="card" id="{{this._id}}">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+        </div>
+        <div>
+          <h4>
+            {{this.doctor.name}}
+          </h4>
+          <p>
+            {{this.doctor.field}}
+          </p>
+        </div>
+      </div>
       <div class="c-head">
-        <p>{{this.user.name}}</p>
+        <h3>
+          User Deatils
+        </h3>
+        <p>
+          {{this.user.name}}
+        </p>
         {{#if this.user.email}}
-        <p>{{this.user.email}}</p>
+        <p>
+          {{this.user.email}}
+        </p>
         {{else}}
-        <p>{{this.user.contactno}}</p>
+        <p>
+          {{this.user.contactno}}
+        </p>
         {{/if}}
       </div>
       <div class="c-content">
-        <p>{{this.date}}</p>
-        <p>{{this.timeslot}}</p>
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
         <div class="btn-grp" style="margin-left: 0;">
-          <a href="/consult/{{this._id}}"><button class="crop">Consult</button></a>
-          <button class="crop" style="margin-left: 10px;"
-            onclick="modalup('delete-modal','{{this._id}}')">Cancel</button>
+          <a href="/consult/{{this._id}}">
+            <button class="crop">
+              Consult
+            </button>
+          </a>
+          <button class="crop" style="margin-left: 10px;" onclick="modalup('delete-modal','{{this._id}}')">
+            Cancel
+          </button>
         </div>
       </div>
     </div>
     {{/each}}
     {{else}}
     <div class="card" style="display: flex; justify-content: center; align-items: center">
-      <h1>No Appointments</h1>
+      <h1>
+        No Appointments
+      </h1>
     </div>
     {{/if}}
   </div>
@@ -57,26 +90,56 @@
     {{#if upcoming}}
     {{#each upcoming}}
     <div class="card" id="{{this._id}}">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+        </div>
+        <div>
+          <h4>
+            {{this.doctor.name}}
+          </h4>
+          <p>
+            {{this.doctor.field}}
+          </p>
+        </div>
+      </div>
       <div class="c-head">
-        <p>{{this.user.name}}</p>
+        <h3>
+          User Deatils
+        </h3>
+        <p>
+          {{this.user.name}}
+        </p>
         {{#if this.user.email}}
-        <p>{{this.user.email}}</p>
+        <p>
+          {{this.user.email}}
+        </p>
         {{else}}
-        <p>{{this.user.contactno}}</p>
+        <p>
+          {{this.user.contactno}}
+        </p>
         {{/if}}
       </div>
       <div class="c-content">
-        <p>{{this.date}}</p>
-        <p>{{this.timeslot}}</p>
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
         <div class="btn-grp" style="margin-left: 0;">
-          <button class="crop" onclick="modalup('delete-modal','{{this._id}}')">Cancel</button>
+          <button class="crop" onclick="modalup('delete-modal','{{this._id}}')">
+            Cancel
+          </button>
         </div>
       </div>
     </div>
     {{/each}}
     {{else}}
     <div class="card" style="display: flex; justify-content: center; align-items: center">
-      <h1>No Appointments</h1>
+      <h1>
+        No Appointments
+      </h1>
     </div>
     {{/if}}
   </div>
@@ -85,28 +148,63 @@
     {{#if consulted}}
     {{#each consulted}}
     <div class="card" id="{{this._id}}">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+        </div>
+        <div>
+          <h4>
+            {{this.doctor.name}}
+          </h4>
+          <p>
+            {{this.doctor.field}}
+          </p>
+        </div>
+      </div>
       <div class="c-head">
-        <p>{{this.user.name}}</p>
+        <h3>
+          User Deatils
+        </h3>
+        <p>
+          {{this.user.name}}
+        </p>
         {{#if this.user.email}}
-        <p>{{this.user.email}}</p>
+        <p>
+          {{this.user.email}}
+        </p>
         {{else}}
-        <p>{{this.user.contactno}}</p>
+        <p>
+          {{this.user.contactno}}
+        </p>
         {{/if}}
       </div>
       <div class="c-content">
-        <p>{{this.date}}</p>
-        <p>{{this.timeslot}}</p>
-        <h4>Medicines</h4>
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
+        <h4>
+          Medicines
+        </h4>
         {{#if this.medicines}}
         {{#each this.medicines}}
-        <p>{{this}}</p>
+        <p>
+          {{this}}
+        </p>
         {{/each}}
         {{else}}
-        <p>No Medicines Provided</p>
+        <p>
+          No Medicines Provided
+        </p>
         {{/if}}
         {{#if this.notes}}
-        <h4>Notes</h4>
-        <p>{{this.notes}}
+        <h4>
+          Notes
+        </h4>
+        <p>
+          {{this.notes}}
         </p>
         {{/if}}
       </div>
@@ -114,7 +212,9 @@
     {{/each}}
     {{else}}
     <div class="card" style="display: flex; justify-content: center; align-items: center">
-      <h1>No Appointments</h1>
+      <h1>
+        No Appointments
+      </h1>
     </div>
     {{/if}}
   </div>
@@ -123,23 +223,49 @@
     {{#if cancelled}}
     {{#each cancelled}}
     <div class="card">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+        </div>
+        <div>
+          <h4>
+            {{this.doctor.name}}
+          </h4>
+          <p>
+            {{this.doctor.field}}
+          </p>
+        </div>
+      </div>
       <div class="c-head">
-        <p>{{this.user.name}}</p>
+        <h3>User Deatils</h3>
+        <p>
+          {{this.user.name}}
+        </p>
         {{#if this.user.email}}
-        <p>{{this.user.email}}</p>
+        <p>
+          {{this.user.email}}
+        </p>
         {{else}}
-        <p>{{this.email.contactno}}</p>
+        <p>
+          {{this.email.contactno}}
+        </p>
         {{/if}}
       </div>
       <div class="c-content">
-        <p>{{this.date}}</p>
-        <p>{{this.timeslot}}</p>
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
       </div>
     </div>
     {{/each}}
     {{else}}
     <div class="card" style="display: flex; justify-content: center; align-items: center">
-      <h1>No Appointments</h1>
+      <h1>
+        No Appointments
+      </h1>
     </div>
     {{/if}}
   </div>
@@ -148,24 +274,52 @@
     {{#if expired}}
     {{#each expired}}
     <div class="card">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+        </div>
+        <div>
+          <h4>
+            {{this.doctor.name}}
+          </h4>
+          <p>
+            {{this.doctor.field}}
+          </p>
+        </div>
+      </div>
       <div class="c-head">
-        <p>{{this.user.name}}</p>
+        <h3>User Deatils</h3>
+        <p>
+          {{this.user.name}}
+        </p>
         {{#if this.user.email}}
-        <p>{{this.user.email}}</p>
+        <p>
+          {{this.user.email}}
+        </p>
         {{else}}
-        <p>{{this.user.contactno}}</p>
+        <p>
+          {{this.user.contactno}}
+        </p>
         {{/if}}
       </div>
       <div class="c-content">
-        <p>{{this.date}}</p>
-        <p>{{this.timeslot}}</p>
-        <p>{{this.status}}</p>
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
+        <p>
+          {{this.status}}
+        </p>
       </div>
     </div>
     {{/each}}
     {{else}}
     <div class="card" style="display: flex; justify-content: center; align-items: center">
-      <h1>No Appointments</h1>
+      <h1>
+        No Appointments
+      </h1>
     </div>
     {{/if}}
   </div>
