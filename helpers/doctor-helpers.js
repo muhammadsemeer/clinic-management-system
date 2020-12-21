@@ -286,7 +286,6 @@ module.exports = {
   },
   removeBlocked: (doctorId, patients) => {
     return new Promise(async (resolve, reject) => {
-      console.log(patients);
       let blocked = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
