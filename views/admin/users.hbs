@@ -57,10 +57,14 @@
                 </div>
               </td>
               <td>
-                {{this.name}}
+                <a href="/stats/{{this._id}}">
+                  {{this.name}}
+                </a>
               </td>
               <td>
-                {{this.username}}
+                <a href="/stats/{{this._id}}">
+                  {{this.username}}
+                </a>
               </td>
               <td>
                 {{this.email}}
@@ -74,15 +78,21 @@
               <td>
                 <a class="edit tooltip" href="/doctors/{{this.username}}">
                   <i class="fas fa-user-edit"></i>
-                  <span class="tooltip-text">Edit</span>
+                  <span class="tooltip-text">
+                    Edit
+                  </span>
                 </a>
                 <span class="delete tooltip" onclick="modalup('doctor-block-modal','{{this._id}}')">
                   <i class="fas fa-user-slash"></i>
-                  <span class="tooltip-text">Block</span>
+                  <span class="tooltip-text">
+                    Block
+                  </span>
                 </span>
                 <span class="delete tooltip" onclick="modalup('doctor-modal','{{this._id}}')">
                   <i class="fas fa-user-times"></i>
-                  <span class="tooltip-text">Delete</span>
+                  <span class="tooltip-text">
+                    Delete
+                  </span>
                 </span>
               </td>
             </tr>
@@ -144,15 +154,21 @@
               <td>
                 <a class="edit tooltip" href="/patients/{{this._id}}">
                   <i class="fas fa-user-edit"></i>
-                  <span class="tooltip-text">Edit</span>
+                  <span class="tooltip-text">
+                    Edit
+                  </span>
                 </a>
                 <span class="delete tooltip" onclick="modalup('pateint-block-modal','{{this._id}}')">
                   <i class="fas fa-user-slash"></i>
-                  <span class="tooltip-text">Block</span>
+                  <span class="tooltip-text">
+                    Block
+                  </span>
                 </span>
                 <span class="delete tooltip" onclick="modalup('pateint-modal','{{this._id}}')">
                   <i class="fas fa-user-times"></i>
-                  <span class="tooltip-text">Delete</span>
+                  <span class="tooltip-text">
+                    Delete
+                  </span>
                 </span>
               </td>
             </tr>

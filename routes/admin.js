@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const adminHelpers = require("../helpers/admin-helpers");
+// const doctorHelpers = require("../helpers/doctor-helpers");
 const jwt = require("jsonwebtoken");
 const { sendMail } = require("../helpers/send-mail");
 const { sendMessage } = require("../helpers/sms-send");
@@ -385,6 +386,11 @@ router.get("/search", verifyLogin, async (req, res) => {
     result4,
     result5,
   });
+});
+
+router.get("/stats/:id", verifyLogin, async (req, res) => {
+  let counts = await adminHelpers.getCountsOfAppontments(req.params.id);
+  res.render("admin/stats", { title: "Stats", admin: req.admin, counts });
 });
 
 module.exports = router;

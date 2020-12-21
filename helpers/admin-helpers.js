@@ -525,4 +525,37 @@ module.exports = {
       resolve(appointment);
     });
   },
+  getCountsOfAppontments: (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+      let total = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .countDocuments({ doctor: ObjectId(doctorId) });
+      let approved = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .countDocuments({
+          $and: [{ doctor: ObjectId(doctorId) }, { status: "Approved" }],
+        });
+      let pending = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .countDocuments({
+          $and: [{ doctor: ObjectId(doctorId) }, { status: "Pending" }],
+        });
+      let consulted = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .countDocuments({
+          $and: [{ doctor: ObjectId(doctorId) }, { status: "Consulted" }],
+        });
+      let deleted = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .countDocuments({
+          $and: [{ doctor: ObjectId(doctorId) }, { status: "Deleted" }],
+        });
+      resolve({total, approved, pending, consulted , deleted})
+    });
+  },
 };
