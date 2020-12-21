@@ -1,0 +1,181 @@
+<section class="admin-users ml-250">
+  <div class="user-container">
+    <div class="tab">
+      <button id="doctor" class="active"
+        onclick="toogleTab('#doctor', '#patient', '#doctor-conatiner', '#patient-conatiner')">
+        <i class="fas fa-user-md"></i>
+        Doctors
+      </button>
+      <button id="patient" onclick="toogleTab('#patient','#doctor','#patient-conatiner','#doctor-conatiner')">
+        <i class="fas fa-user-injured"></i>
+        Patients
+      </button>
+      <hr />
+    </div>
+    <div id="doctor-conatiner" class="container active">
+      <div class="btn-sec">
+        <a href="/add-doctor">
+          <i class="fas fa-user-plus"></i>
+        </a>
+      </div>
+      <div class="doctors-display">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Image
+              </th>
+              <th>
+                Doctor Name
+              </th>
+              <th>
+                Username
+              </th>
+              <th>
+                Email
+              </th>
+              <th>
+                Specialsed
+              </th>
+              <th>
+                Sepeciality
+              </th>
+              <th>
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each doctor}}
+            <tr id="{{this._id}}">
+              <td>
+                <div>
+                  <img src="/images/doctor/{{this._id}}.jpg" alt="" />
+                  <div id="{{this._id}}msg" class="img-hover" onclick="window.location = '/image-upload/{{this._id}}'">
+                    Edit
+                  </div>
+                </div>
+              </td>
+              <td>
+                {{this.name}}
+              </td>
+              <td>
+                {{this.username}}
+              </td>
+              <td>
+                {{this.email}}
+              </td>
+              <td>
+                {{this.specialised}}
+              </td>
+              <td>
+                {{this.field}}
+              </td>
+              <td>
+                <span class="yes tooltip" onclick="modalup('doctor-block-modal','{{this._id}}')">
+                  <i class="fas fa-user-slash"></i>
+                  <span class="tooltip-text" style="top: 60%; left: 0;">Un Block</span>
+                </span>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="patient-conatiner" class="container">
+      <div class="btn-sec">
+        <a href="/add-patient">
+          <i class="fas fa-user-plus"></i>
+        </a>
+      </div>
+      <div class="doctors-display">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Patient Name
+              </th>
+              <th>
+                Age
+              </th>
+              <th>
+                Gender
+              </th>
+              <th>
+                Mobile No
+              </th>
+              <th>
+                Email
+              </th>
+              <th>
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each patient}}
+            <tr id="{{this._id}}">
+              <td>
+                <div>
+                  {{this.name}}
+                </div>
+              </td>
+              <td>
+                {{this.age}}
+              </td>
+              <td>
+                {{this.gender}}
+              </td>
+              <td>
+                {{this.contactno}}
+              </td>
+              <td>
+                {{this.email}}
+              </td>
+              <td>
+                <span class="yes tooltip" onclick="modalup('pateint-block-modal','{{this._id}}')">
+                  <i class="fas fa-user-slash"></i>
+                  <span class="tooltip-text" style="top: 60%; left: 0;">Un Block</span>
+                </span>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="modal-container">
+  <div class="modal doctor-block-modal">
+    <h1>
+      Do you Want Un Block Doctor?
+    </h1>
+    <button class="yes" onclick="unblockDoctor()">
+      Yes
+    </button>
+    <button class="no" onclick="document.querySelector('.doctor-block-modal').classList.toggle('active')">
+      No
+    </button>
+  </div>
+  <div class="modal block-sucess-modal">
+    <h1>
+      Un Blocked Sucessfully
+    </h1>
+    <button class="normal" onclick="document.querySelector('.block-sucess-modal').classList.toggle('active')">
+      Close
+    </button>
+  </div>
+  <div class="modal pateint-block-modal">
+    <h1>
+      Do you Want Un Block Pateint?
+    </h1>
+    <button class="yes" onclick="unblockPatient()">
+      Yes
+    </button>
+    <button class="no" onclick="document.querySelector('.pateint-block-modal').classList.toggle('active')">
+      No
+    </button>
+  </div>
+</div>

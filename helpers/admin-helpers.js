@@ -296,4 +296,24 @@ module.exports = {
         });
     });
   },
+  getBlockedDoctors: () => {
+    return new Promise(async (resolve, reject) => {
+      let doctors = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .find({ status: "Blocked" })
+        .toArray();
+      resolve(doctors);
+    });
+  },
+  getBlockedPatients: () => {
+    return new Promise(async (resolve, reject) => {
+      let doctors = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .find({ status: "Blocked" })
+        .toArray();
+      resolve(doctors);
+    });
+  },
 };

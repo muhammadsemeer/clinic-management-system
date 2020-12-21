@@ -299,13 +299,24 @@ router.get("/image-upload/:id", verifyLogin, (req, res) => {
 
 router.put("/doctor/block/:id", (req, res) => {
   adminHelpers.blockDoctor(req.params.id).then((response) => {
-    res.json(response)
-  })
+    res.json(response);
+  });
 });
 router.put("/patient/block/:id", (req, res) => {
   adminHelpers.blockPatient(req.params.id).then((response) => {
-    res.json(response)
-  })
+    res.json(response);
+  });
+});
+
+router.get("/users/blocked", verifyLogin, async (req, res) => {
+  let doctor = await adminHelpers.getBlockedDoctors();
+  let patient = await adminHelpers.getBlockedPatients();
+  res.render("admin/blocked-users", {
+    title: "Users",
+    admin: req.admin,
+    doctor,
+    patient,
+  });
 });
 
 module.exports = router;
