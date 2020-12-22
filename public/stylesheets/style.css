@@ -404,6 +404,7 @@ header h1 {
 }
 .doctors-display {
   overflow-x: auto;
+  min-height: 150px;
 }
 .doctors-display table {
   width: 100%;
@@ -417,7 +418,7 @@ header h1 {
 .doctors-display th,
 .doctors-display td {
   padding: 5px;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   position: relative;
 }
@@ -1265,6 +1266,10 @@ ul li {
 }
 
 /* Tooltip */
+
+.tooltip {
+  position: relative;
+}
 
 .tooltip-text {
   font-size: 12px;

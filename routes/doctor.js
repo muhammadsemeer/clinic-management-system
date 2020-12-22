@@ -148,6 +148,7 @@ router.delete("/bookings/cancel/:id", (req, res) => {
 
 router.get("/patients", verifyLogin, async (req, res) => {
   let allPateints = await doctorHelpers.getMyPatients(req.doctor._id);
+  console.log(allPateints);
   let notBlocked = await doctorHelpers.removeBlocked(
     req.doctor._id,
     allPateints
@@ -334,6 +335,19 @@ router.get("/search", verifyLogin, async (req, res) => {
     result4,
     result5,
   });
+});
+
+router.get("/history/:id", verifyLogin, (req, res) => {
+  doctorHelpers
+    .getPatientHistory(req.doctor._id, req.params.id)
+    .then((response) => {
+      console.log(response);
+      res.render("doctor/history", {
+        title: "Consulted History",
+        doctorLogged: req.doctor,
+        history: response,
+      });
+    });
 });
 
 module.exports = router;

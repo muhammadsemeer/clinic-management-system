@@ -44,11 +44,13 @@
                                 {{this.contactno}}
                             </td>
                             <td>
-                                <span class="edit">
+                                <a class="edit tooltip" href="/history/{{this._id}}">
                                     <i class="fas fa-calendar"></i>
-                                </span>
-                                <span class="delete" onclick="modalup('delete-modal','{{this._id}}')">
+                                    <span class="tooltip-text">History</span>
+                                </a>
+                                <span class="delete tooltip" onclick="modalup('delete-modal','{{this._id}}')">
                                     <i class="fas fa-user-slash"></i>
+                                    <span class="tooltip-text">lock</span>
                                 </span>
                             </td>
                         </tr>
@@ -89,11 +91,13 @@
                                 {{this.contactno}}
                             </td>
                             <td>
-                                <span class="edit">
+                                <a class="edit tooltip" href="/history/{{this._id}}">
                                     <i class="fas fa-calendar"></i>
-                                </span>
-                                <span class="yes" onclick="modalup('unblock-modal','{{this._id}}')">
+                                    <span class="tooltip-text">History</span>
+                                </a>
+                                <span class="yes tooltip" onclick="modalup('unblock-modal','{{this._id}}')">
                                     <i class="fas fa-user-check"></i>
+                                    <span class="tooltip-text">Unblock</span>
                                 </span>
                             </td>
                         </tr>

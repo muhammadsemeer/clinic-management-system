@@ -1,0 +1,51 @@
+<section class="dr-page history ml-250">
+    <div class="doctors-display" style="padding: 25px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Patient Name
+                    </th>
+                    <th>
+                        Patient Email
+                    </th>
+                    <th>
+                        Patient Contactno
+                    </th>
+                    <th>
+                        Consulted On
+                    </th>
+                    <th>
+                        Medcines
+                    </th>
+                    <th>
+                        Notes
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each history}}
+                <tr id="{{this._id}}">
+                    <td>
+                        {{this.user.name}}
+                    </td>
+                    <td>
+                        {{this.user.email}}
+                    </td>
+                    <td>
+                        {{this.user.contactno}}
+                    </td>
+                    <td><span>{{this.date}}</span></td>
+                    <td>
+                        {{#each this.medicines}}
+                        {{this}}
+                        {{/each}}
+                    </td>
+                    <td>{{this.notes}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    </div>
+</section>
