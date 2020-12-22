@@ -528,4 +528,35 @@ module.exports = {
       resolve(appointment);
     });
   },
+  getPatientHistory: (doctorId, userId) => {
+    return new Promise(async (resolve, reject) => {
+      let history = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [
+                { doctor: ObjectId(doctorId) },
+                { user: ObjectId(userId) },
+                { status: "Consulted" },
+              ],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+        ])
+        .toArray();
+      resolve(history);
+    });
+  },
 };
