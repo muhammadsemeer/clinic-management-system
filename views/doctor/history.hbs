@@ -1,4 +1,5 @@
 <section class="dr-page history ml-250">
+    {{#if history}}
     <div class="doctors-display" style="padding: 25px;">
         <div class="btn-sec">
             <a href="/history/download/{{userId}}">
@@ -53,4 +54,9 @@
         </table>
     </div>
     </div>
+    {{else}}
+    <div class="head" style="display: flex; justify-content: center">
+        <h1>No History Found</h1>
+    </div>
+    {{/if}}
 </section>
