@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 const adminHelpers = require("../helpers/admin-helpers");
-// const doctorHelpers = require("../helpers/doctor-helpers");
 const jwt = require("jsonwebtoken");
 const { sendMail } = require("../helpers/send-mail");
 const { sendMessage } = require("../helpers/sms-send");
