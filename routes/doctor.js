@@ -3,6 +3,7 @@ const doctorHelpers = require("../helpers/doctor-helpers");
 var router = express.Router();
 var jwt = require("jsonwebtoken");
 const Fuse = require("fuse.js");
+const { exportExcel } = require("../helpers/export-xlsx");
 require("dotenv").config();
 
 const verifyLogin = (req, res, next) => {
@@ -341,13 +342,48 @@ router.get("/history/:id", verifyLogin, (req, res) => {
   doctorHelpers
     .getPatientHistory(req.doctor._id, req.params.id)
     .then((response) => {
-      console.log(response);
       res.render("doctor/history", {
         title: "Consulted History",
         doctorLogged: req.doctor,
+        userId: req.params.id,
         history: response,
       });
     });
+});
+
+router.get("/history/download/:id", verifyLogin, async (req, res) => {
+  let columnNames = [
+    "ID",
+    "Pateint Name",
+    "Consulted Date",
+    "Consulted Time",
+    "Medicines",
+    "Notes",
+  ];
+  let dataDB = await doctorHelpers.getPatientHistory(
+    req.doctor._id,
+    req.params.id
+  );
+  let datas = dataDB.map((element) => {
+    if (!element.medicines || !element.notes) {
+      element.medicines = "";
+      element.notes = "";
+    }
+    return [
+      element._id.toString(),
+      element.user.name,
+      element.date,
+      element.timeslot,
+      element.medicines.toString(),
+      element.notes,
+    ];
+  });
+  exportExcel(datas, columnNames, "History", `/xlsx/${req.params.id}.xlsx`);
+  res.render("doctor/download", {
+    title: "Download History",
+    doctorLogged: req.doctor,
+    userId: req.params.id
+  });
 });
 
 module.exports = router;
