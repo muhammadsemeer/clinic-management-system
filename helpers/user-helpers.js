@@ -19,7 +19,7 @@ module.exports = {
         })
         .toArray();
       if (mailFound.length <= 0) {
-        if ((mailFound[0].status = "Blocked")) {
+        if ((mailFound[0].status === "Blocked")) {
           reject({ msg: "Your Account is temporarliy disbaled" });
         }
         details.status = "Active";
@@ -55,7 +55,7 @@ module.exports = {
         })
         .toArray();
       if (mailFound.length <= 0) {
-        if ((mailFound[0].status = "Blocked")) {
+        if ((mailFound[0].status === "Blocked")) {
           reject({ msg: "Your Account is temporarliy disbaled" });
         }
         details.status = "Active";
@@ -68,7 +68,7 @@ module.exports = {
             resolve(data.ops[0]);
           });
       } else if (mailFound[0].auth === OAuth) {
-        if ((mailFound[0].status = "Blocked")) {
+        if ((mailFound[0].status === "Blocked")) {
           reject({ msg: "Your Account is temporarliy disbaled" });
         }
         resolve(mailFound[0]);
@@ -93,7 +93,7 @@ module.exports = {
       if (emailFound.length <= 0) {
         reject({ msg: "No User Found" });
       } else {
-        if ((emailFound[0].status = "Blocked")) {
+        if ((emailFound[0].status === "Blocked")) {
           reject({ msg: "Your Account is temporarliy disbaled" });
         }
         resolve(emailFound[0].email);
@@ -116,7 +116,7 @@ module.exports = {
       if (mobileFound.length <= 0) {
         reject({ msg: "Inavild Email or Mobile No" });
       } else {
-        if ((mobileFound[0].status = "Blocked")) {
+        if ((mobileFound[0].status === "Blocked")) {
           reject({ msg: "Your Account is temporarliy disbaled" });
         }
         resolve(mobileFound[0].contactno);
