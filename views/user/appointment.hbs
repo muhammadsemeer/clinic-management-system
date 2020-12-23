@@ -21,21 +21,21 @@
         <i class="fas fa-calendar-times"></i>
         Cancelled
       </button>
-      <div class="search" style="display: flex; align-items:center">
-        <form action="/search" method="GET">
-          <div class="btn-grp">
-            <input type="search" name="q" class="first" id="search" value="{{query}}" placeholder="Search....">
-            <button type="submit" class="last" id="search-btn"><i class="fas fa-search"></i></button>
-          </div>
-        </form>
-        <div class="btn-sec" style="flex: 1;">
-          <a href="/history/download/{{userId}}" style="color: var(--green)">
-            Download Consulted History
-            <i class="fas fa-download" style="width: auto;"></i>
-          </a>
-        </div>
-      </div>
       <hr />
+    </div>
+  </div>
+  <div class="search" style="display: flex; align-items:center">
+    <form action="/search" method="GET">
+      <div class="btn-grp">
+        <input type="search" name="q" class="first" id="search" value="{{query}}" placeholder="Search....">
+        <button type="submit" class="last" id="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+    </form>
+    <div class="btn-sec" style="flex: 1;">
+      <a href="/history/download/{{userId}}" style="color: var(--green)">
+        Download Consulted History
+        <i class="fas fa-download" style="width: auto;"></i>
+      </a>
     </div>
   </div>
   <div class="card active" id="appointment-conatiner">
