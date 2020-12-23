@@ -394,4 +394,18 @@ router.get("/stats/:id", verifyLogin, async (req, res) => {
   res.render("admin/stats", { title: "Stats", admin: req.admin, counts });
 });
 
+router.get("/search/users", async (req, res) => {
+  let doctor = await adminHelpers.getDoctors();
+  let patient = await adminHelpers.getPatients();
+  const options = {
+    includeScore: true,
+    keys: ["name", "email", "contactno"],
+  };
+  const fuse1 = new Fuse(doctor, options);
+  const fuse2 = new Fuse(patient, options);
+  const result1 = fuse1.search(req.query.q);
+  const result2 = fuse2.search(req.query.q);
+  res.json({ result1, result2 });
+});
+
 module.exports = router;

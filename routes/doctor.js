@@ -399,7 +399,7 @@ router.get("/search/patient", verifyToken, async (req, res) => {
   );
   const options = {
     includeScore: true,
-    keys: ["name", "email", "contactno"],
+    keys: ["name", "email", "username", "field", "specialised"],
   };
   const fuse1 = new Fuse(notBlocked, options);
   const fuse2 = new Fuse(blocked, options);
