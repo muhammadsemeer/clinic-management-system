@@ -11,6 +11,12 @@
         </button>
         <hr />
     </div>
+    <div class="search" style="display: flex; justify-content:flex-end">
+            <div class="btn-grp">
+                <input type="text" name="q" class="first" id="search" value="{{query}}" placeholder="Search....">
+                <button type="submit" class="last" id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+    </div>
     <div class="user-container">
         <div id="doctor-conatiner" class="container active">
             <div class="doctors-display" style="padding: 25px;">
@@ -50,7 +56,7 @@
                                 </a>
                                 <span class="delete tooltip" onclick="modalup('delete-modal','{{this._id}}')">
                                     <i class="fas fa-user-slash"></i>
-                                    <span class="tooltip-text">lock</span>
+                                    <span class="tooltip-text">Block</span>
                                 </span>
                             </td>
                         </tr>
@@ -154,43 +160,4 @@
         Close
     </button>
 </div>
-<script>
-    function blockUser() {
-        fetch(`/block-user/${doctorid}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        }).then((res) => res.json()).then((res) => {
-            if (res === true) {
-                document.querySelector(".delete-modal").classList.remove("active")
-                document.getElementById(doctorid).remove()
-                modalup("delete-sucess-modal")
-            } else if (res === "login") {
-                window.location = "/login"
-            }
-            else {
-                modalup("delete-fail-modal")
-            }
-        })
-    }
-    function unblock() {
-        fetch(`/block-user/${doctorid}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        }).then((res) => res.json()).then((res) => {
-            if (res === true) {
-                document.querySelector(".unblock-modal").classList.remove("active")
-                document.getElementById(doctorid).remove()
-                modalup("unblock-sucess-modal")
-            } else if (res === "login") {
-                window.location = "/login"
-            }
-            else {
-                modalup("delete-fail-modal")
-            }
-        })
-    }
-</script>
+<script src="/javascripts/patient-search.js"></script>

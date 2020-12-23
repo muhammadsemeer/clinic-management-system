@@ -377,12 +377,34 @@ router.get("/history/download/:id", verifyLogin, async (req, res) => {
       element.notes,
     ];
   });
-  exportExcel(datas, columnNames, "History", `/xlsx/doctor/${req.params.id}.xlsx`);
+  exportExcel(
+    datas,
+    columnNames,
+    "History",
+    `/xlsx/doctor/${req.params.id}.xlsx`
+  );
   res.render("doctor/download", {
     title: "Download History",
     doctorLogged: req.doctor,
-    userId: req.params.id
+    userId: req.params.id,
   });
 });
 
+router.get("/search/patient", verifyToken, async (req, res) => {
+  let allPateints = await doctorHelpers.getMyPatients(req.doctor._id);
+  let blocked = await doctorHelpers.getBlocked(req.doctor._id, allPateints);
+  let notBlocked = await doctorHelpers.removeBlocked(
+    req.doctor._id,
+    allPateints
+  );
+  const options = {
+    includeScore: true,
+    keys: ["name", "email", "contactno"],
+  };
+  const fuse1 = new Fuse(notBlocked, options);
+  const fuse2 = new Fuse(blocked, options);
+  const result1 = fuse1.search(req.query.q);
+  const result2 = fuse2.search(req.query.q);
+  res.json({ result1, result2 });
+});
 module.exports = router;
