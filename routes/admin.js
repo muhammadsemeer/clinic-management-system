@@ -93,6 +93,7 @@ router.get("/users", verifyLogin, async (req, res) => {
   res.render("admin/users", {
     title: "Users",
     admin: req.admin,
+    search2: true,
     doctor,
     patient,
   });
@@ -329,6 +330,7 @@ router.get("/users/blocked", verifyLogin, async (req, res) => {
   res.render("admin/blocked-users", {
     title: "Blocked Users",
     admin: req.admin,
+    search2: true,
     doctor,
     patient,
   });
