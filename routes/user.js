@@ -507,4 +507,15 @@ router.get("/history/download/", verifyLogin, async (req, res) => {
   });
 });
 
+router.get("/search/doctors",  async (req, res) => {
+  let doctors = await adminHelpers.getDoctors();
+  const options = {
+    includeScore: true,
+    keys: ["name", "field", "specialised"],
+  };
+  const fuse = new Fuse(doctors, options);
+  const result = fuse.search(req.query.q);
+  res.json(result);
+});
+
 module.exports = router;

@@ -846,6 +846,7 @@ nav a {
   padding: 50px 25px;
   padding-top: 0;
   flex-wrap: wrap;
+  min-height: 500px;
 }
 
 .home .container {
