@@ -1301,3 +1301,8 @@ ul li {
   opacity: 1;
   visibility: visible;
 }
+
+.dr-search input {
+  background: #ffffff;
+  box-shadow: inset 23px 23px 46px #cccccc, inset -23px -23px 46px #ffffff;
+}

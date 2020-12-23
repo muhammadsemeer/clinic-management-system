@@ -16,31 +16,39 @@
       </div>
     </aside>
   </div>
+  <div class="search" style="display: flex; justify-content:flex-end">
+    <div class="dr-search">
+        <div class="btn-grp">
+          <input type="search" name="q" class="first" id="search" value="{{query}}" placeholder="Search....">
+          <button type="submit" class="last" id="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+  </div>
   <div class="card" id="doctors">
     {{#each doctor}}
-      <div class="container">
-        <div class="img-section">
-          <img src="/images/doctor/{{this._id}}.jpg" alt="" />
-        </div>
-        <div class="content">
-          <p>
-            {{this.name}}
-          </p>
-          <p>
-            {{this.field}}
-          </p>
-          <p>
-            {{this.specialised}}
-          </p>
-          <div class="btn-grp" style="margin-left: 0; font-size: 16px">
-            <a href="/book-appoinment/{{this._id}}">
-              <button class="crop" style="font-size: 15px">
-                Book Apointment
-              </button>
-            </a>
-          </div>
+    <div class="container">
+      <div class="img-section">
+        <img src="/images/doctor/{{this._id}}.jpg" alt="" />
+      </div>
+      <div class="content">
+        <p>
+          {{this.name}}
+        </p>
+        <p>
+          {{this.field}}
+        </p>
+        <p>
+          {{this.specialised}}
+        </p>
+        <div class="btn-grp" style="margin-left: 0; font-size: 16px">
+          <a href="/book-appoinment/{{this._id}}">
+            <button class="crop" style="font-size: 15px">
+              Book Apointment
+            </button>
+          </a>
         </div>
       </div>
+    </div>
     {{/each}}
   </div>
 </section>
