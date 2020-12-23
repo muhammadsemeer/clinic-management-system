@@ -14,11 +14,14 @@ module.exports = {
             {
               $or: [{ email: details.email }, { contactno: details.contactno }],
             },
-            { status: "Active" },
+            { $or: [{ status: "Active" }, { status: "Blocked" }] },
           ],
         })
         .toArray();
       if (mailFound.length <= 0) {
+        if ((mailFound[0].status = "Blocked")) {
+          reject({ msg: "Your Account is temporarliy disbaled" });
+        }
         details.status = "Active";
         details.auth = "Password";
         details.password = await bcrypt.hash(details.password, 10);
@@ -39,15 +42,22 @@ module.exports = {
         .get()
         .collection(collection.PATIENT_COLLECTION)
         .find({
-          $and: [
+          $or: [
             {
-              email: details.email,
+              $and: [
+                {
+                  email: details.email,
+                },
+                { $or: [{ status: "Active" }, { status: "Blocked" }] },
+              ],
             },
-            { status: "Active" },
           ],
         })
         .toArray();
       if (mailFound.length <= 0) {
+        if ((mailFound[0].status = "Blocked")) {
+          reject({ msg: "Your Account is temporarliy disbaled" });
+        }
         details.status = "Active";
         details.auth = OAuth;
         delete details.authtoken;
@@ -58,6 +68,9 @@ module.exports = {
             resolve(data.ops[0]);
           });
       } else if (mailFound[0].auth === OAuth) {
+        if ((mailFound[0].status = "Blocked")) {
+          reject({ msg: "Your Account is temporarliy disbaled" });
+        }
         resolve(mailFound[0]);
       } else {
         reject({ msg: "Email Id Alreday Registered" });
@@ -70,12 +83,19 @@ module.exports = {
         .get()
         .collection(collection.PATIENT_COLLECTION)
         .find({
-          $and: [{ email: email }, { auth: "Password" }, { status: "Active" }],
+          $and: [
+            { email: email },
+            { auth: "Password" },
+            { $or: [{ status: "Active" }, { status: "Blocked" }] },
+          ],
         })
         .toArray();
       if (emailFound.length <= 0) {
         reject({ msg: "No User Found" });
       } else {
+        if ((emailFound[0].status = "Blocked")) {
+          reject({ msg: "Your Account is temporarliy disbaled" });
+        }
         resolve(emailFound[0].email);
       }
     });
@@ -89,13 +109,16 @@ module.exports = {
           $and: [
             { contactno: mobileno },
             { auth: "Password" },
-            { status: "Active" },
+            { $or: [{ status: "Active" }, { status: "Blocked" }] },
           ],
         })
         .toArray();
       if (mobileFound.length <= 0) {
         reject({ msg: "Inavild Email or Mobile No" });
       } else {
+        if ((mobileFound[0].status = "Blocked")) {
+          reject({ msg: "Your Account is temporarliy disbaled" });
+        }
         resolve(mobileFound[0].contactno);
       }
     });
