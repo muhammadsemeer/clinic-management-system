@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const { verify } = require("../helpers/google-oauth");
 const { sendOTP, verfiyOTP } = require("../helpers/send-otp");
 const { createSlots } = require("../helpers/create-time-slot");
+const Fuse = require("fuse.js");
 require("dotenv").config();
 const loginCheck = (req, res, next) => {
   if (req.cookies.userToken) {
@@ -436,6 +437,41 @@ router.post("/profile/edit", verifyLogin, (req, res) => {
       req.session.editErr = error.msg;
       res.redirect("/profile/edit");
     });
+});
+
+router.get("/search", verifyLogin, async (req, res) => {
+  let appointments = await userHelpers.getMyAppointments(
+    req.user._id,
+    "Approved"
+  );
+  let requests = await userHelpers.getMyAppointments(req.user._id, "Pending");
+  let cancelled = await userHelpers.getMyAppointments(req.user._id, "Deleted");
+  let consulted = await userHelpers.getMyAppointments(
+    req.user._id,
+    "Consulted"
+  );
+  const options = {
+    includeScore: true,
+    keys: ["date", "doctor.name", "doctor.field", "timeslot"],
+  };
+  const fuse1 = new Fuse(appointments, options);
+  const fuse2 = new Fuse(requests, options);
+  const fuse3 = new Fuse(cancelled, options);
+  const fuse4 = new Fuse(consulted, options);
+  const result1 = fuse1.search(req.query.q);
+  const result2 = fuse2.search(req.query.q);
+  const result3 = fuse3.search(req.query.q);
+  const result4 = fuse4.search(req.query.q);
+  res.render("user/search", {
+    title: `${req.query.q} - Search`,
+    user: req.user,
+    header: true,
+    query: req.query.q,
+    result1,
+    result2,
+    result3,
+    result4,
+  });
 });
 
 module.exports = router;

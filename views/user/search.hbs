@@ -1,0 +1,248 @@
+<section class="user appointment">
+  <div class="user-container">
+    <div class="tab">
+      <button id="appointment" class="active"
+        onclick="toogleTab3('#appointment', '#requsted' ,'#consulted','#cancel', '#appointment-conatiner', '#consulted-container', '#cancelled-conatiner','#requested-container')">
+        <i class="fas fa-calendar-check"></i>
+        Appoitments
+      </button>
+      <button id="requsted"
+        onclick="toogleTab3('#requsted','#consulted','#appointment', '#cancel', '#requested-container','#consulted-container', '#appointment-conatiner', '#cancelled-conatiner')">
+        <i class="fas fa-spinner"></i>
+        My Requests
+      </button>
+      <button id="consulted"
+        onclick="toogleTab3('#consulted','#appointment', '#requsted' ,'#cancel', '#consulted-container', '#requested-container','#appointment-conatiner', '#cancelled-conatiner')">
+        <i class="fas fa-clipboard-check"></i>
+        Consulted
+      </button>
+      <button id="cancel"
+        onclick="toogleTab3('#cancel','#consulted','#appointment', '#requsted', '#cancelled-conatiner','#requested-container','#consulted-container', '#appointment-conatiner')">
+        <i class="fas fa-calendar-times"></i>
+        Cancelled
+      </button>
+      <div class="search" style="display: flex; align-items:center">
+        <form action="/search" method="GET">
+          <div class="btn-grp">
+            <input type="search" name="q" class="first" id="search" value="{{query}}" placeholder="Search....">
+            <button type="submit" class="last" id="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+        </form>
+        <div class="btn-sec" style="flex: 1;">
+          <a href="/history/download/{{userId}}" style="color: var(--green)">
+            Download Consulted History
+            <i class="fas fa-download" style="width: auto;"></i>
+          </a>
+        </div>
+      </div>
+      <hr />
+    </div>
+  </div>
+  <div class="card active" id="appointment-conatiner">
+    {{#if result1}}
+    {{#each result1}}
+    <div class="container" id="{{this.item._id}}">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.item.doctor._id}}.jpg" alt="{{this.item.doctor.name}}" />
+        </div>
+        <div>
+          <h3>
+            {{this.item.doctor.name}}
+          </h3>
+          <p>
+            {{this.item.doctor.field}}
+          </p>
+        </div>
+      </div>
+      <div class="content">
+        <p>
+          {{this.item.date}}
+        </p>
+        <p>
+          {{this.item.timeslot}}
+        </p>
+        <p>
+          {{this.item.status}}
+        </p>
+        <div class="btn-grp" style="margin-left: 0; font-size: 16px">
+          <a href="#">
+            <button class="crop" style="font-size: 15px" onclick="modalup('message-modal','{{this.item._id}}')">
+              Cancel Apointment
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="container">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
+    {{/if}}
+  </div>
+  <div class="user-container">
+    <div class="card" id="requested-container">
+      {{#if result2}}
+      {{#each result2}}
+      <div class="container" id="{{this.item._id}}">
+        <div class="doctor-section">
+          <div>
+            <img src="/images/doctor/{{this.item.doctor._id}}.jpg" alt="{{this.item.doctor.name}}" />
+          </div>
+          <div>
+            <h3>
+              {{this.item.doctor.name}}
+            </h3>
+            <p>
+              {{this.item.doctor.field}}
+            </p>
+          </div>
+        </div>
+        <div class="content">
+          <p>
+            {{this.item.date}}
+          </p>
+          <p>
+            {{this.item.timeslot}}
+          </p>
+          <p>
+            {{this.item.status}}
+          </p>
+          <div class="btn-grp" style="margin-left: 0; font-size: 16px">
+            <button class="crop" style="font-size: 15px" onclick="modalup('message-modal','{{this.item._id}}')">
+              Cancel Apointment
+            </button>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+      {{else}}
+      <div class="container">
+        <h1>
+          No Appointments
+        </h1>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+  <div class="user-container">
+    <div class="card" id="consulted-container">
+      {{#if result4}}
+      {{#each result4}}
+      <div class="container" id="{{this.item._id}}">
+        <div class="doctor-section">
+          <div>
+            <img src="/images/doctor/{{this.item.doctor._id}}.jpg" alt="{{this.item.doctor.name}}" />
+          </div>
+          <div>
+            <h3>
+              {{this.item.doctor.name}}
+            </h3>
+            <p>
+              {{this.item.doctor.field}}
+            </p>
+          </div>
+        </div>
+        <div class="content">
+          <p>
+            {{this.item.date}}
+          </p>
+          <p>
+            {{this.item.timeslot}}
+          </p>
+          <h3>Medicines</h3>
+          {{#if this.item.medicines}}
+          {{#each this.item.medicines}}
+          <p>{{this}}</p>
+          {{/each}}
+          {{else}}
+          <p>No Medicines Provided</p>
+          {{/if}}
+          {{#if this.item.notes}}
+          <h3>Notes</h3>
+          {{this.item.notes}}
+          {{/if}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{else}}
+    <div class="container">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
+    {{/if}}
+  </div>
+  </div>
+  <div class="user-container">
+    <div class="card" id="cancelled-conatiner">
+      {{#if result3}}
+      {{#each result3}}
+      <div class="container" id="{{this.item._id}}">
+        <div class="doctor-section">
+          <div>
+            <img src="/images/doctor/{{this.item.doctor._id}}.jpg" alt="{{this.item.doctor.name}}" />
+          </div>
+          <div>
+            <h3>
+              {{this.item.doctor.name}}
+            </h3>
+            <p>
+              {{this.item.doctor.field}}
+            </p>
+          </div>
+        </div>
+        <div class="content">
+          <p>
+            {{this.item.date}}
+          </p>
+          <p>
+            {{this.item.timeslot}}
+          </p>
+          <p>
+            {{this.item.status}}
+          </p>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{else}}
+    <div class="container">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
+    {{/if}}
+  </div>
+</section>
+<div class="modal message-modal">
+  <h1>
+    Are You Want to Cancel Appointment?
+  </h1>
+  <button class="yes" onclick="cancelAppointment()">
+    Yes
+  </button>
+  <button class="no" onclick="document.querySelector('.message-modal').classList.toggle('active')">
+    No
+  </button>
+</div>
+<div class="modal success-modal">
+  <h1>
+    Appointment Successully Cancelled
+  </h1>
+  <button class="normal" onclick="document.querySelector('.success-modal').classList.toggle('active')">
+    Close
+  </button>
+</div>
+<div class="modal error-modal">
+  <h1>
+    Something Went Wrong
+  </h1>
+  <button class="normal" onclick="document.querySelector('.error-modal').classList.toggle('active')">
+    Close
+  </button>
+</div>
