@@ -9,9 +9,17 @@ module.exports = {
       let emailFound = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
-        .find({ $and: [{ username: deatils.usrname }, { status: "Active" }] })
+        .find({
+          $and: [
+            { username: deatils.usrname },
+            { $or: [{ status: "Active" }, { status: "Blocked" }] },
+          ],
+        })
         .toArray();
       if (emailFound.length > 0) {
+        if (emailFound[0].status === "Blocked") {
+          reject({ msg: "Your Account is temporarliy disbaled" });
+        }
         bcrypt
           .compare(deatils.password, emailFound[0].password)
           .then((status) => {
