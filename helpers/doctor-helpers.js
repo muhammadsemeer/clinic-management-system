@@ -303,7 +303,7 @@ module.exports = {
             projection: { _id: 0, blockedUsers: 1 },
           }
         );
-      let result = [];
+      let result =  patients;
       if (blocked.blockedUsers.length === patients.length) {
         return resolve();
       }
@@ -315,8 +315,8 @@ module.exports = {
           blocked.blockedUsers.length != 0
         ) {
           for (let j = 0; j < blocked.blockedUsers.length; j++) {
-            if (blocked.blockedUsers[j] != patients[i]._id) {
-              result.push(patients[i]);
+            if (blocked.blockedUsers[j] == patients[i]._id) {
+              result.splice(i, 1);
             }
           }
         } else {

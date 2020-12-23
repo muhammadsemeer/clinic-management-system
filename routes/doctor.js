@@ -149,12 +149,11 @@ router.delete("/bookings/cancel/:id", (req, res) => {
 
 router.get("/patients", verifyLogin, async (req, res) => {
   let allPateints = await doctorHelpers.getMyPatients(req.doctor._id);
-  console.log(allPateints);
+  let blocked = await doctorHelpers.getBlocked(req.doctor._id, allPateints);
   let notBlocked = await doctorHelpers.removeBlocked(
     req.doctor._id,
     allPateints
   );
-  let blocked = await doctorHelpers.getBlocked(req.doctor._id, allPateints);
   res.render("doctor/patient", {
     title: "Patients",
     doctorLogged: req.doctor,
