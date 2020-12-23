@@ -16,6 +16,9 @@ search.addEventListener("keyup", (event) => {
     })
       .then((res) => res.json())
       .then((res) => {
+        if (res.length == 0) {
+          return (container.innerHTML = "<h1>No Results Found</h1>");
+        }
         res.forEach((element) => {
           section += `
             <div class="container">
@@ -62,6 +65,9 @@ searchbtn.addEventListener("click", (event) => {
     })
       .then((res) => res.json())
       .then((res) => {
+        if (res.length == 0) {
+          return (container.innerHTML = "<h1>No Results Found</h1>");
+        }
         res.forEach((element) => {
           section += `
             <div class="container">
