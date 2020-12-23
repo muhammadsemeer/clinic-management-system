@@ -378,7 +378,7 @@ router.get("/history/download/:id", verifyLogin, async (req, res) => {
       element.notes,
     ];
   });
-  exportExcel(datas, columnNames, "History", `/xlsx/${req.params.id}.xlsx`);
+  exportExcel(datas, columnNames, "History", `/xlsx/doctor/${req.params.id}.xlsx`);
   res.render("doctor/download", {
     title: "Download History",
     doctorLogged: req.doctor,

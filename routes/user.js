@@ -7,6 +7,7 @@ const { verify } = require("../helpers/google-oauth");
 const { sendOTP, verfiyOTP } = require("../helpers/send-otp");
 const { createSlots } = require("../helpers/create-time-slot");
 const Fuse = require("fuse.js");
+const { exportExcel } = require("../helpers/export-xlsx");
 require("dotenv").config();
 const loginCheck = (req, res, next) => {
   if (req.cookies.userToken) {
@@ -471,6 +472,38 @@ router.get("/search", verifyLogin, async (req, res) => {
     result2,
     result3,
     result4,
+  });
+});
+
+router.get("/history/download/", verifyLogin, async (req, res) => {
+  let columnNames = [
+    "ID",
+    "Doctor Name",
+    "Consulted Date",
+    "Consulted Time",
+    "Medicines",
+    "Notes",
+  ];
+  let dataDB = await userHelpers.getMyAppointments(req.user._id, "Consulted");
+  let datas = dataDB.map((element) => {
+    if (!element.medicines || !element.notes) {
+      element.medicines = "";
+      element.notes = "";
+    }
+    return [
+      element._id.toString(),
+      element.doctor.name,
+      element.date,
+      element.timeslot,
+      element.medicines.toString(),
+      element.notes,
+    ];
+  });
+  exportExcel(datas, columnNames, "History", `/xlsx/user/${req.user._id}.xlsx`);
+  res.render("user/download", {
+    title: "Download History",
+    header: true,
+    user: req.user,
   });
 });
 
