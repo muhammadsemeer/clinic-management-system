@@ -12,9 +12,24 @@ var app = express();
 var db = require("./config/connection");
 var session = require("express-session");
 var fileUpload = require("express-fileupload");
+var helmet = require("helmet");
+var crypto = require("crypto");
+const { hash } = require("bcrypt");
 require("dotenv").config();
 
-app.disable('x-powered-by')
+// app.disable('x-powered-by')
+
+app.use((req, res, next) => {
+  res.locals.styleNonce = crypto.randomBytes(16).toString("base64");
+  global.__webpack_nonce__ = res.locals.styleNonce;
+  next();
+});
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
