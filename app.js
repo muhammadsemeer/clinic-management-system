@@ -17,13 +17,6 @@ var crypto = require("crypto");
 const { hash } = require("bcrypt");
 require("dotenv").config();
 
-// app.disable('x-powered-by')
-
-app.use((req, res, next) => {
-  res.locals.styleNonce = crypto.randomBytes(16).toString("base64");
-  global.__webpack_nonce__ = res.locals.styleNonce;
-  next();
-});
 
 app.use(
   helmet({
