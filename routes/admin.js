@@ -397,12 +397,16 @@ router.get("/stats/:id", verifyLogin, async (req, res) => {
 router.get("/search/users", async (req, res) => {
   let doctor = await adminHelpers.getDoctors();
   let patient = await adminHelpers.getPatients();
-  const options = {
+  const options1 = {
+    includeScore: true,
+    keys: ["name", "email", "username", "field", "specialised"],
+  };
+  const options2 = {
     includeScore: true,
     keys: ["name", "email", "contactno"],
   };
-  const fuse1 = new Fuse(doctor, options);
-  const fuse2 = new Fuse(patient, options);
+  const fuse1 = new Fuse(doctor, options1);
+  const fuse2 = new Fuse(patient, options2);
   const result1 = fuse1.search(req.query.q);
   const result2 = fuse2.search(req.query.q);
   res.json({ result1, result2 });
