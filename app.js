@@ -13,8 +13,6 @@ var db = require("./config/connection");
 var session = require("express-session");
 var fileUpload = require("express-fileupload");
 var helmet = require("helmet");
-var crypto = require("crypto");
-const { hash } = require("bcrypt");
 require("dotenv").config();
 
 
