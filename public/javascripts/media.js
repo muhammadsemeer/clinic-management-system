@@ -96,3 +96,8 @@ function deletePateint() {
       }
     });
 }
+
+var notfication = document.createElement("div");
+notfication.classList.add("notfication-container");
+
+document.body.appendChild(notfication);
