@@ -306,7 +306,7 @@ router.post("/book-appoinment/:doctor", verifyToken, (req, res) => {
       userHelpers
         .bookApointment(req.params.doctor, req.user._id, req.body)
         .then((response) => {
-          res.json({ status: true });
+          res.json({ status: true, response });
         })
         .catch((error) => {
           res.json({ status: false, error: error.msg });
@@ -507,7 +507,7 @@ router.get("/history/download/", verifyLogin, async (req, res) => {
   });
 });
 
-router.get("/search/doctors",  async (req, res) => {
+router.get("/search/doctors", async (req, res) => {
   let doctors = await adminHelpers.getDoctors();
   const options = {
     includeScore: true,

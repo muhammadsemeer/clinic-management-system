@@ -1,3 +1,5 @@
+var socket = io();
+socket.emit("s", "hi");
 function getDates(start) {
   var div = "";
   var dates = document.querySelector("#date");
@@ -12,7 +14,7 @@ function getDates(start) {
       res.forEach((element, index) => {
         dates.innerHTML = "";
         div += `
-          <div>
+      <div>
           <input type="radio" name="date" data-start="0" id="d${index}" value="${element}" />
           <label for="d${index}" onclick="getTimeSlots('${element}',0)" style="width: 200px">
           <span>${element}</span>
@@ -62,7 +64,10 @@ const book = (doctorid, userid) => {
       .then((res) => res.json())
       .then((res) => {
         if (res.status === true) {
-          modalup("success-modal");
+          socket.emit("request", res.response._id);
+          // setTimeout(()=> {
+            modalup("success-modal");
+          // },2000)
         } else if (res.status === "No Auth") {
           saveBooking(obj);
           let date = new Date().setMinutes(10);

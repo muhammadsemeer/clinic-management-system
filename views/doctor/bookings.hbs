@@ -32,7 +32,7 @@
     </div>
     {{/each}}
     {{else}}
-    <div class="container" style="padding-top: 15px;">
+    <div class="container no-book" style="padding-top: 15px;">
         <div class="card" style="display: flex; justify-content: center; align-items: center">
             <h1>No Bookings</h1>
         </div>
@@ -66,6 +66,7 @@
         Close
     </button>
 </div>
+<script src="/socket.io/socket.io.js"></script>
 <script>
     function cancelBooking() {
         fetch(`/bookings/cancel/${doctorid}`, {
@@ -83,4 +84,76 @@
             }
         })
     }
+    var id = "{{doctorLogged._id}}"
+    var socket = io()
+    var container = document.querySelector(".booking")
+    var nobooking = document.querySelector(".no-book")
+    socket.on(id, (appointment) => {
+        if (appointment.user.email === undefined) {
+            appointment.user.email = ""
+        }
+        if (appointment.user.contactno === undefined) {
+            appointment.user.contactno = ""
+        }
+        if (nobooking) {
+            nobooking.remove()
+            container.innerHTML += `
+        <div class="container" id="${appointment._id}" style="padding-top: 15px;">
+        <div class="card">
+            <div class="card-head">
+                <div>
+                    <p>${appointment.user.name}</p>
+                    <p style="word-break: break-all; font-size: 14px;">${appointment.user.email}</p>
+                    <p style="word-break: break-all; font-size: 14px;">${appointment.user.contactno}</p>
+                </div>
+            </div>
+            <div class="card-body">
+                <p>Date: ${appointment.date}</p>
+                <p>Time: ${appointment.timeslot}</p>
+                <div class="btn-grp">
+                    <a href="/bookings/approve/${appointment._id}">
+                        <button class="crop">
+                            Approve
+                        </button>
+                    </a>
+                    <button class="crop" style="margin-left: 10px;" onclick="modalup('delete-modal','${appointment._id}')">
+                        Cancel
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+        `
+        } else {
+            container.innerHTML += `
+        <div class="container" id="${appointment._id}" style="padding-top: 15px;">
+        <div class="card">
+            <div class="card-head">
+                <div>
+                    <p>${appointment.user.name}</p>
+                    <p style="word-break: break-all; font-size: 14px;">${appointment.user.email}</p>
+                    <p style="word-break: break-all; font-size: 14px;">${appointment.user.contactno}</p>
+                </div>
+            </div>
+            <div class="card-body">
+                <p>Date: ${appointment.date}</p>
+                <p>Time: ${appointment.timeslot}</p>
+                <div class="btn-grp">
+                    <a href="/bookings/approve/${appointment._id}">
+                        <button class="crop">
+                            Approve
+                        </button>
+                    </a>
+                    <button class="crop" style="margin-left: 10px;" onclick="modalup('delete-modal','${appointment._id}')">
+                        Cancel
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+        `
+        }
+    })
 </script>
