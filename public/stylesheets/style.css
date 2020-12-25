@@ -1308,3 +1308,55 @@ ul li {
   background: linear-gradient(145deg, #e6e6e6, #ffffff);
   box-shadow: 23px 23px 46px #cccccc, -23px -23px 46px #ffffff;
 }
+
+/* Notfication */
+.notfication-container {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  height: 300px;
+  overflow-y: scroll;
+  scrollbar-color: dark;
+}
+
+.notfication-container::-webkit-scrollbar {
+  width: 3px;
+}
+
+.notfication-container::-webkit-scrollbar-track {
+  background: none;
+}
+
+.notificaton {
+  margin: 10px 0;
+  width: 250px;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.notificaton button {
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: #006eff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    45deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  border-radius: 50px;
+}

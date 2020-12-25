@@ -1,5 +1,4 @@
 var socket = io();
-socket.emit("s", "hi");
 function getDates(start) {
   var div = "";
   var dates = document.querySelector("#date");
@@ -65,9 +64,7 @@ const book = (doctorid, userid) => {
       .then((res) => {
         if (res.status === true) {
           socket.emit("request", res.response._id);
-          // setTimeout(()=> {
             modalup("success-modal");
-          // },2000)
         } else if (res.status === "No Auth") {
           saveBooking(obj);
           let date = new Date().setMinutes(10);
