@@ -62,6 +62,13 @@
   <script src="/javascripts/script.js"></script>
   <script src="/javascripts/image-cropper.js"></script>
   <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  {{#if doctorLogged}}
+  <script>
+    var id = "{{doctorLogged._id}}"
+  </script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/javascripts/doctor-notification.js"></script>
+  {{/if}}
 </body>
 
 </html>

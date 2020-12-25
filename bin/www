@@ -35,7 +35,9 @@ io.on("connection", (socket) => {
   socket.on("request", async (id) => {
     let appointment = await getAppointmentDetails(id);
     let doctorId = appointment.doctor;
+    let notification = "notify" + appointment.doctor;
     io.emit(doctorId, appointment);
+    io.emit(notification, appointment);
   });
 });
 
