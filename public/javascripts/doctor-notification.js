@@ -1,8 +1,8 @@
 var socket = io();
 var notification = "notify" + id;
-var container = document.querySelector(".notfication-container");
+var noificationContainer = document.querySelector(".notfication-container");
 socket.on(notification, (appointment) => {
-  container.innerHTML += `
+  noificationContainer.innerHTML += `
     <div class="notificaton">
     <div class="notification-heading">
      ${appointment.user.name}
