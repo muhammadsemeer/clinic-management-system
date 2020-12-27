@@ -32,8 +32,8 @@ app.engine(
     layoutsDir: __dirname + "/views/layout/",
     partialsDir: __dirname + "/views/partials/",
     helpers: {
-      isOAuth: function (auth, options) {
-        if (auth === "Password") {
+      isOAuth: function (auth, email, options) {
+        if (auth === "Password" && email) {
           return options.fn(this);
         } else {
           return options.inverse(this);
