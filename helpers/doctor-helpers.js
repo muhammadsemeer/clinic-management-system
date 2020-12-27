@@ -369,11 +369,25 @@ module.exports = {
   },
   getMyProfile: (doctorId) => {
     return new Promise(async (resolve, reject) => {
-      let profile = db
+      let profile = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
         .findOne({ _id: ObjectId(doctorId) });
       resolve(profile);
+    });
+  },
+  getMyProfileEmail: (email) => {
+    return new Promise(async (resolve, reject) => {
+      let profile = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .find({ email: email })
+        .toArray();
+      if (profile.length > 0) {
+        resolve(profile[0]);
+      } else {
+        reject({ msg: "User Not Found" });
+      }
     });
   },
   checkUsername: (username, currentUsername) => {
