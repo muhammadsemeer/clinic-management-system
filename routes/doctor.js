@@ -4,6 +4,7 @@ var router = express.Router();
 var jwt = require("jsonwebtoken");
 const Fuse = require("fuse.js");
 const { exportExcel } = require("../helpers/export-xlsx");
+const { sendMail } = require("../helpers/send-mail");
 require("dotenv").config();
 
 const verifyLogin = (req, res, next) => {
@@ -407,4 +408,51 @@ router.get("/search/patient", verifyToken, async (req, res) => {
   const result2 = fuse2.search(req.query.q);
   res.json({ result1, result2 });
 });
+
+router.get("/profile/change-password", verifyLogin, async (req, res) => {
+  let profileDetails = await doctorHelpers.getMyProfile(req.doctor._id);
+  var payload = {
+    id: req.doctor._id,
+  };
+  var token = jwt.sign(payload, process.env.JWT_RESET_PASSWORD, {
+    expiresIn: "5m",
+  });
+  var template = `
+  <h2>Change Password</h2>
+  <a href="${process.env.DOCTOR_HOSTNAME}/profile/change-password/${token}">${process.env.DOCTOR_HOSTNAME}/profile/change-password/${token}</a>
+  `;
+  sendMail(profileDetails.email, "Change Password", template);
+  res.render("doctor/password-meassage", {
+    title: "Change Password",
+    message: `Change password link sent to your mail ${profileDetails.email}`,
+  });
+});
+
+router.get("/profile/change-password/:token", (req, res) => {
+  jwt.verify(
+    req.params.token,
+    process.env.JWT_RESET_PASSWORD,
+    (err, decoded) => {
+      if (err) {
+        res.render("doctor/password-meassage", {
+          title: "Link Exipred",
+          message: `The link was exipred the link is only valid for 5 Minutes`,
+        });
+      } else {
+        res.render("doctor/change-password", {
+          title: "New Password",
+          id: decoded.id,
+        });
+      }
+    }
+  );
+});
+
+router.post("/profile/change-password", (req, res) => {
+  doctorHelpers.changePassword(req.body).then((response) => {
+    res.clearCookie("doctorToken");
+    res.redirect("/");
+  });
+});
+
 module.exports = router;

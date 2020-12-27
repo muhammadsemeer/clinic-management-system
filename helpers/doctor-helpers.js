@@ -303,7 +303,7 @@ module.exports = {
             projection: { _id: 0, blockedUsers: 1 },
           }
         );
-      let result =  patients;
+      let result = patients;
       if (blocked.blockedUsers.length === patients.length) {
         return resolve();
       }
@@ -565,6 +565,24 @@ module.exports = {
         ])
         .toArray();
       resolve(history);
+    });
+  },
+  changePassword: (details) => {
+    return new Promise(async (resolve, reject) => {
+      details.password = await bcrypt.hash(details.password, 10);
+      db.get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(details.id) },
+          {
+            $set: {
+              password: details.password,
+            },
+          }
+        )
+        .then((response) => {
+          resolve();
+        });
     });
   },
 };

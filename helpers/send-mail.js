@@ -7,7 +7,7 @@ module.exports.sendMail = (to, sub, output) => {
       from: process.env.FROMMAIL,
       to: to,
       subject: sub,
-      text: output,
+      html: output,
     };
     transporter.sendMail(mailOptions, (error, data) => {
       if (error) return reject(error);

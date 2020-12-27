@@ -8,7 +8,6 @@
 }
 html {
   scroll-behavior: smooth;
-  scrollbar-color: var(--primary-color) 0%  var(--secondary-color) 100%;
 }
 body {
   background-color: var(--body-back);
