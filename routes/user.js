@@ -565,4 +565,64 @@ router.post("/profile/change-password", (req, res) => {
   });
 });
 
+router.get("/forget/password", (req, res) => {
+  res.render("user/forget-password", {
+    title: "Forget Password",
+    error: req.session.resetErr,
+  });
+  req.session.resetErr = null;
+});
+
+router.post("/reset/password/send", (req, res) => {
+  userHelpers
+    .getMyProfileEmail(req.body.email)
+    .then((response) => {
+      var payload = {
+        id: response._id,
+      };
+      var token = jwt.sign(payload, process.env.JWT_RESET_PASSWORD, {
+        expiresIn: "5m",
+      });
+      var template = `
+  <h2>Reset Password</h2>
+  <a href="${process.env.USER_HOSTNAME}/reset/password/${token}">${process.env.USER_HOSTNAME}/reset/password/${token}</a>
+  `;
+      sendMail(response.email, "Reset Password", template);
+      res.render("user/password-meassage", {
+        title: "Reset Password",
+        message: `Reset password link sent to your mail ${response.email}`,
+      });
+    })
+    .catch((error) => {
+      req.session.resetErr = error.msg;
+      res.redirect("/forget/password");
+    });
+});
+
+router.get("/reset/password/:token", (req, res) => {
+  jwt.verify(
+    req.params.token,
+    process.env.JWT_RESET_PASSWORD,
+    (err, decoded) => {
+      if (err) {
+        res.render("user/password-meassage", {
+          title: "Link Exipred",
+          message: `The link was exipred the link is only valid for 5 Minutes`,
+        });
+      } else {
+        res.render("user/change-password", {
+          title: "New Password",
+          id: decoded.id,
+        });
+      }
+    }
+  );
+});
+
+router.post("/reset/password", (req, res) => {
+  userHelpers.changePassword(req.body).then((response) => {
+    res.redirect("/login");
+  });
+});
+
 module.exports = router;

@@ -278,6 +278,16 @@ module.exports = {
         });
     });
   },
+  getMyProfileEmail: (email) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.PATIENT_COLLECTION)
+        .findOne({ email: email })
+        .then((response) => {
+          resolve(response);
+        });
+    });
+  },
   checkBlocked: (doctorId, userId) => {
     return new Promise(async (resolve, reject) => {
       let blocked = await db
