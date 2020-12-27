@@ -1,4 +1,4 @@
-<section class="admin-login" style="margin-top: 50px;">
+<section class="admin-login">
   <div class="img-section">
     <img src="/images/icons/undraw_secure_login_pdn4.svg" alt="" />
   </div>
@@ -14,70 +14,31 @@
       <p class="or">
         OR
       </p>
-      <div
-        class="fb-login-button"
-        data-size="large"
-        data-button-type="continue_with"
-        data-layout="rounded"
-        data-auto-logout-link="false"
-        data-use-continue-as="true"
-        data-onlogin="checkLoginState();"
-      ></div>
+      <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="rounded"
+        data-auto-logout-link="false" data-use-continue-as="true" data-onlogin="checkLoginState();"></div>
       <p class="or">
         OR
       </p>
       <div class="input-section">
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value="{{userDetails.name}}"
-          required
-        />
+        <input type="text" name="name" id="name" value="{{userDetails.name}}" required />
         <label for="name">
           Name
         </label>
       </div>
       <div class="input-section">
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value="{{userDetails.email}}"
-        />
+        <input type="email" name="email" id="email" value="{{userDetails.email}}" />
         <label for="email">
           Email (Optional)
         </label>
       </div>
       <div class="input-section">
-        <input
-          type="text"
-          pattern="^\+[1-9]{1}[0-9]{3,14}$"
-          name="contactno"
-          id="contactno"
-          placeholder="eg: +919876543210"
-          value="{{userDetails.contactno}}"
-          required
-        />
+        <input type="text" pattern="^\+[1-9]{1}[0-9]{3,14}$" name="contactno" id="contactno"
+          placeholder="eg: +919876543210" value="{{userDetails.contactno}}" required />
         <label for="contactno">
           Contact No (with country code)
         </label>
       </div>
-      <div class="input-section">
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value="{{userDetails.password}}"
-          required
-        />
-        <label for="password">
-          Password
-        </label>
-        <div class="icon">
-          <i class="far fa-eye-slash"></i>
-          <i class="far fa-eye"></i>
-        </div>
+      <div class="input-section" id="pwd-sec">
       </div>
       <div class="radio-section">
         <div>
@@ -103,7 +64,7 @@
         Already Have an Account??
       </a>
       <div class="input-section">
-        <input type="submit" value="Login" />
+        <input type="submit" value="Sign Up" />
       </div>
     </form>
   </div>
@@ -112,10 +73,7 @@
   <h1>
     Please Select Gender!
   </h1>
-  <button
-    class="normal"
-    onclick="document.querySelector('.gender-modal').classList.toggle('active')"
-  >
+  <button class="normal" onclick="document.querySelector('.gender-modal').classList.toggle('active')">
     OK
   </button>
 </div>
@@ -123,10 +81,27 @@
   <h1>
     Something Went Wrong.. Try Again!!!!
   </h1>
-  <button
-    class="normal"
-    onclick="document.querySelector('.error-modal').classList.toggle('active')"
-  >
+  <button class="normal" onclick="document.querySelector('.error-modal').classList.toggle('active')">
     OK
   </button>
 </div>
+<script>
+  const email = document.getElementById("email")
+  const pwd = document.getElementById("pwd-sec")
+  email.addEventListener("keyup", (event) => {
+    if (event.target.value !== "") {
+      pwd.innerHTML = `
+      <input type="password" name="password" id="password" value="{{userDetails.password}}" required />
+        <label for="password">
+          Password
+        </label>
+        <div class="icon">
+          <i class="far fa-eye-slash"></i>
+          <i class="far fa-eye"></i>
+        </div>
+      `
+    } else {
+      pwd.innerHTML = ""
+    }
+  })
+</script>

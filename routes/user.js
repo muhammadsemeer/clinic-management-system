@@ -8,6 +8,7 @@ const { sendOTP, verfiyOTP } = require("../helpers/send-otp");
 const { createSlots } = require("../helpers/create-time-slot");
 const Fuse = require("fuse.js");
 const { exportExcel } = require("../helpers/export-xlsx");
+const { sendMail } = require("../helpers/send-mail");
 require("dotenv").config();
 const loginCheck = (req, res, next) => {
   if (req.cookies.userToken) {
@@ -516,6 +517,52 @@ router.get("/search/doctors", async (req, res) => {
   const fuse = new Fuse(doctors, options);
   const result = fuse.search(req.query.q);
   res.json(result);
+});
+
+router.get("/profile/change-password", verifyLogin, async (req, res) => {
+  let profileDetails = await userHelpers.getMyProfile(req.user._id);
+  var payload = {
+    id: req.user._id,
+  };
+  var token = jwt.sign(payload, process.env.JWT_RESET_PASSWORD, {
+    expiresIn: "5m",
+  });
+  var template = `
+  <h2>Change Password</h2>
+  <a href="${process.env.USER_HOSTNAME}/profile/change-password/${token}">${process.env.USER_HOSTNAME}/profile/change-password/${token}</a>
+  `;
+  sendMail(profileDetails.email, "Change Password", template);
+  res.render("user/password-meassage", {
+    title: "Change Password",
+    message: `Change password link sent to your mail ${profileDetails.email}`,
+  });
+});
+
+router.get("/profile/change-password/:token", (req, res) => {
+  jwt.verify(
+    req.params.token,
+    process.env.JWT_RESET_PASSWORD,
+    (err, decoded) => {
+      if (err) {
+        res.render("user/password-meassage", {
+          title: "Link Exipred",
+          message: `The link was exipred the link is only valid for 5 Minutes`,
+        });
+      } else {
+        res.render("user/change-password", {
+          title: "New Password",
+          id: decoded.id,
+        });
+      }
+    }
+  );
+});
+
+router.post("/profile/change-password", (req, res) => {
+  userHelpers.changePassword(req.body).then((response) => {
+    res.clearCookie("userToken");
+    res.redirect("/login");
+  });
 });
 
 module.exports = router;

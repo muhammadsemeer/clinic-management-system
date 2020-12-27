@@ -272,9 +272,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       db.get()
         .collection(collection.PATIENT_COLLECTION)
-        .findOne(
-          { _id: ObjectId(id) },
-        )
+        .findOne({ _id: ObjectId(id) })
         .then((response) => {
           resolve(response);
         });
@@ -347,6 +345,24 @@ module.exports = {
       } else {
         reject({ msg: "Email or Contact No already registered" });
       }
+    });
+  },
+  changePassword: (details) => {
+    return new Promise(async (resolve, reject) => {
+      details.password = await bcrypt.hash(details.password, 10);
+      db.get()
+        .collection(collection.PATIENT_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(details.id) },
+          {
+            $set: {
+              password: details.password,
+            },
+          }
+        )
+        .then((response) => {
+          resolve();
+        });
     });
   },
 };
