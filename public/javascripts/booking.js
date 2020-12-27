@@ -175,6 +175,7 @@ function getAndBook() {
       .then((res) => res.json())
       .then((res) => {
         if (res.status === true) {
+          socket.emit("request", res.response._id);
           localStorage.removeItem("bookings");
           modalup("success-modal");
         } else if (res.status === "No Auth") {
