@@ -455,14 +455,64 @@ router.post("/profile/edit/", verifyLogin, (req, res) => {
         message: "Re Authentication Required",
       });
     } else {
-      var token = jwt.sign(req.body, process.env.JWT_SECERT, {
-        expiresIn: "60d",
+      adminHelpers.getMyProfile(req.body.email).then((response) => {
+        delete response.password;
+        var token = jwt.sign(response, process.env.JWT_SECERT, {
+          expiresIn: "60d",
+        });
+        res.cookie("adminToken", token, {
+          httpOnly: true,
+        });
+        res.redirect("/myprofile");
       });
-      res.cookie("adminToken", token, {
-        httpOnly: true,
-      });
-      res.redirect("/myprofile");
     }
+  });
+});
+
+router.get("/profile/change-password", verifyLogin, async (req, res) => {
+  let profileDetails = await adminHelpers.getMyProfile(req.admin.email);
+  var payload = {
+    id: req.admin._id,
+  };
+  var token = jwt.sign(payload, process.env.JWT_RESET_PASSWORD, {
+    expiresIn: "5m",
+  });
+  var template = `
+    <h2>Change Password</h2>
+    <a href="${process.env.ADMIN_HOSTNAME}/profile/change-password/${token}">${process.env.ADMIN_HOSTNAME}/profile/change-password/${token}</a>
+    `;
+  sendMail(profileDetails.email, "Change Password", template);
+  res.render("admin/password-message", {
+    title: "Change Password",
+    message: `Change password link sent to your mail ${profileDetails.email}`,
+  });
+});
+
+router.get("/profile/change-password/:token", (req, res) => {
+  jwt.verify(
+    req.params.token,
+    process.env.JWT_RESET_PASSWORD,
+    (err, decoded) => {
+      if (err) {
+        res.render("admin/password-message", {
+          title: "Link Exipred",
+          message: `The link was exipred the link is only valid for 5 Minutes`,
+        });
+      } else {
+        console.log(decoded);
+        res.render("admin/change-password", {
+          title: "New Password",
+          id: decoded.id,
+        });
+      }
+    }
+  );
+});
+
+router.post("/profile/change-password", (req, res) => {
+  adminHelpers.changePassword(req.body).then((response) => {
+    res.clearCookie("adminToken");
+    res.redirect("/");
   });
 });
 

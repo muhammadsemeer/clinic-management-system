@@ -590,4 +590,22 @@ module.exports = {
         });
     });
   },
+  changePassword: (details) => {
+    return new Promise(async (resolve, reject) => {
+      details.password = await bcrypt.hash(details.password, 10);
+      db.get()
+        .collection(collection.ADMIN_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(details.id) },
+          {
+            $set: {
+              password: details.password,
+            },
+          }
+        )
+        .then((response) => {
+          resolve();
+        });
+    });
+  },
 };
