@@ -555,7 +555,39 @@ module.exports = {
         .countDocuments({
           $and: [{ doctor: ObjectId(doctorId) }, { status: "Deleted" }],
         });
-      resolve({total, approved, pending, consulted , deleted})
+      resolve({ total, approved, pending, consulted, deleted });
+    });
+  },
+  getMyProfile: (email) => {
+    return new Promise(async (resolve, reject) => {
+      let profile = await db
+        .get()
+        .collection(collection.ADMIN_COLLECTION)
+        .find({ email: email })
+        .toArray();
+      if (profile.length > 0) {
+        resolve(profile[0]);
+      } else {
+        reject({ msg: "Wrong Email Id" });
+      }
+    });
+  },
+  editProfile: (id, details) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.ADMIN_COLLECTION)
+        .updateOne(
+          { _id: ObjectId(id) },
+          {
+            $set: {
+              name: details.name,
+              email: details.email,
+            },
+          }
+        )
+        .then((response) => {
+          resolve();
+        });
     });
   },
 };

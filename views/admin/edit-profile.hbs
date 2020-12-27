@@ -1,0 +1,29 @@
+<section class="admin-add ml-250">
+  <div class="head">
+    <h1>
+      Edit Profile
+    </h1>
+  </div>
+  <div class="error">
+    {{error}}
+  </div>
+  <div class="container">
+    <form action="/profile/edit/" method="POST" onsubmit="return validate(event)">
+      <div class="input-section">
+        <input type="text" name="name" value="{{adminDetails.name}}" required />
+        <label for="">
+          Name
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="email" name="email" value="{{adminDetails.email}}" required />
+        <label for="">
+          Email
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="submit" value="Update" />
+      </div>
+    </form>
+  </div>
+</section>

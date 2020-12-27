@@ -118,7 +118,13 @@ router.get("/appointment", verifyLogin, async (req, res) => {
 });
 
 router.get("/myprofile", verifyLogin, (req, res) => {
-  res.render("admin/profile", { title: "My Profile", admin: req.admin });
+  adminHelpers.getMyProfile(req.admin.email).then((response) => {
+    res.render("admin/profile", {
+      title: "My Profile",
+      admin: req.admin,
+      adminDetails: response,
+    });
+  });
 });
 
 router.get("/add-doctor", verifyLogin, (req, res) => {
@@ -428,6 +434,36 @@ router.get("/search/blocked", async (req, res) => {
   const result1 = fuse1.search(req.query.q);
   const result2 = fuse2.search(req.query.q);
   res.json({ result1, result2 });
+});
+
+router.get("/profile/edit", verifyLogin, (req, res) => {
+  adminHelpers.getMyProfile(req.admin.email).then((response) => {
+    res.render("admin/edit-profile", {
+      title: "Edit Profile",
+      admin: req.admin,
+      adminDetails: response,
+    });
+  });
+});
+
+router.post("/profile/edit/", verifyLogin, (req, res) => {
+  adminHelpers.editProfile(req.admin._id, req.body).then((response) => {
+    if (req.admin.email !== req.body.email) {
+      res.clearCookie("adminToken");
+      res.render("admin/message", {
+        title: "Email Id Changed",
+        message: "Re Authentication Required",
+      });
+    } else {
+      var token = jwt.sign(req.body, process.env.JWT_SECERT, {
+        expiresIn: "60d",
+      });
+      res.cookie("adminToken", token, {
+        httpOnly: true,
+      });
+      res.redirect("/myprofile");
+    }
+  });
 });
 
 module.exports = router;
