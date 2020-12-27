@@ -42,7 +42,9 @@
                 {{/if}}
                 <div class="btn-grp" style="margin-left: 0;">
                     <a href="/profile/edit"><button class="crop">Edit</button></a>
+                    {{#isOAuth userDetails.auth}}
                     <button class="crop" style="margin-left: 10px;">Change Password</button>
+                    {{/isOAuth}}
                 </div>
             </div>
         </div>

@@ -274,9 +274,6 @@ module.exports = {
         .collection(collection.PATIENT_COLLECTION)
         .findOne(
           { _id: ObjectId(id) },
-          {
-            projection: { name: 1, email: 1, contactno: 1, gender: 1, age: 1 },
-          }
         )
         .then((response) => {
           resolve(response);

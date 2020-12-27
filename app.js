@@ -15,7 +15,6 @@ var fileUpload = require("express-fileupload");
 var helmet = require("helmet");
 require("dotenv").config();
 
-
 app.use(
   helmet({
     contentSecurityPolicy: false,
@@ -32,6 +31,15 @@ app.engine(
     defaultLayout: "layout",
     layoutsDir: __dirname + "/views/layout/",
     partialsDir: __dirname + "/views/partials/",
+    helpers: {
+      isOAuth: function (auth, options) {
+        if (auth === "Password") {
+          return options.fn(this);
+        } else {
+          return options.inverse(this);
+        }
+      },
+    },
   })
 );
 
