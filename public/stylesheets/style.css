@@ -1379,3 +1379,25 @@ input[type="date"] {
     var(--secondary-color) 100%
   );
 }
+
+.legend {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.legend > div {
+  margin: 0 25px;
+}
+.legend1 {
+  display: inline-block;
+  width: 25px;
+  height: 15px;
+  background-color: rgba(255, 99, 132);
+}
+.legend2 {
+  display: inline-block;
+  width: 25px;
+  height: 15px;
+  background-color: rgba(54, 162, 235);
+}

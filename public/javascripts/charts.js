@@ -106,5 +106,5 @@ function plotChart(data) {
   arcs
     .append("text")
     .attr("transform", (d) => `translate(${label.centroid(d)})`)
-    .text((d) => d.data.value + d.data.label);
+    .text((d) => d.data.label);
 }

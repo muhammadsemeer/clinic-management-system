@@ -675,11 +675,11 @@ module.exports = {
       let pPercentage = (patients.length / totalAppointments) * 100;
       let result = [
         {
-          label: "% Appointments",
+          label: "Appointments",
           value: Math.floor(aPercentage),
         },
         {
-          label: "% Pateint",
+          label: "Patient",
           value: Math.floor(pPercentage),
         },
       ];
