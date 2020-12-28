@@ -662,25 +662,25 @@ module.exports = {
     });
   },
   getDoctorStats: (doctorId, date, patients) => {
-    return new Promise(async (resolve, rejetct) => {
+    return new Promise(async (resolve, reject) => {
       let totalAppointments = await db
         .get()
         .collection(collection.APPOINTMENT_COLLECTION)
-        .countDocuments({ doctor: doctorId });
+        .countDocuments({ doctor: ObjectId(doctorId) });
       let requestedAppointments = await db
         .get()
         .collection(collection.APPOINTMENT_COLLECTION)
-        .countDocuments({ doctor: doctorId, date: date });
+        .countDocuments({ doctor: ObjectId(doctorId), date: date });
       let aPercentage = (requestedAppointments / totalAppointments) * 100;
       let pPercentage = (patients.length / totalAppointments) * 100;
       let result = [
         {
           label: "% Appointments",
-          value: aPercentage,
+          value: Math.floor(aPercentage),
         },
         {
           label: "% Pateint",
-          value: pPercentage,
+          value: Math.floor(pPercentage),
         },
       ];
       resolve(result);

@@ -36,59 +36,68 @@ var myChart = new Chart(ctx, {
     },
   },
 });
-const data = [
-  {
-    label: "Appointment",
-    value: 7,
-  },
-  {
-    label: "Pateints",
-    value: 10,
-  },
-  {
-    label: "Total",
-    value: 11,
-  },
-];
 
-var svg = d3.select("svg"),
-  width = svg.attr("width"),
-  height = svg.attr("height");
+var date = document.getElementById("date");
+date.value = new Date(Date.now()).toISOString().slice(0, 10);
 
-const radius = Math.min(width, height) / 2;
+date.addEventListener("change", (event) => {
+  fecthData(event.target.value);
+});
 
-var g = svg
-  .append("g")
-  .attr("transform", `translate(${width / 2}, ${height / 2} )`);
+var id = location.pathname.split("/")[2];
+function fecthData(date) {
+  var reqDate = new Date(date).toDateString();
+  fetch(`/stats-report/${id}?date=${reqDate}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      return plotChart(data);
+    });
+}
 
-var color = d3.scaleOrdinal([
-  "rgba(255, 99, 132)",
-  "rgba(54, 162, 235)",
-  "rgba(255, 206, 86)",
-]);
+fecthData(date.value);
 
-var pie = d3.pie().value((data) => data.value);
+function plotChart(data) {
+  document.querySelector("svg").innerHTML = "";
+  var svg = d3.select("svg"),
+    width = svg.attr("width"),
+    height = svg.attr("height");
 
-var arc = d3.arc().outerRadius(radius).innerRadius(125);
+  const radius = Math.min(width, height) / 2;
 
-var label = d3
-  .arc()
-  .outerRadius(radius)
-  .innerRadius(radius - 90);
+  var g = svg
+    .append("g")
+    .attr("transform", `translate(${width / 2}, ${height / 2} )`);
 
-var arcs = g
-  .selectAll(".arc")
-  .data(pie(data))
-  .enter()
-  .append("g")
-  .attr("class", "arc");
+  var color = d3.scaleOrdinal(["rgba(255, 99, 132)", "rgba(54, 162, 235)"]);
 
-arcs
-  .append("path")
-  .attr("d", arc)
-  .attr("fill", (d) => color(d.data.value));
+  var pie = d3.pie().value((data) => data.value);
 
-arcs
-  .append("text")
-  .attr("transform", (d) => `translate(${label.centroid(d)})`)
-  .text((d) => d.data.label);
+  var arc = d3.arc().outerRadius(radius).innerRadius(125);
+
+  var label = d3
+    .arc()
+    .outerRadius(radius)
+    .innerRadius(radius - 90);
+
+  var arcs = g
+    .selectAll(".arc")
+    .data(pie(data))
+    .enter()
+    .append("g")
+    .attr("class", "arc");
+
+  arcs
+    .append("path")
+    .attr("d", arc)
+    .attr("fill", (d) => color(d.data.value));
+
+  arcs
+    .append("text")
+    .attr("transform", (d) => `translate(${label.centroid(d)})`)
+    .text((d) => d.data.label);
+}
