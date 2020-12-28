@@ -683,6 +683,9 @@ module.exports = {
           value: Math.floor(pPercentage),
         },
       ];
+      if (aPercentage === 0 && pPercentage === 0) {
+        return resolve([]);
+      }
       resolve(result);
     });
   },

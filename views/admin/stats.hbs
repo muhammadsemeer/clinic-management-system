@@ -2,22 +2,17 @@
     integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g=="
     crossorigin="anonymous" />
 <section class="admin-stats ml-250">
-    <style>
-        .d3-chart {
-            display: flex;
-            justify-content: center;
-            margin: 25px 0;
-        }
-    </style>
     <div style="padding-top: 25px;">
         <canvas id="chart" width="500" height="200"></canvas>
     </div>
-    <input type="date" id="date">
     <div class="head">
         <h1 style="text-align: center;">Stats</h1>
+        <div style="text-align: right;">
+            <input type="date" id="date">
+        </div>
     </div>
     <div class="d3-chart">
-        <svg width="500" height="400"></svg>
+        <svg width="700" height="400"></svg>
     </div>
     <script>
         var total = "{{counts.total}}"

@@ -1359,3 +1359,23 @@ ul li {
   );
   border-radius: 50px;
 }
+
+.d3-chart {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+input[type="date"] {
+  width: 200px;
+  margin-right: 50px;
+  padding: 10px;
+  color: #fff;
+  border: 1px solid;
+  border-radius: 6px;
+  background: linear-gradient(
+    45deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+}

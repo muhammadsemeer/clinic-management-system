@@ -55,14 +55,21 @@ function fecthData(date) {
   })
     .then((res) => res.json())
     .then((data) => {
-      return plotChart(data);
+      if (data.length == 0) {
+        return (document.querySelector(".d3-chart").innerHTML =
+          "<h1>No Datas Found</h1>");
+      } else {
+        return plotChart(data);
+      }
     });
 }
 
 fecthData(date.value);
 
 function plotChart(data) {
-  document.querySelector("svg").innerHTML = "";
+  document.querySelector(
+    ".d3-chart"
+  ).innerHTML = `<svg width="700" height="400"></svg>`;
   var svg = d3.select("svg"),
     width = svg.attr("width"),
     height = svg.attr("height");
@@ -82,7 +89,7 @@ function plotChart(data) {
   var label = d3
     .arc()
     .outerRadius(radius)
-    .innerRadius(radius - 90);
+    .innerRadius(radius - 50);
 
   var arcs = g
     .selectAll(".arc")
@@ -99,5 +106,5 @@ function plotChart(data) {
   arcs
     .append("text")
     .attr("transform", (d) => `translate(${label.centroid(d)})`)
-    .text((d) => d.data.label);
+    .text((d) => d.data.value + d.data.label);
 }
