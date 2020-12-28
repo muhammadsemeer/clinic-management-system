@@ -516,4 +516,16 @@ router.post("/profile/change-password", (req, res) => {
   });
 });
 
+router.get("/stats-report/:id", async (req, res) => {
+  let patients = await adminHelpers.getMyPatients(
+    req.params.id,
+    req.query.date
+  );
+  adminHelpers
+    .getDoctorStats(req.params.id, req.query.date, patients)
+    .then((response) => {
+      res.json(response);
+    });
+});
+
 module.exports = router;

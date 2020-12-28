@@ -608,4 +608,82 @@ module.exports = {
         });
     });
   },
+  getMyPatients: (doctorId, date) => {
+    return new Promise(async (resolve, reject) => {
+      let patients = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [{ doctor: ObjectId(doctorId) }, { date: date }],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+          {
+            $project: {
+              _id: 0,
+              user: 1,
+            },
+          },
+          {
+            $group: {
+              _id: null,
+              uniqueIds: { $addToSet: "$user._id" },
+              count: { $sum: 1 },
+            },
+          },
+          { $match: { count: { $gt: 1 } } },
+        ])
+        .toArray();
+      if (patients.length != 0) {
+        var id = patients[0].uniqueIds;
+        var result = [];
+        for (let i = 0; i < id.length; i++) {
+          result[i] = await db
+            .get()
+            .collection(collection.PATIENT_COLLECTION)
+            .findOne({ _id: ObjectId(id[i]) });
+        }
+        resolve(result);
+      } else {
+        resolve([]);
+      }
+    });
+  },
+  getDoctorStats: (doctorId, date, patients) => {
+    return new Promise(async (resolve, rejetct) => {
+      let totalAppointments = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .countDocuments({ doctor: doctorId });
+      let requestedAppointments = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .countDocuments({ doctor: doctorId, date: date });
+      let aPercentage = (requestedAppointments / totalAppointments) * 100;
+      let pPercentage = (patients.length / totalAppointments) * 100;
+      let result = [
+        {
+          label: "% Appointments",
+          value: aPercentage,
+        },
+        {
+          label: "% Pateint",
+          value: pPercentage,
+        },
+      ];
+      resolve(result);
+    });
+  },
 };
