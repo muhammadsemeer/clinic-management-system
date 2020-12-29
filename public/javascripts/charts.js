@@ -101,7 +101,7 @@ function plotChart(data) {
   arcs
     .append("path")
     .attr("d", arc)
-    .attr("fill", (d) => color(d.data.value));
+    .attr("fill", (d,i) => color(i));
 
   arcs
     .append("text")
