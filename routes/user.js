@@ -244,7 +244,11 @@ router.post("/login/password", tokenCheck, (req, res) => {
       res.redirect("/");
     })
     .catch((error) => {
-      res.render("user/password", { email: req.body.email, error: error.msg });
+      res.render("user/password", {
+        title: "Login",
+        email: req.body.email,
+        error: error.msg,
+      });
     });
 });
 

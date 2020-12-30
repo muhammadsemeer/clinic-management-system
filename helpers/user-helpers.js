@@ -128,7 +128,13 @@ module.exports = {
       let emailFound = await db
         .get()
         .collection(collection.PATIENT_COLLECTION)
-        .find({ $and: [{ email: details.email }, { auth: "Password" }] })
+        .find({
+          $and: [
+            { email: details.email },
+            { auth: "Password" },
+            { status: "Active" },
+          ],
+        })
         .toArray();
       if (emailFound.length <= 0) {
         reject({ msg: "Invalid Password" });
