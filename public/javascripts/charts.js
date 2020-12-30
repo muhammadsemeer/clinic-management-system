@@ -1,3 +1,4 @@
+/* ************** Chart Js *************************** */
 var ctx = document.getElementById("chart");
 var myChart = new Chart(ctx, {
   type: "pie",
@@ -37,6 +38,9 @@ var myChart = new Chart(ctx, {
   },
 });
 
+/* 
+************************* D3JS Chart *********************************
+*/ 
 var date = document.getElementById("date");
 date.value = new Date(Date.now()).toISOString().slice(0, 10);
 
@@ -106,5 +110,5 @@ function plotChart(data) {
   arcs
     .append("text")
     .attr("transform", (d) => `translate(${label.centroid(d)})`)
-    .text((d) => d.data.label);
+    .text((d) => `${ d.data.value}% ${ d.data.label}`);
 }
