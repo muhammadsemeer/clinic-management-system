@@ -6,6 +6,7 @@ const { sendMail } = require("../helpers/send-mail");
 const { sendMessage } = require("../helpers/sms-send");
 const fs = require("fs");
 const Fuse = require("fuse.js");
+const { generatePassword } = require("../helpers/generate-password");
 const verifyLogin = (req, res, next) => {
   if (req.cookies.adminToken) {
     jwt.verify(
@@ -150,6 +151,7 @@ router.get("/add-patient", verifyLogin, (req, res) => {
 });
 
 router.post("/add-doctor", verifyLogin, (req, res) => {
+  req.body.password = generatePassword();
   var to = req.body.email;
   var sub = "Added to Doctor's List on Galaxieon Care";
   var output = `
@@ -226,6 +228,7 @@ router.post("/doctors/:name", verifyLogin, (req, res) => {
 });
 
 router.post("/add-patient", verifyLogin, (req, res) => {
+  req.body.password = generatePassword();
   var to = req.body.email;
   var sub = "Added to Patient's List on Galaxieon Care";
   var output = `
