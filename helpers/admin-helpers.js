@@ -29,7 +29,12 @@ module.exports = {
       let emailFound = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
-        .find({ $and: [{ email: details.email }, { status: "Active" }] })
+        .find({
+          $and: [
+            { email: details.email },
+            { $or: [{ status: "Active" }, { status: "Blocked" }] },
+          ],
+        })
         .toArray();
       if (emailFound.length <= 0) {
         details.password = await bcrypt.hash(details.password, 10);
@@ -59,7 +64,12 @@ module.exports = {
       let userNameDb = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
-        .find({ $and: [{ username: username }, { status: "Active" }] })
+        .find({
+          $and: [
+            { username: username },
+            { $or: [{ status: "Active" }, { status: "Blocked" }] },
+          ],
+        })
         .toArray();
       if (userNameDb.length > 0) {
         resolve(false);
@@ -129,9 +139,7 @@ module.exports = {
             {
               $or: [{ email: details.email }, { contactno: details.contactno }],
             },
-            {
-              status: "Active",
-            },
+            { $or: [{ status: "Active" }, { status: "Blocked" }] },
           ],
         })
         .toArray();

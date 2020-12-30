@@ -246,7 +246,7 @@ router.post("/add-patient", verifyLogin, (req, res) => {
     .then((response) => {
       sendMail(to, sub, output)
         .then((response) => {
-          sendMessage([req.body.contactno], output)
+          sendMessage(req.body.contactno, output)
             .then((response) => {
               res.render("admin/success-page", {
                 admin: req.admin,
