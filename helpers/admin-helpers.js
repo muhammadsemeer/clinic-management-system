@@ -29,7 +29,7 @@ module.exports = {
       let emailFound = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
-        .find({ email: details.email })
+        .find({ $and: [{ email: details.email }, { status: "Active" }] })
         .toArray();
       if (emailFound.length <= 0) {
         details.password = await bcrypt.hash(details.password, 10);
@@ -38,30 +38,6 @@ module.exports = {
           .insertOne(details)
           .then((data) => {
             resolve(data.ops[0]);
-          });
-      } else if (emailFound[0].status === "Deleted") {
-        details.password = await bcrypt.hash(details.password, 10);
-        db.get()
-          .collection(collection.DOCTORS_COLLECTION)
-          .updateOne(
-            { email: details.email },
-            {
-              $set: {
-                name: details.name,
-                username: details.username,
-                email: details.email,
-                password: details.password,
-                gender: details.gender,
-                status: "Active",
-              },
-            }
-          )
-          .then(async (data) => {
-            let doctor = await db
-              .get()
-              .collection(collection.DOCTORS_COLLECTION)
-              .findOne({ email: details.email });
-            resolve(doctor);
           });
       } else {
         reject({ msg: "Email Id Already Exists" });
@@ -149,7 +125,14 @@ module.exports = {
         .get()
         .collection(collection.PATIENT_COLLECTION)
         .find({
-          $or: [{ email: details.email }, { contactno: details.contactno }],
+          $and: [
+            {
+              $or: [{ email: details.email }, { contactno: details.contactno }],
+            },
+            {
+              status: "Active",
+            },
+          ],
         })
         .toArray();
       if (mailFound.length <= 0) {
@@ -160,25 +143,6 @@ module.exports = {
           .insertOne(details)
           .then((data) => {
             resolve(data.ops[0]);
-          });
-      } else if (mailFound[0].status === "Deleted") {
-        details.password = await bcrypt.hash(details.password, 10);
-        db.get()
-          .collection(collection.PATIENT_COLLECTION)
-          .updateOne(
-            { email: details.email },
-            {
-              $set: {
-                name: details.name,
-                email: details.email,
-                password: details.password,
-                gender: details.gender,
-                status: "Active",
-              },
-            }
-          )
-          .then((data) => {
-            resolve();
           });
       } else {
         reject({ msg: "Email Id or Contact No Already Exists" });

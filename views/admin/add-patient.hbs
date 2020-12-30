@@ -22,13 +22,8 @@
         </label>
       </div>
       <div class="input-section">
-        <input
-          type="text"
-          pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"
-          name="contactno"
-          value="{{patient.contactno}}"
-          required
-        />
+        <input type="text" pattern="^\+[1-9]{1}[0-9]{3,14}$" placeholder="eg: +919876543210" name="contactno"
+          value="{{patient.contactno}}" required />
         <label for="">
           Contact No
         </label>
@@ -40,13 +35,7 @@
         </label>
       </div>
       <div class="input-section">
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value="{{patient.password}}"
-          required
-        />
+        <input type="password" name="password" id="password" value="{{patient.password}}" required />
         <label for="password">
           Password
         </label>
@@ -85,10 +74,7 @@
   <h1>
     Please Select Gender!
   </h1>
-  <button
-    class="normal"
-    onclick="document.querySelector('.gender-modal').classList.toggle('active')"
-  >
+  <button class="normal" onclick="document.querySelector('.gender-modal').classList.toggle('active')">
     OK
   </button>
 </div>
