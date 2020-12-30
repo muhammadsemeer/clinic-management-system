@@ -131,21 +131,38 @@ module.exports = {
   },
   addPatient: (details) => {
     return new Promise(async (resolve, reject) => {
-      let mailFound = await db
-        .get()
-        .collection(collection.PATIENT_COLLECTION)
-        .find({
-          $and: [
-            {
-              $or: [{ email: details.email }, { contactno: details.contactno }],
-            },
-            { $or: [{ status: "Active" }, { status: "Blocked" }] },
-          ],
-        })
-        .toArray();
+      let mailFound;
+      if (details.email) {
+        mailFound = await db
+          .get()
+          .collection(collection.PATIENT_COLLECTION)
+          .find({
+            $and: [
+              {
+                email: details.email,
+              },
+              { $or: [{ status: "Active" }, { status: "Blocked" }] },
+            ],
+          })
+          .toArray();
+        details.password = await bcrypt.hash(details.password, 10);
+      } else {
+        mailFound = await db
+          .get()
+          .collection(collection.PATIENT_COLLECTION)
+          .find({
+            $and: [
+              {
+                contactno: details.contactno,
+              },
+              { $or: [{ status: "Active" }, { status: "Blocked" }] },
+            ],
+          })
+          .toArray();
+      }
       if (mailFound.length <= 0) {
         details.status = "Active";
-        details.password = await bcrypt.hash(details.password, 10);
+        details.auth = "Password";
         db.get()
           .collection(collection.PATIENT_COLLECTION)
           .insertOne(details)

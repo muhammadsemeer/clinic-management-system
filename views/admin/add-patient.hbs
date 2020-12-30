@@ -8,7 +8,7 @@
     {{error}}
   </div>
   <div class="container">
-    <form action="/add-patient" method="POST" onsubmit="return validate(event)">
+    <form action="/add-patient" method="POST" onsubmit="return validate1(event)">
       <div class="input-section">
         <input type="text" name="name" value="{{patient.name}}" required />
         <label for="">
@@ -16,18 +16,12 @@
         </label>
       </div>
       <div class="input-section">
-        <input type="email" name="email" value="{{patient.email}}" required />
+        <input type="text" placeholder="eg: +919876543210" name="cred" id="cred" value="{{patient.email}}" required />
         <label for="">
-          Email
+          Email or contactno
         </label>
       </div>
-      <div class="input-section">
-        <input type="text" pattern="^\+[1-9]{1}[0-9]{3,14}$" placeholder="eg: +919876543210" name="contactno"
-          value="{{patient.contactno}}" required />
-        <label for="">
-          Contact No
-        </label>
-      </div>
+      <div class="error user-error"></div>
       <div class="input-section">
         <input type="number" name="age" value="{{patient.age}}" required />
         <label for="">
@@ -68,3 +62,49 @@
     OK
   </button>
 </div>
+<div class="modal valid-modal">
+  <h1>
+    Please enter your Email or Phone Number
+  </h1>
+  <button class="normal" onclick="document.querySelector('.valid-modal').classList.toggle('active')">
+    OK
+  </button>
+</div>
+<script>
+  var cred = document.getElementById("cred");
+  var error = document.querySelector(".user-error");
+  let checkCred = false
+  const validate1 = (event) => {
+    const male = document.getElementById("male");
+    const female = document.getElementById("female");
+    if (male.checked || female.checked) {
+      if (checkCred) {
+        return true;
+      }
+      else if (event.target.value == "") {
+        modalup("valid-modal")
+        return false;
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      modalup("gender-modal");
+      return false;
+    }
+  };
+  cred.addEventListener("keyup", (event) => {
+    var mailFormat = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})|(\+[1-9]{1}[0-9]{11})+$/;
+    if (!mailFormat.test(event.target.value)) {
+      error.innerHTML = "Please Enter Valid Email or Mobile No"
+      error.style.display = "inline";
+      cred.style.borderColor = "#ec1919";
+      checkCred = false
+    } else {
+      error.style.display = "none";
+      cred.style.borderColor = "#19b9ec";
+      checkCred = true
+    }
+  })
+</script>

@@ -158,8 +158,8 @@ router.post("/add-doctor", verifyLogin, (req, res) => {
   Hi, ${req.body.name}
   Greetings from Galaxieon Care
 
-  ${req.admin.name} added you to our doctor's list.
-  You can login to your doctor accout with your username and password that created by ${req.admin.name}
+  Admin Of Galaxieon Care added you to our doctor's list.
+  You can login to your doctor accout with your username and password that created by Admin
 
   Username: ${req.body.username}
   Password: ${req.body.password}
@@ -228,47 +228,75 @@ router.post("/doctors/:name", verifyLogin, (req, res) => {
 });
 
 router.post("/add-patient", verifyLogin, (req, res) => {
-  req.body.password = generatePassword();
+  var format = /([0-9\+[1-9]{1}[0-9]{3,14})+$/;
+  var cred = req.body.cred;
+  if (format.test(cred)) {
+    req.body.contactno = cred;
+    delete req.body.cred;
+  } else {
+    req.body.email = cred;
+    delete req.body.cred;
+  }
   var to = req.body.email;
   var sub = "Added to Patient's List on Galaxieon Care";
-  var output = `
-  Hi, ${req.body.name}
-  Greetings from Galaxieon Care
-
-  ${req.admin.name} added you to our patient's list .
-  You can login to your accout with your email and password that created by ${req.admin.name} or your can login with your resitered mobile
-
-  Registered Moblie No: ${req.body.contactno}
-  Password: ${req.body.password}
-`;
+  if (req.body.email) {
+    password = generatePassword();
+    req.body.password = password;
+  }
   adminHelpers
     .addPatient(req.body)
     .then((response) => {
-      sendMail(to, sub, output)
-        .then((response) => {
-          sendMessage(req.body.contactno, output)
-            .then((response) => {
-              res.render("admin/success-page", {
-                admin: req.admin,
-                title: `${req.body.name} Added Sucessfully`,
-                message: `Username and password was sent to the mail id  ${req.body.email} and regiested mobile ${req.body.contactno}`,
-              });
-            })
-            .catch((error) => {
-              res.render("admin/success-page", {
-                admin: req.admin,
-                title: `${req.body.name} Added Sucessfully`,
-                message: `Something Went Wrong on Sending Message to ${req.body.contactno}`,
-              });
+      if (req.body.email) {
+        var output = `
+      Hi, ${req.body.name}
+      Greetings from Galaxieon Care
+
+      Admin Of Galaxieon Care added you to our patient's list .
+      You can login to your  or your can login with your email and password
+      Email: ${req.body.email}
+      Password: ${password}
+    `;
+        sendMail(to, sub, output)
+          .then((response) => {
+            res.render("admin/success-page", {
+              admin: req.admin,
+              title: `${req.body.name} Added Sucessfully`,
+              message: `Username and password was sent to the mail id  ${req.body.email}`,
             });
-        })
-        .catch((error) => {
-          res.render("admin/success-page", {
-            admin: req.admin,
-            title: `${req.body.name} Added Sucessfully`,
-            message: `Something Went Wrong on Sending Mail to ${req.body.email}`,
+          })
+          .catch((error) => {
+            res.render("admin/success-page", {
+              admin: req.admin,
+              title: `${req.body.name} Added Sucessfully`,
+              message: `Something Went Wrong on Sending Mail to ${req.body.email}`,
+            });
           });
-        });
+      } else {
+        let no = req.body.contactno.substring(3, 13);
+        var output = `
+        Hi, ${req.body.name}
+        Greetings from Galaxieon Care
+      
+        Admin Of Galaxieon Care added you to our patient's list .
+        You can login to your  or your can login with your resitered mobile
+        Registered Moblie No: ${req.body.contactno}
+      `;
+        sendMessage([no], output)
+          .then((response) => {
+            res.render("admin/success-page", {
+              admin: req.admin,
+              title: `${req.body.name} Added Sucessfully`,
+              message: `Mesaage was sent to the regiested mobile ${req.body.contactno}`,
+            });
+          })
+          .catch((error) => {
+            res.render("admin/success-page", {
+              admin: req.admin,
+              title: `${req.body.name} Added Sucessfully`,
+              message: `Something Went Wrong on Sending Message to ${req.body.contactno}`,
+            });
+          });
+      }
     })
     .catch((error) => {
       req.session.adderror = error.msg;
