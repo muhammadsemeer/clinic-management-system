@@ -100,12 +100,14 @@ router.get("/", loginCheck, (req, res) => {
     return;
   }
   adminHelpers.getDoctors().then((response) => {
-    res.render("user/index", {
-      user: req.user,
-      title: "Galaxieon Care",
-      header: true,
-      doctor: response,
-    });
+    setTimeout(() => {
+      res.render("user/index", {
+        user: req.user,
+        title: "Galaxieon Care",
+        header: true,
+        doctor: response,
+      });
+    },5000)
   });
 });
 

@@ -1,3 +1,11 @@
+var loader = document.querySelector(".loader");
+
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    loader.style.display = "none";
+  }
+};
+
 var eye = document.querySelector(".input-section .icon");
 if (eye) {
   eye.addEventListener("click", () => {

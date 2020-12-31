@@ -1402,3 +1402,27 @@ input[type="date"] {
   height: 15px;
   background-color: rgba(54, 162, 235);
 }
+
+/* Modal Loader */
+.loader {
+  position: fixed;
+  top: 0;
+  z-index: 111111111;
+  width: 100%;
+  height: calc(100vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.349);
+}
+
+
+
+.loader .spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid var(--login-one);
+  border-top: 5px solid var(--primary-color);
+  animation: spin 1s linear infinite;
+}
