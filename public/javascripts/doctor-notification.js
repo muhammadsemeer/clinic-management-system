@@ -3,7 +3,7 @@ var notification = "notify" + id;
 var noificationContainer = document.querySelector(".notfication-container");
 socket.on(notification, (appointment) => {
   noificationContainer.innerHTML += `
-    <div class="notificaton">
+    <div class="notificaton" onclick="location.href = '/bookings'">
     <div class="notification-heading">
      ${appointment.user.name}
     </div>
