@@ -136,7 +136,9 @@ router.get("/bookings/approve/:id", verifyLogin, (req, res) => {
   doctorHelpers
     .changeBookingStatus(req.params.id, "Approved")
     .then((response) => {
-      res.redirect("/bookings");
+      doctorHelpers.sendInfo(req.params.id, "Approved").then((response) => {
+        res.redirect("/bookings");
+      });
     });
 });
 
@@ -144,7 +146,9 @@ router.delete("/bookings/cancel/:id", (req, res) => {
   doctorHelpers
     .changeBookingStatus(req.params.id, "Deleted")
     .then((response) => {
-      res.json(true);
+      doctorHelpers.sendInfo(req.params.id, "Rejected").then((response) => {
+        res.json(true);
+      });
     });
 });
 

@@ -2,6 +2,8 @@ const db = require("../config/connection");
 const collection = require("../config/collection");
 const { ObjectId } = require("mongodb");
 const bcrypt = require("bcrypt");
+const { sendMail } = require("./send-mail");
+const { sendMessage } = require("./sms-send");
 
 module.exports = {
   dologin: (deatils) => {
@@ -597,6 +599,71 @@ module.exports = {
         .then((response) => {
           resolve();
         });
+    });
+  },
+  sendInfo: (appId, status) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              _id: ObjectId(appId),
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+          {
+            $unwind: "$doctor",
+          },
+        ])
+        .toArray();
+      var template = `
+        Hi, ${appointment[0].user.name},
+
+        Your Booking is ${status} By ${appointment[0].doctor.name}
+        Booking Date: ${appointment[0].date}
+        Booking Time: ${appointment[0].timeslot}
+        
+        Thank You 
+        Galaxieon Care
+        `;
+      var emailTemplate = 
+      `
+        <h4>Hi, ${appointment[0].user.name},</h4>
+        <h4>Your Booking is ${status} By ${appointment[0].doctor.name}</h4>
+        <h4>Booking Date: ${appointment[0].date}</h4>
+        <h4>Booking Time: ${appointment[0].timeslot}</h4>
+        <h4>Thank You </h4>
+        <h4>Galaxieon Care </h4>
+        `;
+      if (appointment[0].user.email) {
+        sendMail(appointment[0].user.email,"Booking Rejected", emailTemplate).then((response) => {
+          resolve(response)
+        })
+      } else {
+        sendMessage([appointment[0].user.contactno.substring(3, 13)], template).then((response) => {
+          resolve(response)
+        })
+      }
     });
   },
 };
