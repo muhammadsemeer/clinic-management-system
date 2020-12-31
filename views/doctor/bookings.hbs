@@ -70,7 +70,8 @@
 <script>
     var loader = document.querySelector(".loader");
     function cancelBooking() {
-        loader.style.display = "flex"
+        loader.style.display = "flex";
+        loader.classList.add("fetch")
         fetch(`/bookings/cancel/${doctorid}`, {
             method: "DELETE",
             headers: {
@@ -78,7 +79,8 @@
             }
         }).then((res) => res.json()).then((status) => {
             if (status) {
-                loader.style.display = "none"
+                loader.style.display = "none";
+                loader.classList.remove("fetch")
                 document.getElementById(doctorid).remove()
                 document.querySelector('.delete-modal').classList.toggle('active')
                 modalup("delete-sucess-modal")

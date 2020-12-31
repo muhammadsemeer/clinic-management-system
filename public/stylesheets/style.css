@@ -1407,16 +1407,18 @@ input[type="date"] {
 .loader {
   position: fixed;
   top: 0;
-  z-index: 111111111;
+  z-index: 9999999999999999;
   width: 100%;
   height: calc(100vh);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   background-color: #fff;
 }
 
-
+.loader.fetch {
+  background: rgba(255, 255, 255, 0.356);
+}
 
 .loader .spinner {
   width: 50px;
