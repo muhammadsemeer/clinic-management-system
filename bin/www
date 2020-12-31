@@ -39,6 +39,11 @@ io.on("connection", (socket) => {
     io.emit(doctorId, appointment);
     io.emit(notification, appointment);
   });
+  socket.on("deleted", async (id) => {
+    let appointment = await getAppointmentDetails(id);
+    var deleted = "deleted" + appointment.doctor;
+    io.emit(deleted, id);
+  });
 });
 
 /**

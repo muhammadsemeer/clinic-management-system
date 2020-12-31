@@ -391,14 +391,14 @@ router.get("/appointments", verifyLogin, async (req, res) => {
 });
 
 router.delete("/cancel-appointment/:id", (req, res) => {
-  userHelpers
-    .cancelAppointment(req.params.id)
-    .then((response) => {
-      res.json(true);
-    })
-    .catch((error) => {
-      res.json(false);
-    });
+  // userHelpers
+  //   .cancelAppointment(req.params.id)
+  //   .then((response) => {
+      res.json({ status: true, appId: req.params.id });
+    // })
+    // .catch((error) => {
+    //   res.json({status: false});
+    // });
 });
 
 router.get("/profile", verifyLogin, (req, res) => {

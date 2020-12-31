@@ -177,6 +177,7 @@ const emailCheck = (event) => {
   }
 };
 
+var socket = io();
 const cancelAppointment = () => {
   document.querySelector(".message-modal").classList.toggle("active");
   fetch(`/cancel-appointment/${doctorid}`, {
@@ -187,8 +188,9 @@ const cancelAppointment = () => {
   })
     .then((res) => res.json())
     .then((res) => {
-      if (res) {
+      if (res.status) {
         document.getElementById(`${doctorid}`).remove();
+        socket.emit("deleted", res.appId);
         modalup("success-modal");
       } else {
         modalup("error-modal");
