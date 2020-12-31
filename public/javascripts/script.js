@@ -20,10 +20,13 @@ if (eye) {
 var username = document.querySelector("input[name=username]");
 var usernameFormat = null;
 var error = document.querySelector(".user-error");
-var format = new RegExp(/[@~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
 if (username) {
   username.addEventListener("keyup", () => {
     username.value = username.value.toLowerCase();
+    var format = new RegExp(/[@~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
+    if (/\s/.test(username.value)) {
+      username.value = username.value.replace(" ", "_");
+    }
     if (format.test(username.value)) {
       usernameFormat = false;
       error.style.display = "inline";
@@ -34,9 +37,6 @@ if (username) {
       usernameFormat = true;
       error.style.display = "none";
       username.style.borderColor = "#19b9ec";
-    }
-    if (/\s/.test(username.value)) {
-      username.value = username.value.replace(" ", "_");
     }
     checkUserName(username.value);
   });

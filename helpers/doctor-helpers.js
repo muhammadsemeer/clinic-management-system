@@ -26,7 +26,7 @@ module.exports = {
             if (status) {
               resolve(emailFound[0]);
             } else {
-              reject({ msg: "Invalid Email or Password" });
+              reject({ msg: "Invalid Username or Password" });
             }
           })
           .catch((err) => {

@@ -34,3 +34,24 @@
     </form>
   </div>
 </section>
+<script>
+  var username = document.getElementById("username"),
+    error = document.querySelector(".user-error"),
+    format = new RegExp(/[@~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
+  username.addEventListener("keyup", (event) => {
+    console.log(event.target.value)
+    event.target.value = event.target.value.toLowerCase();
+    if (format.test(event.target.value)) {
+      error.style.display = "inline";
+      error.innerHTML =
+        "Username does not includes special characters like @~`!#$%^&*+=-[]\\',/{}|\\\":";
+      event.target.style.borderColor = "#ec1919";
+    } else {
+      error.style.display = "none";
+      event.target.style.borderColor = "#19b9ec";
+    }
+    if (/\s/.test(event.target.value)) {
+      event.target.value = event.target.value.replace(" ", "_");
+    }
+  })
+</script>
