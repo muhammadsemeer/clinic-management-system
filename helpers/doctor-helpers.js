@@ -65,8 +65,8 @@ module.exports = {
         .toArray();
       let result = [];
       bookings.forEach((element) => {
-        var today = new Date().toDateString();
-        var dbDate = new Date(element.date).toDateString();
+        var today = new Date();
+        var dbDate = new Date(element.date);
         if (dbDate >= today) {
           result.push(element);
         }
@@ -646,8 +646,7 @@ module.exports = {
         Thank You 
         Galaxieon Care
         `;
-      var emailTemplate = 
-      `
+      var emailTemplate = `
         <h4>Hi, ${appointment[0].user.name},</h4>
         <h4>Your Booking is ${status} By ${appointment[0].doctor.name}</h4>
         <h4>Booking Date: ${appointment[0].date}</h4>
@@ -656,13 +655,20 @@ module.exports = {
         <h4>Galaxieon Care </h4>
         `;
       if (appointment[0].user.email) {
-        sendMail(appointment[0].user.email,"Booking Rejected", emailTemplate).then((response) => {
-          resolve(response)
-        })
+        sendMail(
+          appointment[0].user.email,
+          "Booking Rejected",
+          emailTemplate
+        ).then((response) => {
+          resolve(response);
+        });
       } else {
-        sendMessage([appointment[0].user.contactno.substring(3, 13)], template).then((response) => {
-          resolve(response)
-        })
+        sendMessage(
+          [appointment[0].user.contactno.substring(3, 13)],
+          template
+        ).then((response) => {
+          resolve(response);
+        });
       }
     });
   },
