@@ -68,7 +68,9 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script>
+    var loader = document.querySelector(".loader");
     function cancelBooking() {
+        loader.style.display = "flex"
         fetch(`/bookings/cancel/${doctorid}`, {
             method: "DELETE",
             headers: {
@@ -76,6 +78,7 @@
             }
         }).then((res) => res.json()).then((status) => {
             if (status) {
+                loader.style.display = "none"
                 document.getElementById(doctorid).remove()
                 document.querySelector('.delete-modal').classList.toggle('active')
                 modalup("delete-sucess-modal")
