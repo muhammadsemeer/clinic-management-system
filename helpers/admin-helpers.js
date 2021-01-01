@@ -26,6 +26,7 @@ module.exports = {
   addDoctor: (details) => {
     return new Promise(async (resolve, reject) => {
       details.status = "Active";
+      details.blockedUsers = [];
       let emailFound = await db
         .get()
         .collection(collection.DOCTORS_COLLECTION)
