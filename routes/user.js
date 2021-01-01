@@ -499,7 +499,7 @@ router.get("/search", verifyLogin, async (req, res) => {
   });
 });
 
-router.get("/history/download/", verifyLogin, async (req, res) => {
+router.get("/history/download", verifyLogin, async (req, res) => {
   let columnNames = [
     "ID",
     "Doctor Name",
