@@ -660,7 +660,7 @@ module.exports = {
       if (appointment[0].user.email) {
         sendMail(
           appointment[0].user.email,
-          "Booking Rejected",
+          `Booking ${status}`,
           emailTemplate
         ).then((response) => {
           resolve(response);
