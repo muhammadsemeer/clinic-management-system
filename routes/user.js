@@ -528,6 +528,7 @@ router.get("/history/download", verifyLogin, async (req, res) => {
     title: "Download History",
     header: true,
     user: req.user,
+    path: `/xlsx/user/${req.user._id}.xlsx`
   });
 });
 
