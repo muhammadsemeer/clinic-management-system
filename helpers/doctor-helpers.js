@@ -63,14 +63,17 @@ module.exports = {
           },
         ])
         .toArray();
+      console.log(bookings);
       let result = [];
       bookings.forEach((element) => {
         var today = new Date();
+        today = new Date(today).setTime(0, 0, 0, 0);
         var dbDate = new Date(element.date);
         if (dbDate >= today) {
           result.push(element);
         }
       });
+      console.log(result);
       resolve(result);
     });
   },

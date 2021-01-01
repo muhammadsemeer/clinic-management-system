@@ -1,0 +1,55 @@
+<section class="admin-add ml-250">
+  <div class="head">
+    <h1>
+      Create Slot Config
+    </h1>
+  </div>
+  <div class="error">
+    {{error}}
+  </div>
+  <div class="container">
+    <form action="/config/slot" method="POST">
+      <div class="input-section">
+        <input type="time" name="startTime" required />
+        <label for="startTime">
+          Consulting Time From
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="time" name="endTime" required />
+        <label for="endTime">
+          Consulting Time To
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="number" max="23" min="0" value="0" placeholder="like 8 or 13" name="slotHours" required />
+        <label for="">
+          Slot Hours
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="number" max="60" min="0" value="0" placeholder="like 8 or 13" name="slotMinutes" required />
+        <label for="">
+          Slot Minutes
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="number" max="60" min="0" value="0" placeholder="like 8 or 13" name="slotPreparation" required />
+        <label for="">
+          Slot Preparation Minutes
+        </label>
+      </div>
+      <div class="input-section">
+        <input type="submit" value="Update" />
+      </div>
+    </form>
+  </div>
+</section>
+<div class="modal gender-modal">
+  <h1>
+    Please Select Gender!
+  </h1>
+  <button class="normal" onclick="document.querySelector('.gender-modal').classList.toggle('active')">
+    OK
+  </button>
+</div>

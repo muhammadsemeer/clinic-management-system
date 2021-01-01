@@ -17,7 +17,13 @@ const verifyLogin = (req, res, next) => {
           return res.redirect("/login");
         } else {
           req.doctor = decoded;
-          next();
+          if (decoded.slotConfig) {
+            next();
+          } else if (req.url === "/config/slot") {
+            next();
+          } else {
+            res.redirect("/config/slot");
+          }
         }
       }
     );
@@ -517,6 +523,43 @@ router.post("/reset/password", (req, res) => {
   doctorHelpers.changePassword(req.body).then((response) => {
     res.redirect("/login");
   });
+});
+
+router.get("/config/slot", verifyLogin, (req, res) => {
+  res.render("doctor/create-slot-config", {
+    title: "Create Slot Config",
+    doctorLogged: req.doctor,
+  });
+});
+
+router.post("/config/slot", verifyLogin, (req, res) => {
+  var slotConfig = {
+    configSlotHours: req.body.slotHours,
+    configSlotMinutes: req.body.slotMinutes,
+    configSlotPreparation: req.body.slotPreparation,
+    timeArr: [{ startTime: req.body.startTime, endTime: req.body.endTime }],
+  };
+  doctorHelpers
+    .upadateSlotConfig(req.doctor._id, slotConfig)
+    .then((response) => {
+      doctorHelpers
+        .getMyProfile(req.doctor._id)
+        .then((data) => {
+          delete data.password;
+          var token = jwt.sign(data, process.env.JWT_SECERT, {
+            expiresIn: "60d",
+          });
+          res.cookie("doctorToken", token, {
+            httpOnly: true,
+          });
+          res.redirect("/");
+        })
+        .catch((error) => {
+          req.session.loginErr = error.msg;
+          req.session.loginUser = req.body;
+          res.redirect("/login");
+        });
+    });
 });
 
 module.exports = router;
