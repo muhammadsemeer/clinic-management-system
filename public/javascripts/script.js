@@ -10,21 +10,23 @@ document.onreadystatechange = () => {
 
 var eye = document.querySelector(".input-section .icon");
 if (eye) {
-  eye.addEventListener("click", () => {
-    var inputFeild = document.querySelector("input[name=password]");
-    var eyeSlash = document.querySelector(".fa-eye-slash");
-    var eye = document.querySelector(".fa-eye");
-    var status = inputFeild.getAttribute("type");
-    if (status === "password") {
-      inputFeild.setAttribute("type", "text");
-      eye.style.display = "none";
-      eyeSlash.style.display = "inline";
-    } else {
-      inputFeild.setAttribute("type", "password");
-      eye.style.display = "inline";
-      eyeSlash.style.display = "none";
-    }
-  });
+  eye.addEventListener("click", show);
+}
+
+function show() {
+  var inputFeild = document.querySelector("input[name=password]");
+  var eyeSlash = document.querySelector(".fa-eye-slash");
+  var eye = document.querySelector(".fa-eye");
+  var status = inputFeild.getAttribute("type");
+  if (status === "password") {
+    inputFeild.setAttribute("type", "text");
+    eye.style.display = "none";
+    eyeSlash.style.display = "inline";
+  } else {
+    inputFeild.setAttribute("type", "password");
+    eye.style.display = "inline";
+    eyeSlash.style.display = "none";
+  }
 }
 
 var username = document.querySelector("input[name=username]");
@@ -185,27 +187,6 @@ const emailCheck = (event) => {
   } else {
     return true;
   }
-};
-
-var socket = io();
-const cancelAppointment = () => {
-  document.querySelector(".message-modal").classList.toggle("active");
-  fetch(`/cancel-appointment/${doctorid}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.status) {
-        document.getElementById(`${doctorid}`).remove();
-        socket.emit("deleted", res.appId);
-        modalup("success-modal");
-      } else {
-        modalup("error-modal");
-      }
-    });
 };
 
 var name;
