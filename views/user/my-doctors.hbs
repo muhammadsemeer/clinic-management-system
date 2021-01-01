@@ -1,0 +1,53 @@
+<section class="user doctors">
+    <div class="head">
+       <h1> My Doctors</h1>
+    </div>
+    <div class="user-container">
+        <div id="doctor-conatiner" class="container active">
+            <div class="doctors-display" style="padding: 25px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Specialised
+                            </th>
+                            <th>
+                                Field
+                            </th>
+                            <th>
+                                Last Appointment
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each notBlocked}}
+                        <tr id="{{this._id}}">
+                            <td>
+                                {{this.name}}
+                            </td>
+                            <td>
+                                {{this.email}}
+                            </td>
+                            <td>
+                                {{this.contactno}}
+                            </td>
+                            <td>
+                                <a class="edit tooltip" href="/history/{{this._id}}">
+                                    <i class="fas fa-calendar"></i>
+                                    <span class="tooltip-text">History</span>
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
