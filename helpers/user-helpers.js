@@ -381,4 +381,70 @@ module.exports = {
         });
     });
   },
+  getMyDoctors: (userId) => {
+    return new Promise(async (resolve, reject) => {
+      let doctors = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [{ user: ObjectId(userId) }, { status: "Consulted" }],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$doctor",
+          },
+          {
+            $project: {
+              _id: 0,
+              doctor: 1,
+            },
+          },
+          {
+            $group: {
+              _id: null,
+              uniqueIds: { $addToSet: "$doctor._id" },
+              count: { $sum: 1 },
+            },
+          },
+          { $match: { count: { $gt: 1 } } },
+        ])
+        .toArray();
+      var id = doctors[0].uniqueIds;
+      var result = [];
+      for (let i = 0; i < id.length; i++) {
+        result[i] = await db
+          .get()
+          .collection(collection.DOCTORS_COLLECTION)
+          .findOne({ _id: ObjectId(id[i]) });
+        let last = await db
+          .get()
+          .collection(collection.APPOINTMENT_COLLECTION)
+          .find({
+            $and: [
+              { user: ObjectId(userId) },
+              { doctor: id[i] },
+              { status: "Consulted" },
+            ],
+          })
+          .sort({ _id: -1 })
+          .limit(1)
+          .toArray();
+        result[i].last = {
+          date: last[0].date,
+          timeslot: last[0].timeslot
+        };
+      }
+      resolve(result);
+    });
+  },
 };

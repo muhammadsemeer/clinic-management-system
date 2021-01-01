@@ -648,11 +648,13 @@ router.post("/reset/password", (req, res) => {
   });
 });
 
-router.get("/mydoctors", verifyLogin, (req, res) => {
+router.get("/mydoctors", verifyLogin, async (req, res) => {
+  let doctors = await userHelpers.getMyDoctors(req.user._id);
   res.render("user/my-doctors", {
     user: req.user,
     header: true,
     title: "My Doctors",
+    doctors,
   });
 });
 

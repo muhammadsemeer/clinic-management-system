@@ -26,16 +26,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each notBlocked}}
+                        {{#each doctors}}
                         <tr id="{{this._id}}">
                             <td>
                                 {{this.name}}
                             </td>
                             <td>
-                                {{this.email}}
+                                {{this.specialised}}
                             </td>
                             <td>
-                                {{this.contactno}}
+                                {{this.field}}
+                            </td>
+                            <td>
+                                {{this.last.date}} <br> {{this.last.timeslot}}
                             </td>
                             <td>
                                 <a class="edit tooltip" href="/history/{{this._id}}">
