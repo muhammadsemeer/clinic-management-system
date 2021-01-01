@@ -15,6 +15,9 @@ if (eye) {
 
 function show() {
   var inputFeild = document.querySelector("input[name=password]");
+  if(!inputFeild) {
+    inputFeild = document.querySelector("input[name=code]");
+  }
   var eyeSlash = document.querySelector(".fa-eye-slash");
   var eye = document.querySelector(".fa-eye");
   var status = inputFeild.getAttribute("type");

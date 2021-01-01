@@ -230,6 +230,23 @@ router.post("/login", tokenCheck, (req, res) => {
   }
 });
 
+router.get("/resent/otp/:no", (req, res) => {
+  userHelpers
+    .checkMobile(req.params.no)
+    .then((response) => {
+      sendOTP(response)
+        .then((data) => {
+          res.json({ status: true });
+        })
+        .catch((error) => {
+          res.json({ status: false, error: error.msg });
+        });
+    })
+    .catch((error) => {
+      res.json({ status: false, error: error.msg });
+    });
+});
+
 router.post("/login/password", tokenCheck, (req, res) => {
   userHelpers
     .passwordLogin(req.body)
@@ -266,9 +283,11 @@ router.post("/login/otp-verify", (req, res) => {
         res.redirect("/");
       })
       .catch((error) => {
-        req.session.loginErr = error.msg;
-        req.session.loginUser = req.body.number;
-        res.redirect("/login");
+        res.render("user/otp", {
+          title: "Verify OTP",
+          mobileno: req.body.number,
+          error: error.msg,
+        });
       });
   });
 });
@@ -397,7 +416,7 @@ router.delete("/cancel-appointment/:id", (req, res) => {
       res.json({ status: true, appId: req.params.id });
     })
     .catch((error) => {
-      res.json({status: false});
+      res.json({ status: false });
     });
 });
 

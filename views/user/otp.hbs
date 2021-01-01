@@ -22,7 +22,7 @@
           <i class="far fa-eye"></i>
         </div>
       </div>
-      <a href="/forgot-password">
+      <a onclick="resendOTP('{{mobileno}}')">
         Resend the code Again
       </a>
       <div class="input-section">
@@ -35,10 +35,26 @@
   <h1>
     Something Went Wrong.. Try Again!!!!
   </h1>
-  <button
-    class="normal"
-    onclick="document.querySelector('.error-modal').classList.toggle('active')"
-  >
+  <button class="normal" onclick="document.querySelector('.error-modal').classList.toggle('active')">
     OK
   </button>
 </div>
+<script>
+  const resendOTP = (no) => {
+    loader.style.display = "flex";
+    loader.classList.add("fetch")
+    fetch(`/resent/otp/${no}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((res) => res.json()).then((res) => {
+      if (res.status) {
+        loader.style.display = "none";
+        loader.classList.remove("fetch")
+      } else {
+        document.querySelector(".error").innerHTML = res.error
+      }
+    })
+  }
+</script>
