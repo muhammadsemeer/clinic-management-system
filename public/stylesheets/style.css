@@ -1416,9 +1416,6 @@ input[type="date"] {
   background-color: #fff;
 }
 
-.loader.fetch {
-  background: rgba(255, 255, 255, 0.356);
-}
 
 .spinner {
   width: 50px;
