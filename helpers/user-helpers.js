@@ -452,11 +452,28 @@ module.exports = {
       let history = await db
         .get()
         .collection(collection.APPOINTMENT_COLLECTION)
-        .find({
-          $and: [{ doctor: ObjectId(doctorId) }, { user: ObjectId(userId) }],
-        })
+        .aggregate([
+          {
+            $match: {
+              $and: [
+                { doctor: ObjectId(doctorId) },
+                { user: ObjectId(userId) },
+              ],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$doctor",
+          },
+        ])
         .toArray();
-      console.log(history);
       resolve(history);
     });
   },

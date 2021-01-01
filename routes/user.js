@@ -528,7 +528,7 @@ router.get("/history/download", verifyLogin, async (req, res) => {
     title: "Download History",
     header: true,
     user: req.user,
-    path: `/xlsx/user/${req.user._id}.xlsx`
+    path: `/xlsx/user/${req.user._id}.xlsx`,
   });
 });
 
@@ -671,6 +671,42 @@ router.get("/history/:id", verifyLogin, async (req, res) => {
     title: `Cosnulted History - ${reqDoctor.name}`,
     reqDoctor,
     history,
+  });
+});
+
+router.get("/history/download/:id", verifyLogin, async (req, res) => {
+  let columnNames = [
+    "ID",
+    "Doctor Name",
+    "Consulted Date",
+    "Consulted Time",
+    "Medicines",
+    "Notes",
+  ];
+  let dataDB = await userHelpers.getConsultedHistory(
+    req.user._id,
+    req.params.id
+  );;
+  let datas = dataDB.map((element) => {
+    if (!element.medicines || !element.notes) {
+      element.medicines = "";
+      element.notes = "";
+    }
+    return [
+      element._id.toString(),
+      element.doctor.name,
+      element.date,
+      element.timeslot,
+      element.medicines.toString(),
+      element.notes,
+    ];
+  });
+  exportExcel(datas, columnNames, "History", `/xlsx/user/${req.user._id}_${req.params.id}.xlsx`);
+  res.render("user/download", {
+    title: "Download History",
+    header: true,
+    user: req.user,
+    path: `/xlsx/user/${req.user._id}_${req.params.id}.xlsx`,
   });
 });
 
