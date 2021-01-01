@@ -648,4 +648,12 @@ router.post("/reset/password", (req, res) => {
   });
 });
 
+router.get("/mydoctors", verifyLogin, (req, res) => {
+  res.render("user/my-doctors", {
+    user: req.user,
+    header: true,
+    title: "My Doctors",
+  });
+});
+
 module.exports = router;
