@@ -268,7 +268,6 @@ module.exports = {
               count: { $sum: 1 },
             },
           },
-          { $match: { count: { $gt: 1 } } },
         ])
         .toArray();
       var id = patients[0].uniqueIds;
@@ -279,6 +278,7 @@ module.exports = {
           .collection(collection.PATIENT_COLLECTION)
           .findOne({ _id: ObjectId(id[i]) });
       }
+      console.log(result);
       resolve(result);
     });
   },
