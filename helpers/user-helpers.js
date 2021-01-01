@@ -441,10 +441,23 @@ module.exports = {
           .toArray();
         result[i].last = {
           date: last[0].date,
-          timeslot: last[0].timeslot
+          timeslot: last[0].timeslot,
         };
       }
       resolve(result);
+    });
+  },
+  getConsultedHistory: (userId, doctorId) => {
+    return new Promise(async (resolve, reject) => {
+      let history = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .find({
+          $and: [{ doctor: ObjectId(doctorId) }, { user: ObjectId(userId) }],
+        })
+        .toArray();
+      console.log(history);
+      resolve(history);
     });
   },
 };

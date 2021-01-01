@@ -658,4 +658,19 @@ router.get("/mydoctors", verifyLogin, async (req, res) => {
   });
 });
 
+router.get("/history/:id", verifyLogin, async (req, res) => {
+  let reqDoctor = await userHelpers.getBookingDoctor(req.params.id);
+  let history = await userHelpers.getConsultedHistory(
+    req.user._id,
+    req.params.id
+  );
+  res.render("user/history", {
+    user: req.user,
+    header: true,
+    title: `Cosnulted History - ${reqDoctor.name}`,
+    reqDoctor,
+    history,
+  });
+});
+
 module.exports = router;

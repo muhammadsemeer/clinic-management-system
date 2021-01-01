@@ -1,0 +1,49 @@
+<section class="user history">
+    <div class="head">
+        <h2>Consulted History</h2>
+        <h3>Dr. {{reqDoctor.name}}</h3>
+    </div>
+    {{#if history}}
+    <div class="doctors-display" style="padding: 25px;">
+        <div class="btn-sec">
+            <a href="/history/download/{{userId}}">
+                <i class="fas fa-download"></i>
+            </a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    </th>
+                    <th>
+                        Consulted On
+                    </th>
+                    <th>
+                        Medcines
+                    </th>
+                    <th>
+                        Notes
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each history}}
+                <tr id="{{this._id}}">
+                    <td><span>{{this.date}}</span></td>
+                    <td>
+                        {{#each this.medicines}}
+                        {{this}}
+                        {{/each}}
+                    </td>
+                    <td>{{this.notes}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    </div>
+    {{else}}
+    <div class="head" style="display: flex; justify-content: center">
+        <h1>No History Found</h1>
+    </div>
+    {{/if}}
+</section>
