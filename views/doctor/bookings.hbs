@@ -40,8 +40,11 @@
     {{/if}}
 </section>
 <div class="modal delete-modal">
+    <div class="loader-f">
+        <div class="spinner"></div>
+    </div>
     <h1>
-        Do you Want Delete Doctor?
+        Do you Want to Cancel?
     </h1>
     <button class="yes" onclick="cancelBooking()">
         Yes
@@ -68,10 +71,9 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    var loader = document.querySelector(".loader");
+    var loaderf = document.querySelector(".loader-f");
     function cancelBooking() {
-        loader.style.display = "flex";
-        loader.classList.add("fetch")
+        loaderf.style.display = "flex";
         fetch(`/bookings/cancel/${doctorid}`, {
             method: "DELETE",
             headers: {
@@ -79,8 +81,7 @@
             }
         }).then((res) => res.json()).then((status) => {
             if (status) {
-                loader.style.display = "none";
-                loader.classList.remove("fetch")
+                loaderf.style.display = "none";
                 document.getElementById(doctorid).remove()
                 document.querySelector('.delete-modal').classList.toggle('active')
                 modalup("delete-sucess-modal")
