@@ -77,21 +77,13 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-router.get("/", verifyLogin, async (req, res) => {
-  let todays = await doctorHelpers.getTodaysAppointment(req.doctor._id);
-  let upcoming = await doctorHelpers.getUpcomingAppointments(req.doctor._id);
-  let expired = await doctorHelpers.getExipredApointments(req.doctor._id);
-  let cancelled = await doctorHelpers.getCancelledAppointment(req.doctor._id);
-  let consulted = await doctorHelpers.getConsultedAppointments(req.doctor._id);
-  res.render("doctor/index", {
-    title: "Doctor Dashboard",
-    doctorLogged: req.doctor,
-    search: true,
-    todays,
-    upcoming,
-    expired,
-    cancelled,
-    consulted,
+router.get("/", verifyLogin, (req, res) => {
+  doctorHelpers.getMybookings(req.doctor._id).then((response) => {
+    res.render("doctor/index", {
+      title: "My Booking",
+      doctorLogged: req.doctor,
+      bookings: response,
+    });
   });
 });
 
@@ -128,13 +120,21 @@ router.get("/logout", (req, res) => {
   res.redirect("/login");
 });
 
-router.get("/bookings", verifyLogin, (req, res) => {
-  doctorHelpers.getMybookings(req.doctor._id).then((response) => {
-    res.render("doctor/bookings", {
-      title: "My Booking",
-      doctorLogged: req.doctor,
-      bookings: response,
-    });
+router.get("/appointments", verifyLogin, async (req, res) => {
+  let todays = await doctorHelpers.getTodaysAppointment(req.doctor._id);
+  let upcoming = await doctorHelpers.getUpcomingAppointments(req.doctor._id);
+  let expired = await doctorHelpers.getExipredApointments(req.doctor._id);
+  let cancelled = await doctorHelpers.getCancelledAppointment(req.doctor._id);
+  let consulted = await doctorHelpers.getConsultedAppointments(req.doctor._id);
+  res.render("doctor/appointments", {
+    title: "Doctor Dashboard",
+    doctorLogged: req.doctor,
+    search: true,
+    todays,
+    upcoming,
+    expired,
+    cancelled,
+    consulted,
   });
 });
 
@@ -143,7 +143,7 @@ router.get("/bookings/approve/:id", verifyLogin, (req, res) => {
     .changeBookingStatus(req.params.id, "Approved")
     .then((response) => {
       doctorHelpers.sendInfo(req.params.id, "Approved").then((response) => {
-        res.redirect("/bookings");
+        res.redirect("/");
       });
     });
 });
