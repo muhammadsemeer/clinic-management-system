@@ -35,7 +35,7 @@ module.exports = {
             if (err) throw err;
           });
       } else {
-        reject({ msg: "Invalid Email or Password" });
+        reject({ msg: "Invalid Username or Password" });
       }
     });
   },
