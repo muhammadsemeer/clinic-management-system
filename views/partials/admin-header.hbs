@@ -8,7 +8,7 @@
   </div>
   {{#if search}}
   <div class="search">
-    <form action="/search" method="GET">
+    <form action="/search/{{searchId}}" method="GET">
       <div class="btn-grp">
         <input type="search" name="q" class="first" id="search" value="{{query}}" placeholder="Search....">
         <button type="submit" class="last" id="search-btn"><i class="fas fa-search"></i></button>

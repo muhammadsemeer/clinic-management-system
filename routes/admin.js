@@ -119,6 +119,7 @@ router.get("/appointment/:id", verifyLogin, async (req, res) => {
   res.render("admin/appointment-id", {
     title: "Appointment",
     admin: req.admin,
+    searchId: req.params.id,
     search: true,
     todays,
     upcoming,
@@ -394,12 +395,22 @@ router.put("/patient/unblock/:id", (req, res) => {
   });
 });
 
-router.get("/search", verifyLogin, async (req, res) => {
-  let todaysAppointments = await adminHelpers.getTodaysAppointment();
-  let upcomingAppointments = await adminHelpers.getUpcomingAppointments();
-  let expiredAppointments = await adminHelpers.getExipredApointments();
-  let cancelledAppointments = await adminHelpers.getCancelledAppointment();
-  let consultedAppointments = await adminHelpers.getConsultedAppointments();
+router.get("/search/:id", verifyLogin, async (req, res) => {
+  let todaysAppointments = await adminHelpers.getTodaysAppointment(
+    req.params.id
+  );
+  let upcomingAppointments = await adminHelpers.getUpcomingAppointments(
+    req.params.id
+  );
+  let expiredAppointments = await adminHelpers.getExipredApointments(
+    req.params.id
+  );
+  let cancelledAppointments = await adminHelpers.getCancelledAppointment(
+    req.params.id
+  );
+  let consultedAppointments = await adminHelpers.getConsultedAppointments(
+    req.params.id
+  );
   const options = {
     includeScore: true,
     keys: [
@@ -410,6 +421,7 @@ router.get("/search", verifyLogin, async (req, res) => {
       "doctor.specialised",
       "user.name",
       "user.email",
+      "user.contactno",
       "timeslot",
     ],
   };
@@ -427,6 +439,7 @@ router.get("/search", verifyLogin, async (req, res) => {
     title: `${req.query.q} - Search`,
     admin: req.admin,
     search: true,
+    searchId: req.params.id,
     query: req.query.q,
     result1,
     result2,
