@@ -1,0 +1,359 @@
+<section class="admin appmnt ml-250">
+  <div class="tab">
+    <button class="tb active" data-id="today" onclick="tabview(event)">
+      <i class="fas fa-calendar-day"></i>
+      Today
+    </button>
+    <button class="tb" data-id="upcoming" onclick="tabview(event)">
+      <i class="fas fa-calendar-week"></i>
+      Upcoming
+    </button>
+    <button class="tb" data-id="consulted" onclick="tabview(event)">
+      <i class="fas fa-clipboard-check"></i>
+      Consulted
+    </button>
+    <button class="tb" data-id="cancelled" onclick="tabview(event)">
+      <i class="fas fa-calendar-times"></i>
+      Cancelled
+    </button>
+    <button class="tb" data-id="expired" onclick="tabview(event)">
+      <i class="fas fa-history"></i>
+      Expired
+    </button>
+    <hr />
+  </div>
+  <!-- today -->
+  <div class="card-sec active" id="today">
+    {{#if todays}}
+    {{#each todays}}
+    <div class="card" id="{{this._id}}">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+        </div>
+        <div>
+          <h4>
+            {{this.doctor.name}}
+          </h4>
+          <p>
+            {{this.doctor.field}}
+          </p>
+          <p>{{this.doctor.specialised}}</p>
+        </div>
+      </div>
+      <div>
+        <p>{{this.doctor.email}}</p>
+      </div>
+      <div class="c-head">
+        <h3>
+          User Deatils
+        </h3>
+        <p>
+          {{this.user.name}}
+        </p>
+        {{#if this.user.email}}
+        <p>
+          {{this.user.email}}
+        </p>
+        {{else}}
+        <p>
+          {{this.user.contactno}}
+        </p>
+        {{/if}}
+      </div>
+      <div class="c-content">
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="card" style="display: flex; justify-content: center; align-items: center">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
+    {{/if}}
+  </div>
+  <!-- upcoming -->
+  <div class="card-sec" id="upcoming">
+    {{#if upcoming}}
+    {{#each upcoming}}
+    <div class="card" id="{{this._id}}">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+        </div>
+        <div>
+          <h4>
+            {{this.doctor.name}}
+          </h4>
+          <p>
+            {{this.doctor.field}}
+          </p>
+          <p>{{this.doctor.specialised}}</p>
+        </div>
+      </div>
+      <div>
+        <p>{{this.doctor.email}}</p>
+      </div>
+      <div class="c-head">
+        <h3>
+          User Deatils
+        </h3>
+        <p>
+          {{this.user.name}}
+        </p>
+        {{#if this.user.email}}
+        <p>
+          {{this.user.email}}
+        </p>
+        {{else}}
+        <p>
+          {{this.user.contactno}}
+        </p>
+        {{/if}}
+      </div>
+      <div class="c-content">
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="card" style="display: flex; justify-content: center; align-items: center">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
+    {{/if}}
+  </div>
+  <!-- consulted -->
+  <div class="card-sec" id="consulted">
+    {{#if consulted}}
+    {{#each consulted}}
+    <div class="card" id="{{this._id}}">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+        </div>
+        <div>
+          <h4>
+            {{this.doctor.name}}
+          </h4>
+          <p>
+            {{this.doctor.field}}
+          </p>
+          <p>{{this.doctor.specialised}}</p>
+        </div>
+      </div>
+      <div>
+        <p>{{this.doctor.email}}</p>
+      </div>
+      <div class="c-head">
+        <h3>
+          User Deatils
+        </h3>
+        <p>
+          {{this.user.name}}
+        </p>
+        {{#if this.user.email}}
+        <p>
+          {{this.user.email}}
+        </p>
+        {{else}}
+        <p>
+          {{this.user.contactno}}
+        </p>
+        {{/if}}
+      </div>
+      <div class="c-content">
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
+        <h4>
+          Medicines
+        </h4>
+        {{#if this.medicines}}
+        {{#each this.medicines}}
+        <p>
+          {{this}}
+        </p>
+        {{/each}}
+        {{else}}
+        <p>
+          No Medicines Provided
+        </p>
+        {{/if}}
+        {{#if this.notes}}
+        <h4>
+          Notes
+        </h4>
+        <p>
+          {{this.notes}}
+        </p>
+        {{/if}}
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="card" style="display: flex; justify-content: center; align-items: center">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
+    {{/if}}
+  </div>
+  <!-- cancelled -->
+  <div class="card-sec" id="cancelled">
+    {{#if cancelled}}
+    {{#each cancelled}}
+    <div class="card">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+        </div>
+        <div>
+          <h4>
+            {{this.doctor.name}}
+          </h4>
+          <p>
+            {{this.doctor.field}}
+          </p>
+          <p>{{this.doctor.specialised}}</p>
+        </div>
+      </div>
+      <div>
+        <p>{{this.doctor.email}}</p>
+      </div>
+      <div class="c-head">
+        <h3>User Deatils</h3>
+        <p>
+          {{this.user.name}}
+        </p>
+        {{#if this.user.email}}
+        <p>
+          {{this.user.email}}
+        </p>
+        {{else}}
+        <p>
+          {{this.email.contactno}}
+        </p>
+        {{/if}}
+      </div>
+      <div class="c-content">
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="card" style="display: flex; justify-content: center; align-items: center">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
+    {{/if}}
+  </div>
+  <!-- expired -->
+  <div class="card-sec" id="expired">
+    {{#if expired}}
+    {{#each expired}}
+    <div class="card">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+        </div>
+        <div>
+          <h4>
+            {{this.doctor.name}}
+          </h4>
+          <p>
+            {{this.doctor.field}}
+          </p>
+          <p>{{this.doctor.specialised}}</p>
+        </div>
+      </div>
+      <div>
+        <p>{{this.doctor.email}}</p>
+      </div>
+      <div class="c-head">
+        <h3>User Deatils</h3>
+        <p>
+          {{this.user.name}}
+        </p>
+        {{#if this.user.email}}
+        <p>
+          {{this.user.email}}
+        </p>
+        {{else}}
+        <p>
+          {{this.user.contactno}}
+        </p>
+        {{/if}}
+      </div>
+      <div class="c-content">
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
+        <p>
+          {{this.status}}
+        </p>
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="card" style="display: flex; justify-content: center; align-items: center">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
+    {{/if}}
+  </div>
+</section>
+<div class="modal delete-modal">
+  <h1>
+    Do you Want Cancel ?
+  </h1>
+  <button class="yes" onclick="cancelBooking()">
+    Yes
+  </button>
+  <button class="no" onclick="document.querySelector('.delete-modal').classList.toggle('active')">
+    No
+  </button>
+</div>
+<div class="modal delete-sucess-modal">
+  <h1>
+    Deleted Sucessfully
+  </h1>
+  <button class="normal" onclick="document.querySelector('.delete-sucess-modal').classList.toggle('active')">
+    Close
+  </button>
+</div>
+<div class="modal delete-fail-modal">
+  <h1>
+    Something Went Wrong
+  </h1>
+  <button class="normal" onclick="document.querySelector('.delete-fail-modal').classList.toggle('active')">
+    Close
+  </button>
+</div>
+<script src="/javascripts/appointment-doc.js"></script>

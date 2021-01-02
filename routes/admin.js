@@ -101,12 +101,22 @@ router.get("/users", verifyLogin, async (req, res) => {
 });
 
 router.get("/appointment", verifyLogin, async (req, res) => {
-  let todays = await adminHelpers.getTodaysAppointment();
-  let upcoming = await adminHelpers.getUpcomingAppointments();
-  let expired = await adminHelpers.getExipredApointments();
-  let cancelled = await adminHelpers.getCancelledAppointment();
-  let consulted = await adminHelpers.getConsultedAppointments();
+  let doctor = await adminHelpers.getDoctors();
   res.render("admin/appointment", {
+    title: "Users",
+    admin: req.admin,
+    search2: true,
+    doctor,
+  });
+});
+
+router.get("/appointment/:id", verifyLogin, async (req, res) => {
+  let todays = await adminHelpers.getTodaysAppointment(req.params.id);
+  let upcoming = await adminHelpers.getUpcomingAppointments(req.params.id);
+  let expired = await adminHelpers.getExipredApointments(req.params.id);
+  let cancelled = await adminHelpers.getCancelledAppointment(req.params.id);
+  let consulted = await adminHelpers.getConsultedAppointments(req.params.id);
+  res.render("admin/appointment-id", {
     title: "Appointment",
     admin: req.admin,
     search: true,

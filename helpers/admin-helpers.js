@@ -306,7 +306,7 @@ module.exports = {
       resolve(doctors);
     });
   },
-  getTodaysAppointment: () => {
+  getTodaysAppointment: (doctorId) => {
     return new Promise(async (resolve, reject) => {
       let date = new Date().toDateString();
       let appointment = await db
@@ -315,7 +315,11 @@ module.exports = {
         .aggregate([
           {
             $match: {
-              $and: [{ status: "Approved" }, { date: date }],
+              $and: [
+                { doctor: ObjectId(doctorId) },
+                { status: "Approved" },
+                { date: date },
+              ],
             },
           },
           {
@@ -345,7 +349,7 @@ module.exports = {
       resolve(appointment);
     });
   },
-  getUpcomingAppointments: () => {
+  getUpcomingAppointments: (doctorId) => {
     return new Promise(async (resolve, reject) => {
       let date = new Date().toDateString();
       let appointment = await db
@@ -354,7 +358,11 @@ module.exports = {
         .aggregate([
           {
             $match: {
-              $and: [{ status: "Approved" }, { date: { $ne: date } }],
+              $and: [
+                { doctor: ObjectId(doctorId) },
+                { status: "Approved" },
+                { date: { $ne: date } },
+              ],
             },
           },
           {
@@ -392,7 +400,7 @@ module.exports = {
       resolve(result);
     });
   },
-  getExipredApointments: () => {
+  getExipredApointments: (doctorId) => {
     return new Promise(async (resolve, reject) => {
       let date = new Date().toDateString();
       let appointment = await db
@@ -401,7 +409,11 @@ module.exports = {
         .aggregate([
           {
             $match: {
-              $and: [{ status: { $ne: "Deleted" } }, { date: { $ne: date } }],
+              $and: [
+                { doctor: ObjectId(doctorId) },
+                { status: { $ne: "Deleted" } },
+                { date: { $ne: date } },
+              ],
             },
           },
           {
@@ -439,7 +451,7 @@ module.exports = {
       resolve(result);
     });
   },
-  getCancelledAppointment: () => {
+  getCancelledAppointment: (doctorId) => {
     return new Promise(async (resolve, reject) => {
       let appointment = await db
         .get()
@@ -447,7 +459,14 @@ module.exports = {
         .aggregate([
           {
             $match: {
-              status: "Deleted",
+              $and: [
+                {
+                  doctor: ObjectId(doctorId),
+                },
+                {
+                  status: "Deleted",
+                },
+              ],
             },
           },
           {
@@ -477,7 +496,7 @@ module.exports = {
       resolve(appointment);
     });
   },
-  getConsultedAppointments: () => {
+  getConsultedAppointments: (doctorId) => {
     return new Promise(async (resolve, reject) => {
       let appointment = await db
         .get()
@@ -485,7 +504,14 @@ module.exports = {
         .aggregate([
           {
             $match: {
-              status: "Consulted",
+              $and: [
+                {
+                  doctor: ObjectId(doctorId),
+                },
+                {
+                  status: "Consulted",
+                },
+              ],
             },
           },
           {
