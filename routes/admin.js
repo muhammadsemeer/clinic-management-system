@@ -112,10 +112,39 @@ router.get("/appointment", verifyLogin, async (req, res) => {
 
 router.get("/appointment/:id", verifyLogin, async (req, res) => {
   let todays = await adminHelpers.getTodaysAppointment(req.params.id);
-  let upcoming = await adminHelpers.getUpcomingAppointments(req.params.id);
-  let expired = await adminHelpers.getExipredApointments(req.params.id);
-  let cancelled = await adminHelpers.getCancelledAppointment(req.params.id);
-  let consulted = await adminHelpers.getConsultedAppointments(req.params.id);
+  let upcoming,
+    expired,
+    cancelled,
+    consulted,
+    date;
+  if (req.query.date) {
+    date = new Date(req.query.date);
+    date = new Date(new Date(date).setHours(24, 0, 0, 0))
+      .toISOString()
+      .slice(0, 10);
+    upcoming = await adminHelpers.getUpcomingAppointmentsByDate(
+      req.params.id,
+      req.query.date
+    );
+    expired = await adminHelpers.getExipredApointmentsByDate(
+      req.params.id,
+      req.query.date
+    );
+    cancelled = await adminHelpers.getCancelledAppointmentByDate(
+      req.params.id,
+      req.query.date
+    );
+    consulted = await adminHelpers.getConsultedAppointmentsByDate(
+      req.params.id,
+      req.query.date
+    );
+  } else {
+    date = new Date(Date.now()).toISOString().slice(0, 10);
+    upcoming = await adminHelpers.getUpcomingAppointments(req.params.id);
+    expired = await adminHelpers.getExipredApointments(req.params.id);
+    cancelled = await adminHelpers.getCancelledAppointment(req.params.id);
+    consulted = await adminHelpers.getConsultedAppointments(req.params.id);
+  }
   res.render("admin/appointment-id", {
     title: "Appointment",
     admin: req.admin,
@@ -126,6 +155,7 @@ router.get("/appointment/:id", verifyLogin, async (req, res) => {
     expired,
     cancelled,
     consulted,
+    date,
   });
 });
 

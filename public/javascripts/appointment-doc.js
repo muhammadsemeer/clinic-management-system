@@ -17,10 +17,15 @@ function cancelBooking() {
     });
 }
 
-var id = "today";
-
+var date = document.getElementById("date");
 function tabview(event) {
+  var id = "today";
   id = event.target.dataset.id;
+  if (id !== "today") {
+    date.style.visibility = "visible";
+  } else {
+    date.style.visibility = "hidden";
+  }
   var tb = document.querySelectorAll(".tb");
   var cardSec = document.querySelectorAll(".card-sec");
   for (let i = 0; i < tb.length; i++) {
@@ -32,3 +37,8 @@ function tabview(event) {
   document.getElementById(id).classList.add("active");
   event.target.classList.add("active");
 }
+
+date.addEventListener("change", (event) => {
+  let date = new Date(event.target.value).toDateString();
+  location.search = `date=${date}`;
+});
