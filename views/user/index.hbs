@@ -18,17 +18,21 @@
   </div>
   <div class="search" style="display: flex; justify-content:flex-end; padding-top: 30px">
     <div class="dr-search">
-        <div class="btn-grp">
-          <input type="text" name="q" class="first" id="search" value="{{query}}" placeholder="Search....">
-          <button type="submit" class="last" id="search-btn"><i class="fas fa-search"></i></button>
-        </div>
+      <div class="btn-grp">
+        <input type="text" name="q" class="first" id="search" value="{{query}}" placeholder="Search....">
+        <button type="submit" class="last" id="search-btn"><i class="fas fa-search"></i></button>
+      </div>
     </div>
   </div>
   <div class="card" id="doctors">
     {{#each doctor}}
     <div class="container">
       <div class="img-section">
+        {{#isImage this._id "doctor"}}
         <img src="/images/doctor/{{this._id}}.jpg" alt="" />
+        {{else}}
+        <img src="/images/icons/undraw_male_avatar_323b.svg">
+        {{/isImage}}
       </div>
       <div class="content">
         <p>

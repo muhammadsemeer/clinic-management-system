@@ -13,7 +13,7 @@ var db = require("./config/connection");
 var session = require("express-session");
 var fileUpload = require("express-fileupload");
 var helmet = require("helmet");
-var fs = require("fs")
+var fs = require("fs");
 require("dotenv").config();
 
 app.use(
@@ -47,8 +47,8 @@ app.engine(
           return options.inverse(this);
         }
       },
-      isImage: function (id, options) {
-        var path = "./public/images/users/" + id + ".jpg"
+      isImage: function (id, user, options) {
+        var path = "./public/images/" + user + "/" + id + ".jpg";
         if (fs.existsSync(path)) {
           return options.fn(this);
         } else {

@@ -8,7 +8,11 @@
             </div>
             <div class="card-body">
                 <div class="img-sec">
+                    {{#isImage doctorDetails._id "doctor"}}
                     <img src="/images/doctor/{{doctorDetails._id}}.jpg" alt="">
+                    {{else}}
+                    <img src="/images/icons/undraw_male_avatar_323b.svg">
+                    {{/isImage}}
                     <div class="div" onclick="window.location = '/image-upload/{{doctorDetails._id}}'">
                         Edit
                     </div>

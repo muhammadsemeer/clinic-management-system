@@ -50,7 +50,11 @@
             <tr id="{{this._id}}">
               <td>
                 <div>
+                  {{#isImage this._id "doctor"}}
                   <img src="/images/doctor/{{this._id}}.jpg" alt="" />
+                  {{else}}
+                  <img src="/images/icons/undraw_male_avatar_323b.svg">
+                  {{/isImage}}
                   <div id="{{this._id}}msg" class="img-hover" onclick="window.location = '/image-upload/{{this._id}}'">
                     Edit
                   </div>

@@ -22,7 +22,11 @@
 </header>
 <section class="sidebar">
     <div class="profile-display">
-        <img src="/images/doctor/{{doctorLogged._id}}.jpg" alt="{{doctorLogged.name}}">
+        {{#isImage doctorLogged._id "doctor"}}
+        <img src="/images/doctor/{{doctorLogged._id}}.jpg" alt="">
+        {{else}}
+        <img src="/images/icons/undraw_male_avatar_323b.svg">
+        {{/isImage}}
         <p>{{doctorLogged.name}}</p>
     </div>
     <div class="nav-links">

@@ -6,7 +6,7 @@
         <div class="profile-disp">
             <div class="disp-head">
                 <div class="img-sec">
-                    {{#isImage userDetails._id}}
+                    {{#isImage userDetails._id "users"}}
                     <img src="/images/users/{{userDetails._id}}.jpg" alt="{{userDetails.name}}">
                     {{else}}
                     <img src="/images/icons/undraw_male_avatar_323b.svg">
