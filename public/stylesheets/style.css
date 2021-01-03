@@ -1456,3 +1456,44 @@ input[type="date"] {
 .seacrh-appmnt > * {
   margin: 10px 0;
 }
+
+/* 
+**************User Profile*************************
+*/
+
+.myprofile .container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.myprofile .container > div {
+  margin: 15px;
+  padding: 15px;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow: 23px 23px 46px #cccccc, -23px -23px 46px #ffffff;
+  border-radius: 6px;
+  word-break: break-all;
+}
+
+.profile-disp .disp-head {
+  text-align: center;
+}
+
+.profile-disp .disp-head .img-sec img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+
+.insights-section .in-body {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: baseline;
+  flex-wrap: wrap;
+}
+
+.insights-section .in-body > div {
+  margin: 15px;
+}

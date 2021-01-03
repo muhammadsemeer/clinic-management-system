@@ -1,54 +1,70 @@
-<div class="user profile">
+<section class="user myprofile">
+    <div class="head">
+        <h1>My Profile</h1>
+    </div>
     <div class="container">
-        <div class="card">
-            <div class="card-head">
-                <h1>
-                    My Profile
-                </h1>
+        <div class="profile-disp">
+            <div class="disp-head">
+                <div class="img-sec">
+                    <img src="/images/icons/undraw_male_avatar_323b.svg">
+                    <div class="div" onclick="window.location = '/image-upload/{{doctorDetails._id}}'">
+                        Edit
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="details-feild">
-                    <p>
-                        Name:
-                        {{userDetails.name}}
-                    </p>
-                </div>
-                <div class="details-feild">
-                    <p>
-                        Email:
-                        {{userDetails.email}}
-                    </p>
-                </div>
+            <div class="disp-body">
+                <p>Name: {{userDetails.name}}</p>
+                {{#if userDetails.email}}
+                <p>Email: {{userDetails.email}}</p>
+                {{/if}}
                 {{#if userDetails.contactno}}
-                <div class="details-feild">
-                    <p>
-                        Contact No: {{userDetails.contactno}}
-                    </p>
-                </div>
+                <p>Contact No: {{userDetails.contactno}}</p>
                 {{/if}}
                 {{#if userDetails.gender}}
-                <div class="details-feild">
-                    <p>
-                        Gender: {{userDetails.gender}}
-                    </p>
-                </div>
+                <p>Gender: {{userDetails.gender}}</p>
                 {{/if}}
                 {{#if userDetails.age}}
-                <div class="details-feild">
-                    <p>
-                        Age: {{userDetails.age}}
-                    </p>
-                </div>
+                <p>Age: {{userDetails.age}}</p>
                 {{/if}}
                 <div class="btn-grp" style="margin-left: 0;">
                     <a href="/profile/edit"><button class="crop">Edit</button></a>
+                    <a href="/image-upload/{{userDeatils._id}}"><button class="crop" style="margin-left: 5px;">Change
+                            Image</button></a>
+                    <br>
+                </div>
+                <div class="btn-grp" style="margin-left: 0;">
                     {{#isOAuth userDetails.auth userDetails.email}}
                     <a href="/profile/change-password">
-                        <button class="crop" style="margin-left: 10px;">Change Password</button>
+                        <button class="crop">Change Password</button>
                     </a>
                     {{/isOAuth}}
                 </div>
             </div>
         </div>
+        <div class="insights-section">
+            <div class="head" style="padding-top: 0;">
+                <h1>Insights</h1>
+            </div>
+            <div class="in-body">
+                <div>
+                    <h4>Last Constulted Appointment</h4>
+                    <p>Sun Jan 3 2021</p>
+                    <p>2:30 PM - 3:00PM</p>
+                    <p>By Benjamin Fernandes</p>
+                    <div class="btn-grp" style="margin-left: 0;"><button class=" crop">View More</button></div>
+                    <h4>Most Visited Doctor</h4>
+                    <p>Benjamin Fernandes</p>
+                </div>
+                <div>
+                    <h4>Next Appointment</h4>
+                    <p>Sun Jan 3 2021</p>
+                    <p>2:30 PM - 3:00PM</p>
+                    <p>By Benjamin Fernandes</p>
+                    <div class="btn-grp" style="margin-left: 0;"><button class=" crop">View More</button></div>
+                    <h4>Total Consulted Appointments</h4>
+                    <p>5</p>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
