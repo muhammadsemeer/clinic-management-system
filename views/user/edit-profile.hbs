@@ -16,12 +16,14 @@
         </label>
       </div>
       {{#if userDetails.email}}
+      {{#isNotOAuth userDetails.email}}
       <div class="input-section">
         <input type="email" name="email" value="{{userDetails.email}}" required />
         <label for="">
           Email
         </label>
       </div>
+      {{/isNotOAuth}}
       {{/if}}
       {{#if userDetails.contactno}}
       <div class="input-section">

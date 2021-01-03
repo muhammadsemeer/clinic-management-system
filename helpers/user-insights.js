@@ -13,11 +13,13 @@ const myInsights = (userId) => {
       .sort({ _id: -1 })
       .limit(1)
       .toArray();
-    let doctor = lastApp[0].doctor;
-    lastApp[0].doctor = await db
-      .get()
-      .collection(collection.DOCTORS_COLLECTION)
-      .findOne({ _id: ObjectId(doctor) });
+    if (lastApp.length !== 0) {
+      let doctor = lastApp[0].doctor;
+      lastApp[0].doctor = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .findOne({ _id: ObjectId(doctor) });
+    }
     let mostVisited = await db
       .get()
       .collection(collection.APPOINTMENT_COLLECTION)
@@ -53,8 +55,12 @@ const myInsights = (userId) => {
       Math,
       mostVisited.map((item) => item.count)
     );
-    let mostVisitedDoc = mostVisited.filter((item) => item.count === maxValue);
-    mostVisited = mostVisitedDoc[0]._id.doctor;
+    if (mostVisited.length !== 0) {
+      let mostVisitedDoc = mostVisited.filter(
+        (item) => item.count === maxValue
+      );
+      mostVisited = mostVisitedDoc[0]._id.doctor;
+    }
     let lastBook = await db
       .get()
       .collection(collection.APPOINTMENT_COLLECTION)
@@ -64,18 +70,25 @@ const myInsights = (userId) => {
       .sort({ _id: -1 })
       .limit(1)
       .toArray();
-    let doctor1 = lastBook[0].doctor;
-    lastBook[0].doctor = await db
-      .get()
-      .collection(collection.DOCTORS_COLLECTION)
-      .findOne({ _id: ObjectId(doctor1) });
+    if (lastBook.length !== 0) {
+      let doctor1 = lastBook[0].doctor;
+      lastBook[0].doctor = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .findOne({ _id: ObjectId(doctor1) });
+    }
     let consultedAppCount = await db
       .get()
       .collection(collection.APPOINTMENT_COLLECTION)
       .countDocuments({
         $and: [{ user: ObjectId(userId) }, { status: "Consulted" }],
       });
-    resolve({ lastApp: lastApp[0], mostVisited, lastBook: lastBook[0], consultedAppCount });
+    resolve({
+      lastApp: lastApp[0],
+      mostVisited,
+      lastBook: lastBook[0],
+      consultedAppCount,
+    });
   });
 };
 

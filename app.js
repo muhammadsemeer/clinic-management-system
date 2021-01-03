@@ -39,6 +39,14 @@ app.engine(
           return options.inverse(this);
         }
       },
+      isNotOAuth: function (auth, options) {
+        if (auth !== "Password") {
+          console.log("here");
+          return options.inverse(this);
+        } else {
+          return options.fn(this);
+        }
+      },
     },
   })
 );

@@ -88,8 +88,10 @@
 <script>
   const email = document.getElementById("email")
   const pwd = document.getElementById("pwd-sec")
+  const cno = document.getElementById("contactno")
   email.addEventListener("keyup", (event) => {
     if (event.target.value !== "") {
+      cno.required = false
       pwd.innerHTML = `
       <input type="password" name="password" id="password" value="{{userDetails.password}}" required />
         <label for="password">
@@ -101,6 +103,7 @@
         </div>
       `
     } else {
+      cno.required = true
       pwd.innerHTML = ""
     }
   })

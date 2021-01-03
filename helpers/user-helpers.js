@@ -19,7 +19,7 @@ module.exports = {
         })
         .toArray();
       if (mailFound.length <= 0) {
-        if (mailFound[0].status === "Blocked") {
+        if (mailFound.length !== 0 && mailFound[0].status === "Blocked") {
           reject({ msg: "Your Account is temporarliy disbaled" });
         }
         details.status = "Active";
