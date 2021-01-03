@@ -9,6 +9,7 @@ const { createSlots } = require("../helpers/create-time-slot");
 const Fuse = require("fuse.js");
 const { exportExcel } = require("../helpers/export-xlsx");
 const { sendMail } = require("../helpers/send-mail");
+const myInsights = require("../helpers/user-insights");
 require("dotenv").config();
 const loginCheck = (req, res, next) => {
   if (req.cookies.userToken) {
@@ -420,14 +421,15 @@ router.delete("/cancel-appointment/:id", (req, res) => {
     });
 });
 
-router.get("/profile", verifyLogin, (req, res) => {
-  userHelpers.getMyProfile(req.user._id).then((response) => {
-    res.render("user/myprofile", {
-      title: "My Profile",
-      user: req.user,
-      userDetails: response,
-      header: true,
-    });
+router.get("/profile", verifyLogin, async (req, res) => {
+  let userDetails = await userHelpers.getMyProfile(req.user._id);
+  let insights = await myInsights(req.user._id);
+  res.render("user/myprofile", {
+    title: "My Profile",
+    user: req.user,
+    userDetails,
+    insights,
+    header: true,
   });
 });
 router.get("/profile/edit", verifyLogin, (req, res) => {
@@ -686,7 +688,7 @@ router.get("/history/download/:id", verifyLogin, async (req, res) => {
   let dataDB = await userHelpers.getConsultedHistory(
     req.user._id,
     req.params.id
-  );;
+  );
   let datas = dataDB.map((element) => {
     if (!element.medicines || !element.notes) {
       element.medicines = "";
@@ -701,7 +703,12 @@ router.get("/history/download/:id", verifyLogin, async (req, res) => {
       element.notes,
     ];
   });
-  exportExcel(datas, columnNames, "History", `/xlsx/user/${req.user._id}_${req.params.id}.xlsx`);
+  exportExcel(
+    datas,
+    columnNames,
+    "History",
+    `/xlsx/user/${req.user._id}_${req.params.id}.xlsx`
+  );
   res.render("user/download", {
     title: "Download History",
     header: true,

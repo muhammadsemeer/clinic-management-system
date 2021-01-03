@@ -48,21 +48,21 @@
             <div class="in-body">
                 <div>
                     <h4>Last Constulted Appointment</h4>
-                    <p>Sun Jan 3 2021</p>
-                    <p>2:30 PM - 3:00PM</p>
-                    <p>By Benjamin Fernandes</p>
-                    <div class="btn-grp" style="margin-left: 0;"><button class=" crop">View More</button></div>
+                    <p>{{insights.lastApp.date}}</p>
+                    <p>{{insights.lastApp.timeslot}}</p>
+                    <p>With {{insights.lastApp.doctor.name}}</p>
+                    {{!-- <div class="btn-grp" style="margin-left: 0;"><button class=" crop">View More</button></div> --}}
                     <h4>Most Visited Doctor</h4>
-                    <p>Benjamin Fernandes</p>
+                    <p>{{insights.mostVisited.name}}</p>
                 </div>
                 <div>
-                    <h4>Next Appointment</h4>
-                    <p>Sun Jan 3 2021</p>
-                    <p>2:30 PM - 3:00PM</p>
-                    <p>By Benjamin Fernandes</p>
-                    <div class="btn-grp" style="margin-left: 0;"><button class=" crop">View More</button></div>
+                    <h4>Last Booked Appointment</h4>
+                    <p>{{insights.lastBook.date}}</p>
+                    <p>{{insights.lastBook.timeslot}}</p>
+                    <p>With {{insights.lastBook.doctor.name}}</p>
+                    {{!-- <div class="btn-grp" style="margin-left: 0;"><button class=" crop">View More</button></div> --}}
                     <h4>Total Consulted Appointments</h4>
-                    <p>5</p>
+                    <p>{{insights.consultedAppCount}}</p>
                 </div>
             </div>
         </div>
