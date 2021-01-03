@@ -1,15 +1,15 @@
 <section class="user appointment">
   <div class="user-container">
     <div class="tab">
-      <button id="appointment" class="active"
-        onclick="toogleTab3('#appointment', '#requsted' ,'#consulted','#cancel', '#appointment-conatiner', '#consulted-container', '#cancelled-conatiner','#requested-container')">
-        <i class="fas fa-calendar-check"></i>
-        Appoitments
-      </button>
-      <button id="requsted"
+      <button id="requsted" class="active"
         onclick="toogleTab3('#requsted','#consulted','#appointment', '#cancel', '#requested-container','#consulted-container', '#appointment-conatiner', '#cancelled-conatiner')">
         <i class="fas fa-spinner"></i>
         My Requests
+      </button>
+      <button id="appointment"
+        onclick="toogleTab3('#appointment', '#requsted' ,'#consulted','#cancel', '#appointment-conatiner', '#consulted-container', '#cancelled-conatiner','#requested-container')">
+        <i class="fas fa-calendar-check"></i>
+        Appoitments
       </button>
       <button id="consulted"
         onclick="toogleTab3('#consulted','#appointment', '#requsted' ,'#cancel', '#consulted-container', '#requested-container','#appointment-conatiner', '#cancelled-conatiner')">
@@ -38,7 +38,7 @@
       </a>
     </div>
   </div>
-  <div class="card active" id="appointment-conatiner">
+  <div class="card" id="appointment-conatiner">
     {{#if appointments}}
     {{#each appointments}}
     <div class="container" id="{{this._id}}">
@@ -84,7 +84,7 @@
     {{/if}}
   </div>
   <div class="user-container">
-    <div class="card" id="requested-container">
+    <div class="card active" id="requested-container">
       {{#if requests}}
       {{#each requests}}
       <div class="container" id="{{this._id}}">
