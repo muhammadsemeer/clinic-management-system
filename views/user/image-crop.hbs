@@ -1,0 +1,100 @@
+<section class="admin-cropper">
+  <div class="head">
+    <h1>
+      Image Upload
+    </h1>
+  </div>
+  <div class="input">
+    <div class="btn-container">
+      <div class="btn-grp">
+        <label for="image">
+          Select Image
+          <input
+            type="file"
+            name="image"
+            id="image"
+            onchange="change(event)"
+            hidden
+          />
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="img-container">
+    <img src="" id="input-image" />
+  </div>
+  <div class="btn-container" id="crop-btn" style="display: none;">
+    <div class="btn-grp">
+      <button class="first" onclick="cropper.zoom(0.1)">
+        <i class="fas fa-search-plus"></i>
+      </button>
+      <button class="last" onclick="cropper.zoom(-0.1)">
+        <i class="fas fa-search-minus"></i>
+      </button>
+    </div>
+    <div class="btn-grp">
+      <button class="first" onclick="cropper.move(-10,0)">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <button onclick="cropper.move(10,0)">
+        <i class="fas fa-arrow-right"></i>
+      </button>
+      <button onclick="cropper.move(0,-10)">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+      <button class="last" onclick="cropper.move(0,10)">
+        <i class="fas fa-arrow-down"></i>
+      </button>
+    </div>
+    <div class="btn-grp">
+      <button class="first" onclick="cropper.rotate(-90)">
+        <i class="fas fa-undo-alt"></i>
+      </button>
+      <button class="last" onclick="cropper.rotate(90)">
+        <i class="fas fa-redo-alt"></i>
+      </button>
+    </div>
+    <div class="btn-grp">
+      <button class="first" onclick="cropper.scaleX(-1)">
+        <i class="fas fa-arrows-alt-h"></i>
+      </button>
+      <button class="last" onclick="cropper.scaleY(-1)">
+        <i class="fas fa-arrows-alt-v"></i>
+      </button>
+    </div>
+    <div class="btn-grp">
+      <button class="crop" onclick="crop()">
+        Crop
+      </button>
+    </div>
+  </div>
+</section>
+<div class="modal crop-modal">
+  <div id="croped-image"></div>
+  <div class="btn-container" style="margin: 5px 0;">
+    <div id="myProgress">
+      <div id="myBar"></div>
+    </div>
+    <div class="btn-grp">
+      <button
+        class="crop"
+        id="up-btn"
+        style="width: 100px;"
+        onclick="upload('{{id}}')"
+      >
+        Upload
+      </button>
+      <button id="cls-btn" onclick="window.location = '/myprofile'">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+<div class="modal error-modal">
+  <h3>
+    Something Went Wrong!
+  </h3>
+  <button class="normal" onclick="window.location = '/image-upload/{{id}}'">
+    Close
+  </button>
+</div>

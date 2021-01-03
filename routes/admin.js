@@ -371,7 +371,7 @@ router.post("/patients/:id", verifyLogin, (req, res) => {
   });
 });
 
-router.post("/doctor/upload/:id", (req, res) => {
+router.post("/image/upload/:id", (req, res) => {
   let image = req.files.image;
   image.mv("./public/images/doctor/" + req.params.id + ".jpg", (err) => {
     if (err) {

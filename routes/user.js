@@ -717,4 +717,28 @@ router.get("/history/download/:id", verifyLogin, async (req, res) => {
   });
 });
 
+router.get("/image-upload/:id", verifyLogin, (req, res) => {
+  res.render("user/image-crop", {
+    doctorLogged: req.doctor,
+    id: req.params.id,
+    title: "Edit Image",
+    header: true,
+  });
+});
+
+router.post("/image/upload/:id", verifyToken, (req, res) => {
+  let image = req.files.image;
+  image.mv("./public/images/users/" + req.params.id + ".jpg", (err) => {
+    if (err) {
+      res.json({ status: false });
+    } else {
+      res.json({ status: true });
+    }
+  });
+});
+
+router.get("/myprofile", (req,res) => {
+  res.redirect("/profile")
+})
+
 module.exports = router;

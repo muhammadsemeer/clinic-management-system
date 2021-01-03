@@ -37,6 +37,8 @@ function move(time, func) {
           document.querySelector("#myBar").innerHTML = "Uploaded Sucessfully";
           document.querySelector("#cls-btn").style.display = "block";
         }
+      } else if (width === 80 && time === 120) {
+        clearInterval(id);
       } else {
         width++;
         elem.style.width = width + "%";
@@ -50,13 +52,13 @@ function move(time, func) {
 const upload = (id) => {
   document.querySelector("#up-btn").style.display = "none";
   document.querySelector("#myProgress").style.display = "block";
-  move(2000, 1);
+  move(120, 1);
   cropper.getCroppedCanvas().toBlob((blob) => {
     const formData = new FormData();
 
     formData.append("image", blob);
 
-    fetch("/doctor/upload/" + id, {
+    fetch("/image/upload/" + id, {
       method: "POST",
       body: formData,
     })
