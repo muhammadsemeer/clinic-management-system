@@ -121,7 +121,7 @@ function getTimeSlots(date, start) {
         return (dates.innerHTML = `
         <label
           for=""
-          style="width: 600px;"
+          style="width: 300px;"
         >
           <span>
            No Slots Available
