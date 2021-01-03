@@ -139,7 +139,6 @@ router.get("/appointment/:id", verifyLogin, async (req, res) => {
       req.query.date
     );
   } else {
-    date = new Date(Date.now()).toISOString().slice(0, 10);
     upcoming = await adminHelpers.getUpcomingAppointments(req.params.id);
     expired = await adminHelpers.getExipredApointments(req.params.id);
     cancelled = await adminHelpers.getCancelledAppointment(req.params.id);

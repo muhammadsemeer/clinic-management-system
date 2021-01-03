@@ -120,16 +120,46 @@ router.get("/logout", (req, res) => {
   res.redirect("/login");
 });
 
+router.get("/bookings", (req, res) => {
+  res.redirect("/");
+});
+
 router.get("/appointments", verifyLogin, async (req, res) => {
   let todays = await doctorHelpers.getTodaysAppointment(req.doctor._id);
-  let upcoming = await doctorHelpers.getUpcomingAppointments(req.doctor._id);
-  let expired = await doctorHelpers.getExipredApointments(req.doctor._id);
-  let cancelled = await doctorHelpers.getCancelledAppointment(req.doctor._id);
-  let consulted = await doctorHelpers.getConsultedAppointments(req.doctor._id);
+  let upcoming, expired, cancelled, consulted, date;
+  if (req.query.date) {
+    console.log("here");
+    date = new Date(req.query.date);
+    date = new Date(new Date(date).setHours(24, 0, 0, 0))
+      .toISOString()
+      .slice(0, 10);
+    upcoming = await doctorHelpers.getUpcomingAppointmentsByDate(
+      req.doctor._id,
+      req.query.date
+    );
+    expired = await doctorHelpers.getExipredApointmentsByDate(
+      req.doctor._id,
+      req.query.date
+    );
+    cancelled = await doctorHelpers.getCancelledAppointmentByDate(
+      req.doctor._id,
+      req.query.date
+    );
+    consulted = await doctorHelpers.getConsultedAppointmentsByDate(
+      req.doctor._id,
+      req.query.date
+    );
+  } else {
+    upcoming = await doctorHelpers.getUpcomingAppointments(req.doctor._id);
+    expired = await doctorHelpers.getExipredApointments(req.doctor._id);
+    cancelled = await doctorHelpers.getCancelledAppointment(req.doctor._id);
+    consulted = await doctorHelpers.getConsultedAppointments(req.doctor._id);
+  }
   res.render("doctor/appointments", {
     title: "Doctor Dashboard",
     doctorLogged: req.doctor,
     search: true,
+    date: date,
     todays,
     upcoming,
     expired,

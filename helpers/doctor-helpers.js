@@ -233,6 +233,116 @@ module.exports = {
       resolve(appointment);
     });
   },
+  getUpcomingAppointmentsByDate: (doctorId, date) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [
+                { doctor: ObjectId(doctorId) },
+                { status: "Approved" },
+                { date: date },
+              ],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+        ])
+        .toArray();
+      let result = [];
+      appointment.forEach((element) => {
+        var today = new Date();
+        var dbDate = new Date(element.date);
+        if (dbDate > today) {
+          result.push(element);
+        }
+      });
+      console.log(appointment);
+      resolve(result);
+    });
+  },
+  getExipredApointmentsByDate: (doctorId, date) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [
+                { doctor: ObjectId(doctorId) },
+                { status: { $ne: "Deleted" } },
+                { date: date },
+              ],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+        ])
+        .toArray();
+      let result = [];
+      appointment.forEach((element) => {
+        var today = new Date();
+        var dbDate = new Date(element.date);
+        if (dbDate < today) {
+          result.push(element);
+        }
+      });
+      resolve(result);
+    });
+  },
+  getCancelledAppointmentByDate: (doctorId, date) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [
+                { doctor: ObjectId(doctorId) },
+                { status: "Deleted" },
+                { date: date },
+              ],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+        ])
+        .toArray();
+      resolve(appointment);
+    });
+  },
   getMyPatients: (doctorId) => {
     return new Promise(async (resolve, reject) => {
       let patients = await db
@@ -537,6 +647,37 @@ module.exports = {
           {
             $match: {
               $and: [{ doctor: ObjectId(doctorId) }, { status: "Consulted" }],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+        ])
+        .toArray();
+      resolve(appointment);
+    });
+  },
+  getConsultedAppointmentsByDate: (doctorId, date) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [
+                { doctor: ObjectId(doctorId) },
+                { status: "Consulted" },
+                { date: date },
+              ],
             },
           },
           {
