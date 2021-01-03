@@ -6,10 +6,11 @@
         <div class="profile-disp">
             <div class="disp-head">
                 <div class="img-sec">
+                    {{#isImage userDetails._id}}
+                    <img src="/images/users/{{userDetails._id}}.jpg" alt="{{userDetails.name}}">
+                    {{else}}
                     <img src="/images/icons/undraw_male_avatar_323b.svg">
-                    <div class="div" onclick="window.location = '/image-upload/{{doctorDetails._id}}'">
-                        Edit
-                    </div>
+                    {{/isImage}}
                 </div>
             </div>
             <div class="disp-body">
