@@ -16,7 +16,7 @@
         </label>
       </div>
       {{#if userDetails.email}}
-      {{#isNotOAuth userDetails.email}}
+      {{#isNotOAuth userDetails.auth}}
       <div class="input-section">
         <input type="email" name="email" value="{{userDetails.email}}" required />
         <label for="">
