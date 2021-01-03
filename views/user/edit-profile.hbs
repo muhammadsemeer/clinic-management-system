@@ -8,26 +8,29 @@
     {{error}}
   </div>
   <div class="container">
-    <form action="/profile/edit" method="POST">
+    <form action="/profile/edit" method="POST" onsubmit="return validate(event)">
       <div class="input-section">
         <input type="text" name="name" value="{{userDetails.name}}" required />
         <label for="">
           Name
         </label>
       </div>
+      {{#if userDetails.email}}
       <div class="input-section">
         <input type="email" name="email" value="{{userDetails.email}}" required />
         <label for="">
           Email
         </label>
       </div>
+      {{/if}}
+      {{#if userDetails.contactno}}
       <div class="input-section">
-        <input type="text" pattern="^\+[1-9]{1}[0-9]{3,14}$" name="contactno" value="{{userDetails.contactno}}"
-           />
+        <input type="text" pattern="^\+[1-9]{1}[0-9]{3,14}$" name="contactno" value="{{userDetails.contactno}}" />
         <label for="">
           Contact No (with country code)
         </label>
       </div>
+      {{/if}}
       <div class="input-section">
         <input type="number" name="age" value="{{userDetails.age}}" />
         <label for="">

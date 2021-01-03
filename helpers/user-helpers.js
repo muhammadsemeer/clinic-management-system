@@ -352,6 +352,7 @@ module.exports = {
                 email: details.email,
                 contactno: details.contactno,
                 age: details.age,
+                gender: details.gender,
               },
             }
           )
