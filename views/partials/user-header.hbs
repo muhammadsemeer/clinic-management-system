@@ -43,7 +43,7 @@
     </a>
     {{/if}}
   </nav>
-  <div class="menu-icon" onclick="document.querySelector('.menu-user').classList.toggle('active');">
+  <div class="menu-icon">
     <div style="padding-top: 10px;">
       <a href="/myprofile">
         {{#isImage user._id "users"}}
@@ -53,7 +53,9 @@
         {{/isImage}}
       </a>
     </div>
-    <i class="fas fa-bars"></i>
+    <div onclick="document.querySelector('.menu-user').classList.toggle('active');">
+      <i class="fas fa-bars"></i>
+    </div>
   </div>
 </header>
 <div class="menu-user">
