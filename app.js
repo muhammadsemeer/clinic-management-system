@@ -86,18 +86,24 @@ app.use("/", userRouter);
 // 404 route
 
 app.get("/404", (req, res) => {
-  res.render("404");
+  res.status(404).render("404", {
+    title: "Page Not Found"
+  });
 });
 
 // 500 route
 
 app.get("/500", (req, res) => {
-  res.render("500");
+  res.status(500).render("500", {
+    title: "Internal Server Error"
+  });
 });
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+  res.status(404).render("404", {
+    title: "Page Not Found"
+  })
 });
 
 // error handler
@@ -108,7 +114,9 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.render("500", {
+    title: "Internal Server Error"
+  });
 });
 
 module.exports = app;
