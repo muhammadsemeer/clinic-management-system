@@ -83,6 +83,12 @@ app.use(subdomain("admin", adminRouter));
 app.use(subdomain("doctor", doctorRouter));
 app.use("/", userRouter);
 
+// 404 route
+
+app.get("/404", (req, res) => {
+  res.render("404");
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
