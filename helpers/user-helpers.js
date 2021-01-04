@@ -254,6 +254,37 @@ module.exports = {
       resolve(appointment);
     });
   },
+  getMyAppointmentsByDate: (userId, status, date) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [
+                { user: ObjectId(userId) },
+                { status: status },
+                { date: date },
+              ],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$doctor",
+          },
+        ])
+        .toArray();
+      resolve(appointment);
+    });
+  },
   cancelAppointment: (id) => {
     return new Promise(async (resolve, reject) => {
       db.get()

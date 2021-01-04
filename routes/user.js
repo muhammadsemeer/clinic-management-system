@@ -389,16 +389,41 @@ router.post("/get-timeslot/:id", (req, res) => {
 });
 
 router.get("/appointments", verifyLogin, async (req, res) => {
-  let appointments = await userHelpers.getMyAppointments(
-    req.user._id,
-    "Approved"
-  );
-  let requests = await userHelpers.getMyAppointments(req.user._id, "Pending");
-  let cancelled = await userHelpers.getMyAppointments(req.user._id, "Deleted");
-  let consulted = await userHelpers.getMyAppointments(
-    req.user._id,
-    "Consulted"
-  );
+  let appointments, requests, cancelled, consulted, date;
+  if (req.query.date) {
+    date = new Date(req.query.date);
+    date = new Date(new Date(date).setHours(24, 0, 0, 0))
+      .toISOString()
+      .slice(0, 10);
+    appointments = await userHelpers.getMyAppointmentsByDate(
+      req.user._id,
+      "Approved",
+      req.query.date
+    );
+    requests = await userHelpers.getMyAppointmentsByDate(
+      req.user._id,
+      "Pending",
+      req.query.date
+    );
+    cancelled = await userHelpers.getMyAppointmentsByDate(
+      req.user._id,
+      "Deleted",
+      req.query.date
+    );
+    consulted = await userHelpers.getMyAppointmentsByDate(
+      req.user._id,
+      "Consulted",
+      req.query.date
+    );
+  } else {
+    appointments = await userHelpers.getMyAppointments(
+      req.user._id,
+      "Approved"
+    );
+    requests = await userHelpers.getMyAppointments(req.user._id, "Pending");
+    cancelled = await userHelpers.getMyAppointments(req.user._id, "Deleted");
+    consulted = await userHelpers.getMyAppointments(req.user._id, "Consulted");
+  }
   res.render("user/appointment", {
     user: req.user,
     header: true,
@@ -407,6 +432,7 @@ router.get("/appointments", verifyLogin, async (req, res) => {
     requests,
     cancelled,
     consulted,
+    date: date,
   });
 });
 
@@ -737,8 +763,8 @@ router.post("/image/upload/:id", verifyToken, (req, res) => {
   });
 });
 
-router.get("/myprofile", (req,res) => {
-  res.redirect("/profile")
-})
+router.get("/myprofile", (req, res) => {
+  res.redirect("/profile");
+});
 
 module.exports = router;

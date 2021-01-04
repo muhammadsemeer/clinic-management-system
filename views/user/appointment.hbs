@@ -31,6 +31,9 @@
         <button type="submit" class="last" id="search-btn"><i class="fas fa-search"></i></button>
       </div>
     </form>
+    <div id="date-c">
+      <input type="date" id="date" style="margin: 0" value="{{date}}">
+    </div>
     <div class="btn-sec">
       <a href="/history/download" style="color: var(--green)">
         Download Consulted History
@@ -246,5 +249,12 @@
     Close
   </button>
 </div>
+<script>
+  var date = document.getElementById("date");
+  date.addEventListener("change", (event) => {
+    let date = new Date(event.target.value).toDateString();
+    location.search = `date=${date}`;
+  });
+</script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/javascripts/booking.js"></script>

@@ -128,7 +128,6 @@ router.get("/appointments", verifyLogin, async (req, res) => {
   let todays = await doctorHelpers.getTodaysAppointment(req.doctor._id);
   let upcoming, expired, cancelled, consulted, date;
   if (req.query.date) {
-    console.log("here");
     date = new Date(req.query.date);
     date = new Date(new Date(date).setHours(24, 0, 0, 0))
       .toISOString()
