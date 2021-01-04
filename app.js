@@ -89,6 +89,12 @@ app.get("/404", (req, res) => {
   res.render("404");
 });
 
+// 500 route
+
+app.get("/500", (req, res) => {
+  res.render("500");
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
