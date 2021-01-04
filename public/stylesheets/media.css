@@ -24,7 +24,7 @@
     display: none;
   }
   .menu-icon {
-    display: block;
+    display: flex;
   }
   .dr-page.active {
     margin-left: 0;

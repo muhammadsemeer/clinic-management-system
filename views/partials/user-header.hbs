@@ -32,9 +32,27 @@
     <a href="/logout">
       Logout
     </a>
+    <div>
+      <a href="/myprofile">
+        {{#isImage user._id "users"}}
+        <img class="img" src="/images/users/{{user._id}}.jpg" alt="{{userDetails.name}}">
+        {{else}}
+        <img class="img" src="/images/icons/undraw_male_avatar_323b.svg">
+        {{/isImage}}
+    </div>
+    </a>
     {{/if}}
   </nav>
   <div class="menu-icon" onclick="document.querySelector('.menu-user').classList.toggle('active');">
+    <div style="padding-top: 10px;">
+      <a href="/myprofile">
+        {{#isImage user._id "users"}}
+        <img class="img" src="/images/users/{{user._id}}.jpg" alt="{{userDetails.name}}">
+        {{else}}
+        <img class="img" src="/images/icons/undraw_male_avatar_323b.svg">
+        {{/isImage}}
+      </a>
+    </div>
     <i class="fas fa-bars"></i>
   </div>
 </header>
