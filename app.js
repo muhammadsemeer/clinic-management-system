@@ -79,8 +79,8 @@ db.connect((error) => {
   console.log("Database Connected");
 });
 
-app.use(subdomain("admin", adminRouter));
-app.use(subdomain("doctor", doctorRouter));
+app.use(subdomain("admin.care", adminRouter));
+app.use(subdomain("doctor.care", doctorRouter));
 app.use("/", userRouter);
 
 // 404 route
