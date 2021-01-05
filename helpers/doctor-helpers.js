@@ -380,15 +380,16 @@ module.exports = {
           },
         ])
         .toArray();
-      var id = patients[0].uniqueIds;
       var result = [];
-      for (let i = 0; i < id.length; i++) {
-        result[i] = await db
-          .get()
-          .collection(collection.PATIENT_COLLECTION)
-          .findOne({ _id: ObjectId(id[i]) });
+      if (patients.length != 0) {
+        var id = patients[0].uniqueIds;
+        for (let i = 0; i < id.length; i++) {
+          result[i] = await db
+            .get()
+            .collection(collection.PATIENT_COLLECTION)
+            .findOne({ _id: ObjectId(id[i]) });
+        }
       }
-      console.log(result);
       resolve(result);
     });
   },

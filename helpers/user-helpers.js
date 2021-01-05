@@ -55,7 +55,7 @@ module.exports = {
         })
         .toArray();
       if (mailFound.length <= 0) {
-        if (mailFound[0].status === "Blocked") {
+        if (mailFound.length !== 0 && mailFound[0].status === "Blocked") {
           reject({ msg: "Your Account is temporarliy disbaled" });
         }
         details.status = "Active";
@@ -451,30 +451,32 @@ module.exports = {
           { $match: { count: { $gt: 1 } } },
         ])
         .toArray();
-      var id = doctors[0].uniqueIds;
       var result = [];
-      for (let i = 0; i < id.length; i++) {
-        result[i] = await db
-          .get()
-          .collection(collection.DOCTORS_COLLECTION)
-          .findOne({ _id: ObjectId(id[i]) });
-        let last = await db
-          .get()
-          .collection(collection.APPOINTMENT_COLLECTION)
-          .find({
-            $and: [
-              { user: ObjectId(userId) },
-              { doctor: id[i] },
-              { status: "Consulted" },
-            ],
-          })
-          .sort({ _id: -1 })
-          .limit(1)
-          .toArray();
-        result[i].last = {
-          date: last[0].date,
-          timeslot: last[0].timeslot,
-        };
+      if (doctors.length != 0) {
+        var id = doctors[0].uniqueIds;
+        for (let i = 0; i < id.length; i++) {
+          result[i] = await db
+            .get()
+            .collection(collection.DOCTORS_COLLECTION)
+            .findOne({ _id: ObjectId(id[i]) });
+          let last = await db
+            .get()
+            .collection(collection.APPOINTMENT_COLLECTION)
+            .find({
+              $and: [
+                { user: ObjectId(userId) },
+                { doctor: id[i] },
+                { status: "Consulted" },
+              ],
+            })
+            .sort({ _id: -1 })
+            .limit(1)
+            .toArray();
+          result[i].last = {
+            date: last[0].date,
+            timeslot: last[0].timeslot,
+          };
+        }
       }
       resolve(result);
     });
