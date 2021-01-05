@@ -15,7 +15,7 @@ if (eye) {
 
 function show() {
   var inputFeild = document.querySelector("input[name=password]");
-  if(!inputFeild) {
+  if (!inputFeild) {
     inputFeild = document.querySelector("input[name=code]");
   }
   var eyeSlash = document.querySelector(".fa-eye-slash");
@@ -129,6 +129,7 @@ function onSuccess(googleUser) {
   }
 }
 function onFailure(error) {
+  document.querySelector(".error").innerHTML = error.error;
   modalup("error-modal");
 }
 
