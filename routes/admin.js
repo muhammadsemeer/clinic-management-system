@@ -112,11 +112,7 @@ router.get("/appointment", verifyLogin, async (req, res) => {
 
 router.get("/appointment/:id", verifyLogin, async (req, res) => {
   let todays = await adminHelpers.getTodaysAppointment(req.params.id);
-  let upcoming,
-    expired,
-    cancelled,
-    consulted,
-    date;
+  let upcoming, expired, cancelled, consulted, date;
   if (req.query.date) {
     date = new Date(req.query.date);
     date = new Date(new Date(date).setHours(24, 0, 0, 0))
@@ -195,14 +191,15 @@ router.post("/add-doctor", verifyLogin, (req, res) => {
   var to = req.body.email;
   var sub = "Added to Doctor's List on Galaxieon Care";
   var output = `
-  Hi, ${req.body.name}
-  Greetings from Galaxieon Care
+  <h3>Hi, ${req.body.name}</h3>
+  <h3>Greetings from Galaxieon Care</h3>
 
-  Admin Of Galaxieon Care added you to our doctor's list.
-  You can login to your doctor accout with your username and password that created by Admin
+  <p>Admin Of Galaxieon Care added you to our doctor's list.
+  You can login to your doctor accout with your username and password that created by Admin</p>
 
-  Username: ${req.body.username}
-  Password: ${req.body.password}
+  <p>Username: ${req.body.username}
+  Password: ${req.body.password}</p>
+  <a href="${process.env.DOCTOR_HOSTNAME}">Click To Login<a>
 `;
   adminHelpers
     .addDoctor(req.body)
@@ -288,13 +285,14 @@ router.post("/add-patient", verifyLogin, (req, res) => {
     .then((response) => {
       if (req.body.email) {
         var output = `
-      Hi, ${req.body.name}
-      Greetings from Galaxieon Care
+      <h3>Hi, ${req.body.name}
+      Greetings from Galaxieon Care</h3>
 
-      Admin Of Galaxieon Care added you to our patient's list .
+      <p>Admin Of Galaxieon Care added you to our patient's list .
       You can login to your  or your can login with your email and password
       Email: ${req.body.email}
-      Password: ${password}
+      Password: ${password}</p>
+      <a href="${process.env.DOCTOR_HOSTNAME}">Click To Login<a>
     `;
         sendMail(to, sub, output)
           .then((response) => {
@@ -320,6 +318,8 @@ router.post("/add-patient", verifyLogin, (req, res) => {
         Admin Of Galaxieon Care added you to our patient's list .
         You can login to your  or your can login with your resitered mobile
         Registered Moblie No: ${req.body.contactno}
+        To Login
+        ${process.env.DOCTOR_HOSTNAME}
       `;
         sendMessage([no], output)
           .then((response) => {
