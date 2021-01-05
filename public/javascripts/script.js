@@ -35,10 +35,10 @@ function show() {
 var username = document.querySelector("input[name=username]");
 var usernameFormat = null;
 var error = document.querySelector(".user-error");
+var format = new RegExp(/[@~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
 if (username) {
   username.addEventListener("keyup", () => {
     username.value = username.value.toLowerCase();
-    var format = new RegExp(/[@~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
     if (/\s/.test(username.value)) {
       username.value = username.value.replace(" ", "_");
     }
