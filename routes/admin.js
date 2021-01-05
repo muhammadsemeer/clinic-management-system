@@ -292,7 +292,7 @@ router.post("/add-patient", verifyLogin, (req, res) => {
       You can login to your  or your can login with your email and password
       Email: ${req.body.email}
       Password: ${password}</p>
-      <a href="${process.env.DOCTOR_HOSTNAME}">Click To Login<a>
+      <a href="${process.env.USER_HOSTNAME}">Click To Login<a>
     `;
         sendMail(to, sub, output)
           .then((response) => {
@@ -319,7 +319,7 @@ router.post("/add-patient", verifyLogin, (req, res) => {
         You can login to your  or your can login with your resitered mobile
         Registered Moblie No: ${req.body.contactno}
         To Login
-        ${process.env.DOCTOR_HOSTNAME}
+        ${process.env.USER_HOSTNAME}
       `;
         sendMessage([no], output)
           .then((response) => {
