@@ -3,6 +3,8 @@ require("dotenv").config();
 module.exports.sendMail = (to, sub, output) => {
   return new Promise((resolve, reject) => {
     const sgMail = require("@sendgrid/mail");
+    console.log("call");
+    console.log(process.env.SENDGRID_API_KEY);
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
     const msg = {
