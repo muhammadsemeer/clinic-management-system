@@ -44,6 +44,7 @@
     {{/if}}
   </nav>
   <div class="menu-icon">
+    {{#if user}}
     <div style="padding-top: 10px;">
       <a href="/myprofile">
         {{#isImage user._id "users"}}
@@ -53,6 +54,7 @@
         {{/isImage}}
       </a>
     </div>
+    {{/if}}
     <div onclick="document.querySelector('.menu-user').classList.toggle('active');">
       <i class="fas fa-bars"></i>
     </div>
