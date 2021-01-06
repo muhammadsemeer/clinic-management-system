@@ -1,6 +1,10 @@
 <section class="admin appmnt ml-250">
   <div class="tab">
-    <button class="tb active" data-id="today" onclick="tabview(event)">
+    <button class="tb active" data-id="pending" onclick="tabview(event)">
+      <i class="fas fa-history"></i>
+      Pending
+    </button>
+    <button class="tb" data-id="today" onclick="tabview(event)">
       <i class="fas fa-calendar-day"></i>
       Today
     </button>
@@ -23,10 +27,67 @@
     <hr />
   </div>
   <div style="text-align: right" id="date-c">
-    <input type="date" id="date" value="{{date}}" style="visibility: hidden;">
+    <input type="date" id="date" value="{{date}}">
   </div>
-  <!-- today -->
-  <div class="card-sec active" id="today">
+  <!-- Pending -->
+  <div class="card-sec active" id="pending">
+    {{#if pending}}
+    {{#each pending}}
+    <div class="card" id="{{this._id}}">
+      <div class="doctor-section">
+        <div>
+          <img src="/images/doctor/{{this.doctor._id}}.jpg" alt="{{this.doctor.name}}" />
+        </div>
+        <div>
+          <h4>
+            {{this.doctor.name}}
+          </h4>
+          <p>
+            {{this.doctor.field}}
+          </p>
+          <p>{{this.doctor.specialised}}</p>
+        </div>
+      </div>
+      <div>
+        <p>{{this.doctor.email}}</p>
+      </div>
+      <div class="c-head">
+        <h3>
+          User Deatils
+        </h3>
+        <p>
+          {{this.user.name}}
+        </p>
+        {{#if this.user.email}}
+        <p>
+          {{this.user.email}}
+        </p>
+        {{else}}
+        <p>
+          {{this.user.contactno}}
+        </p>
+        {{/if}}
+      </div>
+      <div class="c-content">
+        <p>
+          {{this.date}}
+        </p>
+        <p>
+          {{this.timeslot}}
+        </p>
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="card" style="display: flex; justify-content: center; align-items: center">
+      <h1>
+        No Appointments
+      </h1>
+    </div>
+    {{/if}}
+  </div>
+  <!-- Today -->
+  <div class="card-sec" id="today">
     {{#if todays}}
     {{#each todays}}
     <div class="card" id="{{this._id}}">

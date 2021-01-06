@@ -114,7 +114,7 @@ router.get("/appointment", verifyLogin, async (req, res) => {
 
 router.get("/appointment/:id", verifyLogin, async (req, res) => {
   let todays = await adminHelpers.getTodaysAppointment(req.params.id);
-  let upcoming, expired, cancelled, consulted, date;
+  let upcoming, expired, cancelled, consulted, pending, date;
   if (req.query.date) {
     date = new Date(req.query.date);
     date = new Date(new Date(date).setHours(24, 0, 0, 0))
@@ -136,11 +136,16 @@ router.get("/appointment/:id", verifyLogin, async (req, res) => {
       req.params.id,
       req.query.date
     );
+    pending = await adminHelpers.getPendingAppointmentsByDate(
+      req.params.id,
+      req.query.date
+    );
   } else {
     upcoming = await adminHelpers.getUpcomingAppointments(req.params.id);
     expired = await adminHelpers.getExipredApointments(req.params.id);
     cancelled = await adminHelpers.getCancelledAppointment(req.params.id);
     consulted = await adminHelpers.getConsultedAppointments(req.params.id);
+    pending = await adminHelpers.getPendingAppointments(req.params.id);
   }
   res.render("admin/appointment-id", {
     title: "Appointment",
@@ -152,6 +157,7 @@ router.get("/appointment/:id", verifyLogin, async (req, res) => {
     expired,
     cancelled,
     consulted,
+    pending,
     date,
   });
 });

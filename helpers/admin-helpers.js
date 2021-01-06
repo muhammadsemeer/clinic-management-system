@@ -541,6 +541,51 @@ module.exports = {
       resolve(appointment);
     });
   },
+  getPendingAppointments: (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [
+                {
+                  doctor: ObjectId(doctorId),
+                },
+                {
+                  status: "Pending",
+                },
+              ],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$doctor",
+          },
+        ])
+        .toArray();
+      resolve(appointment);
+    });
+  },
   getUpcomingAppointmentsByDate: (doctorId, date) => {
     return new Promise(async (resolve, reject) => {
       let appointment = await db
@@ -703,6 +748,54 @@ module.exports = {
                 },
                 {
                   status: "Consulted",
+                },
+                {
+                  date: date,
+                },
+              ],
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PATIENT_COLLECTION,
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+          {
+            $unwind: "$user",
+          },
+          {
+            $lookup: {
+              from: collection.DOCTORS_COLLECTION,
+              localField: "doctor",
+              foreignField: "_id",
+              as: "doctor",
+            },
+          },
+          {
+            $unwind: "$doctor",
+          },
+        ])
+        .toArray();
+      resolve(appointment);
+    });
+  },
+  getPendingAppointmentsByDate: (doctorId, date) => {
+    return new Promise(async (resolve, reject) => {
+      let appointment = await db
+        .get()
+        .collection(collection.APPOINTMENT_COLLECTION)
+        .aggregate([
+          {
+            $match: {
+              $and: [
+                {
+                  doctor: ObjectId(doctorId),
+                },
+                {
+                  status: "Pending",
                 },
                 {
                   date: date,
