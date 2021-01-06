@@ -130,6 +130,8 @@ router.post("/signup", (req, res) => {
       });
       res.cookie("userToken", token, {
         httpOnly: true,
+        expires: new Date(Date.now() + 5184000000),
+        secure: process.env.NODE_ENV === "production" ? true : false,
       });
       res.redirect("/");
     })
@@ -156,6 +158,8 @@ router.post("/signup/oauth/google", (req, res) => {
           });
           res.cookie("userToken", token, {
             httpOnly: true,
+            expires: new Date(Date.now() + 5184000000),
+            secure: process.env.NODE_ENV === "production" ? true : false,
           });
           res.json({ status: true });
         })
@@ -177,6 +181,8 @@ router.post("/signup/oauth/facebook", (req, res) => {
       });
       res.cookie("userToken", token, {
         httpOnly: true,
+        expires: new Date(Date.now() + 5184000000),
+        secure: process.env.NODE_ENV === "production" ? true : false,
       });
       res.json({ status: true });
     })
@@ -258,6 +264,8 @@ router.post("/login/password", tokenCheck, (req, res) => {
       });
       res.cookie("userToken", token, {
         httpOnly: true,
+        expires: new Date(Date.now() + 5184000000),
+        secure: process.env.NODE_ENV === "production" ? true : false,
       });
       res.redirect("/");
     })
@@ -280,6 +288,8 @@ router.post("/login/otp-verify", (req, res) => {
         });
         res.cookie("userToken", token, {
           httpOnly: true,
+          expires: new Date(Date.now() + 5184000000),
+          secure: process.env.NODE_ENV === "production" ? true : false,
         });
         res.redirect("/");
       })

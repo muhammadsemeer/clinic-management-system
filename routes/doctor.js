@@ -105,6 +105,8 @@ router.post("/login", (req, res) => {
       });
       res.cookie("doctorToken", token, {
         httpOnly: true,
+        expires: new Date(Date.now() + 5184000000),
+        secure: process.env.NODE_ENV === "production" ? true : false,
       });
       res.redirect("/");
     })
@@ -580,6 +582,8 @@ router.post("/config/slot", verifyLogin, (req, res) => {
           });
           res.cookie("doctorToken", token, {
             httpOnly: true,
+            expires: new Date(Date.now() + 5184000000),
+            secure: process.env.NODE_ENV === "production" ? true : false,
           });
           res.redirect("/");
         })

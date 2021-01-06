@@ -72,6 +72,8 @@ router.post("/login", async (req, res) => {
       });
       res.cookie("adminToken", token, {
         httpOnly: true,
+        expires: new Date(Date.now() + 864000000),
+        secure: process.env.NODE_ENV === "production" ? true : false,
       });
       res.redirect("/");
     })
@@ -545,6 +547,8 @@ router.post("/profile/edit/", verifyLogin, (req, res) => {
         });
         res.cookie("adminToken", token, {
           httpOnly: true,
+          expires: new Date(Date.now() + 864000000),
+          secure: process.env.NODE_ENV === "production" ? true : false,
         });
         res.redirect("/myprofile");
       });
