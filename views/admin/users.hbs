@@ -148,11 +148,11 @@
                 {{#isImage this._id "users"}}
                 <img class="img" src="/images/users/{{this._id}}.jpg">
                 {{else}}
-                {{#isOAuth this.auth user.email}}
+                {{#isNotOAuth this.auth}}
                 <img class="img" src="/images/icons/undraw_male_avatar_323b.svg">
                 {{else}}
                 <img class="img" src="{{this.profileImage}}" alt="">
-                {{/isOAuth}}
+                {{/isNotOAuth}}
                 {{/isImage}}
               </td>
               <td>
