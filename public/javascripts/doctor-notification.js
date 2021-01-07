@@ -3,11 +3,11 @@ var notification = "notify" + id;
 var noificationContainer = document.querySelector(".notfication-container");
 socket.on(notification, (appointment) => {
   noificationContainer.innerHTML += `
-    <div class="notificaton" onclick="location.href = '/bookings'">
-    <div class="notification-heading">
+    <div class="notificaton">
+    <div class="notification-heading" onclick="location.href = '/bookings'">
      ${appointment.user.name}
     </div>
-    <div class="notification-text">
+    <div class="notification-text" onclick="location.href = '/bookings'">
       New Booking on ${appointment.date} at ${appointment.timeslot}
     </div>
     <button onclick="this.parentNode.remove()">Close</button>
