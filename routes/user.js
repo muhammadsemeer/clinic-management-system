@@ -335,22 +335,21 @@ router.get("/date", (req, res) => {
 });
 
 router.post("/book-appoinment/:doctor", verifyToken, (req, res) => {
-  // userHelpers
-  //   .checkBlocked(req.params.doctor, req.user._id)
-  //   .then((result) => {
-  //     userHelpers
-  //       .bookApointment(req.params.doctor, req.user._id, req.body)
-  //       .then((response) => {
-  //         res.json({ status: true, response });
-  //       })
-  //       .catch((error) => {
-  //         res.json({ status: false, error: error.msg });
-  //       });
-  //   })
-  //   .catch((error) => {
-  //     res.json({ status: false, error: error.msg });
-  //   });
-  res.json({ status: false, error: "Not Available" });
+  userHelpers
+    .checkBlocked(req.params.doctor, req.user._id)
+    .then((result) => {
+      userHelpers
+        .bookApointment(req.params.doctor, req.user._id, req.body)
+        .then((response) => {
+          res.json({ status: true, response });
+        })
+        .catch((error) => {
+          res.json({ status: false, error: error.msg });
+        });
+    })
+    .catch((error) => {
+      res.json({ status: false, error: error.msg });
+    });
 });
 
 router.post("/get-timeslot/:id", (req, res) => {
@@ -484,7 +483,7 @@ router.get("/profile/edit", verifyLogin, (req, res) => {
 
 router.post("/profile/edit", verifyLogin, (req, res) => {
   userHelpers
-    .editPofrile(req.user, req.body)
+    .editPofrile(req.user,req.body)
     .then((response) => {
       if (req.body.email !== req.user.email) {
         res.clearCookie("userToken");
