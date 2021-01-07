@@ -157,23 +157,34 @@ function signOut() {
 function checkLoginState() {
   FB.getLoginStatus(function (response) {
     if (response.status === "connected") {
-      FB.api("/me", "GET", { fields: "id,name,email" }, function (response) {
-        fetch("/signup/oauth/facebook", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(response),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            if (res.status) {
-              window.location = "/";
-            } else {
-              document.querySelector(".error").innerHTML = res.error.msg;
-            }
-          });
-      });
+      FB.api(
+        "/me",
+        "GET",
+        { fields: "id,name,email,picture" },
+        function (response) {
+          let obj = {
+            id: response.id,
+            name: response.name,
+            email: response.email,
+            profileImage: response.picture.data.url
+          };
+          fetch("/signup/oauth/facebook", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(obj),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.status) {
+                window.location = "/";
+              } else {
+                document.querySelector(".error").innerHTML = res.error.msg;
+              }
+            });
+        }
+      );
     } else {
       modalup("error-modal");
     }
