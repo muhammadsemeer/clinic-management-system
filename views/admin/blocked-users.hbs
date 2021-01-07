@@ -52,7 +52,7 @@
                 </div>
               </td>
               <td>
-               <a href="/stats/{{this._id}}">{{this.name}}</a>
+                <a href="/stats/{{this._id}}">{{this.name}}</a>
               </td>
               <td>
                 <a href="/stats/{{this._id}}">{{this.username}}</a>
@@ -84,6 +84,9 @@
           <thead>
             <tr>
               <th>
+                Image
+              </th>
+              <th>
                 Patient Name
               </th>
               <th>
@@ -99,6 +102,9 @@
                 Email
               </th>
               <th>
+                Auth Method
+              </th>
+              <th>
                 Actions
               </th>
             </tr>
@@ -106,6 +112,17 @@
           <tbody>
             {{#each patient}}
             <tr id="{{this._id}}">
+              <td>
+                {{#isImage this._id "users"}}
+                <img class="img" src="/images/users/{{this._id}}.jpg">
+                {{else}}
+                {{#isNotOAuth this.auth}}
+                <img class="img" src="/images/icons/undraw_male_avatar_323b.svg">
+                {{else}}
+                <img class="img" src="{{this.profileImage}}" alt="">
+                {{/isNotOAuth}}
+                {{/isImage}}
+              </td>
               <td>
                 <div>
                   {{this.name}}
@@ -122,6 +139,9 @@
               </td>
               <td>
                 {{this.email}}
+              </td>
+              <td>
+                {{this.auth}}
               </td>
               <td>
                 <span class="yes tooltip" onclick="modalup('pateint-block-modal','{{this._id}}')">

@@ -9,11 +9,11 @@
                     {{#isImage user._id "users"}}
                     <img class="img" src="/images/users/{{user._id}}.jpg" alt="{{userDetails.name}}">
                     {{else}}
-                    {{#isOAuth user.auth user.email}}
+                    {{#isNotOAuth user.auth}}
                     <img class="img" src="/images/icons/undraw_male_avatar_323b.svg">
                     {{else}}
                     <img class="img" src="{{user.profileImage}}" alt="">
-                    {{/isOAuth}}
+                    {{/isNotOAuth}}
                     {{/isImage}}
                 </div>
             </div>
