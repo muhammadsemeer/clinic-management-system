@@ -24,7 +24,9 @@ module.exports = {
         }
         details.status = "Active";
         details.auth = "Password";
-        details.password = await bcrypt.hash(details.password, 10);
+        if (details.password) {
+          details.password = await bcrypt.hash(details.password, 10);
+        }
         db.get()
           .collection(collection.PATIENT_COLLECTION)
           .insertOne(details)
