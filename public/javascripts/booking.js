@@ -42,7 +42,7 @@ getDates(start);
 const book = (doctorid, userid) => {
   let dateInput = document.querySelector('input[name="date"]:checked');
   let timeInput = document.querySelector('input[name="timeslot"]:checked');
-  if (dateInput !== null || timeInput !== null) {
+  if (dateInput !== null && timeInput !== null) {
     var date = dateInput.value;
     var timeslot = timeInput.value;
     let obj = {
@@ -64,7 +64,7 @@ const book = (doctorid, userid) => {
       .then((res) => {
         if (res.status === true) {
           socket.emit("request", res.response._id);
-            modalup("success-modal");
+          modalup("success-modal");
         } else if (res.status === "No Auth") {
           saveBooking(obj);
           let date = new Date().setMinutes(10);
@@ -72,9 +72,7 @@ const book = (doctorid, userid) => {
           window.location = `/login`;
         } else {
           document.querySelector(".error").innerHTML = res.error;
-          setTimeout(() => {
-            document.querySelector(".error").innerHTML = "";
-          }, 5000);
+          modalup("error-modal");
         }
       });
   } else {
@@ -185,9 +183,7 @@ function getAndBook() {
         } else {
           localStorage.removeItem("bookings");
           document.querySelector(".error").innerHTML = res.error;
-          setTimeout(() => {
-            document.querySelector(".error").innerHTML = "";
-          }, 5000);
+          modalup("error-modal");
         }
       });
   }

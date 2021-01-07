@@ -22,7 +22,6 @@
           Select Your Date and Time
         </h1>
       </div>
-      <h3 class="error" style="text-align: center;"></h3>
       <div class="dates">
         <div class="arrow" onclick="changeStart(0)">
           <i class="fas fa-chevron-left"></i>
@@ -51,7 +50,7 @@
   </div>
 </section>
 <div class="modal error-modal">
-  <h1>
+  <h1 class="error">
     Please Select Date and Time
   </h1>
   <button class="normal" onclick="document.querySelector('.error-modal').classList.toggle('active')">
