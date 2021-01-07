@@ -23,6 +23,10 @@
           Email
         </label>
       </div>
+      {{else}}
+      <div class="input-section">
+        <input type="email" name="email" value="{{userDetails.email}}" hidden />
+      </div>
       {{/isNotOAuth}}
       {{/if}}
       {{#if userDetails.contactno}}

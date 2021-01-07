@@ -357,28 +357,16 @@ module.exports = {
       }
     });
   },
-  editPofrile: (userId, details) => {
+  editPofrile: (user, details) => {
     return new Promise(async (resolve, reject) => {
-      let email = await db
-        .get()
-        .collection(collection.PATIENT_COLLECTION)
-        .find({
-          $and: [
-            { _id: { $ne: ObjectId(userId) } },
-            {
-              $or: [{ email: details.email }, { contactno: details.contactno }],
-            },
-            {
-              status: "Active",
-            },
-          ],
-        })
-        .toArray();
-      if (email.length <= 0) {
+      if (
+        user.email === details.email ||
+        user.contactno === details.contactno
+      ) {
         db.get()
           .collection(collection.PATIENT_COLLECTION)
           .updateOne(
-            { _id: ObjectId(userId) },
+            { _id: ObjectId(user._id) },
             {
               $set: {
                 name: details.name,
@@ -393,7 +381,44 @@ module.exports = {
             resolve();
           });
       } else {
-        reject({ msg: "Email or Contact No already registered" });
+        let email = await db
+          .get()
+          .collection(collection.PATIENT_COLLECTION)
+          .find({
+            $and: [
+              {
+                $or: [
+                  { email: details.email },
+                  { contactno: details.contactno },
+                ],
+              },
+              {
+                status: "Active",
+              },
+            ],
+          })
+          .toArray();
+        if (email.length != 0) {
+          db.get()
+            .collection(collection.PATIENT_COLLECTION)
+            .updateOne(
+              { _id: ObjectId(user._id) },
+              {
+                $set: {
+                  name: details.name,
+                  email: details.email,
+                  contactno: details.contactno,
+                  age: details.age,
+                  gender: details.gender,
+                },
+              }
+            )
+            .then((response) => {
+              resolve();
+            });
+        } else {
+          reject({ msg: "Email Id or Contact No Already Exist" });
+        }
       }
     });
   },
