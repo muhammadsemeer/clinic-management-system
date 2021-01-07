@@ -116,6 +116,9 @@
           <thead>
             <tr>
               <th>
+                Image
+              </th>
+              <th>
                 Patient Name
               </th>
               <th>
@@ -131,6 +134,9 @@
                 Email
               </th>
               <th>
+                Auth Method
+              </th>
+              <th>
                 Actions
               </th>
             </tr>
@@ -138,6 +144,17 @@
           <tbody>
             {{#each patient}}
             <tr id="{{this._id}}">
+              <td>
+                {{#isImage this._id "users"}}
+                <img class="img" src="/images/users/{{this._id}}.jpg">
+                {{else}}
+                {{#isOAuth this.auth user.email}}
+                <img class="img" src="/images/icons/undraw_male_avatar_323b.svg">
+                {{else}}
+                <img class="img" src="{{this.profileImage}}" alt="">
+                {{/isOAuth}}
+                {{/isImage}}
+              </td>
               <td>
                 <div>
                   {{this.name}}
@@ -154,6 +171,9 @@
               </td>
               <td>
                 {{this.email}}
+              </td>
+              <td>
+                {{this.auth}}
               </td>
               <td>
                 <a class="edit tooltip" href="/patients/{{this._id}}">
