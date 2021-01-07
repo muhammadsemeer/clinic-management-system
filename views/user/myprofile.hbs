@@ -6,10 +6,14 @@
         <div class="profile-disp">
             <div class="disp-head">
                 <div class="img-sec">
-                    {{#isImage userDetails._id "users"}}
-                    <img src="/images/users/{{userDetails._id}}.jpg" alt="{{userDetails.name}}">
+                    {{#isImage user._id "users"}}
+                    <img class="img" src="/images/users/{{user._id}}.jpg" alt="{{userDetails.name}}">
                     {{else}}
-                    <img src="/images/icons/undraw_male_avatar_323b.svg">
+                    {{#isOAuth user.auth user.email}}
+                    <img class="img" src="/images/icons/undraw_male_avatar_323b.svg">
+                    {{else}}
+                    <img class="img" src="{{user.profileImage}}" alt="">
+                    {{/isOAuth}}
                     {{/isImage}}
                 </div>
             </div>
@@ -29,8 +33,10 @@
                 {{/if}}
                 <div class="btn-grp" style="margin-left: 0;">
                     <a href="/profile/edit"><button class="crop">Edit</button></a>
+                    {{#isNotOAuth userDetails.auth}}
                     <a href="/image-upload/{{userDetails._id}}"><button class="crop" style="margin-left: 5px;">Change
                             Image</button></a>
+                    {{/isNotOAuth}}
                     <br>
                 </div>
                 <div class="btn-grp" style="margin-left: 0;">
