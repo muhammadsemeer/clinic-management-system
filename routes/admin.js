@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
     .then((response) => {
       delete response.password;
       var token = jwt.sign(response, process.env.JWT_SECERT, {
-        expiresIn: "60d",
+        expiresIn: "10d",
       });
       res.cookie("adminToken", token, {
         httpOnly: true,
@@ -549,7 +549,7 @@ router.post("/profile/edit/", verifyLogin, (req, res) => {
       adminHelpers.getMyProfile(req.body.email).then((response) => {
         delete response.password;
         var token = jwt.sign(response, process.env.JWT_SECERT, {
-          expiresIn: "60d",
+          expiresIn: "10d",
         });
         res.cookie("adminToken", token, {
           httpOnly: true,
