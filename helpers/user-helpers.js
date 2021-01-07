@@ -192,6 +192,7 @@ module.exports = {
             { doctor: ObjectId(doctor) },
             { date: details.date },
             { timeslot: details.timeslot },
+            { status:  {$ne: "Deleted"} }
           ],
         })
         .toArray();
