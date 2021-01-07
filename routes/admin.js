@@ -432,6 +432,47 @@ router.put("/patient/unblock/:id", (req, res) => {
   });
 });
 
+router.get("/stats/:id", verifyLogin, async (req, res) => {
+  let counts = await adminHelpers.getCountsOfAppontments(req.params.id);
+  res.render("admin/stats", { title: "Stats", admin: req.admin, counts });
+});
+
+router.get("/search/users", async (req, res) => {
+  let doctor = await adminHelpers.getDoctors();
+  let patient = await adminHelpers.getPatients();
+  const options1 = {
+    includeScore: true,
+    keys: ["name", "email", "username", "field", "specialised"],
+  };
+  const options2 = {
+    includeScore: true,
+    keys: ["name", "email", "contactno"],
+  };
+  const fuse1 = new Fuse(doctor, options1);
+  const fuse2 = new Fuse(patient, options2);
+  const result1 = fuse1.search(req.query.q);
+  const result2 = fuse2.search(req.query.q);
+  res.json({ result1, result2 });
+});
+
+router.get("/search/blocked", async (req, res) => {
+  let doctor = await adminHelpers.getBlockedDoctors();
+  let patient = await adminHelpers.getBlockedPatients();
+  const options1 = {
+    includeScore: true,
+    keys: ["name", "email", "username", "field", "specialised"],
+  };
+  const options2 = {
+    includeScore: true,
+    keys: ["name", "email", "contactno"],
+  };
+  const fuse1 = new Fuse(doctor, options1);
+  const fuse2 = new Fuse(patient, options2);
+  const result1 = fuse1.search(req.query.q);
+  const result2 = fuse2.search(req.query.q);
+  res.json({ result1, result2 });
+});
+
 router.get("/search/:id", verifyLogin, async (req, res) => {
   let todaysAppointments = await adminHelpers.getTodaysAppointment(
     req.params.id
@@ -484,47 +525,6 @@ router.get("/search/:id", verifyLogin, async (req, res) => {
     result4,
     result5,
   });
-});
-
-router.get("/stats/:id", verifyLogin, async (req, res) => {
-  let counts = await adminHelpers.getCountsOfAppontments(req.params.id);
-  res.render("admin/stats", { title: "Stats", admin: req.admin, counts });
-});
-
-router.get("/search/users", async (req, res) => {
-  let doctor = await adminHelpers.getDoctors();
-  let patient = await adminHelpers.getPatients();
-  const options1 = {
-    includeScore: true,
-    keys: ["name", "email", "username", "field", "specialised"],
-  };
-  const options2 = {
-    includeScore: true,
-    keys: ["name", "email", "contactno"],
-  };
-  const fuse1 = new Fuse(doctor, options1);
-  const fuse2 = new Fuse(patient, options2);
-  const result1 = fuse1.search(req.query.q);
-  const result2 = fuse2.search(req.query.q);
-  res.json({ result1, result2 });
-});
-
-router.get("/search/blocked", async (req, res) => {
-  let doctor = await adminHelpers.getBlockedDoctors();
-  let patient = await adminHelpers.getBlockedPatients();
-  const options1 = {
-    includeScore: true,
-    keys: ["name", "email", "username", "field", "specialised"],
-  };
-  const options2 = {
-    includeScore: true,
-    keys: ["name", "email", "contactno"],
-  };
-  const fuse1 = new Fuse(doctor, options1);
-  const fuse2 = new Fuse(patient, options2);
-  const result1 = fuse1.search(req.query.q);
-  const result2 = fuse2.search(req.query.q);
-  res.json({ result1, result2 });
 });
 
 router.get("/profile/edit", verifyLogin, (req, res) => {
