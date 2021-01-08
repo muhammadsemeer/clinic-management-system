@@ -28,7 +28,10 @@
             <tbody>
                 {{#each history}}
                 <tr id="{{this._id}}">
-                    <td><span>{{this.date}}</span></td>
+                    <td>
+                        <span>{{this.date}}</span>
+                        <span>{{this.timeslot}}</span>
+                    </td>
                     <td>
                         {{#each this.medicines}}
                         {{this}}

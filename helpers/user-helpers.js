@@ -519,6 +519,7 @@ module.exports = {
               $and: [
                 { doctor: ObjectId(doctorId) },
                 { user: ObjectId(userId) },
+                { status: "Consulted" },
               ],
             },
           },
