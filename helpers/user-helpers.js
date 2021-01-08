@@ -192,7 +192,7 @@ module.exports = {
             { doctor: ObjectId(doctor) },
             { date: details.date },
             { timeslot: details.timeslot },
-            { status:  {$ne: "Deleted"} }
+            { status: { $ne: "Deleted" } },
           ],
         })
         .toArray();
@@ -476,7 +476,6 @@ module.exports = {
               count: { $sum: 1 },
             },
           },
-          { $match: { count: { $gt: 1 } } },
         ])
         .toArray();
       var result = [];
