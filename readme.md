@@ -41,7 +41,7 @@ This app have 3 sections. <br>
 3. Admin Panel
 ```
 
-All Pages on User Section is on `/` route. Doctor Panel And Admin Panel is serving on sudomains like `doctor.example.com` and `admin.example.com```
+All Pages on User Section is on `/` route. Doctor Panel And Admin Panel is serving on sudomains like `doctor.example.com` and ```admin.example.com```
 
 If You Want to accces Doctor Panel And Admin Panel you want to add your local subdomain configurations.
 
