@@ -18,18 +18,18 @@
                 </div>
             </div>
             <div class="disp-body">
-                <p>Name: {{userDetails.name}}</p>
+                <p>Name: <span>{{userDetails.name}}</span></p>
                 {{#if userDetails.email}}
-                <p>Email: {{userDetails.email}}</p>
+                <p>Email: <span>{{userDetails.email}}</span></p>
                 {{/if}}
                 {{#if userDetails.contactno}}
-                <p>Contact No: {{userDetails.contactno}}</p>
+                <p>Contact No: <span>{{userDetails.contactno}}</span></p>
                 {{/if}}
                 {{#if userDetails.gender}}
-                <p>Gender: {{userDetails.gender}}</p>
+                <p>Gender: <span>{{userDetails.gender}}</span></p>
                 {{/if}}
                 {{#if userDetails.age}}
-                <p>Age: {{userDetails.age}}</p>
+                <p>Age: <span>{{userDetails.age}}</span></p>
                 {{/if}}
                 <div class="btn-grp" style="margin-left: 0;">
                     <a href="/profile/edit"><button class="crop">Edit</button></a>
@@ -55,27 +55,35 @@
             <div class="in-body">
                 {{#if insights.lastBook}}
                 <div>
-                    <h4>Last Constulted Appointment</h4>
-                    <p>{{insights.lastApp.date}}</p>
-                    <p>{{insights.lastApp.timeslot}}</p>
-                    <p>With {{insights.lastApp.doctor.name}}</p>
-                    <h4>Most Visited Doctor</h4>
-                    <p>{{insights.mostVisited.name}}</p>
-                </div>
-                <div>
                     <h4>Last Booked Appointment</h4>
                     <p>{{insights.lastBook.date}}</p>
                     <p>{{insights.lastBook.timeslot}}</p>
                     <p>Status: {{insights.lastBook.status}}</p>
                     <p>With {{insights.lastBook.doctor.name}}</p>
+                    {{#if insights.lastApp}}
                     <h4>Total Consulted Appointments</h4>
                     <p>{{insights.consultedAppCount}}</p>
+                    {{/if}}
                 </div>
                 {{else}}
                 <div>
                     <p>No Appointments Booked Yet</p>
                 </div>
                 {{/if}}
+                <div>
+                    <h4>Last Constulted Appointment</h4>
+                    {{#if insights.lastApp}}
+                    <p>{{insights.lastApp.date}}</p>
+                    <p>{{insights.lastApp.timeslot}}</p>
+                    <p>With {{insights.lastApp.doctor.name}}</p>
+                    <h4>Most Visited Doctor</h4>
+                    <p>{{insights.mostVisited.name}}</p>
+                    {{else}}
+                    <div>
+                        <p>No Consulted Appointment Found</p>
+                    </div>
+                    {{/if}}
+                </div>
             </div>
         </div>
     </div>
