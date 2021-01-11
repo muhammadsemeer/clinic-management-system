@@ -15,16 +15,19 @@
           Name
         </label>
       </div>
+      {{#if patient.email}}
       <div class="input-section">
         <input type="email" name="email" value="{{patient.email}}" required />
         <label for="">
           Email
         </label>
       </div>
+      {{/if}}
+      {{#if patient.contactno}}
       <div class="input-section">
         <input
           type="text"
-          pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"
+          pattern="^\+[1-9]{1}[0-9]{3,14}$"
           name="contactno"
           value="{{patient.contactno}}"
           required
@@ -33,6 +36,7 @@
           Contact No
         </label>
       </div>
+      {{/if}}
       <div class="input-section">
         <input type="number" name="age" value="{{patient.age}}" required />
         <label for="">
