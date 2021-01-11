@@ -21,7 +21,15 @@ const loginCheck = (req, res, next) => {
           next();
         } else {
           req.user = decoded;
-          next();
+          userHelpers
+            .checkUserStatus(decoded._id)
+            .then((response) => {
+              next();
+            })
+            .catch((error) => {
+              res.clearCookie("userToken");
+              res.redirect("/");
+            });
         }
       }
     );
@@ -58,7 +66,15 @@ const verifyLogin = (req, res, next) => {
           return res.redirect("/login");
         } else {
           req.user = decoded;
-          next();
+          userHelpers
+            .checkUserStatus(decoded._id)
+            .then((response) => {
+              next();
+            })
+            .catch((error) => {
+              res.clearCookie("userToken");
+              res.redirect("/");
+            });
         }
       }
     );
@@ -84,7 +100,15 @@ const verifyToken = (req, res, next) => {
           res.json({ status: "No Auth" });
         } else {
           req.user = decoded;
-          next();
+          userHelpers
+            .checkUserStatus(decoded._id)
+            .then((response) => {
+              next();
+            })
+            .catch((error) => {
+              res.clearCookie("userToken");
+              res.json({ status: "No Auth" });
+            });
         }
       }
     );
@@ -483,7 +507,7 @@ router.get("/profile/edit", verifyLogin, (req, res) => {
 
 router.post("/profile/edit", verifyLogin, (req, res) => {
   userHelpers
-    .editPofrile(req.user,req.body)
+    .editPofrile(req.user, req.body)
     .then((response) => {
       if (req.body.email !== req.user.email) {
         res.clearCookie("userToken");

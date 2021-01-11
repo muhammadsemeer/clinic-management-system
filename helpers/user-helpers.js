@@ -539,4 +539,19 @@ module.exports = {
       resolve(history);
     });
   },
+  checkUserStatus: (userId) => {
+    return new Promise(async (resolve, reject) => {
+      let user = await db
+        .get()
+        .collection(collection.PATIENT_COLLECTION)
+        .findOne({
+          _id: ObjectId(userId),
+        });
+      if (user.status === "Active") {
+        resolve();
+      } else {
+        reject();
+      }
+    });
+  },
 };
