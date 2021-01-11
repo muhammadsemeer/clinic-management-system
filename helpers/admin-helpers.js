@@ -583,7 +583,16 @@ module.exports = {
           },
         ])
         .toArray();
-      resolve(appointment);
+      let result = [];
+      appointment.forEach((element) => {
+        var today = new Date();
+        today = new Date(today).setHours(0,0,0,0);
+        var dbDate = new Date(element.date);
+        if (dbDate >= today) {
+          result.push(element);
+        }
+      });
+      resolve(result);
     });
   },
   getUpcomingAppointmentsByDate: (doctorId, date) => {

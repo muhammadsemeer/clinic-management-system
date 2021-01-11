@@ -66,12 +66,13 @@ module.exports = {
       let result = [];
       bookings.forEach((element) => {
         var today = new Date();
-        today = new Date(today);
+        today = new Date(today).setHours(0,0,0,0);
         var dbDate = new Date(element.date);
-        if (dbDate > today) {
+        if (dbDate >= today) {
           result.push(element);
         }
       });
+      console.log(result, "result");
       resolve(result);
     });
   },
