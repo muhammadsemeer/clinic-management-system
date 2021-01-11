@@ -34,8 +34,8 @@
       <div class="input-section">
         <input type="text" pattern="^\+[1-9]{1}[0-9]{3,14}$" name="contactno" id="contactno"
           placeholder="eg: +919876543210" value="{{userDetails.contactno}}" required />
-        <label for="contactno">
-          Contact No
+        <label for="contactno" id="cno-lab">
+          Contact No (Optional)
         </label>
       </div>
       <div class="input-section" id="pwd-sec">
@@ -89,8 +89,11 @@
   const email = document.getElementById("email")
   const pwd = document.getElementById("pwd-sec")
   const cno = document.getElementById("contactno")
+  const cnoLab = document.getElementById("cno-lab")
   email.addEventListener("keyup", (event) => {
     if (event.target.value !== "") {
+      cno.hidden = true
+      cnoLab.hidden = true
       cno.required = false
       pwd.innerHTML = `
       <input type="password" name="password" id="password" value="{{userDetails.password}}" required />
@@ -103,6 +106,8 @@
         </div>
       `
     } else {
+      cno.hidden = false
+      cnoLab.hidden = false
       cno.required = true
       pwd.innerHTML = ""
     }
