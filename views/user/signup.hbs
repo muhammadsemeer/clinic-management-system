@@ -27,7 +27,7 @@
       </div>
       <div class="input-section">
         <input type="email" name="email" id="email" value="{{userDetails.email}}" />
-        <label for="email">
+        <label for="email" id="email-lab">
           Email (Optional)
         </label>
       </div>
@@ -87,6 +87,7 @@
 </div>
 <script>
   const email = document.getElementById("email")
+  const emailLab = document.getElementById("email-lab")
   const pwd = document.getElementById("pwd-sec")
   const cno = document.getElementById("contactno")
   const cnoLab = document.getElementById("cno-lab")
@@ -110,6 +111,17 @@
       cnoLab.hidden = false
       cno.required = true
       pwd.innerHTML = ""
+    }
+  })
+  cno.addEventListener("keyup", (event) => {
+    if (event.target.value !== "") {
+      email.hidden = true
+      emailLab.hidden = true
+      email.required = false
+    } else {
+      email.hidden = false
+      emailLab.hidden = false
+      email.required = true
     }
   })
 </script>
