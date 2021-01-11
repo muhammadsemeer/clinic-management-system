@@ -817,4 +817,19 @@ module.exports = {
       }
     });
   },
+  checkUserStatus: (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+      let user = await db
+        .get()
+        .collection(collection.DOCTORS_COLLECTION)
+        .findOne({
+          _id: ObjectId(doctorId),
+        });
+      if (user.status === "Active") {
+        resolve();
+      } else {
+        reject();
+      }
+    });
+  },
 };

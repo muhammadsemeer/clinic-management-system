@@ -17,13 +17,21 @@ const verifyLogin = (req, res, next) => {
           return res.redirect("/login");
         } else {
           req.doctor = decoded;
-          if (decoded.slotConfig) {
-            next();
-          } else if (req.url === "/config/slot") {
-            next();
-          } else {
-            res.redirect("/config/slot");
-          }
+          doctorHelpers
+            .checkUserStatus(decoded._id)
+            .then((resposne) => {
+              if (decoded.slotConfig) {
+                next();
+              } else if (req.url === "/config/slot") {
+                next();
+              } else {
+                res.redirect("/config/slot");
+              }
+            })
+            .catch((error) => {
+              res.clearCookie("doctorToken");
+              res.redirect("/login");
+            });
         }
       }
     );
@@ -68,7 +76,15 @@ const verifyToken = (req, res, next) => {
           res.json("login");
         } else {
           req.doctor = decoded;
-          next();
+          doctorHelpers
+            .checkUserStatus(decoded._id)
+            .then((resposne) => {
+              next();
+            })
+            .catch((error) => {
+              res.clearCookie("doctorToken");
+              res.redirect("/login");
+            });
         }
       }
     );
