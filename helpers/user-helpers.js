@@ -19,9 +19,6 @@ module.exports = {
         })
         .toArray();
       if (mailFound.length <= 0) {
-        if (mailFound.length !== 0 && mailFound[0].status === "Blocked") {
-          reject({ msg: "Your Account is temporarliy disbaled" });
-        }
         details.status = "Active";
         details.auth = "Password";
         if (details.password) {
@@ -34,7 +31,11 @@ module.exports = {
             resolve(data.ops[0]);
           });
       } else {
-        reject({ msg: "Email Id or Contact No Already Exists" });
+        if (mailFound.length !== 0 && mailFound[0].status === "Blocked") {
+          reject({ msg: "Your Account is temporarliy disbaled" });
+        } else {
+          reject({ msg: "Email Id or Contact No Already Exists" });
+        }
       }
     });
   },
