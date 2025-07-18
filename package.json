@@ -15,7 +15,7 @@
     "express": "~4.16.1",
     "express-fileupload": "^1.2.0",
     "express-handlebars": "^5.2.0",
-    "express-session": "^1.17.1",
+    "express-session": "^1.18.2",
     "express-subdomain": "^1.0.5",
     "fast-two-sms": "^2.1.0",
     "fuse.js": "^6.4.3",
@@ -25,7 +25,7 @@
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
-    "morgan": "~1.9.1",
+    "morgan": "~1.10.1",
     "socket.io": "^3.0.4",
     "twilio": "^3.53.0",
     "xlsx": "^0.16.9"
