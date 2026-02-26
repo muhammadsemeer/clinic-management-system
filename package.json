@@ -8,13 +8,13 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.0",
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "express-fileupload": "^1.2.0",
-    "express-handlebars": "^5.2.0",
+    "express-handlebars": "^8.0.6",
     "express-session": "^1.17.1",
     "express-subdomain": "^1.0.5",
     "fast-two-sms": "^2.1.0",
@@ -31,6 +31,6 @@
     "xlsx": "^0.16.9"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^3.1.14"
   }
 }
